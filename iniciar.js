@@ -33,7 +33,9 @@ configurado.iniciar(pastaDeConfiguracaoPadrao, function(configuracao) {
   
   // Aqui nós temos as rotas para cada caminho do nosso aplicativo
   var listaDeRotas = [
-    
+    { "caminho": express.static(pasta.join(__dirname, 'testes')), "rota": '/' }
+  , { "caminho": express.static(pasta.join(__dirname, 'testes/incluir/js/bibliotecas')), "rota": '/bibliotecas' }
+  , { "caminho": express.static(pasta.join(__dirname, 'testes/incluir/estilos')), "rota": '/estilos' }
   ];
 
   // Carregamos aqui o servidor express, o cors e o redirecionamento.
