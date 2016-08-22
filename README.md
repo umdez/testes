@@ -1,2 +1,2 @@
-# testes
-Proposito é realizar diversos testes das características utilizadas para o desenvolvimento de projetos.
+# autenticando
+Proposito é oferecer características base para autenticação e entrada.
