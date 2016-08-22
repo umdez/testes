@@ -5,6 +5,7 @@ var EmissorDeEvento = require('events').EventEmitter;
 var Promessa = require('bluebird');
 var registrador = require('../nucleo/registrador')('autenticacao');
 var controladores = require('./controladores/indice');
+var _ = require('lodash');
 
 var Autenticacao = function (opcoes) {
 
@@ -16,7 +17,9 @@ var Autenticacao = function (opcoes) {
 
   this.configuracao = opcoes.configuracao;
 
-  //_.defaults(this.configuracao, { });
+  _.defaults(this.configuracao, { 
+    superSegredo: "MeuSuperSegredo"
+  });
 
   this.aplicativo = opcoes.aplicativo;
 
@@ -38,7 +41,11 @@ Autenticacao.prototype.iniciar = function () {
   return new Promessa(function (deliberar, recusar) {
 
     controladores.forEach(function (c) {
-      meuObj.controladores[c.nome] = new c.Controlador({ 'fonte': contas, modelos: modelos });
+      meuObj.controladores[c.nome] = new c.Controlador({ 
+        'fonte': contas
+      , 'modelos': modelos
+      , 'superSegredo': meuObj.configuracao.superSegredo
+      });
     });
     
     deliberar(meuObj);

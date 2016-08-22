@@ -114,9 +114,22 @@ config.servidor.certificados = {
 /* @Diretiva {restificando} O nosso servidor Restificando.
  *
  * - restificando.base (Opcional) A nossa base do serviço restificando.
+ * 
+ * - restificando.superSegredo (Obrigatório) A super senha secreta para geração
+ *   dos tokens de acesso.
  */
 config.restificando = {
   "base": ""
+, "superSegredo": "meuSuperSegredo"
+};
+
+/* @Diretiva {autenticacao} O nosso serviço de autenticação.
+ *
+ * - autenticacao.superSegredo (Obrigatório) A super senha secreta para geração
+ *   dos tokens de acesso.
+ */
+config.autenticacao = {
+  "superSegredo": "meuSuperSegredo"
 };
 
 module.exports = config;

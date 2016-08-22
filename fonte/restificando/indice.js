@@ -25,7 +25,8 @@ var Restificando = function (opcoes) {
   this.configuracao = opcoes.configuracao;
 
   _.defaults(this.configuracao, {         
-     base: "" 
+     'base': ""
+  ,  'superSegredo': "MeuSuperSegredo"
   });
 
   this.aplicativo = opcoes.aplicativo;
@@ -102,8 +103,9 @@ Restificando.prototype.carregarOsControladores = function () {
     var fonte = moduloRest.fontes[c.aliase].fonte;
 
     meuObj.controladores[c.aliase] = new c.Controlador({ 
-     'fonte': fonte
-    , modelos: moduloDb.modelos 
+      'fonte': fonte
+    , 'modelos': moduloDb.modelos 
+    , 'superSegredo': meuObj.configuracao.superSegredo
     });
   });
 

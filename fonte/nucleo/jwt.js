@@ -10,6 +10,7 @@ jsonWebToken.prototype.inicializar = function(opcoes) {
   this.token = null;
   this.jid = null;
   this.senha = null;
+  this.superSegredo = opcoes.superSegredo;
 };
 
 jsonWebToken.prototype.encontrarUmToken = function(requisicao) {
@@ -87,7 +88,7 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
              , 'bandeiras': bandeiras
             };
             
-            meuObj.token = jwt.sign(usuario, "superSegredo", { expiresInMinutes: (14*60) });
+            meuObj.token = jwt.sign(usuario, meuObj.superSegredo, { expiresInMinutes: (14*60) });
 
             var instancia = {
               'id': conta.id
@@ -131,7 +132,7 @@ jsonWebToken.prototype.autorizar = function(requisicao, resposta, contexto, cd) 
 
     if (meuObj.token) {
       
-      jwt.verify(meuObj.token, "superSegredo", function (erro, decodificado) {
+      jwt.verify(meuObj.token, meuObj.superSegredo, function (erro, decodificado) {
         if (erro) {
           // erro.name: 'TokenExpiredError' ou outros
           // erro.message: Mensagem sobre o erro ocorrido.
