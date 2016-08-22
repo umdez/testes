@@ -29,7 +29,7 @@ Usuarios.prototype.iniciar = function() {
   var meuObj = this;
 
   fonte.ler.iniciar.antesQue(function(requisicao, resposta, contexto) {
-    return meuObj.limiteDeLeituras.afunilarSrvico(requisicao, resposta, contexto);
+    return meuObj.limiteDeLeituras.afunilarServico(requisicao, resposta, contexto);
   });
   
   fonte.ler.iniciar.antesQue(function(requisicao, resposta, contexto) {

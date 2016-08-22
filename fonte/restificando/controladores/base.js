@@ -17,8 +17,8 @@ Controlador.prototype.inicializar = function(opcoes) {
 Controlador.prototype.criarUmLimite = function(opcoes) {
   this.limitar[opcoes.nome] = new this.limitadorDeUso(opcoes);
   this.limitar[opcoes.nome].dados = opcoes;
-  this.limitar[opcoes.nome].afunilarSrvico = this.afunilarServico.bind({dados: this.limitar[opcoes.nome]});
-  this.limitar[opcoes.nome].zerarLimite = this.zerarUmLimite.bind({dados: this.limitar[opcoes.nome]});
+  this.limitar[opcoes.nome].afunilarServico = this.afunilarServico.bind({dados: this.limitar[opcoes.nome]});
+  this.limitar[opcoes.nome].zerarUmLimite = this.zerarUmLimite.bind({dados: this.limitar[opcoes.nome]});
   return this.limitar[opcoes.nome];
 };
 
