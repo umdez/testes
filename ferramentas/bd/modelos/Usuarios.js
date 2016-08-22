@@ -20,8 +20,9 @@ module.exports = function (database, DataTypes) {
     senha: { type: DataTypes.STRING, validate: {} }  // A senha do usuário. 
   }, {
 
-    associate: function (modelos) {
-      modelos.Usuarios.hasOne(modelos.Funcoes, { as: 'Usuario' }); 
+    associar: function (modelos) {
+      modelos.Usuarios.hasOne(modelos.Funcoes, { foreignKey: 'usuario_id', as: 'Funcoes' });  
+      modelos.Usuarios.hasMany(modelos.Projetos, { foreignKey: 'usuario_id', as: 'Projetos' }); 
     },
     classMethods:{
       

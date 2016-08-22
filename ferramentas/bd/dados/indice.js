@@ -22,7 +22,7 @@ module.exports = function (sequelize_fixtures, modelos)  {
   .filter(function (arquivo) {
     
     // carrega tudo que contenha extensão .json e filtrará o indice.js
-    return ((arquivo.indexOf('.') !== 0) && (arquivo !== 'indice.js') && (arquivo.slice(-5) === '.json'));
+    return ((arquivo.indexOf('.') !== 0) && (arquivo !== 'indice.js') && (arquivo.slice(-3) === '.js'));
   })
   .forEach(function (arquivo) {
     

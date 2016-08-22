@@ -13,7 +13,7 @@ module.exports = function (database, DataTypes) {
     bandeira: { type: DataTypes.STRING, validate: {} }  
   }, {
 
-    associate: function (modelos) {
+    associar: function (modelos) {
       modelos.Funcoes.belongsTo(modelos.Usuarios, { foreignKey: 'usuario_id', as: 'Funcoes' });  
     },
     classMethods:{
