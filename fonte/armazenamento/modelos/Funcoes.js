@@ -10,11 +10,12 @@ module.exports = function (database, DataTypes) {
     
     id: { type: DataTypes.INTEGER, autoIncrement: true,  primaryKey: true },
 
-    bandeira: { type: DataTypes.STRING, validate: {} }  
+    nome: { type: DataTypes.STRING, validate: {} }  // Gerente? atendente?
   }, {
 
     associar: function (modelos) {
       modelos.Funcoes.belongsTo(modelos.Usuarios, { foreignKey: 'usuario_id', as: 'Funcoes' });  
+      modelos.Funcoes.hasMany(modelos.Escopos, { foreignKey: 'funcao_id', as: 'Escopos' }); 
     },
     classMethods:{
       

@@ -17,7 +17,9 @@ module.exports = function (database, DataTypes) {
 
     uuid: { type: DataTypes.UUID, unique: true, defaultValue: uuid.v4, validate: { isUUID: 4 } },  // Identificador unico deste usuário.
     
-    senha: { type: DataTypes.STRING, validate: {} }  // A senha do usuário. 
+    senha: { type: DataTypes.STRING, validate: {} },  // A senha do usuário.
+    
+    estatos: { type: DataTypes.STRING, validate: {} }  // Validado? Bloqueado?
   }, {
 
     associar: function (modelos) {
