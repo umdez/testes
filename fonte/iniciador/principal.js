@@ -18,7 +18,8 @@ exports.prosseguir = function(configuracao, aplicativo, pronto) {
   var rest = modulos['rest'] = {
     'restificando': new Restificando(configuracao.restificando, aplicativo),
     'fontes': null,
-    'controladores': null
+    'controladores': null//,
+    //'contas': new require();
   };
   
   var aut = modulos['aut'] = {

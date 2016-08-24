@@ -1,4 +1,5 @@
 var jwt = require('../../nucleo/jwt');
+var fichario = require('fichario');
 
 var Controlador = function(argumentos) {
   this.inicializar(argumentos);

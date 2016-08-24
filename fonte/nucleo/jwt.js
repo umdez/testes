@@ -1,5 +1,7 @@
 var jwt = require('jsonwebtoken');
 var Promessa = require('bluebird');
+var fichario = require('fichario');
+var _ = require('lodash');
 
 var jsonWebToken = function(argumentos) {
   this.inicializar(argumentos);
@@ -58,16 +60,17 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
     if (meuObj.jid && meuObj.senha) {
       
      return meuObj.modelos['Usuarios'].findOne({
-        attributes: ['id', 'nome', 'jid', 'uuid', 'senha'], 
+        attributes: ['id', 'nome', 'jid', 'uuid', 'senha', 'estatos'], 
         where: {
           jid: meuObj.jid
         }, 
         include: [{
           model: meuObj.modelos['Funcoes'],
           as: 'Funcoes',
-          attributes: ['bandeira']
+          attributes: ['id', 'nome']
         }]
-      }).then(function (conta) {
+      })
+      .then(function (conta) {
         
         if (conta == null) {
           deliberar(contexto.erro(403, "Dados de acesso informados estão incorretos."));
@@ -75,41 +78,58 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
           var seSenhaConfere = meuObj.senha ? conta.verificarSenha(meuObj.senha) : false;
           if (seSenhaConfere) {
             
-            var bandeiras = null;
-            
-            if (conta.Funcoes && conta.Funcoes.dataValues) {
-              bandeiras = conta.Funcoes.dataValues['bandeira'];
-            }
-
-            var usuario = {
-               'id': conta.id
-             , 'jid': conta.jid
-             , 'uuid': conta.uuid
-             , 'bandeiras': bandeiras
-            };
-            
-            meuObj.token = jwt.sign(usuario, meuObj.superSegredo, { expiresInMinutes: (14*60) });
-
-            var instancia = {
+            var usuario = { 
               'id': conta.id
-            , 'autenticado': true
-            , 'nome': conta.nome
             , 'jid': conta.jid
-            , 'uuid': conta.uuid 
-            , 'bandeiras': bandeiras
             };
+            
+            meuObj.token = jwt.sign(usuario, meuObj.superSegredo, { expiresIn: (14*60*60*1000) });
+
+            var instancia = _.assignIn({
+              'nome': conta.nome
+            , 'estatos': conta.estatos 
+            }, usuario);
 
             if (requisicao.session) {
               requisicao.session.token = meuObj.token;
             } else {
               instancia.token = meuObj.token; 
             }
-            
-            cd(true);
-
             contexto.instancia = instancia;
+              
+            var funcao = conta.Funcoes || null;
 
-            deliberar(contexto.continuar);
+            var ficha = fichario.adicUsuario(_.assignIn({ 
+              'token': meuObj.token
+            , 'uuid': conta.uuid
+            , 'funcao': funcao ? funcao.get('nome') : null
+            }, instancia));
+            
+            fichario.setaHoraDeExpiracao(60*14+20);
+
+            return meuObj.modelos['Escopos'].findAll({
+              attributes: ['id', 'nome', 'bandeira'], 
+              where: {
+               funcao_id: funcao ? funcao.get('id') : -1
+              }
+            })
+            .then(function (escopos) {
+              if (escopos != null) {
+               
+                _(escopos).forEach(function(escopo) {
+              
+                  ficha.adicEscopo({
+                    'id': escopo.get('id')
+                  , 'nome': escopo.get('nome')
+                  , 'bandeira': escopo.get('bandeira')
+                  });
+                  
+                }); 
+              }
+              cd(true);
+              deliberar(contexto.continuar);
+            });
+           
           } else {
             deliberar(contexto.erro(403, "Dados de acesso informados estão incorretos."));
           }

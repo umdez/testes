@@ -38,10 +38,13 @@ configurado.iniciar(pastaDeConfiguracaoPadrao, function(configuracao) {
   , { "caminho": express.static(pasta.join(__dirname, 'testes/incluir/estilos')), "rota": '/estilos' }
   ];
 
+  console.log(configuracao.servidor.limite)
+
   // Carregamos aqui o servidor express, o cors e o redirecionamento.
   var expressando = new Expressando({
     "configuracao": configuracao
   , "aplicativo": aplicativo
+  , "express": express
   , "credenciais": credenciais
   , "lista": listaDeRotas
   }, function(objExpressando) { 
