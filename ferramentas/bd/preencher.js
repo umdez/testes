@@ -19,9 +19,8 @@ var aConfiguracaoPadrao = require('./configuracao/configuracao.js');
 var modelos = require('./modelos/indice');
 var dados = require('./dados/indice');
 
-var preenchedor = new Preenchedor(aConfiguracaoPadrao, dados, modelos);
+var preenchedor = new Preenchedor(aConfiguracaoPadrao, modelos, dados);
 
 preenchedor.conectarAoBanco( function() {
-  // Carregamos aqui os dados.
   preenchedor.armazenarOsDados();
 });

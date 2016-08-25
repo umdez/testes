@@ -23,7 +23,7 @@ module.exports = function (database, DataTypes) {
   }, {
 
     associar: function (modelos) {
-      modelos.Usuarios.hasOne(modelos.Funcoes, { foreignKey: 'usuario_id', as: 'Funcoes' });  
+      modelos.Usuarios.belongsTo(modelos.Funcoes, { foreignKey: 'funcao_id', as: 'Usuarios' });
       modelos.Usuarios.hasMany(modelos.Projetos, { foreignKey: 'usuario_id', as: 'Projetos' }); 
     },
     classMethods:{
