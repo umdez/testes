@@ -1,4 +1,4 @@
-var Base = require('./base');
+var Base = require('../base');
 var utilitario = require('util');
 
 var Usuarios = function(argumentos) {
@@ -7,11 +7,6 @@ var Usuarios = function(argumentos) {
   this.limiteDeLeituras = this.criarUmLimite({ 
     nome: 'limiteDeRequisicoes', intervalo: 60*60*1000, max: 150 
   , mensagem: 'Muitas tentativas de leituras aos usuários. Por favor, tente novamente mais tarde.'
-  });
-
-  this.limiteDeListagens = this.criarUmLimite({ 
-    nome: 'limiteDeListagens', intervalo: 60*60*1000, max: 150
-  , mensagem: 'Muitas tentativas de listagens aos usuários. Por favor, tente novamente mais tarde.'
   });
 
   this.iniciar();

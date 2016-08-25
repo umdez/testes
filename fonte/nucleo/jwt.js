@@ -13,6 +13,8 @@ jsonWebToken.prototype.inicializar = function(opcoes) {
   this.senha = null;
   this.superSegredo = opcoes.superSegredo;
   this.fichario = require('fichario');
+  
+  this.fichario.setaHoraDeExpiracao(60*14+10);
 };
 
 jsonWebToken.prototype.encontrarUmToken = function(requisicao) {
@@ -104,8 +106,6 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
             , 'uuid': conta.uuid
             , 'funcao': funcao ? funcao.get('nome') : null
             }, instancia));
-            
-            meuObj.fichario.setaHoraDeExpiracao(60*14+10);
 
             return meuObj.modelos['Escopos'].findAll({
               attributes: ['id', 'nome', 'bandeira'], 
