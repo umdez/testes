@@ -31,6 +31,12 @@ Autorizacao.prototype.iniciar = function() {
     });
   });
 
+  fonte.atualizar.iniciar.antesQue(function(requisicao, resposta, contexto) {
+    return meuObj.verificarEstatos(requisicao, contexto, function(seVerificado) {
+      if (seVerificado) { }
+    });
+  });
+
   fonte.atualizar.iniciar(function(requisicao, resposta, contexto) {
     return contexto.continuar;
   });

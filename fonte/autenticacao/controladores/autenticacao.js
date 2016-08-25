@@ -33,6 +33,12 @@ Autenticacao.prototype.iniciar = function() {
     });
   });
 
+  fonte.criar.iniciar.antesQue(function(requisicao, resposta, contexto) {
+    return meuObj.verificarEstatos(requisicao, contexto, function(seVerificado) {
+      if (seVerificado) { }
+    });
+  });
+
   fonte.criar.iniciar(function(requisicao, resposta, contexto) {
     return contexto.continuar;
   });

@@ -40,12 +40,14 @@ Contas.prototype.carregarConfig = function(opcoes) {
   config.acoes = [ 
     'deletar'      // DELETE: Realiza a saida do usuário em sua conta.
   , 'criar'        // POST: Realiza a entrada do usuário em sua conta.
-  , 'atualizar'    // PUT: Realiza a manutenção da sessão do usuário em sua conta.
+  , 'atualizar'    // PUT|UPDATE: Realiza a manutenção da sessão do usuário em sua conta.
   ]; 
 
   config.excluirAtributos = [ 
     'createdAt'
   , 'updatedAt'
+  , 'iat'
+  , 'exp'
   ];      
 
   return config;       

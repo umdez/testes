@@ -1,6 +1,5 @@
 var jwt = require('jsonwebtoken');
 var Promessa = require('bluebird');
-var fichario = require('fichario');
 var _ = require('lodash');
 
 var jsonWebToken = function(argumentos) {
@@ -13,6 +12,7 @@ jsonWebToken.prototype.inicializar = function(opcoes) {
   this.jid = null;
   this.senha = null;
   this.superSegredo = opcoes.superSegredo;
+  this.fichario = require('fichario');
 };
 
 jsonWebToken.prototype.encontrarUmToken = function(requisicao) {
@@ -83,12 +83,12 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
             , 'jid': conta.jid
             };
             
-            meuObj.token = jwt.sign(usuario, meuObj.superSegredo, { expiresIn: (14*60*60*1000) });
-
             var instancia = _.assignIn({
               'nome': conta.nome
-            , 'estatos': conta.estatos 
+            , 'estatos': _.parseInt(conta.estatos, [radix=16])  
             }, usuario);
+            
+            meuObj.token = jwt.sign(usuario, meuObj.superSegredo, { expiresIn: (14*60*60*1000) });
 
             if (requisicao.session) {
               requisicao.session.token = meuObj.token;
@@ -99,13 +99,13 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
               
             var funcao = conta.Funcoes || null;
 
-            var ficha = fichario.adicUsuario(_.assignIn({ 
+            var ficha = meuObj.fichario.adicUsuario(_.assignIn({ 
               'token': meuObj.token
             , 'uuid': conta.uuid
             , 'funcao': funcao ? funcao.get('nome') : null
             }, instancia));
             
-            fichario.setaHoraDeExpiracao(60*14+20);
+            meuObj.fichario.setaHoraDeExpiracao(60*14+10);
 
             return meuObj.modelos['Escopos'].findAll({
               attributes: ['id', 'nome', 'bandeira'], 
@@ -120,8 +120,8 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
               
                   ficha.adicEscopo({
                     'id': escopo.get('id')
-                  , 'nome': escopo.get('nome')
-                  , 'bandeira': escopo.get('bandeira')
+                  , 'nome': _.toUpper(escopo.get('nome'))
+                  , 'bandeira': _.parseInt(escopo.get('bandeira'), [radix=16])
                   });
                   
                 }); 
@@ -164,10 +164,8 @@ jsonWebToken.prototype.autorizar = function(requisicao, resposta, contexto, cd) 
           var instancia = { 
             'id': decodificado.id
           , 'jid': decodificado.jid
-          , 'uuid': decodificado.uuid
-          , 'autenticado': true
           };
-          
+
           cd(true);
 
           contexto.instancia = instancia;

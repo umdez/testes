@@ -22,7 +22,7 @@ Usuarios.prototype.iniciar = function(opcoes) {
 Usuarios.prototype.carregarConfig = function(opcoes) {
 
   var config = {
-    nome: 'Usuarios'                 // É o nome dado a tabela (modelo) no banco de dados.
+     nome: 'Usuarios'                 // É o nome dado a tabela (modelo) no banco de dados.
   ,  sePossuiAssociacoes: false       // Se possui associações.
   ,  seForRealizarPaginacao: true     // Caso seja necessário possuir suporte à paginação.
   ,  controladores: null              // Os controladores desta fonte.
@@ -59,7 +59,9 @@ Usuarios.prototype.carregarConfig = function(opcoes) {
   , 'listar'      // Oferece a capacidade de listar os registros desta fonte.
   ];   
 
-  config.excluirAtributos = [ ];     
+  config.excluirAtributos = [ 
+    'senha'
+  ];     
 
   return config;       
 };

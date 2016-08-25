@@ -6,7 +6,7 @@
       "nome": "Fulano da Silva",
       "jid": "fulano@localhost",
       "senha": "$2a$05$aC3/OQT/UOFgLaBUkygfYOeTgQpN9jGRQsuWeDvTX3WHvSESbfGz.",
-      "estatos": "40"
+      "estatos": "1"
     }
   },
   {
@@ -16,7 +16,7 @@
       "nome": "Fulana Dias",
       "jid": "fulana@localhost",
       "senha": "$2a$05$aC3/OQT/UOFgLaBUkygfYOeTgQpN9jGRQsuWeDvTX3WHvSESbfGz.",
-      "estatos": "40"
+      "estatos": "2"
     }
   },
   {
@@ -26,7 +26,7 @@
       "nome": "Ciclano Domingues",
       "jid": "ciclano@localhost",
       "senha": "$2a$05$aC3/OQT/UOFgLaBUkygfYOeTgQpN9jGRQsuWeDvTX3WHvSESbfGz.",
-      "estatos": "40"
+      "estatos": "2"
     }
   },
 
@@ -60,7 +60,7 @@
     "data": {
       "id": 1,
       "nome": "Usuarios",
-      "bandeira": "40",
+      "bandeira": "64",
       "funcao_id": 1
     }
   },
@@ -69,7 +69,7 @@
     "data": {
       "id": 2,
       "nome": "Usuarios",
-      "bandeira": "40",
+      "bandeira": "64",
       "funcao_id": 2
     }
   },
@@ -78,7 +78,7 @@
     "data": {
       "id": 3,
       "nome": "Usuarios",
-      "bandeira": "40",
+      "bandeira": "64",
       "funcao_id": 3
     }
   },
@@ -87,7 +87,7 @@
     "data": {
       "id": 4,
       "nome": "Pacientes",
-      "bandeira": "40",
+      "bandeira": "64",
       "funcao_id": 3
     }
   },

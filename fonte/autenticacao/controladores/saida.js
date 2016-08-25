@@ -31,6 +31,12 @@ Saida.prototype.iniciar = function() {
     });
   });
 
+  fonte.deletar.iniciar.antesQue(function(requisicao, resposta, contexto) {
+    return meuObj.verificarEstatos(requisicao, contexto, function(seVerificado) {
+      if (seVerificado) { }
+    });
+  });
+
   fonte.deletar.iniciar(function(requisicao, resposta, contexto) {
     return contexto.continuar;
   });

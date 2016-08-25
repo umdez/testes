@@ -97,14 +97,14 @@ Restificando.prototype.carregarOsControladores = function () {
   
   var meuObj = this;
   var moduloRest = this.modulos['rest'];
-  var moduloDb = this.modulos['bd'];
+  var modelos = this.modulos['bd'].modelos;
 
   controladores.forEach(function (c) {
     var fonte = moduloRest.fontes[c.aliase].fonte;
 
     meuObj.controladores[c.aliase] = new c.Controlador({ 
-      'fonte': fonte
-    , 'modelos': moduloDb.modelos 
+      'fonte': fonte 
+    , 'modelos': modelos
     , 'superSegredo': meuObj.configuracao.superSegredo
     });
   });

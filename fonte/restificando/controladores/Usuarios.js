@@ -33,13 +33,21 @@ Usuarios.prototype.iniciar = function() {
   });
   
   fonte.ler.iniciar.antesQue(function(requisicao, resposta, contexto) {
-    return contexto.continuar;
+    return meuObj.jwt.autorizar(requisicao, resposta, contexto, function(seAutorizado) { 
+      if (seAutorizado) { };
+    });
+  });
+
+  fonte.ler.iniciar.antesQue(function(requisicao, resposta, contexto) {
+    return meuObj.verificarPermissao(requisicao, contexto, function(sePermitido) {
+      if (sePermitido) { };
+    }); 
   });
 
   fonte.ler.iniciar(function(requisicao, resposta, contexto) {
     return contexto.continuar;
   });
-
+  
 };
 
 module.exports = Usuarios;
