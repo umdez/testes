@@ -14,8 +14,8 @@ module.exports = function (database, DataTypes) {
   }, {
 
     associar: function (modelos) {
-      modelos.Funcoes.hasMany(modelos.Usuarios, { foreignKey: 'funcao_id', as: 'Funcoes' });  
-      modelos.Funcoes.hasMany(modelos.Escopos, { foreignKey: 'funcao_id', as: 'Funcoes' }); 
+      modelos.Funcoes.hasMany(modelos.Usuarios, { foreignKey: 'funcao_id' });  
+      modelos.Funcoes.hasMany(modelos.Escopos, { foreignKey: 'funcao_id' }); 
     },
     classMethods:{
       

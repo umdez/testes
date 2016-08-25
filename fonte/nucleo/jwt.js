@@ -68,7 +68,7 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
         }, 
         include: [{
           model: meuObj.modelos['Funcoes'],
-         // as: 'Funcoes',
+          as: 'Funcoes',
           attributes: ['id', 'nome']
         }]
       })
