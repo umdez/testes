@@ -18,37 +18,35 @@ jsonWebToken.prototype.inicializar = function(opcoes) {
 };
 
 jsonWebToken.prototype.encontrarUmToken = function(requisicao) {
-  // Inicialmente procuramos pelo token numa sessão segura se caso não
-  // encontrado, procuramos no body e também depois no cabeçalho.
+
+  this.token = null;
+
   if (requisicao.session && requisicao.session.token) {
     this.token = requisicao.session.token; 
-  } else if (requisicao.body && requisicao.body.token) {
-    this.token = requisicao.body.token;
-  } else if (requisicao.headers['x-acesso-token']) {
-    this.token = requisicao.headers['x-acesso-token'];
-  }
+  } 
+
   return this.token;
 };
 
 jsonWebToken.prototype.encontrarUmJid = function(requisicao) {
+  
+  this.jid = null;
+
   if (requisicao.body && requisicao.body.jid) {
     this.jid = requisicao.body.jid; 
-  } else if (requisicao.params && requisicao.params.jid) {
-    this.jid = requisicao.params.jid;
-  } else if (requisicao.headers['x-autenticacao-jid']) {
-    this.jid = requisicao.headers['x-autenticacao-jid'];
-  }
+  } 
+
   return this.jid;
 };
 
 jsonWebToken.prototype.encontrarUmaSenha = function(requisicao) {
+
+  this.senha = null;
+
   if (requisicao.body && requisicao.body.senha) {
     this.senha = requisicao.body.senha;
-  } else if (requisicao.params && requisicao.params.senha) {
-    this.senha = requisicao.params.senha;
-  } else if (requisicao.headers['x-autenticacao-senha']) {
-    this.senha = requisicao.headers['x-autenticacao-senha'];
-  }
+  } 
+
   return this.senha;
 };
 
@@ -94,9 +92,8 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
 
             if (requisicao.session) {
               requisicao.session.token = meuObj.token;
-            } else {
-              instancia.token = meuObj.token; 
-            }
+            } 
+            
             contexto.instancia = instancia;
               
             var funcao = conta.Funcoes || null;
@@ -184,11 +181,13 @@ jsonWebToken.prototype.autorizar = function(requisicao, resposta, contexto, cd) 
 };  
 
 jsonWebToken.prototype.sair = function(requisicao, resposta, contexto, cd) {
-  
+ 
   return new Promessa(function(deliberar, recusar) {
-   
-    if (requisicao.session) requisicao.session.destroy(function(erro) { });  
-
+    
+    if (requisicao && requisicao.session) {
+      requisicao.session.destroy(function(erro){ });
+    } 
+    
     var instancia = { };
           
     cd(true);

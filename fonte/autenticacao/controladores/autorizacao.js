@@ -21,47 +21,36 @@ Autorizacao.prototype.iniciar = function() {
 
   var meuObj = this;
 
-  fonte.atualizar.iniciar.antesQue(function(requisicao, resposta, contexto) {
+  fonte.listar.iniciar.antesQue(function(requisicao, resposta, contexto) {
     return meuObj.limiteDeRequisicoes.afunilarServico(requisicao, resposta, contexto);
   });
   
-  fonte.atualizar.iniciar.antesQue(function(requisicao, resposta, contexto) {
+  fonte.listar.iniciar.antesQue(function(requisicao, resposta, contexto) {
     return meuObj.jwt.autorizar(requisicao, resposta, contexto, function(seAutorizado) { 
       if (seAutorizado) {};
     });
   });
 
-  fonte.atualizar.iniciar.antesQue(function(requisicao, resposta, contexto) {
+  fonte.listar.iniciar.antesQue(function(requisicao, resposta, contexto) {
     return meuObj.verificarEstatos(requisicao, contexto, function(seVerificado) {
       if (seVerificado) { }
     });
   });
 
-  fonte.atualizar.iniciar(function(requisicao, resposta, contexto) {
+  fonte.listar.iniciar(function(requisicao, resposta, contexto) {
     return contexto.continuar;
   });
 
-  fonte.atualizar.trazer.antesQue(function(requisicao, resposta, contexto) {
+  fonte.listar.trazer.antesQue(function(requisicao, resposta, contexto) {
     // NOTA: Iremos requisitar os nossos próprios dados, portanto, nós impedimos
     // a requisição pela database.
     return contexto.pular; 
   });
 
-  fonte.atualizar.trazer(function(requisicao, resposta, contexto) {
+  fonte.listar.trazer(function(requisicao, resposta, contexto) {
     return contexto.pular;  // Impedimos a requisição dos dados
   });
 
-  fonte.atualizar.escrever.antesQue(function(requisicao, resposta, contexto) {
-    return contexto.pular;  // Impedimos as alterações dos dados
-  });
-
-  fonte.atualizar.escrever(function(requisicao, resposta, contexto) {
-    return contexto.pular;  // Impedimos as alterações dos dados
-  });
-
-  fonte.criar.enviar.antesQue(function(requisicao, resposta, contexto) {
-    return contexto.continuar;
-  });
 };
 
 module.exports = Autorizacao;

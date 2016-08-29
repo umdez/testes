@@ -3,11 +3,6 @@ var utilitario = require('util');
 
 var Saida = function(argumentos) {
   Saida.super_.call(this, argumentos);
-   
-  this.limiteDeSaidas = this.criarUmLimite({ 
-    nome: 'limiteDeSaidas', intervalo: 15*60*1000, max: 20 
-  , mensagem: 'Limite de requisições de saida ultrapassado. Por favor, tente novamente mais tarde.'
-  });
 
   this.iniciar();
 };
@@ -21,10 +16,6 @@ Saida.prototype.iniciar = function() {
 
   var meuObj = this;
 
-  fonte.deletar.iniciar.antesQue(function(requisicao, resposta, contexto) {
-    return meuObj.limiteDeSaidas.afunilarServico(requisicao, resposta, contexto);
-  });
-  
   fonte.deletar.iniciar.antesQue(function(requisicao, resposta, contexto) {
     return meuObj.jwt.sair(requisicao, resposta, contexto, function(seSaiu) { 
       if (seSaiu) {};
