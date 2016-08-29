@@ -85,12 +85,12 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
             , 'jid': conta.jid
             };
             
+            meuObj.token = jwt.sign(usuario, meuObj.superSegredo, { expiresIn: (14*60*60*1000) });
+
             var instancia = _.assignIn({
               'nome': conta.nome
             , 'estatos': _.parseInt(conta.estatos, [radix=16])  
             }, usuario);
-            
-            meuObj.token = jwt.sign(usuario, meuObj.superSegredo, { expiresIn: (14*60*60*1000) });
 
             if (requisicao.session) {
               requisicao.session.token = meuObj.token;
