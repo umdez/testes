@@ -184,12 +184,10 @@ jsonWebToken.prototype.autorizar = function(requisicao, resposta, contexto, cd) 
 };  
 
 jsonWebToken.prototype.sair = function(requisicao, resposta, contexto, cd) {
-  var meuObj = this;
-  this.encontrarUmToken(requisicao);
-
+  
   return new Promessa(function(deliberar, recusar) {
    
-    if (requisicao.session) requisicao.session.regenerate(function(erro) {});  
+    if (requisicao.session) requisicao.session.regenerate(function(erro) { });  
 
     var instancia = { };
           
