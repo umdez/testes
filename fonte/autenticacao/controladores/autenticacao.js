@@ -5,7 +5,7 @@ var Autenticacao = function(argumentos) {
   Autenticacao.super_.call(this, argumentos);
    
   this.limiteDeAutenticacoes = this.criarUmLimite({
-    nome: 'limiteDeAutenticacoes', intervalo: 20*60*1000, max: 10               
+    nome: 'limiteDeAutenticacoes', intervalo: 20*60*1000, max: 25               
   , mensagem: 'Muitas tentativas de autenticação. Por favor, tente novamente mais tarde.'
   });
 

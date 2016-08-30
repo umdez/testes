@@ -60,7 +60,7 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
     if (meuObj.jid && meuObj.senha) {
       
      return meuObj.modelos['Usuarios'].findOne({
-        attributes: ['id', 'nome', 'jid', 'uuid', 'senha', 'estatos'], 
+        attributes: ['id', 'nome', 'jid', 'uuid', 'senha', 'estatos', 'funcao_id'], 
         where: {
           jid: meuObj.jid
         }, 
@@ -73,22 +73,23 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
       .then(function (conta) {
         
         if (conta == null) {
-          deliberar(contexto.erro(403, "Dados de acesso informados estão incorretos."));
+          deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
         } else {
           var seSenhaConfere = meuObj.senha ? conta.verificarSenha(meuObj.senha) : false;
+          
           if (seSenhaConfere) {
-            
+
             var usuario = { 
               'id': conta.id
             , 'jid': conta.jid
+            , 'nome': conta.nome
+            , 'estatos': conta.estatos
+            , 'funcao_id': conta.funcao_id
             };
             
             meuObj.token = jwt.sign(usuario, meuObj.superSegredo, { expiresIn: (14*60*60*1000) });
 
-            var instancia = _.assignIn({
-              'nome': conta.nome
-            , 'estatos': _.parseInt(conta.estatos, [radix=16])  
-            }, usuario);
+            var instancia = _.assignIn({ }, usuario);
 
             if (requisicao.session) {
               requisicao.session.token = meuObj.token;
@@ -102,6 +103,7 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
               'token': meuObj.token
             , 'uuid': conta.uuid
             , 'funcao': funcao ? funcao.get('nome') : null
+            , 'estatos': _.parseInt(conta.estatos, [radix=16]) 
             }, instancia));
 
             return meuObj.modelos['Escopos'].findAll({
@@ -128,13 +130,13 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
             });
            
           } else {
-            deliberar(contexto.erro(403, "Dados de acesso informados estão incorretos."));
+            deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
           }
         }
       });
 
     } else {
-      deliberar(contexto.erro(403, "Dados de acesso informados estão incorretos."));
+      deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
     }
 
     deliberar(contexto.continuar);
@@ -153,14 +155,16 @@ jsonWebToken.prototype.autorizar = function(requisicao, resposta, contexto, cd) 
         if (erro) {
           // erro.name: 'TokenExpiredError' ou outros
           // erro.message: Mensagem sobre o erro ocorrido.
-          
-          if (requisicao.session) requisicao.session.regenerate(function(erro) {});
 
-          deliberar(contexto.erro(403, "Dados de acesso informados estão incorretos."));
+          deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
         } else if (decodificado) {
+
           var instancia = { 
             'id': decodificado.id
           , 'jid': decodificado.jid
+          , 'nome': decodificado.nome
+          , 'estatos': decodificado.estatos
+          , 'funcao_id': decodificado.funcao_id
           };
 
           cd(true);
@@ -168,14 +172,12 @@ jsonWebToken.prototype.autorizar = function(requisicao, resposta, contexto, cd) 
           contexto.instancia = instancia;
           deliberar(contexto.continuar);
         } else {
-          
-          if (requisicao.session) requisicao.session.regenerate(function(erro) {});
 
-          deliberar(contexto.erro(403, "Dados de acesso informados estão incorretos."));
+          deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
         }
       });
     } else {
-      deliberar(contexto.erro(403, "Dados de acesso informados estão incorretos."));
+      deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
     }
   });
 };  

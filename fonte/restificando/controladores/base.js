@@ -2,7 +2,7 @@ var jwt = require('../../nucleo/jwt');
 var Promessa = require('bluebird');
 var _ = require('lodash');
 
-var PERMISSAO_ACESSAR = 0x00000001;
+var PERMISSAO_ACESSAR = 0x00000001;  // Ler ou Listar
 var PERMISSAO_CADASTRAR = 0x00000002;
 var PERMISSAO_REMOVER = 0x00000004;
 var PERMISSAO_ATUALIZAR = 0x00000008;
@@ -62,7 +62,7 @@ Controlador.prototype.verificarPermissao = function(requisicao, contexto, cd) {
       cd(true);
       deliberar(contexto.continuar);
     } else {
-      deliberar(contexto.erro(403, "Voce nao possui permissao de acesso."));
+      deliberar(contexto.erro(401, "Voce nao possui autorização de acesso."));
     }
   });
 };

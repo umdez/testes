@@ -1,28 +1,32 @@
 
 define([
-  "aplicativo"
-, "backbone"
+  "backbone"
+, "modelos/funcao/funcao"
+, "colecoes/escopos/escopos"
 ], function(
-  aplicativo
-, Backbone
+  Backbone
+, ModeloDeFuncao
+, ColecaoDeEscopos
 ) {
   'use strict';
 
   var ModeloDeConta = Backbone.Model.extend({
 
-    urlRoot: '/contas',
+    urlRoot: '/Contas',
     
     idAttribute: 'id',
 
     initialize: function(){
-      
+      this.funcao = new ModeloDeFuncao({});
+      this.escopos = new ColecaoDeEscopos({});
     },
 
     defaults: {
-      'id': 0,
-      'nome': '',
-      'estatos': '',
-      'jid': ''
+      'id': null
+    , 'nome': ''
+    , 'estatos': ''
+    , 'jid': ''
+    , 'funcao_id': null
     }
 
   });

@@ -10,8 +10,6 @@ define([
   
   var aplicativo = {};
 
-  Backbone.emulateHTTP = true;
-
   aplicativo.sessao = new ModeloDeSessao({});
 
   aplicativo.eventos = _.extend({}, Backbone.Events);

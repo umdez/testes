@@ -1,20 +1,20 @@
 var Base = require('../base');
 var utilitario = require('util');
 
-var Usuarios = function(argumentos) {
-  Usuarios.super_.call(this, argumentos);
+var Funcoes = function(argumentos) {
+  Funcoes.super_.call(this, argumentos);
 
   this.limiteDeLeituras = this.criarUmLimite({ 
     nome: 'limiteDeRequisicoes', intervalo: 60*60*1000, max: 150 
-  , mensagem: 'Muitas tentativas de leituras aos usuários. Por favor, tente novamente mais tarde.'
+  , mensagem: 'Muitas tentativas de leituras as funcoes. Por favor, tente novamente mais tarde.'
   });
 
   this.iniciar();
 };
 
-utilitario.inherits(Usuarios, Base);
+utilitario.inherits(Funcoes, Base);
 
-Usuarios.prototype.iniciar = function() {
+Funcoes.prototype.iniciar = function() {
   
   var fonte = this.fonte || null;
 
@@ -44,4 +44,4 @@ Usuarios.prototype.iniciar = function() {
   
 };
 
-module.exports = Usuarios;
+module.exports = Funcoes;

@@ -51,7 +51,7 @@ Controlador.prototype.verificarEstatos = function(requisicao, contexto, cd) {
         "POST": function() {
         
         if (seBloqueado) {
-          deliberar(contexto.erro(403, "Voce não possui o estatos requerido."));
+          deliberar(contexto.erro(401, "Voce não possui o estatos requerido."));
         } else if (seVerificado) {
           cd(true);
           deliberar(contexto.continuar);
@@ -64,7 +64,7 @@ Controlador.prototype.verificarEstatos = function(requisicao, contexto, cd) {
       , "GET": function( ) {
         
         if (seBloqueado) {
-          deliberar(contexto.erro(403, "Voce não possui o estatos requerido."));
+          deliberar(contexto.erro(401, "Voce não possui o seu estatos requerido."));
         } else if (seVerificado) {
           cd(true);
           deliberar(contexto.continuar);

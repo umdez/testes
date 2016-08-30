@@ -18,7 +18,7 @@ Saida.prototype.iniciar = function() {
 
   fonte.deletar.iniciar.antesQue(function(requisicao, resposta, contexto) {
     return meuObj.jwt.sair(requisicao, resposta, contexto, function(seSaiu) { 
-      if (seSaiu) {};
+      if (seSaiu) { };
     });
   });
 
