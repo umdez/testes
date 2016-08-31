@@ -6,7 +6,6 @@ define([
 ], function(
   Backbone
 , ModeloDeFuncao
-, ColecaoDeEscopos
 ) {
   'use strict';
 
@@ -18,7 +17,6 @@ define([
 
     initialize: function(){
       this.funcao = new ModeloDeFuncao({});
-      this.escopos = new ColecaoDeEscopos({});
     },
 
     defaults: {

@@ -13,8 +13,7 @@ module.exports = function (database, DataTypes) {
     nome: { type: DataTypes.STRING, validate: {} }  // Gerente? atendente?
   }, {
 
-    associar: function (modelos) {
-      modelos.Funcoes.hasMany(modelos.Usuarios, { foreignKey: 'funcao_id' });  
+    associar: function (modelos) { 
       modelos.Funcoes.hasMany(modelos.Escopos, { foreignKey: 'funcao_id' }); 
     },
     classMethods:{

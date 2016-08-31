@@ -8,6 +8,7 @@ module.exports = [
 // {modelo: 'Escopos', arquivo: pasta.join(__dirname, 'Escopos/Usuarios.js') }
 // {modelo: 'Escopos', arquivo: pasta.join(__dirname, 'Escopos/Funcoes.js') }
 // {modelo: 'Escopos', arquivo: pasta.join(__dirname, 'Escopos/Escopos.js') }
+// {modelo: 'Escopos', arquivo: pasta.join(__dirname, 'Escopos/Projetos.js') }
 
 // {modelo: 'Usuarios', arquivo: pasta.join(__dirname, 'Usuarios.js') }
 

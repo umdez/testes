@@ -47,14 +47,14 @@ Controlador.prototype.verificarPermissao = function(requisicao, contexto, cd) {
     var metodo = _.toUpper(requisicao.method);
 
     var acoes = {
-      "GET": PERMISSAO_ACESSAR
-    , "POST": PERMISSAO_CADASTRAR
-    , "DELETE": PERMISSAO_REMOVER
-    , "UPDATE": PERMISSAO_ATUALIZAR
-    , "PUT": PERMISSAO_ATUALIZAR 
+      "GET": [ PERMISSAO_ACESSAR, "Ler/Listar" ]
+    , "POST": [ PERMISSAO_CADASTRAR, "Cadastrar"]
+    , "DELETE": [ PERMISSAO_REMOVER, "Remover"]
+    , "UPDATE": [ PERMISSAO_ATUALIZAR, "Atualizar" ]
+    , "PUT": [ PERMISSAO_ATUALIZAR, "Atualizar" ] 
     };
 
-    permissao |= acoes[metodo];
+    permissao |= acoes[metodo][0];
 
     var sePermitido = (meuObj.fichario.sePossuiEscopo(token, modelo, permissao) != 0);
     
@@ -62,7 +62,7 @@ Controlador.prototype.verificarPermissao = function(requisicao, contexto, cd) {
       cd(true);
       deliberar(contexto.continuar);
     } else {
-      deliberar(contexto.erro(401, "Voce nao possui autorização de acesso."));
+      deliberar(contexto.erro(401, "Você não pode " + acoes[metodo][1] + " " + modelo));
     }
   });
 };

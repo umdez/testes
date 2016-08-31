@@ -73,7 +73,7 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
       .then(function (conta) {
         
         if (conta == null) {
-          deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
+          deliberar(contexto.erro(400, "Dados informados não correspondem."));
         } else {
           var seSenhaConfere = meuObj.senha ? conta.verificarSenha(meuObj.senha) : false;
           
@@ -130,13 +130,13 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
             });
            
           } else {
-            deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
+            deliberar(contexto.erro(400, "Senha de acesso informada não corresponde."));
           }
         }
       });
 
     } else {
-      deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
+      deliberar(contexto.erro(400, "Dados de acesso informados não são válidos."));
     }
 
     deliberar(contexto.continuar);
@@ -156,7 +156,7 @@ jsonWebToken.prototype.autorizar = function(requisicao, resposta, contexto, cd) 
           // erro.name: 'TokenExpiredError' ou outros
           // erro.message: Mensagem sobre o erro ocorrido.
 
-          deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
+          deliberar(contexto.erro(400, "Não foi possível verificar o seu token de acesso."));
         } else if (decodificado) {
 
           var instancia = { 
@@ -173,11 +173,11 @@ jsonWebToken.prototype.autorizar = function(requisicao, resposta, contexto, cd) 
           deliberar(contexto.continuar);
         } else {
 
-          deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
+          deliberar(contexto.erro(400, "Não foi possível acessar os dados da sua conta com o token informado."));
         }
       });
     } else {
-      deliberar(contexto.erro(400, "Dados de acesso informados estão incorretos."));
+      deliberar(contexto.erro(400, "É necessário informar um token válido."));
     }
   });
 };  
