@@ -6,7 +6,7 @@ var PERMISSAO_ACESSAR = 0x00000001;  // Ler ou Listar
 var PERMISSAO_CADASTRAR = 0x00000002;
 var PERMISSAO_REMOVER = 0x00000004;
 var PERMISSAO_ATUALIZAR = 0x00000008;
-var PERMISSAO_SUPERIOR = 0x00000040;
+var PERMISSAO_SUPERIOR = 0x00000040;  // Acesso completo
 
 var Controlador = function(argumentos) {
   this.inicializar(argumentos);
@@ -39,9 +39,9 @@ Controlador.prototype.zerarUmLimite = function(requisicao) {
 
 Controlador.prototype.verificarPermissao = function(requisicao, contexto, cd) {
   var meuObj = this;
-  var modelo = _.toUpper(this.modelo.getTableName());
 
   return new Promessa(function(deliberar, recusar) {
+    var modelo = _.toLower(meuObj.modelo.getTableName());
     var token = meuObj.jwt.encontrarUmToken(requisicao);
     var permissao = PERMISSAO_SUPERIOR;
     var metodo = _.toUpper(requisicao.method);

@@ -43,7 +43,7 @@ Controlador.prototype.verificarEstatos = function(requisicao, contexto, cd) {
   return new Promessa(function(deliberar, recusar) {
     var token = meuObj.jwt.encontrarUmToken(requisicao);
     var metodo = _.toUpper(requisicao.method);
-    
+
     var seBloqueado = (meuObj.fichario.sePossuiEstatos(token, ESTATOS_BLOQUEADO) != 0);
     var seVerificado = (meuObj.fichario.sePossuiEstatos(token, ESTATOS_VERIFICADO) != 0);
 

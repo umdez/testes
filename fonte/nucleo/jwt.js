@@ -13,7 +13,7 @@ jsonWebToken.prototype.inicializar = function(opcoes) {
   this.senha = null;
   this.superSegredo = opcoes.superSegredo;
   this.fichario = require('fichario');
-  
+
   this.fichario.setaHoraDeExpiracao(60*14+10);
 };
 
@@ -24,7 +24,6 @@ jsonWebToken.prototype.encontrarUmToken = function(requisicao) {
   if (requisicao.session && requisicao.session.token) {
     this.token = requisicao.session.token; 
   } 
-
   return this.token;
 };
 
@@ -35,27 +34,26 @@ jsonWebToken.prototype.encontrarUmJid = function(requisicao) {
   if (requisicao.body && requisicao.body.jid) {
     this.jid = requisicao.body.jid; 
   } 
-
   return this.jid;
 };
 
 jsonWebToken.prototype.encontrarUmaSenha = function(requisicao) {
-
+  
   this.senha = null;
 
   if (requisicao.body && requisicao.body.senha) {
     this.senha = requisicao.body.senha;
   } 
-
   return this.senha;
 };
 
 jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd) {
   var meuObj = this;
-  this.encontrarUmJid(requisicao);
-  this.encontrarUmaSenha(requisicao);
- 
+
   return new Promessa(function(deliberar, recusar) {
+
+   meuObj.encontrarUmJid(requisicao);
+   meuObj.encontrarUmaSenha(requisicao);
 
     if (meuObj.jid && meuObj.senha) {
       
@@ -117,12 +115,12 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
                
                 _(escopos).forEach(function(escopo) {
               
-                  ficha.adicEscopo({
+                  meuObj.fichario.adicEscopo(meuObj.token, {
                     'id': escopo.get('id')
-                  , 'nome': _.toUpper(escopo.get('nome'))
+                  , 'nome': _.toLower(escopo.get('nome'))
                   , 'bandeira': _.parseInt(escopo.get('bandeira'), [radix=16])
                   });
-                  
+
                 }); 
               }
               cd(true);
@@ -145,9 +143,10 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
 
 jsonWebToken.prototype.autorizar = function(requisicao, resposta, contexto, cd) {
   var meuObj = this;
-  this.encontrarUmToken(requisicao);
 
   return new Promessa(function(deliberar, recusar) {
+
+    meuObj.encontrarUmToken(requisicao);
 
     if (meuObj.token) {
       
@@ -167,10 +166,34 @@ jsonWebToken.prototype.autorizar = function(requisicao, resposta, contexto, cd) 
           , 'funcao_id': decodificado.funcao_id
           };
 
-          cd(true);
-
           contexto.instancia = instancia;
-          deliberar(contexto.continuar);
+
+          return meuObj.modelos['Escopos'].findAll({
+            attributes: ['id', 'nome', 'bandeira'], 
+            where: {
+              funcao_id: decodificado.funcao_id
+            }
+          })
+          .then(function (escopos) {
+
+            meuObj.fichario.limparEscopos(meuObj.token);
+
+            if (escopos != null) {
+              
+              _(escopos).forEach(function(escopo) {
+
+                meuObj.fichario.adicEscopo(meuObj.token, {
+                  'id': escopo.get('id')
+                , 'nome': _.toLower(escopo.get('nome'))
+                , 'bandeira': _.parseInt(escopo.get('bandeira'), [radix=16])
+                });
+                
+              }); 
+            }
+            cd(true);
+            deliberar(contexto.continuar);
+          });
+
         } else {
 
           deliberar(contexto.erro(400, "Não foi possível acessar os dados da sua conta com o token informado."));
@@ -184,17 +207,21 @@ jsonWebToken.prototype.autorizar = function(requisicao, resposta, contexto, cd) 
 
 jsonWebToken.prototype.sair = function(requisicao, resposta, contexto, cd) {
  
+  var meuObj = this;
+
   return new Promessa(function(deliberar, recusar) {
     
+    meuObj.encontrarUmToken(requisicao);
+
     if (requisicao && requisicao.session) {
       requisicao.session.destroy(function(erro){ });
     } 
-    
-    var instancia = { };
+
+    meuObj.fichario.removerFicha(meuObj.token);
           
     cd(true);
 
-    contexto.instancia = instancia;
+    contexto.instancia = { };
 
     deliberar(contexto.continuar);
   });

@@ -40,7 +40,6 @@ define([
             
           }
       });
-
     },
     'erro': function(modelo, resposta, opcoes) {
       console.log(modelo.status + ' '+ JSON.parse(modelo.responseText).mensagem);
