@@ -52,8 +52,8 @@ jsonWebToken.prototype.autenticar = function(requisicao, resposta, contexto, cd)
 
   return new Promessa(function(deliberar, recusar) {
 
-   meuObj.encontrarUmJid(requisicao);
-   meuObj.encontrarUmaSenha(requisicao);
+    meuObj.encontrarUmJid(requisicao);
+    meuObj.encontrarUmaSenha(requisicao);
 
     if (meuObj.jid && meuObj.senha) {
       

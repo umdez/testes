@@ -60,6 +60,7 @@ define([
     console.log('autenticado?? ' + seAutenticado);
     console.log('nome?? ' + aplicativo.sessao.conta.get('nome'));
     console.log('Escopos?? ' + aplicativo.sessao.conta.funcao.get('Escopos'))
+    console.log('Funçao?? ' + aplicativo.sessao.conta.funcao.get('nome'))
   }, this);
 
   var inicializar = function() {

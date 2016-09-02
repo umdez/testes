@@ -29,6 +29,8 @@ define([
       var funcao = this.conta.funcao;
 
       var suporteDeFalhas = function(modelo, resposta, opcoes) {
+        meuObjt.conta.funcao.clear();
+        meuObjt.conta.clear();
         meuObjt.unset('id');
         meuObjt.set({ 'autenticado': false });
         if('erro' in cd) cd.erro(modelo, resposta, opcoes);

@@ -1,14 +1,4 @@
-'use strict'
-
-/*******************************************************************
- * Listificando é de (C) propriedade da Devowly Sistemas 2015-2016 *
- *                 https://github.com/devowly                      *
- *******************************************************************
- * 
- * $Id principal.js, criado em 26/07/2016 às 17:22 por Leo Felippe $
- *
- * Versão atual 0.0.2-Beta
- */
+'use strict';
 
 /* Arquivo de configuração da biblioteca require.js.
  */
@@ -32,7 +22,7 @@
 require.config({
   
   // Base de onde os scripts serão requisitados.
-  baseUrl: "/boilerplate/js",
+  baseUrl: "/js",
   
   // Quantidade de segundos para desistir de carregar um módulo.
   waitSeconds: 7,
@@ -63,14 +53,12 @@ require.config({
 });
 
 require([
-  'aplicativo'  // Carrega o modulo do aplicativo e o passa para nossa função de definição
+  'principal'  
 , 'domready'    // Vamos esperar o DOM estiver apresentado e carregado.
-], function(Aplicativo, quandoCarregado) {
+], function(Principal, quandoCarregado) {
   
-  // Chamado logo após a página estiver totalmente carregada e apresentada.
   quandoCarregado(function() {  
 
-    // Aqui nós iniciamos aqui nosso aplicativo.
-    Aplicativo.inicializar();
+    Principal.inicializar();
   });
 });

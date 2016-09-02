@@ -47,11 +47,11 @@ Controlador.prototype.verificarPermissao = function(requisicao, contexto, cd) {
     var metodo = _.toUpper(requisicao.method);
 
     var acoes = {
-      "GET": [ PERMISSAO_ACESSAR, "Ler/Listar" ]
-    , "POST": [ PERMISSAO_CADASTRAR, "Cadastrar"]
-    , "DELETE": [ PERMISSAO_REMOVER, "Remover"]
-    , "UPDATE": [ PERMISSAO_ATUALIZAR, "Atualizar" ]
-    , "PUT": [ PERMISSAO_ATUALIZAR, "Atualizar" ] 
+      "GET": [ PERMISSAO_ACESSAR, "ler/listar" ]
+    , "POST": [ PERMISSAO_CADASTRAR, "cadastrar"]
+    , "DELETE": [ PERMISSAO_REMOVER, "remover"]
+    , "UPDATE": [ PERMISSAO_ATUALIZAR, "atualizar" ]
+    , "PUT": [ PERMISSAO_ATUALIZAR, "atualizar" ] 
     };
 
     permissao |= acoes[metodo][0];
