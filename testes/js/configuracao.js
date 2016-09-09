@@ -35,6 +35,7 @@ require.config({
   , 'backbone.paginator': '/bibliotecas/backbone.paginator'  // Adicionar paginação ao BackBone. @veja https://github.com/backbone-paginator/backbone.paginator
   , 'jquery': '/bibliotecas/jquery.min'
   , 'domready': '/bibliotecas/domready'
+  , 'strophe': '/bibliotecas/strophe.min'
   },
   
   // Lembre-se: Somente usar o shim para aqueles scripts que não são AMD. Ele
@@ -47,7 +48,10 @@ require.config({
     },
     'underscore': {
       exports: '_'  
-    }
+    },
+    'strophe': {
+
+    },
   }
 
 });

@@ -1,14 +1,4 @@
 'use strict';
-
-/*******************************************************************
- * Listificando é de (C) propriedade da Devowly Sistemas 2015-2016 *
- *                 https://github.com/devowly                      *
- *******************************************************************
- * 
- * $Id iniciar.js, criado em 17/07/2016 às 15:22 por Leo Felippe $
- *
- * Versão atual 0.0.1-Beta
- */
  
 var sistemaDeArquivo = require('fs');
 var pasta = require('path');
@@ -16,7 +6,8 @@ var pastaDeConfiguracaoPadrao = pasta.join(__dirname, '/configuracao/configuraca
 var express = require('express');
 var configurado = require('configurado');
 var registrador = require('./fonte/nucleo/registrador')('iniciar');  // Carregamos o nosso registrador
-var Expressando = require('expressando');
+var Expressando = require('./expressando');
+var servidorXmpp = require('servidor-xmpp');
 
 configurado.iniciar(pastaDeConfiguracaoPadrao, function(configuracao) {
   
@@ -38,17 +29,12 @@ configurado.iniciar(pastaDeConfiguracaoPadrao, function(configuracao) {
   , { "caminho": express.static(pasta.join(__dirname, 'testes/incluir/estilos')), "rota": '/estilos' }
   ];
 
-  console.log(configuracao.servidor.limite)
-
-  // Carregamos aqui o servidor express, o cors e o redirecionamento.
   var expressando = new Expressando({
     "configuracao": configuracao
   , "aplicativo": aplicativo
   , "express": express
   , "credenciais": credenciais
   , "lista": listaDeRotas
-  }, function(objExpressando) { 
-    objExpressando.carregar(); 
   });
   
   // Chamamos o arquivo principal, ele vai carregar os outros arquivos
@@ -58,9 +44,11 @@ configurado.iniciar(pastaDeConfiguracaoPadrao, function(configuracao) {
   // Aqui nós prosseguimos com nossos serviços basicos.
   principal.prosseguir(configuracao, aplicativo, function() {
     registrador.debug('Carregando o servidor HTTP e HTTPS.');
+    expressando.escutarPorConexoes();
+  });
 
-    // Iniciamos a escuta por conexões no express.
-    expressando.escutar(function() { });
+  servidorXmpp.inicializar().then(function(){
+    servidorXmpp.carregar(function(){ });
   });
   
 });
