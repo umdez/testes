@@ -20,10 +20,5 @@ define([
 
   });
 
-  // NOTA: Adicionar paginação
-  
-  return {
-    Colecao: ColecaoDeUsuarios
-  //, Paginacao: PaginacaoDeUsuarios
-  }
+  return ColecaoDeUsuarios;
 });

@@ -5,6 +5,7 @@ define([
 , "modulos/usuario/roteador/rotas"
 , "modelos/usuario/usuario"
 , "colecoes/usuarios/usuarios"
+, "paginacoes/usuarios/usuarios"
 , "modulos/exemplo/indice"  
 ], function (
   aplicativo
@@ -12,6 +13,7 @@ define([
 , Rotas
 , ModeloDeUsuario
 , ColecaoDeUsuario
+, PaginacaoDeUsuario
 , Dependencia01
 ) {
   'use strict';
@@ -22,9 +24,9 @@ define([
 
   Usuario.Modelo = ModeloDeUsuario;
 
-  Usuario.Lista = ColecaoDeUsuario.Colecao;
+  Usuario.Lista = ColecaoDeUsuario;
 
-  //Usuario.Paginacao = ColecaoDeUsuario.Paginacao;
+  Usuario.Paginacao = PaginacaoDeUsuario;
 
   aplicativo.adcRota("Usuario", function(id){
    

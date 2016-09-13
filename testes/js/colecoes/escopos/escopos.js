@@ -20,10 +20,5 @@ define([
 
   });
 
-  // NOTA: Adicionar paginação
-  
-  return {
-    Colecao: ColecaoDeEscopos
-  //, Paginacao: PaginacaoDeEscopos 
-  }
+  return ColecaoDeEscopos;
 });
