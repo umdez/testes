@@ -4,9 +4,11 @@
  */
  
 define([
-  "backbone"
+  "aplicativo"
+, "backbone"
 ], function(
-  Backbone
+  aplicativo
+, Backbone
 ) {
   'use strict';
   
@@ -28,15 +30,18 @@ define([
     },
     
     asRotasDeUmNivel: function(modulo){
-      
+      aplicativo.buscarRota(modulo, null)
     },
 
     asRotasDeDoisNiveis: function(modulo, id){
-      
+      aplicativo.buscarRota(modulo, id)
     }
     
   });
   
+  // Iniciamos aqui o histórico das rotas.
+  Backbone.history.start(); 
+
   return SitioRoteador;
 
 });

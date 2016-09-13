@@ -29,7 +29,7 @@ require.config({
   
   // Os caminhos de cada um dos nossos modulos.
   paths: {
-    'text': '/bibliotecas/text'                              // Para carregamento de arquivos em texto. por exemplo, arquivos .html
+    'text': '/bibliotecas/text'                              // Para carregamento de arquivos. por exemplo, os arquivos .html
   , 'underscore': '/bibliotecas/underscore.min'
   , 'backbone': '/bibliotecas/backbone.min'                  // Backbone
   , 'backbone.paginator': '/bibliotecas/backbone.paginator'  // Adicionar paginação ao BackBone. @veja https://github.com/backbone-paginator/backbone.paginator
@@ -51,14 +51,14 @@ require.config({
     },
     'strophe': {
 
-    },
+    }
   }
 
 });
 
 require([
   'principal'  
-, 'domready'    // Vamos esperar o DOM estiver apresentado e carregado.
+, 'domready'    
 ], function(Principal, quandoCarregado) {
   
   quandoCarregado(function() {  

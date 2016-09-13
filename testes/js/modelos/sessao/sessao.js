@@ -1,15 +1,19 @@
 define([
   "backbone"
+, "urls"
 , "modelos/conta/conta"
 ], function(
   Backbone
+, Urls
 , ModeloDeConta
 ) {
   'use strict';
 
   var ModeloDeSessao = Backbone.Model.extend({
-    
-    urlRoot: '/Contas',
+
+    url: function() {
+      return Urls.gerarUrl('Contas');
+    },
 
     idAttribute: 'id',
 
@@ -37,7 +41,8 @@ define([
       };
 
       var mediador = function(modelo) {
-        funcao.set({'id': conta.get('funcao_id')});
+        funcao.url = Urls.gerarUrl('Funcao', conta.get('funcao_id'));
+        //funcao.set({'id': conta.get('funcao_id')});
         meuObjt.set({'id': modelo.id });
 
         funcao.fetch().done(function(modelo, resposta, opcoes) {

@@ -2,41 +2,51 @@ define([
   "aplicativo"
 , "roteador"
 , "strophe"
+, "modulos/usuario/indice"
+, "modulos/exemplo/indice"
 ], function(
   aplicativo
 , Roteador
-, ClienteXmpp
+, Xmpp
+, ModuloDeUsuario
+, ModuloDeExemplo
 ) {
   'use strict';
 
-  aplicativo.roteador = new Roteador();
+  aplicativo.roteador = new Roteador();  
 
-  aplicativo.clienteXmpp = new ClienteXmpp.Strophe.Connection("https://127.0.0.1:8001/http-bind/");
+  aplicativo.xmpp = {
+    'Strophe': Xmpp.Strophe
+  , 'cliente': new Xmpp.Strophe.Connection("https://127.0.0.1:8001/http-bind/")
+  };
 
   aplicativo.sessao.entrar({'jid': 'fulana@localhost', 'senha': 'montes'}, {
     'sucesso': function(modelo, resposta, opcoes) {
 
-        aplicativo.clienteXmpp.connect('felippe@localhost', 'felippe10', function(estatos) {
+        var Strophe = aplicativo.xmpp.Strophe;
+        var cliente = aplicativo.xmpp.cliente;
+
+        cliente.connect('felippe@localhost', 'felippe101', function(estatos) {
           
-          if(estatos === ClienteXmpp.Strophe.Status.ERROR) {
+          if(estatos === Strophe.Status.ERROR) {
             console.log('An error has occurred');
-          } else if (estatos === ClienteXmpp.Strophe.Status.CONNECTING) {
+          } else if (estatos === Strophe.Status.CONNECTING) {
             console.log('The connection is currently being made');
-          } else if(estatos === ClienteXmpp.Strophe.Status.CONNFAIL) {
+          } else if(estatos === Strophe.Status.CONNFAIL) {
             console.log('The connection attempt failed');
-          } else if(estatos === ClienteXmpp.Strophe.Status.AUTHENTICATING) {
+          } else if(estatos === Strophe.Status.AUTHENTICATING) {
             console.log('The connection is authenticating');
-          } else if(estatos === ClienteXmpp.Strophe.Status.AUTHFAIL) {
+          } else if(estatos === Strophe.Status.AUTHFAIL) {
             console.log('The authentication attempt failed');
-          } else if(estatos === ClienteXmpp.Strophe.Status.CONNECTED) {
+          } else if(estatos === Strophe.Status.CONNECTED) {
             console.log('The connection has succeeded');
-          } else if(estatos === ClienteXmpp.Strophe.Status.DISCONNECTED) {
+          } else if(estatos === Strophe.Status.DISCONNECTED) {
             console.log('The connection has been terminated');
-          } else if(estatos === ClienteXmpp.Strophe.Status.DISCONNECTING) {
+          } else if(estatos === Strophe.Status.DISCONNECTING) {
             console.log('The connection is currently being terminated');
-          } else if(estatos === ClienteXmpp.Strophe.Status.ATTACHED) {
+          } else if(estatos === Strophe.Status.ATTACHED) {
             console.log('The connection has been attached');
-          } else if(estatos === ClienteXmpp.Strophe.Status.CONNTIMEOUT) {
+          } else if(estatos === Strophe.Status.CONNTIMEOUT) {
             console.log('The connection has timed out');
           }
         });

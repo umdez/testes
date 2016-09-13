@@ -1,17 +1,20 @@
 
 define([
   "backbone"
+, "urls"
 , "modelos/funcao/funcao"
-, "colecoes/escopos/escopos"
 ], function(
   Backbone
+, Urls
 , ModeloDeFuncao
 ) {
   'use strict';
 
   var ModeloDeConta = Backbone.Model.extend({
-
-    urlRoot: '/Contas',
+ 
+    url: function() {
+      return Urls.gerarUrl('Contas');
+    },
     
     idAttribute: 'id',
 

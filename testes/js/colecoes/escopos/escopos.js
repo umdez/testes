@@ -1,9 +1,11 @@
 
 define([
   "backbone"
+, "urls"
 , "modelos/escopo/escopo"
 ], function(
   Backbone
+, Urls
 , ModeloDeEscopo
 ) {
   'use strict';
@@ -12,10 +14,16 @@ define([
 
     model: ModeloDeEscopo,
     
-    url: '/Escopos'
+    url: function() {
+      return Urls.gerarUrl('Escopos');
+    }
 
   });
-  
-  return ColecaoDeEscopos;
 
+  // NOTA: Adicionar paginação
+  
+  return {
+    Colecao: ColecaoDeEscopos
+  //, Paginacao: PaginacaoDeEscopos 
+  }
 });
