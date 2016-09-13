@@ -31,9 +31,8 @@ define([
             modelo.fetch();
             console.log(modelo.get('nome'));
 
-            aplicativo.escopos.verificarEscopo(nome, "ATUALIZACAO", function(sePossui) {
-              console.log('wow '+ sePossui);
-            });
+            var sePossui = aplicativo.escopos.verificarEscopo(nome, "ATUALIZACAO");
+            //console.log('wow '+ sePossui);
           }
         });
       } else if (id && id === -1) {

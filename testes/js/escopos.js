@@ -34,10 +34,21 @@ define([
     });
   };
 
-  Escopos.prototype.verificarEscopo = function(modelo, acao, cd) {
-    this.verificarPermissao(modelo, acao, function(sePossui) {
-      cd(sePossui);
+  Escopos.prototype.verificarEscopo = function(modelo, acao) {
+    var sePossui = 0;
+    var permissao = PERMISSAO_SUPERIOR;
+    var escopos = this.sessao.conta.funcao.get('Escopos');
+
+    permissao |= acoes[acao.toUpperCase()];
+
+    _.find(escopos, function(escopo){ 
+      if (escopo && escopo.nome === modelo) {
+        var bandeira = escopo.bandeira;
+        sePossui = (bandeira & permissao);
+        return (sePossui != 0);
+      }
     });
+    return (sePossui != 0);
   };
 
   Escopos.prototype.verificarPermissao = function(modelo, acao, cd) {
