@@ -6,7 +6,8 @@ define([
 , "modelos/usuario/usuario"
 , "colecoes/usuarios/usuarios"
 , "paginacoes/usuarios/usuarios"
-, "modulos/exemplo/indice"  
+, "modulos/exemplo/indice" 
+, "modulos/funcao/indice" 
 ], function (
   aplicativo
 , Backbone
@@ -15,6 +16,7 @@ define([
 , ColecaoDeUsuario
 , PaginacaoDeUsuario
 , Dependencia01
+, Dependencia02
 ) {
   'use strict';
 
@@ -22,15 +24,13 @@ define([
 
   var Usuario = aplicativo.modulo("Usuario");
 
-  Usuario.Modelo = ModeloDeUsuario;
+  Usuario.Modelo = new ModeloDeUsuario({});
 
-  Usuario.Lista = ColecaoDeUsuario;
+  Usuario.Lista = new ColecaoDeUsuario({});
 
-  Usuario.Paginacao = PaginacaoDeUsuario;
+  //Usuario.Paginacao = new PaginacaoDeUsuario({});
 
-  aplicativo.adcRota("Usuario", function(id){
-   
-  });
+  Rotas.iniciar();
  
   return Usuario;
 });
