@@ -50,6 +50,7 @@ define([
             console.log('The connection has timed out');
           }
         });
+        aplicativo.sessao.seAutenticado({});
 
         aplicativo.sessao.seAutenticado({
 
@@ -64,7 +65,8 @@ define([
                   console.log(seAutenticado + '  ' + escopo.bandeira)
                 }
               }, this);
-              
+
+              /*
               aplicativo.sessao.sair({
                 'sucesso': function(modulo, resposta) {
                 
@@ -73,7 +75,7 @@ define([
                     
                 }
               });
-            
+              */
           },
           'erro': function(modelo, resposta, opcoes) {
             
@@ -84,6 +86,7 @@ define([
       console.log(modelo.status + ' '+ JSON.parse(modelo.responseText).mensagem);
     }
   });
+
 
   aplicativo.sessao.seAutenticado({
     'sucesso': function(modelo, resposta, opcoes) {

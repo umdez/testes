@@ -1,9 +1,11 @@
 
 define([ 
   "backbone"
+, "escopos"
 , "modelos/sessao/sessao"
 ], function(
   Backbone
+, Escopos
 , ModeloDeSessao
 ) {
   'use strict';
@@ -36,6 +38,8 @@ define([
     },
 
   };
+
+  aplicativo.escopos = new Escopos(aplicativo.sessao);
 
   return aplicativo;
 });

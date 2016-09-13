@@ -13,7 +13,7 @@ define([
   'use strict';
 
   var ModeloDeUsuario = Backbone.Model.extend({
- 
+
     url: function() {
       return Urls.gerarUrl('Usuario', this.id);
     },

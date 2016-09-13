@@ -35,6 +35,7 @@ define([
       var suporteDeFalhas = function(modelo, resposta, opcoes) {
         meuObjt.conta.funcao.clear();
         meuObjt.conta.clear();
+        meuObjt.conta.url = Urls.gerarUrl('Contas');
         meuObjt.unset('id');
         meuObjt.set({ 'autenticado': false });
         if('erro' in cd) cd.erro(modelo, resposta, opcoes);
@@ -44,6 +45,8 @@ define([
         funcao.url = Urls.gerarUrl('Funcao', conta.get('funcao_id'));
         //funcao.set({'id': conta.get('funcao_id')});
         meuObjt.set({'id': modelo.id });
+        conta.set({'id': modelo.id });
+        conta.url = Urls.gerarUrl('Conta', modelo.id);
 
         funcao.fetch().done(function(modelo, resposta, opcoes) {
           meuObjt.set({ 'autenticado': true });
@@ -74,8 +77,10 @@ define([
       .done(function(modelo, resposta) {
          meuObjt.conta.funcao.clear();
          meuObjt.conta.clear();
+         meuObjt.conta.url = Urls.gerarUrl('Contas');
          meuObjt.unset('id');
          meuObjt.set({ 'autenticado': false });
+
          if('sucesso' in cd) cd.sucesso(modelo, resposta); 
       })
       .fail(function() {

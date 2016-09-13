@@ -22,6 +22,9 @@ define([
     Contas: function() {
       return "/Contas";
     },
+    Conta: function(id) {
+      return "/Contas/"+ id;
+    },
     Usuarios: function() {
       return "/Usuarios";
     },

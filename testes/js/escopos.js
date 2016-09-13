@@ -1,10 +1,8 @@
 
 define([ 
-  "aplicativo"
-, "backbone"
+  "backbone"
 ], function(
-  aplicativo
-, Backbone
+  Backbone
 ) {
   'use strict';
   
@@ -21,25 +19,52 @@ define([
   , "ATUALIZACAO": PERMISSAO_ATUALIZAR
   };
 
-  var Escopos = {
-    
+  var Escopos = function(sessao) {
+    this.sessao = sessao;
   };
  
-  return {
-    sePermitido: function(modelo, acao) {
-
-      var sessao = aplicativo.sessao;
-
-      if (sessao.get('autenticado')) {
-        var escopos = sessao.conta.funcao.get('Escopos');
-        console.log(escopos);
+  Escopos.prototype.verificarSessao = function(cd) {
+    this.sessao.seAutenticado({
+      'sucesso': function(conta, resposta, opcoes) {
+        cd(true);
+      },
+      'erro': function(conta, resposta, opcoes) {
+        cd(false);
       }
-      return false;
-
-     // var permissao = PERMISSAO_SUPERIOR;
-     // permissao |= acoes[acao];
-
-     // return ;
-    }
+    });
   };
+
+  Escopos.prototype.verificarEscopo = function(modelo, acao, cd) {
+    this.verificarPermissao(modelo, acao, function(sePossui) {
+      cd(sePossui);
+    });
+  };
+
+  Escopos.prototype.verificarPermissao = function(modelo, acao, cd) {
+    var meuObj = this;
+
+    this.verificarSessao(function(seAceito) {
+      var sePermitido = 0;
+
+      if (seAceito) {
+        var permissao = PERMISSAO_SUPERIOR;
+        var escopos = meuObj.sessao.conta.funcao.get('Escopos');
+        permissao |= acoes[acao.toUpperCase()];
+
+        _.find(escopos, function(escopo){ 
+          if (escopo && escopo.nome === modelo) {
+            var bandeira = escopo.bandeira;
+            sePermitido = (bandeira & permissao);
+            return (sePermitido != 0);
+          }
+        });
+      } else {
+        
+      }
+
+      cd((sePermitido != 0));
+    });
+  };
+
+  return Escopos;
 });

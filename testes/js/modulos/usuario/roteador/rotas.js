@@ -20,13 +20,35 @@ define([
 
     suporte: function(id) {
       var modelo = this.usuario.Modelo;
-    
-      if (id) {
-        modelo.set({'id': id});
-        modelo.fetch();
-        console.log(modelo.get('nome'));
+      var nome = 'Usuarios';  // Mesmo nome da tabela.
+      var sePermitido = 0;
+
+      if (id && id > 0) {
+        // Leitura de um item em específico
+        aplicativo.escopos.verificarPermissao(nome, "LEITURA", function(sePermitido) {
+          if (sePermitido) {
+            modelo.set({'id': id});
+            modelo.fetch();
+            console.log(modelo.get('nome'));
+
+            aplicativo.escopos.verificarEscopo(nome, "ATUALIZACAO", function(sePossui) {
+              console.log('wow '+ sePossui);
+            });
+          }
+        });
+      } else if (id && id === -1) {
+        aplicativo.escopos.verificarPermissao(nome, "CADASTRO", function(sePermitido) {
+          if (sePermitido) {
+          
+          }
+        });
       } else {
-        
+        // Listagem
+        aplicativo.escopos.verificarPermissao(nome, "LEITURA", function(sePermitido) {
+          if (sePermitido) {
+          
+          }
+        });
       }
     }
 
