@@ -1,15 +1,19 @@
 
 define([
   "backbone"
+, "urls"
 ], function(
   Backbone
+, Urls
 ) {
   'use strict';
 
   var ModeloDeEscopo = Backbone.Model.extend({
-
-    urlRoot: '/Escopos',
     
+    url: function() {
+      return Urls.gerarUrl('Escopo', this.funcao_id, this.id);
+    },
+
     idAttribute: 'id',
 
     initialize: function(){

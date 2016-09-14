@@ -20,15 +20,11 @@ define([
 
   var Funcao = aplicativo.modulo("Funcao");
 
-  Funcao.Modelo = ModeloDeFuncao;
+  Funcao.Modelo = new ModeloDeFuncao({});
 
-  Funcao.Lista = ColecaoDeFuncao;
+  //Funcao.Lista = new ColecaoDeFuncao({});
 
-  Funcao.Paginacao = PaginacaoDeFuncao;
-
-  aplicativo.adcRota("Funcao", function(id){
-   
-  });
+  //Funcao.Paginacao = PaginacaoDeFuncao;
  
   return Funcao;
 });

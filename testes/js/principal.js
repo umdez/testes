@@ -59,13 +59,6 @@ define([
               var escopos = conta.funcao.get('Escopos');
               var seAutenticado = aplicativo.sessao.get('autenticado');
 
-              _.each(escopos, function(escopo, indice, escopos){
-                
-                if (escopo && escopo.nome === 'Projetos') {
-                  console.log(seAutenticado + '  ' + escopo.bandeira)
-                }
-              }, this);
-
               /*
               aplicativo.sessao.sair({
                 'sucesso': function(modulo, resposta) {

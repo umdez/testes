@@ -1,51 +1,68 @@
 
 define([
   "aplicativo"
+, "modulos/baseDasRotas"
+, "modulos/usuario/visoes/cadastro"
+, "modulos/usuario/visoes/leitura"
 ], function (
   aplicativo
+, Base
+, VisaoDeCadastro
+, VisaoDeLeitura
 ) {
   'use strict';
 
   //var $container = $('.some-container');
 
+  // Será possivel utilizar um gerente de visões aqui?
+
   var Rotas = {
 
-    usuario: null,
+    nome: "Usuarios",  // Usado para nome da tabela e da rota
+
+    usuario: aplicativo.modulo("Usuario"),
 
     iniciar: function() {
-      this.usuario = aplicativo.modulo("Usuario");
-
-      aplicativo.adcRota("Usuarios", this.suporte.bind(this));
+      aplicativo.adcRota(this.nome, this.suporte.bind(this));
     },
 
     suporte: function(id) {
+      var meuObj = this;
       var modelo = this.usuario.Modelo;
-      var nome = 'Usuarios';  // Mesmo nome da tabela.
-      var sePermitido = 0;
 
       if (id && id > 0) {
         // Leitura de um item em específico
-        aplicativo.escopos.verificarPermissao(nome, "LEITURA", function(sePermitido) {
+        this.verificarPermissao("LEITURA", function(sePermitido) {
           if (sePermitido) {
             modelo.set({'id': id});
-            modelo.fetch();
-            console.log(modelo.get('nome'));
+            modelo.fetch({
+              reset: true
+            , success: function (mod, resposta, opcoes) {
+                console.log('Leitura'+ modelo.get('nome') +'id '+ id);
+              }
+            });
 
-            var sePossui = aplicativo.escopos.verificarEscopo(nome, "ATUALIZACAO");
-            //console.log('wow '+ sePossui);
+            var sePossui = meuObj.verificarEscopo("ATUALIZACAO");
+            console.log('wow '+ sePossui);
+          } else {
+
           }
         });
-      } else if (id && id === -1) {
-        aplicativo.escopos.verificarPermissao(nome, "CADASTRO", function(sePermitido) {
+      } else if (id && id <= 0) {
+        this.verificarPermissao("CADASTRO", function(sePermitido) {
           if (sePermitido) {
-          
+            console.log('Cadastro');
+          } else {
+
           }
         });
       } else {
         // Listagem
-        aplicativo.escopos.verificarPermissao(nome, "LEITURA", function(sePermitido) {
+        this.verificarPermissao("LEITURA", function(sePermitido) {
           if (sePermitido) {
-          
+            console.log('Listagem');
+          } else {
+            // Provavelmente mostrar uma visão informando que não possui acesso
           }
         });
       }
@@ -53,5 +70,9 @@ define([
 
   };
  
-  return Rotas;
+  var Uniao = {};
+  _.extend(Uniao, Base);
+  _.extend(Uniao, Rotas);
+
+  return Uniao;
 });

@@ -42,8 +42,7 @@ define([
       };
 
       var mediador = function(modelo) {
-        funcao.url = Urls.gerarUrl('Funcao', conta.get('funcao_id'));
-        //funcao.set({'id': conta.get('funcao_id')});
+        funcao.set({'id': conta.get('funcao_id')});
         meuObjt.set({'id': modelo.id });
         conta.set({'id': modelo.id });
         conta.url = Urls.gerarUrl('Conta', modelo.id);

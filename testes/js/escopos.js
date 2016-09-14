@@ -1,8 +1,8 @@
 
 define([ 
-  "backbone"
-], function(
-  Backbone
+  "underscore"
+], function (
+  _
 ) {
   'use strict';
   
@@ -25,10 +25,10 @@ define([
  
   Escopos.prototype.verificarSessao = function(cd) {
     this.sessao.seAutenticado({
-      'sucesso': function(conta, resposta, opcoes) {
+      'sucesso': function(modelo, resposta, opcoes) {
         cd(true);
       },
-      'erro': function(conta, resposta, opcoes) {
+      'erro': function(modelo, resposta, opcoes) {
         cd(false);
       }
     });
@@ -37,7 +37,8 @@ define([
   Escopos.prototype.verificarEscopo = function(modelo, acao) {
     var sePossui = 0;
     var permissao = PERMISSAO_SUPERIOR;
-    var escopos = this.sessao.conta.funcao.get('Escopos');
+    var conta = this.sessao.conta;
+    var escopos = conta.funcao.get('Escopos');
 
     permissao |= acoes[acao.toUpperCase()];
 
@@ -59,7 +60,9 @@ define([
 
       if (seAceito) {
         var permissao = PERMISSAO_SUPERIOR;
-        var escopos = meuObj.sessao.conta.funcao.get('Escopos');
+        var conta = meuObj.sessao.conta;
+        var escopos = conta.funcao.get('Escopos');
+
         permissao |= acoes[acao.toUpperCase()];
 
         _.find(escopos, function(escopo){ 
@@ -69,10 +72,7 @@ define([
             return (sePermitido != 0);
           }
         });
-      } else {
-        
-      }
-
+      } 
       cd((sePermitido != 0));
     });
   };
