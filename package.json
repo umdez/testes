@@ -1,7 +1,7 @@
 {
-  "name": "listificando",
-  "description": "Oferece um arcabouço para realizar listagens de registros de um Banco de Dados.",
-  "keywords": "listagem filtração pesquisa paginação",
+  "name": "testes",
+  "description": "Oferece um arcabouço de testes para os projetos posteriores.",
+  "keywords": "autenticação listagem filtração pesquisa paginação cadastro remoção atualização",
   "version": "0.0.1",
   "author": "Léo Felippe <leofelippedias@hotmail.com.br>",
   "main": "./iniciar.js",
@@ -35,11 +35,11 @@
   "repositories": [
     {
       "type": "git",
-      "path": "git@github.com:umdez/listificando.git"
+      "path": "git@github.com:umdez/testes.git"
     }
   ],
-  "homepage": "https://github.com/umdez/listificando#readme",
-  "bugs": "https://github.com/umdez/listificando/issues",
+  "homepage": "https://github.com/umdez/testes#readme",
+  "bugs": "https://github.com/umdez/testes/issues",
   "maintainers": [
     {
       "name": "umdez",
