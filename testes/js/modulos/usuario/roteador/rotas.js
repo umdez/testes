@@ -4,11 +4,13 @@ define([
 , "modulos/baseDasRotas"
 , "modulos/usuario/visoes/cadastro"
 , "modulos/usuario/visoes/leitura"
+, "modulos/usuario/visoes/paginacao"
 ], function (
   aplicativo
 , Base
 , VisaoDeCadastro
 , VisaoDeLeitura
+, VisaoDePaginacao
 ) {
   'use strict';
 

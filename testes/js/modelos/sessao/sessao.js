@@ -4,7 +4,7 @@ define([
 , "modelos/conta/conta"
 ], function(
   Backbone
-, Urls
+, URLs
 , ModeloDeConta
 ) {
   'use strict';
@@ -12,7 +12,7 @@ define([
   var ModeloDeSessao = Backbone.Model.extend({
 
     url: function() {
-      return Urls.gerarUrl('Contas');
+      return URLs.gerarUrl('Contas');
     },
 
     idAttribute: 'id',
@@ -35,7 +35,7 @@ define([
       var suporteDeFalhas = function(modelo, resposta, opcoes) {
         meuObjt.conta.funcao.clear();
         meuObjt.conta.clear();
-        meuObjt.conta.url = Urls.gerarUrl('Contas');
+        meuObjt.conta.url = URLs.gerarUrl('Contas');
         meuObjt.unset('id');
         meuObjt.set({ 'autenticado': false });
         if('erro' in cd) cd.erro(modelo, resposta, opcoes);
@@ -45,7 +45,7 @@ define([
         funcao.set({'id': conta.get('funcao_id')});
         meuObjt.set({'id': modelo.id });
         conta.set({'id': modelo.id });
-        conta.url = Urls.gerarUrl('Conta', modelo.id);
+        conta.url = URLs.gerarUrl('Conta', modelo.id);
 
         funcao.fetch().done(function(modelo, resposta, opcoes) {
           meuObjt.set({ 'autenticado': true });
@@ -76,7 +76,7 @@ define([
       .done(function(modelo, resposta) {
          meuObjt.conta.funcao.clear();
          meuObjt.conta.clear();
-         meuObjt.conta.url = Urls.gerarUrl('Contas');
+         meuObjt.conta.url = URLs.gerarUrl('Contas');
          meuObjt.unset('id');
          meuObjt.set({ 'autenticado': false });
 

@@ -6,7 +6,7 @@ define([
 , "colecoes/escopos/escopos"
 ], function(
   Backbone
-, Urls
+, URLs
 , ModeloDeFuncao
 , ColecaoDeEscopos
 ) {
@@ -15,7 +15,7 @@ define([
   var ModeloDeUsuario = Backbone.Model.extend({
 
     url: function() {
-      return Urls.gerarUrl('Usuario', this.id);
+      return URLs.gerarUrl('Usuario', this.id);
     },
     
     idAttribute: 'id',

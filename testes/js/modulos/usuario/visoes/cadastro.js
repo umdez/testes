@@ -1,12 +1,10 @@
 
 define([
-  'jquery'
-, 'backbone' 
+  'backbone' 
 , 'underscore'
 //, 'text!/autenticacao/js/templantes/base/base.html'
 ], function(
-  $ 
-, Backbone
+  Backbone
 , _
 //, Templante
 ) {

@@ -5,7 +5,7 @@ define([
 , "modelos/escopo/escopo"
 ], function(
   Backbone
-, Urls
+, URLs
 , ModeloDeEscopo
 ) {
   'use strict';
@@ -15,7 +15,7 @@ define([
     model: ModeloDeEscopo,
     
     url: function() {
-      return Urls.gerarUrl('Escopos');
+      return URLs.gerarUrl('Escopos');
     }
 
   });

@@ -4,14 +4,14 @@ define([
 , "urls"
 ], function(
   Backbone
-, Urls
+, URLs
 ) {
   'use strict';
 
   var ModeloDeEscopo = Backbone.Model.extend({
     
     url: function() {
-      return Urls.gerarUrl('Escopo', this.funcao_id, this.id);
+      return URLs.gerarUrl('Escopo', this.funcao_id, this.id);
     },
 
     idAttribute: 'id',
