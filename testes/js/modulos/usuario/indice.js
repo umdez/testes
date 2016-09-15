@@ -30,6 +30,8 @@ define([
 
   //Usuario.Paginacao = new PaginacaoDeUsuario({});
 
+  Usuario.eventos = _.extend({}, Backbone.Events);
+
   Rotas.iniciar();
  
   return Usuario;

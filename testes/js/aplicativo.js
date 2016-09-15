@@ -20,6 +20,10 @@ define([
 
     rotas: {},
 
+    escopos: null, 
+
+    roteador: null,
+
     modulo: function(nome) {
       if (this.modulos[nome]) {
         return this.modulos[nome];

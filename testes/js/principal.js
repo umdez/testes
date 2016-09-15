@@ -2,14 +2,12 @@ define([
   "aplicativo"
 , "roteador"
 , "strophe"
-, "modulos/usuario/indice"
-, "modulos/exemplo/indice"
+, "modulos"
 ], function(
   aplicativo
 , Roteador
 , Xmpp
-, ModuloDeUsuario
-, ModuloDeExemplo
+, modulos
 ) {
   'use strict';
 
