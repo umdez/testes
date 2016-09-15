@@ -46,8 +46,8 @@ define([
       if (escopo && escopo.nome === modelo) {
         var bandeira = escopo.bandeira;
         sePossui = (bandeira & permissao);
-        return (sePossui != 0);
       }
+      return (sePossui != 0);
     });
     return (sePossui != 0);
   };
@@ -69,8 +69,8 @@ define([
           if (escopo && escopo.nome === modelo) {
             var bandeira = escopo.bandeira;
             sePermitido = (bandeira & permissao);
-            return (sePermitido != 0);
           }
+          return (sePermitido != 0);
         });
       } 
       cd((sePermitido != 0));
