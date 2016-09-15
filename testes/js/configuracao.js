@@ -62,7 +62,6 @@ require([
 ], function(Principal, quandoCarregado) {
   
   quandoCarregado(function() {  
-
     Principal.inicializar();
   });
 });

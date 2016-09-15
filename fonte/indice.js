@@ -1,6 +1,7 @@
 'use strict';
 
-// Utilizado para facilitar o acesso aos módulos deste sitemas para cada um dos nossos módulos.
+// Utilizado para facilitar o acesso aos módulos deste sitemas para cada um dos
+// nossos módulos.
 module.exports = {
   Restificando: require('./restificando/indice'),    // Nosso modulo do serviço REST.
   Armazenamento: require('./armazenamento/indice'),  // Nosso módulo de armazenamento.

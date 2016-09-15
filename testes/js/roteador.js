@@ -39,9 +39,24 @@ define([
     
   });
   
-  // Iniciamos aqui o histórico das rotas.
-  Backbone.history.start(); 
+  var inicializar = function() {
+    
+    var roteamento = function() {
+      aplicativo.roteador = new SitioRoteador();
+      Backbone.history.start(); 
+    }
+    
+    aplicativo.sessao.seAutenticado({
+      'sucesso': function(modelo, resposta, opcoes) {
+        roteamento();
+      },
+      'erro': function(modelo, resposta, opcoes) {
+        roteamento();
+      }
+    });
+  };
 
-  return SitioRoteador;
-
+  return { 
+    inicializar: inicializar
+  };
 });

@@ -11,8 +11,6 @@ define([
 ) {
   'use strict';
 
-  aplicativo.roteador = new Roteador();  
-
   aplicativo.xmpp = {
     'Strophe': Xmpp.Strophe
   , 'cliente': new Xmpp.Strophe.Connection("https://127.0.0.1:8001/http-bind/")
@@ -48,7 +46,6 @@ define([
             console.log('The connection has timed out');
           }
         });
-        aplicativo.sessao.seAutenticado({});
 
         aplicativo.sessao.seAutenticado({
 
@@ -78,16 +75,6 @@ define([
     }
   });
 
-
-  aplicativo.sessao.seAutenticado({
-    'sucesso': function(modelo, resposta, opcoes) {
-      
-    },
-    'erro': function(modelo, resposta, opcoes) {
-      
-    }
-  });
-
   aplicativo.sessao.on("change:autenticado", function(){
     var seAutenticado = aplicativo.sessao.get('autenticado');
     console.log('autenticado?? ' + seAutenticado);
@@ -97,7 +84,7 @@ define([
   }, this);
 
   var inicializar = function() {
-
+    Roteador.inicializar();
   };
 
   return {
