@@ -6,9 +6,11 @@
 define([
   "aplicativo"
 , "backbone"
+, "visoes/base/base"
 ], function(
   aplicativo
 , Backbone
+, VisaoDeBase
 ) {
   'use strict';
   
@@ -21,8 +23,7 @@ define([
     },
     
     initialize: function () {
-      
-      
+      this.visaoDeBase = new VisaoDeBase();
     },
     
     inicio: function() {
@@ -48,6 +49,7 @@ define([
     
     aplicativo.sessao.seAutenticado({
       'sucesso': function(modelo, resposta, opcoes) {
+        console.log('Autenticacao foi um sucesso')
         roteamento();
       },
       'erro': function(modelo, resposta, opcoes) {

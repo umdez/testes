@@ -3,34 +3,40 @@
 /* Suporte para visão base do sistema. */
 
 define([
-  'jquery'
+  'aplicativo'
 , 'backbone' 
-, 'underscore'
-, 'text!/autenticacao/js/templantes/base/base.html'
+, 'visoes/base/entrada'
+, 'visoes/base/painel'
 ], function(
-  $ 
+  aplicativo
 , Backbone
-, _
-, Templante
+, VisaoDeEntrada
+, VisaoDoPainel
 ) {
   
-  var Base = Backbone.View.extend({
-
-    el: $('#conteudo-raiz'),
-
-    templante: _.template(Templante),
+  var VisaoDeBase = Backbone.View.extend({
     
     attributes: {
       
     },
     
     initialize: function() {
+      this.visaoDeEntrada = new VisaoDeEntrada();
+      this.visaoDoPainel = new VisaoDoPainel();
+
       this.render();
+      aplicativo.sessao.on("change:autenticado", this.render);
     },
 
     render: function() {
+      $('div.pages').hide();
       
-      this.$el.html(this.templante());
+      if(aplicativo.sessao.get('autenticado')) {
+        $('#painel').show();
+      } else {
+        $('#entrada').show();
+      } 
+      return this;
     },
 
     events: {
@@ -43,5 +49,5 @@ define([
     
   });
 
-  return Base;
+  return VisaoDeBase;
 });

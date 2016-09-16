@@ -16,34 +16,6 @@ define([
   , 'cliente': new Xmpp.Strophe.Connection("https://127.0.0.1:8001/http-bind/")
   };
 
-  aplicativo.sessao.entrar({'jid': 'fulana@localhost', 'senha': 'montes'}, {
-    'sucesso': function(modelo, resposta, opcoes) {
-
-        aplicativo.sessao.seAutenticado({
-
-          'sucesso': function(modelo, resposta, opcoes) {
-
-              /*
-              aplicativo.sessao.sair({
-                'sucesso': function(modulo, resposta) {
-                
-                },
-                'erro': function(erro){
-                    
-                }
-              });
-              */
-          },
-          'erro': function(modelo, resposta, opcoes) {
-            
-          }
-      });
-    },
-    'erro': function(modelo, resposta, opcoes) {
-      //console.log(modelo.status + ' '+ JSON.parse(modelo.responseText).mensagem);
-    }
-  });
-
   aplicativo.sessao.on("change:autenticado", function() {
     var conta = aplicativo.sessao.conta;
     var seAutenticado = aplicativo.sessao.get('autenticado');
@@ -52,29 +24,30 @@ define([
 
     if (seAutenticado) { 
       var Strophe = aplicativo.xmpp.Strophe;
+      var Estatos = Strophe.Status;
       var cliente = aplicativo.xmpp.cliente;
 
-      cliente.connect('felippe@localhost', 'felippe101', function(estatos) {
+      cliente.connect('fulana@localhost', 'felippe101', function(estatos) {
         
-        if(estatos === Strophe.Status.ERROR) {
+        if(estatos === Estatos.ERROR) {
           console.log('An error has occurred');
-        } else if (estatos === Strophe.Status.CONNECTING) {
+        } else if (estatos === Estatos.CONNECTING) {
           console.log('The connection is currently being made');
-        } else if(estatos === Strophe.Status.CONNFAIL) {
+        } else if(estatos === Estatos.CONNFAIL) {
           console.log('The connection attempt failed');
-        } else if(estatos === Strophe.Status.AUTHENTICATING) {
+        } else if(estatos === Estatos.AUTHENTICATING) {
           console.log('The connection is authenticating');
-        } else if(estatos === Strophe.Status.AUTHFAIL) {
+        } else if(estatos === Estatos.AUTHFAIL) {
           console.log('The authentication attempt failed');
-        } else if(estatos === Strophe.Status.CONNECTED) {
+        } else if(estatos === Estatos.CONNECTED) {
           console.log('The connection has succeeded');
-        } else if(estatos === Strophe.Status.DISCONNECTED) {
+        } else if(estatos === Estatos.DISCONNECTED) {
           console.log('The connection has been terminated');
-        } else if(estatos === Strophe.Status.DISCONNECTING) {
+        } else if(estatos === Estatos.DISCONNECTING) {
           console.log('The connection is currently being terminated');
-        } else if(estatos === Strophe.Status.ATTACHED) {
+        } else if(estatos === Estatos.ATTACHED) {
           console.log('The connection has been attached');
-        } else if(estatos === Strophe.Status.CONNTIMEOUT) {
+        } else if(estatos === Estatos.CONNTIMEOUT) {
           console.log('The connection has timed out');
         }
       });

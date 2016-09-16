@@ -40,9 +40,96 @@
     
   <body>
     
-    <!-- Nosso conteúdo -->
-    <div class="container-fluid" id="conteudo-raiz"> </div>
-    <!-- Fim do conteúdo -->
+    <!-- Nosso conteudo -->
+    <div class="container-fluid" id="conteudo-raiz">
+
+      <div id="entrada" class="pages" style="display: block;">
+        <!-- TOPO -->
+        <div id="topo"></div>
+        <!-- FIM DO TOPO -->
+
+        <!-- BARRA DE NAVEGAÇÃO -->
+        <div id="barra-navegacao"></div>
+        <!-- FIM DA BARRA DE NAVEGAÇÃO -->
+
+        <!-- CONTEUDO -->
+        <div id="conteudo">
+          <div class="row">
+            &nbsp;
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+            &nbsp;
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7">
+            &nbsp;
+            </div>
+            <div class="col-md-4">
+              <form class="entrada">
+                  <div class="form-group">
+                    <label for="entrada-jid">Usuario</label>
+                    <input type="text" class="form-control" id="entrada-jid" placeholder="Exemplo: raiz@localhost">
+                  </div>
+                            
+                  <div class="form-group">
+                    <label for="entrada-senha">Senha</label>
+                    <input type="password" class="form-control" id="entrada-senha" placeholder="">
+                  </div>
+                  
+                  <button type="submit" class="btn btn-success" id="entrada-botao">Entrar</button>
+              
+              </form>
+            </div>
+            <div class="col-md-1">
+            &nbsp;
+            </div>
+          </div>
+        </div>  
+        <!-- FIM CONTEUDO -->
+
+        <br/>
+
+        <!-- RODAPE -->
+        <div id="rodape"></div>
+        <!-- FIM RODAPE -->
+      </div>
+
+      <div id="painel" class="pages" style="display: none;">
+        <!-- TOPO -->
+        <div id="topo">
+          <span id="topo-menu"> </span>
+          Você agora está com acesso ao painel.  
+          <form class="sair">
+            <button type="submit" class="btn btn-success" id="sair-botao">Sair</button>
+          </form>
+        </div>
+        <!-- FIM DO TOPO -->
+
+        <!-- BARRA DE NAVEGAÇÃO -->
+        <div id="barra-navegacao">
+        Navegação.
+        </div>
+        <!-- FIM DA BARRA DE NAVEGAÇÃO -->
+
+        <!-- CONTEUDO -->
+        <div id="conteudo">
+        Conteudo
+        </div>  
+        <!-- FIM CONTEUDO -->
+
+        <br/>
+
+        <!-- RODAPE -->
+        <div id="rodape">
+        Rodapé
+        </div>
+        <!-- FIM RODAPE -->
+      </div>
+
+    </div>
+    <!-- Fim do conteudo -->
     
   </body>
 </html>
