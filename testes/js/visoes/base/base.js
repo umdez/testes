@@ -16,10 +16,6 @@ define([
   
   var VisaoDeBase = Backbone.View.extend({
     
-    attributes: {
-      
-    },
-    
     initialize: function() {
       this.visaoDeEntrada = new VisaoDeEntrada();
       this.visaoDoPainel = new VisaoDoPainel();
@@ -29,7 +25,7 @@ define([
     },
 
     render: function() {
-      $('div.pages').hide();
+      $('div.paginas-base').hide();
       
       if(aplicativo.sessao.get('autenticado')) {
         $('#painel').show();
@@ -37,10 +33,6 @@ define([
         $('#entrada').show();
       } 
       return this;
-    },
-
-    events: {
-      
     },
     
     onClose: function() {

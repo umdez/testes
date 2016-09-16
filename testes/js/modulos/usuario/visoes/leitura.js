@@ -12,7 +12,7 @@ define([
 
   var VisaoDeLeitura = Backbone.View.extend({
 
-   // el: $('#conteudo-raiz'),
+   // el: '#conteudo-raiz',
 
    // templante: _.template(Templante),
     
@@ -33,6 +33,9 @@ define([
       
     },
     
+    onClose: function() {
+      
+    }
   });
 
   return VisaoDeLeitura;

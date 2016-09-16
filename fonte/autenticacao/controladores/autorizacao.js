@@ -5,7 +5,7 @@ var Autorizacao = function(argumentos) {
   Autorizacao.super_.call(this, argumentos);
    
   this.limiteDeRequisicoes = this.criarUmLimite({ 
-    nome: 'limiteDeRequisicoes', intervalo: 60*60*1000, max: 150 
+    nome: 'limiteDeRequisicoes', intervalo: 60*60*1000, max: 450 
   , mensagem: 'Muitas tentativas de requisição para autorização. Por favor, tente novamente mais tarde.'
   });
 

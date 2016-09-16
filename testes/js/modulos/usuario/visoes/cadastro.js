@@ -2,19 +2,19 @@
 define([
   'backbone' 
 , 'underscore'
-//, 'text!/autenticacao/js/templantes/base/base.html'
+, 'text!modulos/usuario/templantes/cadastro.html'
 ], function(
   Backbone
 , _
-//, Templante
+, Templante
 ) {
   'use strict';
 
   var VisaoDeCadastro = Backbone.View.extend({
 
-   // el: $('#conteudo-raiz'),
+    tagName: "div",
 
-   // templante: _.template(Templante),
+    templante: _.template(Templante),
     
     attributes: {
       
@@ -25,13 +25,17 @@ define([
     },
 
     render: function() {
-      
-      //this.$el.html(this.templante());
+      this.$el.html(this.templante());
+      return this;
     },
 
     events: {
       
     },
+
+    onClose: function() {
+      
+    }
     
   });
 

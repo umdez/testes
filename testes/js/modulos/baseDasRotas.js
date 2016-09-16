@@ -1,8 +1,10 @@
 
 define([
   "aplicativo"
+, "gdv"
 ], function (
   aplicativo
+, GDV
 ) {
   'use strict';
 
@@ -26,8 +28,17 @@ define([
       var escopos = aplicativo.escopos;
 
       return escopos.verificarEscopo(this.nome, acao);
+    },
+
+    selecionarUmItem: function(item) {
+      $('ul.menu-painel-topo li').removeClass('active');
+      $(item).addClass('active');
     }
   };
  
-  return BaseDasRotas;
+  var Uniao = {};
+  _.extend(Uniao, GDV);
+  _.extend(Uniao, BaseDasRotas);
+
+  return Uniao;
 });

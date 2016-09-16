@@ -1,20 +1,18 @@
 
 define([
-  'backbone' 
-, 'underscore'
-//, 'text!/autenticacao/js/templantes/base/base.html'
+  'backbone'
+, 'text!modulos/usuario/templantes/paginacao.html'
 ], function(
   Backbone
-, _
-//, Templante
+, Templante
 ) {
   'use strict';
 
   var VisaoDePaginacao = Backbone.View.extend({
 
-   // el: $('#conteudo-raiz'),
+    el: 'div#usuario-pesquisa.conteudo-painel',
 
-   // templante: _.template(Templante),
+    templante: _.template(Templante),
     
     attributes: {
       
@@ -25,13 +23,12 @@ define([
     },
 
     render: function() {
-      
-      //this.$el.html(this.templante());
+      this.$el.html(this.templante());
     },
 
     events: {
       
-    },
+    }
     
   });
 

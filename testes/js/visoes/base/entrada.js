@@ -35,14 +35,14 @@ define([
       evento.preventDefault();
       var meuObj = this;
 
-      aplicativo.sessao.entrar({'jid': this.jid, 'senha': this.senha}, {
+      aplicativo.sessao.entrar({ 'jid': this.jid, 'senha': this.senha }, {
         'sucesso': function(modelo, resposta, opcoes) {
           $('input#entrada-jid').val('');
           $('input#entrada-senha').val('');
           meuObj.jid = meuObj.senha = null;
         },
         'erro': function(modelo, resposta, opcoes) {
-          console.log('Não foi possível autenticar o usuário. '+ modelo.status + ' ('+ JSON.parse(modelo.responseText).mensagem +')');
+          console.log('Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         }
       });
     }

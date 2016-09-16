@@ -29,6 +29,7 @@ define([
         cd(true);
       },
       'erro': function(modelo, resposta, opcoes) {
+        console.log('Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         cd(false);
       }
     });

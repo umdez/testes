@@ -32,6 +32,9 @@ define([
       var meuObj = this;
       var modelo = this.usuario.Modelo;
 
+      // Esconde todos os conteudos do painel.
+      $('#painel > #conteudo > div.conteudo-painel').hide();
+
       if (id && id > 0) {
         // Leitura de um item em específico
         this.verificarPermissao("LEITURA", function(sePermitido) {
@@ -54,6 +57,15 @@ define([
         this.verificarPermissao("CADASTRO", function(sePermitido) {
           if (sePermitido) {
             console.log('Cadastro');
+            
+            var visaoDeCadastro = meuObj.criarVisao("VisaoDeCadastroDeUsuario", function() {
+              return new VisaoDeCadastro();
+            });
+
+            $('div#usuario-cadastro.conteudo-painel').html(visaoDeCadastro.render().el);
+            $('div#usuario-cadastro.conteudo-painel').show();
+
+            meuObj.selecionarUmItem('ul.menu-painel-topo li.item-cadastrar');
           } else {
 
           }
@@ -63,6 +75,14 @@ define([
         this.verificarPermissao("LEITURA", function(sePermitido) {
           if (sePermitido) {
             console.log('Listagem');
+
+            var visaoDePaginacao = meuObj.reusarVisao("VisaoDePaginacaoDeUsuario", function() {
+              return new VisaoDePaginacao();
+            });
+            
+            $('div#usuario-pesquisa.conteudo-painel').show();
+
+            meuObj.selecionarUmItem('ul.menu-painel-topo li.item-pesquisar');
           } else {
             // Provavelmente mostrar uma visão informando que não possui acesso
           }

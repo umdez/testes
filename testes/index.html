@@ -43,14 +43,10 @@
     <!-- Nosso conteudo -->
     <div class="container-fluid" id="conteudo-raiz">
 
-      <div id="entrada" class="pages" style="display: none;">
+      <div id="entrada" class="paginas-base" style="display: none;">
         <!-- TOPO -->
         <div id="topo"></div>
         <!-- FIM DO TOPO -->
-
-        <!-- BARRA DE NAVEGAÇÃO -->
-        <div id="barra-navegacao"></div>
-        <!-- FIM DA BARRA DE NAVEGAÇÃO -->
 
         <!-- CONTEUDO -->
         <div id="conteudo">
@@ -79,7 +75,6 @@
                   </div>
                   
                   <button type="submit" class="btn btn-success" id="entrada-botao">Entrar</button>
-              
               </form>
             </div>
             <div class="col-md-1">
@@ -96,26 +91,32 @@
         <!-- FIM RODAPE -->
       </div>
 
-      <div id="painel" class="pages" style="display: none;">
+      <div id="painel" class="paginas-base" style="display: none;">
         <!-- TOPO -->
         <div id="topo">
-          <span id="topo-menu"> </span>
-          Você agora está com acesso ao painel.  
-          <form class="sair">
-            <button type="submit" class="btn btn-success" id="sair-botao">Sair</button>
-          </form>
+          <!-- BARRA DE NAVEGACAO -->
+          <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse">
+                <ul class="menu-painel-topo nav navbar-nav">
+                  <li class="item-cadastrar"><a href="">Cadastrar</a></li>
+                  <li class="item-pesquisar"><a href="">Pesquisar</a></li>
+                </ul>
+                <form class="navbar-form navbar-right sair">
+                  <button type="submit" class="btn btn-success" id="sair-botao">Sair</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+          <!-- FIM DA BARRA DE NAVEGACAO -->
         </div>
         <!-- FIM DO TOPO -->
 
-        <!-- BARRA DE NAVEGAÇÃO -->
-        <div id="barra-navegacao">
-        Navegação.
-        </div>
-        <!-- FIM DA BARRA DE NAVEGAÇÃO -->
-
         <!-- CONTEUDO -->
         <div id="conteudo">
-        Conteudo
+          <div id="usuario-cadastro" class="conteudo-painel" style="display: none;"></div>
+          <div id="usuario-pesquisa" class="conteudo-painel" style="display: none;"></div>
+          <div id="usuario-leitura" class="conteudo-painel" style="display: none;">Leitura de usuário</div>
         </div>  
         <!-- FIM CONTEUDO -->
 
@@ -123,7 +124,7 @@
 
         <!-- RODAPE -->
         <div id="rodape">
-        Rodapé
+          Rodapé
         </div>
         <!-- FIM RODAPE -->
       </div>

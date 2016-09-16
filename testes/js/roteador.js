@@ -31,11 +31,11 @@ define([
     },
     
     asRotasDeUmNivel: function(modulo){
-      aplicativo.buscarRota(modulo, null)
+      aplicativo.buscarRota(modulo, null);
     },
 
     asRotasDeDoisNiveis: function(modulo, id){
-      aplicativo.buscarRota(modulo, id)
+      aplicativo.buscarRota(modulo, id);
     }
     
   });
@@ -52,6 +52,7 @@ define([
         roteamento();
       },
       'erro': function(modelo, resposta, opcoes) {
+        console.log('Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         roteamento();
       }
     });
