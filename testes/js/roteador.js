@@ -49,7 +49,6 @@ define([
     
     aplicativo.sessao.seAutenticado({
       'sucesso': function(modelo, resposta, opcoes) {
-        console.log('Autenticacao foi um sucesso')
         roteamento();
       },
       'erro': function(modelo, resposta, opcoes) {

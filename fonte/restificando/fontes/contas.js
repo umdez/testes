@@ -40,7 +40,7 @@ Contas.prototype.carregarConfig = function(opcoes) {
   config.acoes = [ 
     'deletar'      // DELETE: Realiza a saida do usuário em sua conta.
   , 'criar'        // POST: Realiza a entrada do usuário em sua conta.
-  , 'ler'          // GET: Realiza a manutenção da sessão do usuário em sua conta.
+  , 'listar'       // GET: Realiza a manutenção da sessão do usuário em sua conta.
   ]; 
 
   config.excluirAtributos = [ 

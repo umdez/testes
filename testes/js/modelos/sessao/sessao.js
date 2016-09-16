@@ -35,7 +35,6 @@ define([
       var suporteDeFalhas = function(modelo, resposta, opcoes) {
         meuObjt.conta.funcao.clear();
         meuObjt.conta.clear();
-        meuObjt.conta.url = URLs.gerarUrl('Contas');
         meuObjt.unset('id');
         meuObjt.set({ 'autenticado': false });
         if('erro' in cd) cd.erro(modelo, resposta, opcoes);
@@ -45,7 +44,6 @@ define([
         funcao.set({'id': conta.get('funcao_id')});
         meuObjt.set({'id': modelo.id });
         conta.set({'id': modelo.id });
-        conta.url = URLs.gerarUrl('Conta', modelo.id);
 
         funcao.fetch().done(function(modelo, resposta, opcoes) {
           meuObjt.set({ 'autenticado': true });
@@ -70,7 +68,10 @@ define([
 
     sair: function(cd) {
       var meuObjt = this;
-
+      
+      // Adc. url da nossa conta a ser destruida
+      this.conta.url = URLs.gerarUrl('Conta', this.id);
+   
       // Realiza a saida do usuario de sua conta.
       this.conta.destroy()
       .done(function(modelo, resposta) {
