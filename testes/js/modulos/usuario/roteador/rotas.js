@@ -36,12 +36,15 @@ define([
           if (sePermitido) {
            
             meuObj.procurarUsuario(id, function(usuario) {
-              var visaoDeLeitura = meuObj.criarVisao("VisaoDeLeituraDeUsuario", function() {
-                return new VisaoDeLeitura({ 'model': usuario });
-              });
-              
-              $('div#usuario-leitura.conteudo-painel').html(visaoDeLeitura.render().el);
-              meuObj.mostrarConteudo('div#usuario-leitura.conteudo-painel');
+              if (usuario) {
+                var visaoDeLeitura = meuObj.criarVisao("VisaoDeLeituraDeUsuario", function() {
+                  return new VisaoDeLeitura({ 'model': usuario });
+                });
+                $('div#usuario-leitura.conteudo-painel').html(visaoDeLeitura.render().el);
+                meuObj.mostrarConteudo('div#usuario-leitura.conteudo-painel');
+              } else {
+                console.log('O usuário não foi encontrado.');
+              }
             });
 
             // remove seleção de todos os items do menu
@@ -87,20 +90,22 @@ define([
     procurarUsuario: function(id, cd) {
       var usuarios = this.modUsuario.Lista;
       var Modelo = this.modUsuario.Modelo;
-
       var usuario = usuarios.get(id);
-      if (usuario) {
-        cd(usuario);
-      } else {
+      
+      if (!usuario) {
         usuario = new Modelo({ 'id': id });
-        usuario.fetch({
-          reset: true
-        , success: function (modelo, resposta, opcoes) {
-            usuarios.add(modelo);
-            cd(modelo);
-          }
-        });
-      }
+      } 
+
+      usuario.fetch({
+        reset: true
+      , success: function (modelo, resposta, opcoes) {
+          usuarios.add(modelo, {merge: true});
+          cd(modelo);
+        }
+      , error: function (modelo, resposta, opcoes) {
+          console.log('Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+        }
+      });
     },
 
     mostrarConteudo: function(item) {
