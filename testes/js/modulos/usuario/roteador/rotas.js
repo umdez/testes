@@ -30,6 +30,7 @@ define([
 
     suporte: function(id) {
       var meuObj = this;
+      var usuarios = this.usuario.Lista;
       var modelo = this.usuario.Modelo;
 
       // Esconde todos os conteudos do painel.
@@ -39,14 +40,29 @@ define([
         // Leitura de um item em específico
         this.verificarPermissao("LEITURA", function(sePermitido) {
           if (sePermitido) {
-            modelo.set({'id': id});
-            modelo.fetch({
-              reset: true
-            , success: function (mod, resposta, opcoes) {
-                console.log('Leitura'+ modelo.get('nome') +'id '+ id);
-              }
-            });
 
+            var quandoCarregarUsuario = function(usuario) {
+              var visaoDeLeitura = meuObj.criarVisao("VisaoDeLeituraDeUsuario", function() {
+                return new VisaoDeLeitura({ 'model': usuario });
+              });
+
+              $('div#usuario-leitura.conteudo-painel').html(visaoDeLeitura.render().el);
+              $('div#usuario-leitura.conteudo-painel').show();
+            }
+  
+            var usuario = usuarios.get(id);
+            if (usuario) {
+              quandoCarregarUsuario(usuario);
+            } else {
+              usuario = new modelo({ 'id': id });
+              usuario.fetch({
+                reset: true
+              , success: function (modelo, resposta, opcoes) {
+                  usuarios.add(modelo);
+                  quandoCarregarUsuario(modelo);
+                }
+              });
+            }
             var sePossui = meuObj.verificarEscopo("ATUALIZACAO");
             console.log('wow '+ sePossui);
           } else {

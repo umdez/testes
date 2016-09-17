@@ -1,21 +1,21 @@
 
 define([
   'backbone' 
-, 'underscore'
-//, 'text!/autenticacao/js/templantes/base/base.html'
+, 'text!modulos/usuario/templantes/leitura.html'
 ], function(
   Backbone
-, _
-//, Templante
+, Templante
 ) {
   'use strict';
 
   var VisaoDeLeitura = Backbone.View.extend({
 
-   // el: '#conteudo-raiz',
+    tagName: "div",
 
-   // templante: _.template(Templante),
+    templante: _.template(Templante),
     
+    model: null, 
+
     attributes: {
       
     },
@@ -25,8 +25,9 @@ define([
     },
 
     render: function() {
-      
-      //this.$el.html(this.templante());
+      console.log(this.nome);
+      this.$el.html(this.templante(this.model.toJSON()));
+      return this;
     },
 
     events: {
@@ -36,6 +37,10 @@ define([
     onClose: function() {
       
     }
+  });
+
+  VisaoDeLeitura = VisaoDeLeitura.extend({
+    nome: 'OKay!!!'
   });
 
   return VisaoDeLeitura;

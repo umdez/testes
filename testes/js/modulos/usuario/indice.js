@@ -24,7 +24,7 @@ define([
 
   var Usuario = aplicativo.modulo("Usuario");
 
-  Usuario.Modelo = new ModeloDeUsuario({});
+  Usuario.Modelo = ModeloDeUsuario;
 
   Usuario.Lista = new ColecaoDeUsuario({});
 
