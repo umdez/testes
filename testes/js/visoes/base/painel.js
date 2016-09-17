@@ -1,8 +1,10 @@
 
 define([
   'aplicativo'
+, 'urls'
 ], function(
   aplicativo
+, URLs
 ) {
 
   var VisaoDoPainel = Backbone.View.extend({
@@ -21,12 +23,12 @@ define([
 
     aoClicarEmCadastroDeUsuario: function(evento) {
       evento.preventDefault();
-      aplicativo.roteador.navigate("Usuarios/0", true);
+      aplicativo.roteador.navigate(URLs.gerarUrl('#Usuario', 0), true);
     },
 
     aoClicarEmPesquisaDeUsuario: function(evento) {
       evento.preventDefault();
-      aplicativo.roteador.navigate("Usuarios", true);
+      aplicativo.roteador.navigate(URLs.gerarUrl('#Usuarios'), true);
     },
 
     aoClicarSair : function(evento) {
@@ -37,7 +39,7 @@ define([
         
         },
         'erro': function(erro){
-            
+          
         }
       });
     }

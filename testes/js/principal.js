@@ -3,11 +3,13 @@ define([
 , "roteador"
 , "strophe"
 , "modulos"
+, "parsley.ptbr"
 ], function(
   aplicativo
 , Roteador
 , Xmpp
 , modulos
+, parsleyPtBr
 ) {
   'use strict';
 

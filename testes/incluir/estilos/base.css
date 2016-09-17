@@ -1,3 +1,6 @@
 ﻿
 /* ESTILOS DO BOOTSTRAP */
-@import url('./bootstrap-v3.3.5/bootstrap.min.css');      
+@import url('./bootstrap-v3.3.5/bootstrap.min.css');  
+
+/* ESTILOS DO PARSLEY */
+@import url('./parsley.css');    

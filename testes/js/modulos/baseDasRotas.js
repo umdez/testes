@@ -22,17 +22,6 @@ define([
       escopos.verificarPermissao(this.nome, acao, function(sePermitido) {
         cd(sePermitido);
       });
-    },
-    
-    verificarEscopo: function(acao) {
-      var escopos = aplicativo.escopos;
-
-      return escopos.verificarEscopo(this.nome, acao);
-    },
-
-    selecionarUmItem: function(item) {
-      $('ul.menu-painel-topo li').removeClass('active');
-      $(item).addClass('active');
     }
   };
  

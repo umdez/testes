@@ -1,9 +1,11 @@
 
 define([
   'backbone'
+, "modulos/baseDasVisoes"
 , 'text!modulos/usuario/templantes/paginacao.html'
 ], function(
   Backbone
+, Base
 , Templante
 ) {
   'use strict';
@@ -13,10 +15,6 @@ define([
     el: 'div#usuario-pesquisa.conteudo-painel',
 
     templante: _.template(Templante),
-    
-    attributes: {
-      
-    },
     
     initialize: function() {
       this.render();
@@ -31,6 +29,8 @@ define([
     }
     
   });
+
+  VisaoDePaginacao = VisaoDePaginacao.extend(Base);
 
   return VisaoDePaginacao;
 });

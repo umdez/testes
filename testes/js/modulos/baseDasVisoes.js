@@ -8,12 +8,10 @@ define([
 
   var BaseDasVisoes = {
     
-    nome: null,
-    
-    verificarEscopo: function(acao) {
+    verificarEscopo: function(nome, acao) {
       var escopos = aplicativo.escopos;
 
-      return escopos.verificarEscopo(this.nome, acao);
+      return escopos.verificarEscopo(nome, acao);
     }
   };
 

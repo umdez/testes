@@ -1,9 +1,15 @@
 
 define([
-  'backbone' 
+  'aplicativo'
+, 'backbone' 
+, 'parsley'
+, "modulos/baseDasVisoes"
 , 'text!modulos/usuario/templantes/leitura.html'
 ], function(
-  Backbone
+  aplicativo
+, Backbone
+, parsley
+, Base
 , Templante
 ) {
   'use strict';
@@ -12,36 +18,103 @@ define([
 
     tagName: "div",
 
-    templante: _.template(Templante),
-    
-    model: null, 
+    jid: null,
+    nome: null,
 
-    attributes: {
-      
-    },
+    sePodeAtualizarUsuario: false,
+    sePodeRemoverUsuario: false,
+
+    templante: _.template(Templante),
     
     initialize: function() {
       this.render();
     },
 
     render: function() {
-      console.log(this.nome);
       this.$el.html(this.templante(this.model.toJSON()));
+      
+      this.validacao = this.$el.find('form.leitura-usuario').parsley('validate');
+
+      this.sePodeAtualizarUsuario = this.verificarEscopo('Usuarios', "ATUALIZACAO");
+      this.sePodeRemoverUsuario = this.verificarEscopo('Usuarios', "REMOCAO");
+
+      if (this.sePodeAtualizarUsuario) {
+        this.$el.find('button#salvar-usuario').prop("disabled", false); 
+      }
+
+      if (this.sePodeRemoverUsuario) {
+        this.$el.find('button#remover-usuario').prop("disabled", false); 
+      }
       return this;
     },
 
     events: {
-      
+      'submit form.leitura-usuario': 'aoClicarEmSubmeter',
+      'click button#salvar-usuario': 'aoClicarEmSalvar',
+      'click button#remover-usuario': 'aoClicarEmRemover',
+      'change input#jid-usuario': 'aoEscreverAtualizarJid',
+      'change input#nome-usuario': 'aoEscreverAtualizarNome'
     },
     
+    aoEscreverAtualizarJid: function(evento) {
+      this.jid = this.$el.find('input#jid-usuario').val();
+    },
+
+    aoEscreverAtualizarNome: function(evento) {
+      this.nome = this.$el.find('input#nome-usuario').val();
+    },
+
+    aoClicarEmSubmeter: function(evento) {
+      // Previnimos a submissão
+      evento.preventDefault();
+    },
+
+    aoClicarEmSalvar: function(evento) {
+      if(!this.sePodeAtualizarUsuario) return;
+
+      var meuObj = this;
+
+      this.validacao.whenValid({}).then(function() {
+        
+        // Ter certeza que possuimos os dados de entrada atuais
+        meuObj.pegarEntradas();
+ 
+        meuObj.model.set({ 
+          'jid': meuObj.jid,
+          'nome': meuObj.nome
+        });
+
+        meuObj.model.save().done(function(modelo, resposta, opcoes) {
+          
+          // Inicia novamente a validação
+          meuObj.validacao.reset();
+
+          console.log('Dados do usuario foram salvos com sucesso');
+        })
+        .fail(function(modelo, resposta, opcoes){
+          console.log('Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+        }); 
+
+      }).fail(function() {
+        console.log('É necessário informar os dados corretos para salvar.');
+      })
+    },
+
+    aoClicarEmRemover: function(evento) {
+      if (!this.sePodeRemoverUsuario) return;
+    },
+
+    pegarEntradas: function() {
+      this.jid = this.$el.find('input#jid-usuario').val();
+      this.nome = this.$el.find('input#nome-usuario').val();
+    },
+
     onClose: function() {
       
     }
   });
 
-  VisaoDeLeitura = VisaoDeLeitura.extend({
-    nome: 'OKay!!!'
-  });
+  VisaoDeLeitura = VisaoDeLeitura.extend(Base);
 
   return VisaoDeLeitura;
 });

@@ -63,15 +63,17 @@
             &nbsp;
             </div>
             <div class="col-md-4">
-              <form class="entrada">
+              <form class="entrada" data-parsley-validate="parsley">
                   <div class="form-group">
                     <label for="entrada-jid">Usuario</label>
-                    <input type="text" class="form-control" id="entrada-jid" placeholder="Exemplo: raiz@localhost">
+                    <input type="text" class="form-control" id="entrada-jid" placeholder="Exemplo: usuario@email" 
+                    data-parsley-type="email" data-parsley-required="true">
                   </div>
                             
                   <div class="form-group">
                     <label for="entrada-senha">Senha</label>
-                    <input type="password" class="form-control" id="entrada-senha" placeholder="">
+                    <input type="password" class="form-control" id="entrada-senha" placeholder="" 
+                    data-parsley-required="true" data-parsley-length="[6, 20]">
                   </div>
                   
                   <button type="submit" class="btn btn-success" id="entrada-botao">Entrar</button>

@@ -60,19 +60,7 @@ define([
       var sePermitido = 0;
 
       if (seAceito) {
-        var permissao = PERMISSAO_SUPERIOR;
-        var conta = meuObj.sessao.conta;
-        var escopos = conta.funcao.get('Escopos');
-
-        permissao |= acoes[acao.toUpperCase()];
-
-        _.find(escopos, function(escopo){ 
-          if (escopo && escopo.nome === modelo) {
-            var bandeira = escopo.bandeira;
-            sePermitido = (bandeira & permissao);
-          }
-          return (sePermitido != 0);
-        });
+        sePermitido = meuObj.verificarEscopo(modelo, acao);
       } 
       cd((sePermitido != 0));
     });

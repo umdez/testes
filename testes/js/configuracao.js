@@ -36,6 +36,8 @@ require.config({
   , 'jquery': '/bibliotecas/jquery.min'
   , 'domready': '/bibliotecas/domready'
   , 'strophe': '/bibliotecas/strophe.min'
+  , 'parsley': '/bibliotecas/parsley/parsley.min'
+  , 'parsley.ptbr': '/bibliotecas/parsley/pt-br'
   },
   
   // Lembre-se: Somente usar o shim para aqueles scripts que não são AMD. Ele
@@ -43,7 +45,7 @@ require.config({
   shim: {
     
     'backbone': {
-      deps: ['underscore', 'jquery'], // As dependencias do backbone
+      deps: ['underscore', 'jquery'], 
       exports: 'Backbone'             // Ao ser carregado, use a variavel global 'Backbone' como valor do modulo.
     },
     'underscore': {
@@ -51,6 +53,12 @@ require.config({
     },
     'strophe': {
 
+    },
+    'parsley': {
+      deps: [ 'jquery']
+    },
+    'parsley.ptbr': {
+      deps: [ 'parsley']
     }
   }
 

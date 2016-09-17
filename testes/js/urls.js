@@ -7,29 +7,35 @@ define([
   'use strict';
   
   var URLs = {
-    Funcoes: function() {
+    'Funcoes': function() {
       return "/Funcoes";
     },
-    Funcao: function(id) {
+    'Funcao': function(id) {
       return "/Funcoes/"+ id;
     },
-    Escopos: function() {
+    'Escopos': function() {
       return "/Escopos";
     },
-    Escopo: function(idDafuncao, id) {
+    'Escopo': function(idDafuncao, id) {
       return "/Funcoes/"+ idDafuncao +"/Escopos/"+ id;
     },
-    Contas: function() {
+    'Contas': function() {
       return "/Contas";
     },
-    Conta: function(id) {
+    'Conta': function(id) {
       return "/Contas/"+ id;
     },
-    Usuarios: function() {
+    'Usuarios': function() {
       return "/Usuarios";
     },
-    Usuario: function(id) {
+    'Usuario': function(id) {
       return "/Usuarios/"+ id;
+    }, 
+    '#Usuarios': function() {
+      return "Usuarios";
+    },
+    '#Usuario': function(id) {
+      return "Usuarios/"+ id;
     }
   };
  
