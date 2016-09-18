@@ -19,6 +19,7 @@ define([
     nome: "Usuarios",  // Usado para nome da tabela e da rota
 
     visaoDoPainel: null,
+    visaoDoTopoPainel: null,
 
     visaoDeLeitura: null,
     visaoDeCadastro: null,
@@ -33,10 +34,14 @@ define([
     suporte: function(id) {
       var meuObj = this;
 
-      this.visaoDoPainel = this.reusarVisao("VisaoBaseDePainel", function() { });
+      var painel = this.visaoDoPainel = this.reusarVisao("VisaoBaseDePainel", function() { });
+      var topoDoPainel = this.visaoDoTopoPainel = this.reusarVisao("VisaoBaseDeTopoPainel", function() { });
  
       // Esconder todos os conteudos do painel.
-      this.visaoDoPainel.escoderTodosOsConteudos();
+      painel.escoderTodosOsConteudos();
+
+      // não apresenta qualquer aviso anteriormente apresentado
+      painel.esconderAviso();
 
       if (id && id > 0) {
         // Leitura de um item em específico
@@ -50,16 +55,16 @@ define([
                 });
                 $('div#usuario-leitura.conteudo-painel').html(meuObj.visaoDeLeitura.render().el);
 
-                meuObj.visaoDoPainel.mostrarUmConteudo('div#usuario-leitura.conteudo-painel');
+                painel.mostrarUmConteudo('div#usuario-leitura.conteudo-painel');
               } else {
-                console.log('O usuário não foi encontrado.');
+                painel.apresentarAviso('Os dados de cadastro deste usuário não foram encontrados.');
               }
             });
 
             // remove seleção de todos os items do menu
-            meuObj.visaoDoPainel.deselecionarItemsTopoMenu();
+            topoDoPainel.deselecionarItemsMenu();
           } else {
-            console.log('Você não possui permissão de leitura aos usuários');
+            painel.apresentarAviso('Você não possui permissão de leitura aos usuários');
           }
         });
       } else if (id && id <= 0) {
@@ -71,10 +76,10 @@ define([
               return new VisaoDeCadastro();
             });
 
-            meuObj.visaoDoPainel.mostrarUmConteudo('div#usuario-cadastro.conteudo-painel');
-            meuObj.visaoDoPainel.selecionarItemTopoMenu('ul.menu-painel-topo li.item-cadastrar');
+            painel.mostrarUmConteudo('div#usuario-cadastro.conteudo-painel');
+            topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-cadastrar');
           } else {
-            console.log('Você não possui permissão de cadastro de usuários');
+             painel.apresentarAviso('Você não possui permissão de cadastro de usuários');
           }
         });
       } else {
@@ -87,11 +92,10 @@ define([
               return new VisaoDePaginacao();
             });
             
-            meuObj.visaoDoPainel.mostrarUmConteudo('div#usuario-pesquisa.conteudo-painel');
-            meuObj.visaoDoPainel.selecionarItemTopoMenu('ul.menu-painel-topo li.item-pesquisar');
+            painel.mostrarUmConteudo('div#usuario-pesquisa.conteudo-painel');
+            topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-pesquisar');
           } else {
-            // AFAZER: Provavelmente mostrar uma visão informando que não possui acesso.
-            console.log('Você não possui permissão de listagem de usuários');
+            painel.apresentarAviso('Você não possui permissão de listagem de usuários');
           }
         });
       }
@@ -113,7 +117,8 @@ define([
           cd(modelo);
         }
       , error: function (modelo, resposta, opcoes) {
-          console.log('Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+          cd(null);
+          console.log('Não foi possível requisitar dados deste usuário.')
         }
       });
     }

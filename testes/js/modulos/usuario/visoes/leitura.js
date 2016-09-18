@@ -1,15 +1,15 @@
 
 define([
-  'aplicativo'
-, 'backbone' 
+  'backbone' 
 , 'parsley'
-, "modulos/baseDasVisoes"
+, 'modulos/baseDasVisoes'
+, 'handlebars'
 , 'text!modulos/usuario/templantes/leitura.html'
 ], function(
-  aplicativo
-, Backbone
+  Backbone
 , parsley
 , Base
+, hbs
 , Templante
 ) {
   'use strict';
@@ -23,14 +23,15 @@ define([
 
     sePodeAtualizarUsuario: false,
     sePodeRemoverUsuario: false,
-
-    templante: _.template(Templante),
     
+    templante: hbs.compile(Templante),
+
     initialize: function() {
       this.render();
     },
 
     render: function() {
+
       this.$el.html(this.templante(this.model.toJSON()));
       
       this.validacao = this.$el.find('form.leitura-usuario').parsley('validate');

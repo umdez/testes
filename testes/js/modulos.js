@@ -10,4 +10,11 @@ define([
 ) {
   'use strict';
  
+  var modulos = [
+    { 'id': 'usuario-cadastro'},
+    { 'id': 'usuario-pesquisa'},
+    { 'id': 'usuario-leitura'}
+  ];
+
+  return modulos;
 });

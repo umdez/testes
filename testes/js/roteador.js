@@ -6,10 +6,12 @@
 define([
   "aplicativo"
 , "backbone"
+, "gdv"
 , "visoes/base/base"
 ], function(
   aplicativo
 , Backbone
+, GDV
 , VisaoDeBase
 ) {
   'use strict';
@@ -23,7 +25,9 @@ define([
     },
     
     initialize: function () {
-      this.visaoDeBase = new VisaoDeBase();
+      this.visaoDeBase = GDV.reusarVisao("VisaoDeBase", function() {
+        return new VisaoDeBase();
+      });
     },
     
     inicio: function() {

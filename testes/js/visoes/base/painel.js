@@ -1,13 +1,11 @@
 
 define([
-  'aplicativo'
-, 'urls'
-, 'modulos'
+  'modulos'
+, 'handlebars'
 , 'text!templantes/base/painel.html'
 ], function(
-  aplicativo
-, URLs
-, modulos
+  modulos
+, hbs
 , Templante
 ) {
 
@@ -15,43 +13,20 @@ define([
 
     el: '#conteudo-raiz > div#painel',
 
-    templante: _.template(Templante),
+    templante: hbs.compile(Templante),
 
     initialize: function () {
       this.render();
     },
 
     render: function() {
-      this.$el.html(this.templante());
+      this.$el.html(this.templante({
+        'modulos': modulos
+      }));
     },
 
     events: {
-      'click ul.menu-painel-topo li.item-cadastrar a': 'aoClicarEmCadastroDeUsuario',
-      'click ul.menu-painel-topo li.item-pesquisar a': 'aoClicarEmPesquisaDeUsuario',
-      'submit form.sair': 'aoClicarSair'
-    },
-
-    aoClicarEmCadastroDeUsuario: function(evento) {
-      evento.preventDefault();
-      aplicativo.roteador.navigate(URLs.gerarUrl('#Usuario', 0), true);
-    },
-
-    aoClicarEmPesquisaDeUsuario: function(evento) {
-      evento.preventDefault();
-      aplicativo.roteador.navigate(URLs.gerarUrl('#Usuarios'), true);
-    },
-
-    aoClicarSair : function(evento) {
-      evento.preventDefault();
-
-      aplicativo.sessao.sair({
-        'sucesso': function(modulo, resposta) {
-          console.log('Você saiu do painel com sucesso.')
-        },
-        'erro': function(modelo, resposta) {
-          console.log('Erro ao tentar sair do painel.')
-        }
-      });
+      
     },
 
     escoderTodosOsConteudos: function() {
@@ -62,14 +37,13 @@ define([
       this.$el.find(item).show();
     },
 
-    deselecionarItemsTopoMenu: function() {
-      // remover seleção de todos items do menu de topo
-      this.$el.find('ul.menu-painel-topo li').removeClass('active');
+    apresentarAviso: function(mensagem) {
+      this.$el.find('div#aviso-erro.conteudo-painel > span#mensagem').text(mensagem);
+      this.$el.find('div#aviso-erro.conteudo-painel').show();
     },
 
-    selecionarItemTopoMenu: function(item) {
-      this.deselecionarItemsTopoMenu();
-      this.$el.find(item).addClass('active');
+    esconderAviso: function() {
+      this.$el.find('div#aviso-erro.conteudo-painel').hide();
     }
 
   });

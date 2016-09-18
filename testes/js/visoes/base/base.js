@@ -8,18 +8,21 @@ define([
 , 'gdv'
 , 'visoes/base/entrada'
 , 'visoes/base/painel'
+, 'visoes/base/topo'
 ], function(
   aplicativo
 , Backbone
 , GDV
 , VisaoDeEntrada
 , VisaoDoPainel
+, VisaoDoTopoPainel
 ) {
   
   var VisaoDeBase = Backbone.View.extend({
     
     visaoDeEntrada: null,
     visaoDoPainel: null,
+    visaoDoTopoPainel: null,
 
     initialize: function() {
 
@@ -31,6 +34,11 @@ define([
         return new VisaoDoPainel();
       });
 
+      this.visaoDoTopoPainel = GDV.criarVisao("VisaoBaseDeTopoPainel", function() {
+        return new VisaoDoTopoPainel();
+      });
+      $('div#painel > div#topo').html(this.visaoDoTopoPainel.render().el);
+ 
       this.render();
       aplicativo.sessao.on("change:autenticado", this.render);
     },
@@ -40,6 +48,13 @@ define([
       $('div.paginas-base').hide();
       
       if(aplicativo.sessao.get('autenticado')) {
+        
+        // Sempre renderizar a cada nova autenticacao.
+        this.visaoDoTopoPainel = GDV.criarVisao("VisaoBaseDeTopoPainel", function() {
+          return new VisaoDoTopoPainel();
+        });
+        $('div#painel > div#topo').html(this.visaoDoTopoPainel.render().el);
+
         $('#painel').show();
       } else {
         $('#entrada').show();

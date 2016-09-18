@@ -1,28 +1,24 @@
 <!-- TOPO -->
-<div id="topo">
-  <!-- BARRA DE NAVEGACAO -->
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse">
-        <ul class="menu-painel-topo nav navbar-nav">
-          <li class="item-cadastrar"><a href="">Cadastrar</a></li>
-          <li class="item-pesquisar"><a href="">Pesquisar</a></li>
-        </ul>
-        <form class="navbar-form navbar-right sair">
-          <button type="submit" class="btn btn-success" id="sair-botao">Sair</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-  <!-- FIM DA BARRA DE NAVEGACAO -->
-</div>
+<div id="topo"></div>
 <!-- FIM DO TOPO -->
 
 <!-- CONTEUDO -->
 <div id="conteudo">
-  <div id="usuario-cadastro" class="conteudo-painel" style="display: none;"></div>
-  <div id="usuario-pesquisa" class="conteudo-painel" style="display: none;"></div>
-  <div id="usuario-leitura" class="conteudo-painel" style="display: none;"></div>
+  
+  <!-- MENSAGEM DE ALERTA -->
+  <div id="aviso-erro" class="alert alert-danger conteudo-painel" role="alert" style="display: none;">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    <span id="mensagem"></span>
+  </div>
+  <!-- FIM DA MENSAGEM DE ALERTA -->
+  
+  <!-- CONTEÚDO DOS MODULOS -->
+  {{#each modulos}}
+    <div id="{{id}}" class="conteudo-painel" style="display: none;"></div>
+  {{/each}}
+  <!-- FIM DO CONTEÚDO DOS MODULOS -->
+
 </div>  
 <!-- FIM CONTEUDO -->
 
