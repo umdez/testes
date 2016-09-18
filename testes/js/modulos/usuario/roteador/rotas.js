@@ -18,6 +18,12 @@ define([
 
     nome: "Usuarios",  // Usado para nome da tabela e da rota
 
+    visaoDoPainel: null,
+
+    visaoDeLeitura: null,
+    visaoDeCadastro: null,
+    visaoDePaginacao: null,
+
     modUsuario: aplicativo.modulo("Usuario"),
 
     iniciar: function() {
@@ -27,8 +33,10 @@ define([
     suporte: function(id) {
       var meuObj = this;
 
-      // Esconde todos os conteudos do painel.
-      $('#painel > #conteudo > div.conteudo-painel').hide();
+      this.visaoDoPainel = this.reusarVisao("VisaoBaseDePainel", function() { });
+ 
+      // Esconder todos os conteudos do painel.
+      this.visaoDoPainel.escoderTodosOsConteudos();
 
       if (id && id > 0) {
         // Leitura de um item em específico
@@ -37,20 +45,21 @@ define([
            
             meuObj.procurarUsuario(id, function(usuario) {
               if (usuario) {
-                var visaoDeLeitura = meuObj.criarVisao("VisaoDeLeituraDeUsuario", function() {
+                meuObj.visaoDeLeitura = meuObj.criarVisao("VisaoDeLeituraDeUsuario", function() {
                   return new VisaoDeLeitura({ 'model': usuario });
                 });
-                $('div#usuario-leitura.conteudo-painel').html(visaoDeLeitura.render().el);
-                meuObj.mostrarConteudo('div#usuario-leitura.conteudo-painel');
+                $('div#usuario-leitura.conteudo-painel').html(meuObj.visaoDeLeitura.render().el);
+
+                meuObj.visaoDoPainel.mostrarUmConteudo('div#usuario-leitura.conteudo-painel');
               } else {
                 console.log('O usuário não foi encontrado.');
               }
             });
 
             // remove seleção de todos os items do menu
-            $('ul.menu-painel-topo li').removeClass('active');
+            meuObj.visaoDoPainel.deselecionarItemsTopoMenu();
           } else {
-
+            console.log('Você não possui permissão de leitura aos usuários');
           }
         });
       } else if (id && id <= 0) {
@@ -58,14 +67,14 @@ define([
           if (sePermitido) {
             console.log('Cadastro');
             
-            var visaoDeCadastro = meuObj.reusarVisao("VisaoDeCadastroDeUsuario", function() {
+            meuObj.visaoDeCadastro = meuObj.reusarVisao("VisaoDeCadastroDeUsuario", function() {
               return new VisaoDeCadastro();
             });
 
-            meuObj.mostrarConteudo('div#usuario-cadastro.conteudo-painel');
-            meuObj.selecionarItem('ul.menu-painel-topo li.item-cadastrar');
+            meuObj.visaoDoPainel.mostrarUmConteudo('div#usuario-cadastro.conteudo-painel');
+            meuObj.visaoDoPainel.selecionarItemTopoMenu('ul.menu-painel-topo li.item-cadastrar');
           } else {
-
+            console.log('Você não possui permissão de cadastro de usuários');
           }
         });
       } else {
@@ -74,14 +83,15 @@ define([
           if (sePermitido) {
             console.log('Listagem');
 
-            var visaoDePaginacao = meuObj.reusarVisao("VisaoDePaginacaoDeUsuario", function() {
+            meuObj.visaoDePaginacao = meuObj.reusarVisao("VisaoDePaginacaoDeUsuario", function() {
               return new VisaoDePaginacao();
             });
             
-            meuObj.mostrarConteudo('div#usuario-pesquisa.conteudo-painel');
-            meuObj.selecionarItem('ul.menu-painel-topo li.item-pesquisar');
+            meuObj.visaoDoPainel.mostrarUmConteudo('div#usuario-pesquisa.conteudo-painel');
+            meuObj.visaoDoPainel.selecionarItemTopoMenu('ul.menu-painel-topo li.item-pesquisar');
           } else {
-            // Provavelmente mostrar uma visão informando que não possui acesso
+            // AFAZER: Provavelmente mostrar uma visão informando que não possui acesso.
+            console.log('Você não possui permissão de listagem de usuários');
           }
         });
       }
@@ -106,16 +116,8 @@ define([
           console.log('Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         }
       });
-    },
-
-    mostrarConteudo: function(item) {
-      $(item).show();
-    },
-
-    selecionarItem: function(item) {
-      $('ul.menu-painel-topo li').removeClass('active');
-      $(item).addClass('active');
     }
+
   };
  
   var Uniao = {};

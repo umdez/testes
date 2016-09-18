@@ -2,9 +2,11 @@
 define([
   'aplicativo'
 , 'parsley'
+, 'text!templantes/base/entrada.html'
 ], function(
   aplicativo
 , parsley
+, Templante
 ) {
  
   var VisaoDeEntrada = Backbone.View.extend({
@@ -14,12 +16,19 @@ define([
     jid: null,  
     senha: null, 
 
+    templante: _.template(Templante),
+
     validacao: null,
 
     initialize: function () {
-      this.validacao = $('form.entrada').parsley('validate');
+      this.render();
     },
     
+    render: function() {
+      this.$el.html(this.templante());
+      this.validacao = this.$el.find('form.entrada').parsley('validate');
+    },
+
     events: {
       'submit form.entrada': 'aoClicarEntrar',
       'change input#entrada-jid': 'aoEscreverAtualizarJid',
@@ -27,11 +36,11 @@ define([
     },
 
     aoEscreverAtualizarJid: function(evento) {
-      this.jid = $('input#entrada-jid').val();
+      this.jid = this.$el.find('input#entrada-jid').val();
     },
 
     aoEscreverAtualizarSenha: function(evento) {
-      this.senha = $('input#entrada-senha').val();
+      this.senha = this.$el.find('input#entrada-senha').val();
     },
 
     aoClicarEntrar: function (evento) {
@@ -53,8 +62,8 @@ define([
     }, 
 
     limparFormulario: function() {
-      $('input#entrada-jid').val('');
-      $('input#entrada-senha').val('');
+      this.$el.find('input#entrada-jid').val('');
+      this.$el.find('input#entrada-senha').val('');
     }
 
   });

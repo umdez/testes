@@ -83,8 +83,8 @@ define([
 
          if('sucesso' in cd) cd.sucesso(modelo, resposta); 
       })
-      .fail(function() {
-        if('erro' in cd) cd.erro(); 
+      .fail(function(modelo, resposta) {
+        if('erro' in cd) cd.erro(modelo, resposta); 
       });     
     },
 

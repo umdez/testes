@@ -38,6 +38,7 @@ require.config({
   , 'strophe': '/bibliotecas/strophe.min'
   , 'parsley': '/bibliotecas/parsley/parsley.min'
   , 'parsley.ptbr': '/bibliotecas/parsley/pt-br'
+  , 'handlebars': '/bibliotecas/handlebars'
   },
   
   // Lembre-se: Somente usar o shim para aqueles scripts que não são AMD. Ele

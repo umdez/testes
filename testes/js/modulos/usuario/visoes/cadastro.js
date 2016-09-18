@@ -5,7 +5,7 @@ define([
 , "modulos/baseDasVisoes"
 , 'urls'
 , 'parsley'
-, 'text!modulos/usuario/templantes/cadastro.html'
+, 'text!modulos/usuario/templantes/cadastro.html' 
 ], function(
   aplicativo
 , Backbone

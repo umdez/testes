@@ -2,17 +2,27 @@
 define([
   'aplicativo'
 , 'urls'
+, 'modulos'
+, 'text!templantes/base/painel.html'
 ], function(
   aplicativo
 , URLs
+, modulos
+, Templante
 ) {
 
   var VisaoDoPainel = Backbone.View.extend({
 
     el: '#conteudo-raiz > div#painel',
 
+    templante: _.template(Templante),
+
     initialize: function () {
-      
+      this.render();
+    },
+
+    render: function() {
+      this.$el.html(this.templante());
     },
 
     events: {
@@ -36,12 +46,30 @@ define([
 
       aplicativo.sessao.sair({
         'sucesso': function(modulo, resposta) {
-        
+          console.log('Você saiu do painel com sucesso.')
         },
-        'erro': function(erro){
-          
+        'erro': function(modelo, resposta) {
+          console.log('Erro ao tentar sair do painel.')
         }
       });
+    },
+
+    escoderTodosOsConteudos: function() {
+      this.$el.find('div#conteudo div.conteudo-painel').hide();
+    },
+
+    mostrarUmConteudo: function(item) {
+      this.$el.find(item).show();
+    },
+
+    deselecionarItemsTopoMenu: function() {
+      // remover seleção de todos items do menu de topo
+      this.$el.find('ul.menu-painel-topo li').removeClass('active');
+    },
+
+    selecionarItemTopoMenu: function(item) {
+      this.deselecionarItemsTopoMenu();
+      this.$el.find(item).addClass('active');
     }
 
   });
