@@ -4,3 +4,6 @@
 
 /* ESTILOS DO PARSLEY */
 @import url('./parsley.css');    
+
+/* ESTILOS DO JASNY */
+@import url('./jasny/jasny-bootstrap.min.css');  

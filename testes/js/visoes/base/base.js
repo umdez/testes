@@ -7,6 +7,7 @@ define([
 , 'backbone' 
 , 'gdv'
 , 'bootstrap'
+, 'jasny'
 , 'visoes/base/entrada'
 , 'visoes/base/painel'
 , 'visoes/base/topo'
@@ -15,6 +16,7 @@ define([
 , Backbone
 , GDV
 , BootStrap
+, Jasny
 , VisaoDeEntrada
 , VisaoDoPainel
 , VisaoDoTopoPainel

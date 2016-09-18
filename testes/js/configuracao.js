@@ -40,6 +40,7 @@ require.config({
   , 'parsley.ptbr': '/bibliotecas/parsley/pt-br'
   , 'handlebars': '/bibliotecas/handlebars'
   , 'bootstrap': '/bibliotecas/bootstrap.min'
+  , 'jasny': '/bibliotecas/jasny-bootstrap.min'
   },
   
   // Lembre-se: Somente usar o shim para aqueles scripts que não são AMD. Ele
@@ -61,6 +62,9 @@ require.config({
     },
     'parsley.ptbr': {
       deps: [ 'parsley']
+    },
+    'jasny': {
+      deps: [ 'bootstrap' ]
     }
   }
 
