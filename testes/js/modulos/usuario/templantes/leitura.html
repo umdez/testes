@@ -1,18 +1,27 @@
-<form class="leitura-usuario" data-parsley-validate="parsley">
-  <div class="form-group">
-    <label for="nome-usuario">Nome completo</label>
-    <input type="text" class="form-control" id="nome-usuario" placeholder="Nome completo" value="{{nome}}" 
-    data-parsley-required="true" data-parsley-length="[10, 80]">
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Cadastro do Usuário</h3>
   </div>
-  <div class="form-group">
-    <label for="jid-usuario">Endereço de Email</label>
-    <input type="email" class="form-control" id="jid-usuario" placeholder="Email" value="{{jid}}" 
-    data-parsley-type="email" data-parsley-required="true" data-parsley-length="[6, 60]">
+  <div class="panel-body">
+
+    <form class="leitura-usuario" data-parsley-validate="parsley">
+      <div class="form-group">
+        <label for="nome-usuario">Nome completo</label>
+        <input type="text" class="form-control" id="nome-usuario" placeholder="Nome completo" value="{{nome}}" 
+        data-parsley-required="true" data-parsley-length="[10, 80]">
+      </div>
+      <div class="form-group">
+        <label for="jid-usuario">Endereço de Email</label>
+        <input type="email" class="form-control" id="jid-usuario" placeholder="Email" value="{{jid}}" 
+        data-parsley-type="email" data-parsley-required="true" data-parsley-length="[6, 60]">
+      </div>
+      <div class="form-group">
+        <label for="uuid-usuario">Uuid</label>
+        <input type="text" class="form-control" id="uuid-usuario" placeholder="uuid" value="{{uuid}}">
+      </div>
+      <button type="submit" class="btn btn-success" id="salvar-usuario" disabled="disabled">Salvar</button>
+      <button type="submit" class="btn btn-danger" id="remover-usuario" disabled="disabled">Remover</button> 
+    </form>
+
   </div>
-  <div class="form-group">
-    <label for="uuid-usuario">Uuid</label>
-    <input type="text" class="form-control" id="uuid-usuario" placeholder="uuid" value="{{uuid}}">
-  </div>
-  <button type="submit" class="btn btn-success" id="salvar-usuario" disabled="disabled">Salvar</button>
-  <button type="submit" class="btn btn-danger" id="remover-usuario" disabled="disabled">Remover</button> 
-</form>
+</div>

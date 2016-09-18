@@ -31,7 +31,7 @@ define([
     events: {
       'click ul.menu-painel-topo li.item-cadastrar a': 'aoClicarEmCadastroDeUsuario',
       'click ul.menu-painel-topo li.item-pesquisar a': 'aoClicarEmPesquisaDeUsuario',
-      'submit form.sair': 'aoClicarSair'
+      'click li#sair-painel a': 'aoClicarSair'
     },
 
     aoClicarEmCadastroDeUsuario: function(evento) {
@@ -49,10 +49,11 @@ define([
 
       aplicativo.sessao.sair({
         'sucesso': function(modulo, resposta) {
-          console.log('Você saiu do painel com sucesso.')
+          aplicativo.roteador.navigate('', true);
+          console.log('Você saiu do painel com sucesso.');
         },
         'erro': function(modelo, resposta) {
-          console.log('Erro ao tentar sair do painel.')
+          console.log('Erro ao tentar sair do painel.');
         }
       });
     },

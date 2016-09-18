@@ -1,5 +1,15 @@
 <!-- TOPO -->
-<div id="topo"></div>
+<div id="topo">
+  <!-- BARRA DE NAVEGAÇÃO -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Laboratório</a>
+      </div>
+    </div>
+  </nav>
+  <!-- FIM DA BARRA DE NAVEGAÇÃO -->
+</div>
 <!-- FIM DO TOPO -->
 
 <!-- CONTEUDO -->
@@ -17,21 +27,33 @@
     &nbsp;
     </div>
     <div class="col-md-4">
-      <form class="entrada" data-parsley-validate="parsley">
-          <div class="form-group">
-            <label for="entrada-jid">Usuario</label>
-            <input type="text" class="form-control" id="entrada-jid" placeholder="Exemplo: usuario@email" 
-            data-parsley-type="email" data-parsley-required="true" data-parsley-length="[6, 60]">
-          </div>
-                    
-          <div class="form-group">
-            <label for="entrada-senha">Senha</label>
-            <input type="password" class="form-control" id="entrada-senha" placeholder="" 
-            data-parsley-required="true" data-parsley-length="[6, 20]">
-          </div>
-          
-          <button type="submit" class="btn btn-success" id="entrada-botao">Entrar</button>
-      </form>
+
+      <!-- INICIO DO PAINEL -->
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Entrar</h3>
+        </div>
+        <div class="panel-body">
+
+          <form class="entrada" data-parsley-validate="parsley">
+              <div class="form-group">
+                <label for="entrada-jid">Usuario</label>
+                <input type="text" class="form-control" id="entrada-jid" placeholder="Exemplo: usuario@email" 
+                data-parsley-type="email" data-parsley-required="true" data-parsley-length="[6, 60]">
+              </div>
+                        
+              <div class="form-group">
+                <label for="entrada-senha">Senha</label>
+                <input type="password" class="form-control" id="entrada-senha" placeholder="" 
+                data-parsley-required="true" data-parsley-length="[6, 20]">
+              </div>
+              
+              <button type="submit" class="btn btn-success" id="entrada-botao">Entrar</button>
+          </form>
+        </div>
+      </div>
+      <!-- FIM DO PAINEL -->
+
     </div>
     <div class="col-md-1">
     &nbsp;

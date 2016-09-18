@@ -6,6 +6,7 @@ define([
   'aplicativo'
 , 'backbone' 
 , 'gdv'
+, 'bootstrap'
 , 'visoes/base/entrada'
 , 'visoes/base/painel'
 , 'visoes/base/topo'
@@ -13,6 +14,7 @@ define([
   aplicativo
 , Backbone
 , GDV
+, BootStrap
 , VisaoDeEntrada
 , VisaoDoPainel
 , VisaoDoTopoPainel
