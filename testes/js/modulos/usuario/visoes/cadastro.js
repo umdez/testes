@@ -18,7 +18,7 @@ define([
 
   var VisaoDeCadastro = Backbone.View.extend({
 
-    el: 'div#usuario-cadastro.conteudo-painel',
+    el: 'div.grupo-um div#usuario-cadastro.conteudo-grupo-um',
 
     jid: null,  
     senha: null, 

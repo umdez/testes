@@ -20,6 +20,7 @@ define([
 
     visaoDoPainel: null,
     visaoDoTopoPainel: null,
+    visaoDosGruposPainel: null,
 
     visaoDeLeitura: null,
     visaoDeCadastro: null,
@@ -39,11 +40,15 @@ define([
 
       var painel = this.visaoDoPainel = this.reusarVisao("VisaoBaseDePainel", function() { });
       var topoDoPainel = this.visaoDoTopoPainel = this.reusarVisao("VisaoBaseDeTopoPainel", function() { });
- 
-      // Esconder todos os conteudos do painel.
-      painel.escoderTodosOsConteudos();
+      var grupos = this.visaoDosGruposPainel = this.reusarVisao("VisaoGruposDoPainel", function() { });
 
-      // não apresenta qualquer aviso anteriormente apresentado
+      // Esconde todos os grupos do conteudo do painel
+      painel.escoderTodosOsGrupos();
+
+      // Esconde todos os conteudos de todos os grupos.
+      grupos.escoderTodosOsConteudosDosGrupos();
+
+      // não apresenta qualquer aviso anteriormente apresentada
       painel.esconderAviso();
 
       if (id && id > 0) {
@@ -56,9 +61,10 @@ define([
                 meuObj.visaoDeLeitura = meuObj.criarVisao("VisaoDeLeituraDeUsuario", function() {
                   return new VisaoDeLeitura({ 'model': usuario });
                 });
-                $('div#usuario-leitura.conteudo-painel').html(meuObj.visaoDeLeitura.render().el);
+                $('div.grupo-um div#usuario-leitura.conteudo-grupo-um').html(meuObj.visaoDeLeitura.render().el);
 
-                painel.mostrarUmConteudo('div#usuario-leitura.conteudo-painel');
+                painel.mostrarUmGrupo('div.grupo-um');
+                grupos.mostrarConteudoDeUmGrupo('div.grupo-um div#usuario-leitura.conteudo-grupo-um');
               } else {
                 painel.apresentarAviso('Os dados de cadastro deste usuário não foram encontrados.');
               }
@@ -79,7 +85,8 @@ define([
               return new VisaoDeCadastro();
             });
 
-            painel.mostrarUmConteudo('div#usuario-cadastro.conteudo-painel');
+            painel.mostrarUmGrupo('div.grupo-um');
+            grupos.mostrarConteudoDeUmGrupo('div.grupo-um div#usuario-cadastro.conteudo-grupo-um');
             topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-cadastrar');
           } else {
              painel.apresentarAviso('Você não possui permissão de cadastro de usuários');
@@ -95,7 +102,8 @@ define([
               return new VisaoDePaginacao();
             });
             
-            painel.mostrarUmConteudo('div#usuario-pesquisa.conteudo-painel');
+            painel.mostrarUmGrupo('div.grupo-um');
+            grupos.mostrarConteudoDeUmGrupo('div.grupo-um div#usuario-pesquisa.conteudo-grupo-um');
             topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-pesquisar');
           } else {
             painel.apresentarAviso('Você não possui permissão de listagem de usuários');

@@ -12,7 +12,7 @@ define([
 
   var VisaoDePaginacao = Backbone.View.extend({
 
-    el: 'div#usuario-pesquisa.conteudo-painel',
+    el: 'div.grupo-um div#usuario-pesquisa.conteudo-grupo-um',
 
     templante: _.template(Templante),
     

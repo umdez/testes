@@ -21,23 +21,17 @@ define([
     },
 
     render: function() {
-      this.$el.html(this.templante({
-        'modulos': modulos.modulos
-      }));
+      this.$el.html(this.templante({ }));
     },
 
-    events: {
-      
+    escoderTodosOsGrupos: function() {
+      this.$el.find('div.grupos-painel').hide(); 
     },
 
-    escoderTodosOsConteudos: function() {
-      this.$el.find('div#conteudo div.conteudo-painel').hide();
-    },
-
-    mostrarUmConteudo: function(item) {
+    mostrarUmGrupo: function(item) {
       this.$el.find(item).show();
     },
-
+ 
     apresentarAviso: function(mensagem) {
       this.$el.find('div#aviso-erro.conteudo-painel > span#mensagem').text(mensagem);
       this.$el.find('div#aviso-erro.conteudo-painel').show();

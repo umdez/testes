@@ -11,11 +11,6 @@ define([
   'use strict';
  
   var modulos = {
-    principal: [
-      { 'id': 'usuario-cadastro'},
-      { 'id': 'usuario-pesquisa'},
-      { 'id': 'usuario-leitura'}
-    ],
     grupoUm: [
       { 'id': 'usuario-cadastro'},
       { 'id': 'usuario-pesquisa'},

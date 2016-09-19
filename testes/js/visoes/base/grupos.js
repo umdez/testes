@@ -12,7 +12,7 @@ define([
 
   var VisaoDosGrupos = Backbone.View.extend({
 
-    el: "div#painel > div#conteudo div.grupos-painel", 
+    el: "div#painel > div#conteudo", 
 
     visaoDoGrupoUm: null,
     visaoDoGrupoDois: null,
@@ -29,6 +29,14 @@ define([
       this.visaoDoGrupoDois = GDV.reusarVisao("VisaoDoGrupoDois", function() {
         return new VisaoDoGrupoDois();
       });
+    },
+
+    esconderTodosOsConteudosDosGrupos: function() {
+      this.$el.find('div.grupos-painel div.conteudo-grupos').hide(); 
+    },
+
+    mostrarConteudoDeUmGrupo: function(item) {
+      this.$el.find(item).show();
     }
 
   });
