@@ -32,12 +32,12 @@ define([
       this.$el.find(item).show();
     },
  
-    apresentarAviso: function(mensagem) {
+    apresentarAvisoDeErro: function(mensagem) {
       this.$el.find('div#aviso-erro.conteudo-painel > span#mensagem').text(mensagem);
       this.$el.find('div#aviso-erro.conteudo-painel').show();
     },
 
-    esconderAviso: function() {
+    esconderTodosAvisos: function() {
       this.$el.find('div#aviso-erro.conteudo-painel').hide();
     }
 

@@ -44,12 +44,12 @@ define([
       aplicativo.roteador.navigate(URLs.gerarUrl('#UsuariosListagem'), true);
     },
 
-    apresentarAviso: function(mensagem) {
+    apresentarAvisoDeErro: function(mensagem) {
       this.$el.find('div#aviso-erro.conteudo-grupo-um > span#mensagem').text(mensagem);
       this.$el.find('div#aviso-erro.conteudo-grupo-um').show();
     },
 
-    esconderAviso: function() {
+    esconderTodosAvisos: function() {
       this.$el.find('div#aviso-erro.conteudo-grupo-um').hide();
     }
 

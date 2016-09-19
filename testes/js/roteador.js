@@ -31,7 +31,7 @@ define([
     },
     
     inicio: function() {
-      // Aqui estaremos na página inicial?
+      
     },
     
     asRotasDeUmNivel: function(modulo){

@@ -36,9 +36,9 @@ define([
       grupos.esconderTodosOsConteudosDosGrupos();
 
       // não apresenta qualquer aviso anteriormente apresentada
-      painel.esconderAviso();
+      painel.esconderTodosAvisos();
 
-      if (rota === 'GrupoUm') {
+      if (rota === 'GrupoUm') { 
         painel.mostrarUmGrupo('div.grupo-um');
         topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-grupo-um');
       } else if (rota === 'GrupoDois') {

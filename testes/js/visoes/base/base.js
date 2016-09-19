@@ -26,6 +26,8 @@ define([
   
   var VisaoDeBase = Backbone.View.extend({
     
+    el: 'body > div#conteudo-raiz',
+
     visaoDeEntrada: null,
     visaoDoPainel: null,
     visaoDoTopoPainel: null,
@@ -44,31 +46,31 @@ define([
       this.visaoDoTopoPainel = GDV.criarVisao("VisaoBaseDeTopoPainel", function() {
         return new VisaoDoTopoPainel();
       });
-      $('div#painel > div#topo').html(this.visaoDoTopoPainel.render().el);
+      this.$el.find('div#painel > div#topo').html(this.visaoDoTopoPainel.render().el);
  
       this.visaoDosGruposPainel = GDV.reusarVisao("VisaoGruposDoPainel", function() {
         return new VisaoDosGruposPainel();
       });
       
       this.render();
-      aplicativo.sessao.on("change:autenticado", this.render);
+      aplicativo.sessao.on("change:autenticado", this.render.bind(this));
     },
 
     render: function() {
       // esconde todas visões de base
-      $('div.paginas-base').hide();
-      
+      this.$el.find('div.paginas-base').hide();
+
       if(aplicativo.sessao.get('autenticado')) {
         
         // Sempre renderizar a cada nova autenticacao.
         this.visaoDoTopoPainel = GDV.criarVisao("VisaoBaseDeTopoPainel", function() {
           return new VisaoDoTopoPainel();
         });
-        $('div#painel > div#topo').html(this.visaoDoTopoPainel.render().el);
+        this.$el.find('div#painel > div#topo').html(this.visaoDoTopoPainel.render().el);
 
-        $('#painel').show();
+        this.$el.find('div#painel').show();
       } else {
-        $('#entrada').show();
+        this.$el.find('div#entrada').show();
       } 
       return this;
     }

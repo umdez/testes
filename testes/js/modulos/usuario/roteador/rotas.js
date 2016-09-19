@@ -51,10 +51,10 @@ define([
       grupos.esconderTodosOsConteudosDosGrupos();
 
       // Esconde qualquer aviso anteriormente apresentado.
-      grupoUm.esconderAviso();
+      grupoUm.esconderTodosAvisos();
 
       // não apresenta qualquer aviso anteriormente apresentada
-      painel.esconderAviso();
+      painel.esconderTodosAvisos();
 
       if (id && id > 0) {
         // Leitura de um item em específico
@@ -70,11 +70,11 @@ define([
                 $('div.grupo-um div#usuario-leitura.conteudo-grupo-um').html(meuObj.visaoDeLeitura.render().el);
                 grupos.mostrarConteudoDeUmGrupo('div.grupo-um div#usuario-leitura.conteudo-grupo-um');
               } else {
-                grupoUm.apresentarAviso('Os dados de cadastro deste usuário não foram encontrados.');
+                grupoUm.apresentarAvisoDeErro('Os dados de cadastro deste usuário não foram encontrados.');
               }
             });
           } else {
-            grupoUm.apresentarAviso('Você não possui permissão de leitura aos usuários');
+            grupoUm.apresentarAvisoDeErro('Você não possui permissão de leitura aos usuários');
           }
         });
       } else if ((id && id <= 0) || (rota == 'UsuariosCadastro')) {
@@ -87,7 +87,7 @@ define([
             });
             grupos.mostrarConteudoDeUmGrupo('div.grupo-um div#usuario-cadastro.conteudo-grupo-um');
           } else {
-            grupoUm.apresentarAviso('Você não possui permissão de cadastro de usuários');
+            grupoUm.apresentarAvisoDeErro('Você não possui permissão de cadastro de usuários');
           }
         });
       } else {
@@ -101,7 +101,7 @@ define([
             });
             grupos.mostrarConteudoDeUmGrupo('div.grupo-um div#usuario-pesquisa.conteudo-grupo-um');
           } else {
-            grupoUm.apresentarAviso('Você não possui permissão de listagem de usuários');
+            grupoUm.apresentarAvisoDeErro('Você não possui permissão de listagem de usuários');
           }
         });
       }
