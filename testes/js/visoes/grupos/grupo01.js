@@ -1,10 +1,12 @@
 define([
-  'modulos'
+  'aplicativo'
+, 'modulos'
 , 'urls'
 , 'handlebars'
 , 'text!templantes/grupos/grupo01.html'
 ], function(
-  modulos
+  aplicativo
+, modulos
 , URLs
 , hbs
 , Templante
@@ -28,7 +30,27 @@ define([
     },
 
     events: {
-      
+      'click ul.menu-vertical-esquerda li.item-cadastrar-usuario a': 'aoClicarEmCadastrarUsuario',
+      'click ul.menu-vertical-esquerda li.item-pesquisar-usuario a': 'aoClicarEmPesquisarUsuario',
+    },
+
+    aoClicarEmCadastrarUsuario: function(evento) {
+      evento.preventDefault();
+      aplicativo.roteador.navigate(URLs.gerarUrl('#UsuariosCadastro'), true);
+    },
+
+    aoClicarEmPesquisarUsuario: function(evento) {
+      evento.preventDefault();
+      aplicativo.roteador.navigate(URLs.gerarUrl('#UsuariosListagem'), true);
+    },
+
+    apresentarAviso: function(mensagem) {
+      this.$el.find('div#aviso-erro.conteudo-grupo-um > span#mensagem').text(mensagem);
+      this.$el.find('div#aviso-erro.conteudo-grupo-um').show();
+    },
+
+    esconderAviso: function() {
+      this.$el.find('div#aviso-erro.conteudo-grupo-um').hide();
     }
 
   });

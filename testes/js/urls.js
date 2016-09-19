@@ -36,6 +36,12 @@ define([
     },
     '#Usuario': function(id) {
       return "Usuarios/"+ id;
+    },
+    '#UsuariosCadastro': function() {
+      return "UsuariosCadastro";
+    },
+    '#UsuariosListagem': function() {
+      return "UsuariosListagem";
     }
   };
  
