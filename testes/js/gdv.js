@@ -28,8 +28,8 @@ define([
         this.visoes[nome].off();
         
         // Se a visão possuir uma função para chamarmos depois da limpeza.
-        if (typeof this.visoes[nome].onClose === 'function') {
-          this.visoes[nome].onClose();
+        if (typeof this.visoes[nome].aoFechar === 'function') {
+          this.visoes[nome].aoFechar();
         }
       }
     },

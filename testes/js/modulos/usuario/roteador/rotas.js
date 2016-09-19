@@ -16,7 +16,7 @@ define([
 
   var Rotas = {
 
-    nome: "Usuarios",  // Usado para nome da tabela e da rota
+    nome: 'Usuarios',  // Usado para nome da tabela e das rotas
 
     visaoDoPainel: null,
     visaoDoTopoPainel: null,
@@ -29,9 +29,12 @@ define([
 
     iniciar: function() {
       aplicativo.adcRota(this.nome, this.suporte.bind(this));
+      aplicativo.adcRota('UsuariosLeitura', this.suporte.bind(this));
+      aplicativo.adcRota('UsuariosListagem', this.suporte.bind(this));
+      aplicativo.adcRota('UsuariosCadastro', this.suporte.bind(this));
     },
 
-    suporte: function(id) {
+    suporte: function(rota, id) {
       var meuObj = this;
 
       var painel = this.visaoDoPainel = this.reusarVisao("VisaoBaseDePainel", function() { });
@@ -67,7 +70,7 @@ define([
             painel.apresentarAviso('Você não possui permissão de leitura aos usuários');
           }
         });
-      } else if (id && id <= 0) {
+      } else if ((id && id <= 0) || (rota == 'UsuariosCadastro')) {
         this.verificarPermissao("CADASTRO", function(sePermitido) {
           if (sePermitido) {
             console.log('Cadastro');

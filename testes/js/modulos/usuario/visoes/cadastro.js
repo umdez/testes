@@ -36,7 +36,7 @@ define([
 
     render: function() {
       this.$el.html(this.templante());
-      this.validacao = this.$el.find('form.cadastro-usuario').parsley('validate');
+      this.validacao = this.$el.find('form.cadastro-usuario').parsley();
     },
 
     events: {

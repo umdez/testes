@@ -34,7 +34,7 @@ define([
 
       this.$el.html(this.templante(this.model.toJSON()));
       
-      this.validacao = this.$el.find('form.leitura-usuario').parsley('validate');
+      this.validacao = this.$el.find('form.leitura-usuario').parsley();
 
       this.sePodeAtualizarUsuario = this.verificarEscopo('Usuarios', "ATUALIZACAO");
       this.sePodeRemoverUsuario = this.verificarEscopo('Usuarios', "REMOCAO");

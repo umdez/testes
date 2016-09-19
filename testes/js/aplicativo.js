@@ -31,13 +31,13 @@ define([
       return this.modulos[nome] = { };
     },
 
-    adcRota: function(modulo, funcao) {
-      this.rotas[modulo] = funcao; 
+    adcRota: function(rota, funcao) {
+      this.rotas[rota] = funcao; 
     },
 
-    buscarRota: function(modulo, id) {
-      if (this.rotas[modulo]) {
-        this.rotas[modulo](id);
+    buscarRota: function(rota, id) {
+      if (this.rotas[rota]) {
+        this.rotas[rota](rota, id);
       }
     },
 

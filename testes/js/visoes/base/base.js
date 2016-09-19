@@ -11,6 +11,7 @@ define([
 , 'visoes/base/entrada'
 , 'visoes/base/painel'
 , 'visoes/base/topo'
+, 'visoes/base/grupos'
 ], function(
   aplicativo
 , Backbone
@@ -20,6 +21,7 @@ define([
 , VisaoDeEntrada
 , VisaoDoPainel
 , VisaoDoTopoPainel
+, VisaoDosGruposPainel
 ) {
   
   var VisaoDeBase = Backbone.View.extend({
@@ -27,6 +29,7 @@ define([
     visaoDeEntrada: null,
     visaoDoPainel: null,
     visaoDoTopoPainel: null,
+    visaoDosGruposPainel: null,
 
     initialize: function() {
 
@@ -43,6 +46,10 @@ define([
       });
       $('div#painel > div#topo').html(this.visaoDoTopoPainel.render().el);
  
+      this.visaoDosGruposPainel = GDV.reusarVisao("VisaoGruposDoPainel", function() {
+        return new VisaoDosGruposPainel();
+      });
+      
       this.render();
       aplicativo.sessao.on("change:autenticado", this.render);
     },

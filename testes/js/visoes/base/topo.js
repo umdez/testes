@@ -10,7 +10,8 @@ define([
 , hbs
 , Templante
 ) {
-
+  'use strict';
+ 
   var VisaoDoTopoPainel = Backbone.View.extend({
 
     tagName: "div",
@@ -68,7 +69,7 @@ define([
       this.$el.find(item).addClass('active');
     },
 
-    onClose: function() {
+    aoFechar: function() {
       
     }
 

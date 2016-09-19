@@ -8,7 +8,8 @@ define([
 , parsley
 , Templante
 ) {
- 
+  'use strict';
+
   var VisaoDeEntrada = Backbone.View.extend({
 
     el: '#conteudo-raiz > div#entrada',
@@ -26,7 +27,7 @@ define([
     
     render: function() {
       this.$el.html(this.templante());
-      this.validacao = this.$el.find('form.entrada').parsley('validate');
+      this.validacao = this.$el.find('form.entrada').parsley();
     },
 
     events: {

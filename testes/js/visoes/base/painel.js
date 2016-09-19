@@ -8,6 +8,7 @@ define([
 , hbs
 , Templante
 ) {
+  'use strict';
 
   var VisaoDoPainel = Backbone.View.extend({
 
@@ -21,7 +22,7 @@ define([
 
     render: function() {
       this.$el.html(this.templante({
-        'modulos': modulos
+        'modulos': modulos.modulos
       }));
     },
 

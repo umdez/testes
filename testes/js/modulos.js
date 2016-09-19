@@ -10,11 +10,29 @@ define([
 ) {
   'use strict';
  
-  var modulos = [
-    { 'id': 'usuario-cadastro'},
-    { 'id': 'usuario-pesquisa'},
-    { 'id': 'usuario-leitura'}
-  ];
+  var modulos = {
+    principal: [
+      { 'id': 'usuario-cadastro'},
+      { 'id': 'usuario-pesquisa'},
+      { 'id': 'usuario-leitura'}
+    ],
+    grupoUm: [
+      { 'id': 'usuario-cadastro'},
+      { 'id': 'usuario-pesquisa'},
+      { 'id': 'usuario-leitura'}
+    ],
+    grupoDois: [
 
-  return modulos;
+    ],
+    grupoTres: [
+
+    ]
+  };
+
+  return {
+    'modulos': modulos.principal,
+    'grupoUm': modulos.grupoUm,
+    'grupoDois': modulos.grupoDois,
+    'grupoTres': modulos.grupoTres
+  }
 });
