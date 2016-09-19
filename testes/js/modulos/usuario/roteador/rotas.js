@@ -43,10 +43,10 @@ define([
       var grupos = this.visaoDosGruposPainel = this.reusarVisao("VisaoGruposDoPainel", function() { });
 
       // Esconde todos os grupos do conteudo do painel
-      painel.escoderTodosOsGrupos();
+      painel.esconderTodosOsGrupos();
 
       // Esconde todos os conteudos de todos os grupos.
-      grupos.escoderTodosOsConteudosDosGrupos();
+      grupos.esconderTodosOsConteudosDosGrupos();
 
       // não apresenta qualquer aviso anteriormente apresentada
       painel.esconderAviso();
@@ -70,8 +70,7 @@ define([
               }
             });
 
-            // remove seleção de todos os items do menu
-            topoDoPainel.deselecionarItemsMenu();
+            topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-grupo-um');
           } else {
             painel.apresentarAviso('Você não possui permissão de leitura aos usuários');
           }
@@ -87,7 +86,7 @@ define([
 
             painel.mostrarUmGrupo('div.grupo-um');
             grupos.mostrarConteudoDeUmGrupo('div.grupo-um div#usuario-cadastro.conteudo-grupo-um');
-            topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-cadastrar');
+            topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-grupo-um');
           } else {
              painel.apresentarAviso('Você não possui permissão de cadastro de usuários');
           }
@@ -104,7 +103,7 @@ define([
             
             painel.mostrarUmGrupo('div.grupo-um');
             grupos.mostrarConteudoDeUmGrupo('div.grupo-um div#usuario-pesquisa.conteudo-grupo-um');
-            topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-pesquisar');
+            topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-grupo-um');
           } else {
             painel.apresentarAviso('Você não possui permissão de listagem de usuários');
           }

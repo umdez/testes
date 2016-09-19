@@ -30,19 +30,19 @@ define([
     },
 
     events: {
-      'click ul.menu-painel-topo li.item-cadastrar a': 'aoClicarEmCadastroDeUsuario',
-      'click ul.menu-painel-topo li.item-pesquisar a': 'aoClicarEmPesquisaDeUsuario',
+      'click ul.menu-painel-topo li.item-grupo-um a': 'aoClicarEmGrupoUm',
+      'click ul.menu-painel-topo li.item-grupo-dois a': 'aoClicarEmGrupoDois',
       'click li#sair-painel a': 'aoClicarSair'
     },
 
-    aoClicarEmCadastroDeUsuario: function(evento) {
+    aoClicarEmGrupoUm: function(evento) {
       evento.preventDefault();
-      aplicativo.roteador.navigate(URLs.gerarUrl('#Usuario', 0), true);
+      aplicativo.roteador.navigate('GrupoUm', true);
     },
 
-    aoClicarEmPesquisaDeUsuario: function(evento) {
+    aoClicarEmGrupoDois: function(evento) {
       evento.preventDefault();
-      aplicativo.roteador.navigate(URLs.gerarUrl('#Usuarios'), true);
+      aplicativo.roteador.navigate('GrupoDois', true);
     },
 
     aoClicarSair : function(evento) {

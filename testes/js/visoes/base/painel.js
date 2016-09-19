@@ -24,7 +24,7 @@ define([
       this.$el.html(this.templante({ }));
     },
 
-    escoderTodosOsGrupos: function() {
+    esconderTodosOsGrupos: function() {
       this.$el.find('div.grupos-painel').hide(); 
     },
 

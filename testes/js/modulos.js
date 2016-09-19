@@ -1,10 +1,12 @@
 
 define([ 
-  "modulos/usuario/indice"
+  "modulos/grupos/indice"
+, "modulos/usuario/indice"
 , "modulos/exemplo/indice"
 , "modulos/funcao/indice"
 ], function(
-  ModuloDeUsuario
+  ModuloDosGrupos
+, ModuloDeUsuario
 , ModuloDeExemplo
 , ModuloDeFuncao
 ) {
@@ -25,7 +27,6 @@ define([
   };
 
   return {
-    'modulos': modulos.principal,
     'grupoUm': modulos.grupoUm,
     'grupoDois': modulos.grupoDois,
     'grupoTres': modulos.grupoTres
