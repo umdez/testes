@@ -55,7 +55,7 @@ define([
         case 'item-pesquisar-usuario': 
           aplicativo.roteador.navigate(URLs.gerarUrl('#UsuariosListagem'), true);
           break;
-      }
+      };
     },
 
     apresentarAvisoDeErro: function(mensagem) {
