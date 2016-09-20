@@ -2,6 +2,8 @@
 Proposito é realizar o teste das várias caracteristicas necessárias para os projetos posteriores.
 
 ## Percursos
+A cada perscurso nós teremos alguma caracteristica em especifico desenvolvida. Listamos abaixo os principais percursos.
+
 | Caracteristica | Descrição | Estatos  |
 |---|---|---|
 | Entrada| Realização de autenticação, autorização e a saida do usuário. | Pronto |
