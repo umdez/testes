@@ -22,7 +22,7 @@ define([
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'indice' });
+  var Registro = Regis.reg.bind({ envolucro: 'usuario/indice' });
 
   // Aqui nós carregamos tudo que for necessário para este modulo.
 
