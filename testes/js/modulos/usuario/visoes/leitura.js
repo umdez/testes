@@ -16,7 +16,7 @@ define([
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'leitura' });
+  var Registro = Regis.reg.bind({ envolucro: 'modulos/usuario/visoes/leitura' });
 
   var VisaoDeLeitura = Backbone.View.extend({
 

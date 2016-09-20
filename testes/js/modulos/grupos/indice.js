@@ -13,7 +13,7 @@ define([
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'grupos/indice' });
+  var Registro = Regis.reg.bind({ envolucro: 'modulos/grupos/indice' });
 
   Registro(Regis.BAIXO, 'Iniciando o modulo de grupos.');
 

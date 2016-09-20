@@ -14,7 +14,7 @@ define([
 ) {
   'use strict';
  
-  var Registro = Regis.reg.bind({ envolucro: 'topo' });
+  var Registro = Regis.reg.bind({ envolucro: 'visoes/base/topo' });
 
   var VisaoDoTopoPainel = Backbone.View.extend({
 

@@ -12,7 +12,7 @@ define([
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'entrada' });
+  var Registro = Regis.reg.bind({ envolucro: 'visoes/base/entrada' });
 
   var VisaoDeEntrada = Backbone.View.extend({
 

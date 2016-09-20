@@ -16,7 +16,7 @@ define([
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'rotas' });
+  var Registro = Regis.reg.bind({ envolucro: 'modulos/usuario/roteador/rotas' });
 
   var Rotas = {
 

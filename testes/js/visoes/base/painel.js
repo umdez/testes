@@ -12,7 +12,7 @@ define([
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'painel' });
+  var Registro = Regis.reg.bind({ envolucro: 'visoes/base/painel' });
 
   var VisaoDoPainel = Backbone.View.extend({
 

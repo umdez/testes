@@ -18,7 +18,7 @@ define([
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'cadastro' });
+  var Registro = Regis.reg.bind({ envolucro: 'modulos/usuario/visoes/cadastro' });
 
   var VisaoDeCadastro = Backbone.View.extend({
 
