@@ -95,7 +95,7 @@ define([
         });
 
       }).fail(function() {
-        Registro(Regis.ALTO, 'É necessário informar os dados corretos para realizar o cadastro.');
+        Registro(Regis.BAIXO, 'É necessário informar os dados corretos para realizar o cadastro.');
       })
     },
 

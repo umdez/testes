@@ -29,6 +29,8 @@ define([
     },
     
     initialize: function () {
+      Registro(Regis.BAIXO, 'Iniciando roteador.');
+
       this.visaoDeBase = GDV.reusarVisao("VisaoDeBase", function() {
         return new VisaoDeBase();
       });

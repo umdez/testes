@@ -36,8 +36,8 @@ define([
     },
 
     events: {
-      'click ul.menu-vertical-esquerda li.item-cadastrar-usuario a': 'aoClicarEmCadastrarUsuario',
-      'click ul.menu-vertical-esquerda li.item-pesquisar-usuario a': 'aoClicarEmPesquisarUsuario',
+      'click ul.menu-vertical-esquerdo li.item-cadastrar-usuario a': 'aoClicarEmCadastrarUsuario',
+      'click ul.menu-vertical-esquerdo li.item-pesquisar-usuario a': 'aoClicarEmPesquisarUsuario',
     },
 
     aoClicarEmCadastrarUsuario: function(evento) {

@@ -1,11 +1,15 @@
 
 define([ 
   "underscore"
+, "registrador"
 ], function (
   _
+, Regis
 ) {
   'use strict';
   
+  var Registro = Regis.reg.bind({ envolucro: 'escopos' });
+
   var PERMISSAO_ACESSAR = 0x00000001;  // Ler ou Listar
   var PERMISSAO_CADASTRAR = 0x00000002;
   var PERMISSAO_REMOVER = 0x00000004;
@@ -29,7 +33,7 @@ define([
         cd(true);
       },
       'erro': function(modelo, resposta, opcoes) {
-        console.log('Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+        Registro(Regis.ALTO, 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         cd(false);
       }
     });
