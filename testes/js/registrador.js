@@ -15,9 +15,10 @@ define([
   };
 
   var FILTRO = {
-    'TODOS': NIVEL.ALTO + 1,  // filtra tudo.
-    'MEDIOS':  NIVEL.MEDIO,   // apenas as mensagens criticas.
-    'NENHUM':  NIVEL.BAIXO,   // registrar tudo.
+    'TODOS': NIVEL.ALTO + 1,    // filtra tudo.
+    'BAIXOS': NIVEL.BAIXO + 1,  // filtra apenas as mensagens simples.
+    'MEDIOS': NIVEL.MEDIO + 1,  // filtra apenas as mensagens simples e médias.
+    'NENHUM': NIVEL.BAIXO,      // não filtra nenhuma mensagem.
   };
 
   var registrador = {
@@ -52,7 +53,8 @@ define([
     'ALTO':  NIVEL.ALTO,
   
     'NENHUM': 'NENHUM',
-    'ALTOS': 'ALTOS',       
+    'MEDIOS': 'MEDIOS',   
+    'BAIXOS':'BAIXOS',    
     'TODOS': 'TODOS',     
 
     reg: function(nivel, msg) {
