@@ -14,6 +14,8 @@ define([
 ) {
   'use strict';
  
+  var Registro = Regis.reg.bind({ envolucro: 'topo' });
+
   var VisaoDoTopoPainel = Backbone.View.extend({
 
     tagName: "div",
@@ -53,10 +55,10 @@ define([
       aplicativo.sessao.sair({
         'sucesso': function(modulo, resposta) {
           aplicativo.roteador.navigate('', true);
-          Regis.reg(Regis.BAIXO, 'Você saiu do painel com sucesso.');
+          Registro(Regis.BAIXO, 'Você saiu do painel com sucesso.');
         },
         'erro': function(modelo, resposta) {
-          Regis.reg(Regis.BAIXO, 'Erro ao tentar sair do painel.');
+          Registro(Regis.BAIXO, 'Erro ao tentar sair do painel.');
         }
       });
     },

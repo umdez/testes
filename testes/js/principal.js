@@ -16,8 +16,6 @@ define([
 ) {
   'use strict';
 
-  Regis.nivel(Regis.TODOS);
-
   var Registro = Regis.reg.bind({ envolucro: 'principal' });
 
   aplicativo.xmpp = {

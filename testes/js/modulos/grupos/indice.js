@@ -15,6 +15,8 @@ define([
 
   var Registro = Regis.reg.bind({ envolucro: 'indice' });
 
+  Registro(Regis.BAIXO, 'Iniciando o modulo de grupos.');
+
   var Rotas = {
 
     visaoDoPainel: null,

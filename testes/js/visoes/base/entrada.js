@@ -12,6 +12,8 @@ define([
 ) {
   'use strict';
 
+  var Registro = Regis.reg.bind({ envolucro: 'entrada' });
+
   var VisaoDeEntrada = Backbone.View.extend({
 
     el: '#conteudo-raiz > div#entrada',
@@ -58,10 +60,10 @@ define([
           // Inicia novamente a validação
           meuObj.validacao.reset();
 
-          Regis.reg(Regis.BAIXO, 'Você acaba de entrar no sistema.');
+          Registro(Regis.BAIXO, 'Você acaba de entrar no sistema.');
         },
         'erro': function(modelo, resposta, opcoes) {
-          Regis.reg(Regis.ALTO, 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+          Registro(Regis.ALTO, 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         }
       });
     }, 

@@ -1,11 +1,13 @@
 
 define([ 
-  "modulos/grupos/indice"
+  "registrador"
+, "modulos/grupos/indice"
 , "modulos/usuario/indice"
 , "modulos/exemplo/indice"
 , "modulos/funcao/indice"
 ], function(
-  ModuloDosGrupos
+  Regis
+, ModuloDosGrupos
 , ModuloDeUsuario
 , ModuloDeExemplo
 , ModuloDeFuncao

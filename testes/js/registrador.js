@@ -21,7 +21,7 @@ define([
   };
 
   var registrador = {
-    mostrar: FILTRO.TODOS,
+    mostrar: null,
 
     registrar: function(envolucro, nivel, msg) {
 
@@ -42,6 +42,8 @@ define([
       this.mostrar = FILTRO[nivel];
     }
   };
+
+  registrador.mostrar = FILTRO.TODOS;
 
   return {
 

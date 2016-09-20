@@ -22,9 +22,11 @@ define([
 ) {
   'use strict';
 
+  var Registro = Regis.reg.bind({ envolucro: 'indice' });
+
   // Aqui nós carregamos tudo que for necessário para este modulo.
 
-  Regis.reg(Regis.BAIXO, 'Iniciando o modulo de usuários.');
+  Registro(Regis.BAIXO, 'Iniciando o modulo de usuários.');
 
   var Usuario = aplicativo.modulo("Usuario");
 

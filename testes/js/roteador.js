@@ -39,12 +39,12 @@ define([
     },
     
     asRotasDeUmNivel: function(modulo) {
-      Registro(Regis.BAIXO, 'Acessando rota de um nivel.');
+      Registro(Regis.BAIXO, 'Buscando a rota '+ modulo);
       aplicativo.buscarRota(modulo, null);
     },
 
     asRotasDeDoisNiveis: function(modulo, id) {
-      Registro(Regis.BAIXO, 'Acessando rota de dois niveis.');
+      Registro(Regis.BAIXO, 'Buscando a rota '+ modulo +'/'+ id);
       aplicativo.buscarRota(modulo, id);
     }
     
