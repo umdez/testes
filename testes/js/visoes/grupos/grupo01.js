@@ -1,3 +1,5 @@
+/* Este é um agrupamento com diversas visões */
+
 define([
   'aplicativo'
 , 'modulos'
@@ -36,18 +38,24 @@ define([
     },
 
     events: {
-      'click ul.menu-vertical-esquerdo li.item-cadastrar-usuario a': 'aoClicarEmCadastrarUsuario',
-      'click ul.menu-vertical-esquerdo li.item-pesquisar-usuario a': 'aoClicarEmPesquisarUsuario',
+      'click ul.menu-vertical-esquerdo li.item-menu a': 'aoClicarEmItemDoMenuEsquerdo'
     },
 
-    aoClicarEmCadastrarUsuario: function(evento) {
+    aoClicarEmItemDoMenuEsquerdo: function(evento) {
       evento.preventDefault();
-      aplicativo.roteador.navigate(URLs.gerarUrl('#UsuariosCadastro'), true);
-    },
 
-    aoClicarEmPesquisarUsuario: function(evento) {
-      evento.preventDefault();
-      aplicativo.roteador.navigate(URLs.gerarUrl('#UsuariosListagem'), true);
+      var id = $(evento.currentTarget).attr('id');
+      
+      Registro(Regis.BAIXO, 'Recebido clique em item ('+ id +') do menu esquerdo.');
+
+      switch (id) {
+        case 'item-cadastrar-usuario': 
+          aplicativo.roteador.navigate(URLs.gerarUrl('#UsuariosCadastro'), true);
+          break;
+        case 'item-pesquisar-usuario': 
+          aplicativo.roteador.navigate(URLs.gerarUrl('#UsuariosListagem'), true);
+          break;
+      }
     },
 
     apresentarAvisoDeErro: function(mensagem) {
