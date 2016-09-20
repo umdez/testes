@@ -15,17 +15,17 @@ define([
   };
 
   var FILTRO = {
-    'NENHUM': NIVEL.ALTO + 1,
-    'ALTOS':  NIVEL.ALTO,      // apenas mensagens criticas
-    'TODOS':  NIVEL.BAIXO,     // registrar tudo.
+    'TODOS': NIVEL.ALTO + 1,  // filtra tudo.
+    'MEDIOS':  NIVEL.MEDIO,   // apenas as mensagens criticas.
+    'NENHUM':  NIVEL.BAIXO,   // registrar tudo.
   };
 
   var registrador = {
-    mostrar: null,
+    filtrar: FILTRO.TODOS,
 
     registrar: function(envolucro, nivel, msg) {
 
-      if (nivel >= this.mostrar) {
+      if (nivel >= this.filtrar) {
         if (nivel === NIVEL.ALTO) {
           console.log('[alto] ('+ envolucro +') '+ msg);
         } else if (nivel === NIVEL.MEDIO) {
@@ -38,12 +38,12 @@ define([
       }
     },
 
-    setarNivelDeFiltragem: function(nivel) {
-      this.mostrar = FILTRO[nivel];
+    setarFiltro: function(nivel) {
+      this.filtrar = FILTRO[nivel];
     }
   };
 
-  registrador.mostrar = FILTRO.TODOS;
+  registrador.filtrar = FILTRO.NENHUM;
 
   return {
 
@@ -60,7 +60,7 @@ define([
     },
 
     nivel: function(nivel) {
-      registrador.setarNivelDeFiltragem(nivel);
+      registrador.setarFiltro(nivel);
     }
   };
 });
