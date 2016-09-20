@@ -34,6 +34,8 @@ define([
     modUsuario: aplicativo.modulo("Usuario"),
 
     iniciar: function() {
+      Registro(Regis.BAIXO, 'Adicionando rotas de usuarios.');
+
       aplicativo.adcRota(this.nome, this.suporte.bind(this));
       aplicativo.adcRota('UsuariosLeitura', this.suporte.bind(this));
       aplicativo.adcRota('UsuariosListagem', this.suporte.bind(this));
@@ -42,6 +44,8 @@ define([
 
     suporte: function(rota, id) {
       var meuObj = this;
+
+      Registro(Regis.BAIXO, 'Acessando suporte da rota '+ rota);
 
       var painel = this.visaoDoPainel = this.reusarVisao("VisaoBaseDePainel", function() { });
       var topoDoPainel = this.visaoDoTopoPainel = this.reusarVisao("VisaoBaseDeTopoPainel", function() { });

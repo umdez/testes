@@ -14,6 +14,10 @@ define([
 ) {
   'use strict';
  
+  var Registro = Regis.reg.bind({ envolucro: 'modulos' });
+
+  Registro(Regis.BAIXO, 'Os modulos foram todos carregados.');
+
   var modulos = {
     grupoUm: [
       { 'id': 'usuario-cadastro'},

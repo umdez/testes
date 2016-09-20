@@ -26,6 +26,8 @@ define([
     validacao: null,
 
     initialize: function () {
+      Registro(Regis.BAIXO, 'Iniciando a visão.');
+      
       this.render();
     },
     

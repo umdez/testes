@@ -2,16 +2,20 @@ define([
   'aplicativo'
 , 'modulos'
 , 'urls'
+, 'registrador'
 , 'handlebars'
 , 'text!templantes/grupos/grupo01.html'
 ], function(
   aplicativo
 , modulos
 , URLs
+, Regis
 , hbs
 , Templante
 ) {
   'use strict';
+
+  var Registro = Regis.reg.bind({ envolucro: 'grupo01' });
 
   var VisaoDoGrupoUm = Backbone.View.extend({
 
@@ -20,6 +24,8 @@ define([
     templante: hbs.compile(Templante),
 
     initialize: function () {
+      Registro(Regis.BAIXO, 'Iniciando a visão.');
+      
       this.render();
     },
 

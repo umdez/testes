@@ -1,3 +1,5 @@
+/* Agrupa todas as URLs das rotas dos modelos e também do roteador.
+ */
 
 define([ 
   

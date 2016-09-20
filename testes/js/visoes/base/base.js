@@ -5,6 +5,7 @@
 define([
   'aplicativo'
 , 'backbone' 
+, 'registrador'
 , 'gdv'
 , 'bootstrap'
 , 'jasny'
@@ -15,6 +16,7 @@ define([
 ], function(
   aplicativo
 , Backbone
+, Regis
 , GDV
 , BootStrap
 , Jasny
@@ -23,7 +25,10 @@ define([
 , VisaoDoTopoPainel
 , VisaoDosGruposPainel
 ) {
-  
+  'use strict';
+
+  var Registro = Regis.reg.bind({ envolucro: 'base' });
+
   var VisaoDeBase = Backbone.View.extend({
     
     el: 'body > div#conteudo-raiz',
@@ -34,7 +39,8 @@ define([
     visaoDosGruposPainel: null,
 
     initialize: function() {
-
+      Registro(Regis.BAIXO, 'Iniciando a visão.');
+      
       this.visaoDeEntrada = GDV.reusarVisao("VisaoBaseDeEntrada", function() {
         return new VisaoDeEntrada();
       });

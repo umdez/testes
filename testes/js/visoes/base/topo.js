@@ -23,6 +23,8 @@ define([
     templante: hbs.compile(Templante),
 
     initialize: function () {
+      Registro(Regis.BAIXO, 'Iniciando a visão.');
+
       this.render();
     },
 

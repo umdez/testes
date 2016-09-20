@@ -23,9 +23,9 @@ define([
     visaoDoTopoPainel: null,
     visaoDosGruposPainel: null,
 
-    visaoDoGrupoUm: null,
-
     iniciar: function() {
+      Registro(Regis.BAIXO, 'Adicionando rotas dos grupos.');
+
       aplicativo.adcRota('GrupoUm', this.suporte.bind(this));
       aplicativo.adcRota('GrupoDois', this.suporte.bind(this));
       aplicativo.adcRota('GrupoTres', this.suporte.bind(this));
@@ -33,11 +33,11 @@ define([
 
     suporte: function(rota, id) {
 
+      Registro(Regis.BAIXO, 'Acessando suporte da rota '+ rota);
+
       var painel = this.visaoDoPainel = this.reusarVisao("VisaoBaseDePainel", function() { });
       var topoDoPainel = this.visaoDoTopoPainel = this.reusarVisao("VisaoBaseDeTopoPainel", function() { });
       var grupos = this.visaoDosGruposPainel = this.reusarVisao("VisaoGruposDoPainel", function() { });
-      
-      var grupoUm = this.visaoDoGrupoUm = this.reusarVisao("VisaoDoGrupoUm", function() { });
 
       // Esconde todos os grupos do conteudo do painel
       painel.esconderTodosOsGrupos();
@@ -49,14 +49,14 @@ define([
       painel.esconderTodosAvisos();
 
       if (rota === 'GrupoUm') { 
+        var grupoUm = this.reusarVisao("VisaoDoGrupoUm", function() { });
+
         grupoUm.esconderTodosAvisos();
         painel.mostrarUmGrupo('div.grupo-um');
         topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-grupo-um');
-        Registro(Regis.BAIXO, 'Acesso ao grupo um.');
       } else if (rota === 'GrupoDois') {
         painel.mostrarUmGrupo('div.grupo-dois');
         topoDoPainel.selecionarItemMenu('ul.menu-painel-topo li.item-grupo-dois');
-        Registro(Regis.BAIXO, 'Acesso ao grupo dois.');
       } else if (rota === 'GrupoTres') {
         painel.mostrarUmGrupo('div.grupo-tres');
       } 
