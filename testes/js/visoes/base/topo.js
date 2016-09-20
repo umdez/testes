@@ -2,11 +2,13 @@
 define([
   'aplicativo'
 , 'urls'
+, 'registrador'
 , 'handlebars'
 , 'text!templantes/base/topo.html'
 ], function(
   aplicativo
 , URLs
+, Regis
 , hbs
 , Templante
 ) {
@@ -51,10 +53,10 @@ define([
       aplicativo.sessao.sair({
         'sucesso': function(modulo, resposta) {
           aplicativo.roteador.navigate('', true);
-          console.log('Você saiu do painel com sucesso.');
+          Regis.reg(Regis.BAIXO, 'Você saiu do painel com sucesso.');
         },
         'erro': function(modelo, resposta) {
-          console.log('Erro ao tentar sair do painel.');
+          Regis.reg(Regis.BAIXO, 'Erro ao tentar sair do painel.');
         }
       });
     },

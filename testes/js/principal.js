@@ -1,17 +1,24 @@
+
 define([ 
   "aplicativo"
 , "roteador"
+, "registrador"
 , "strophe"
 , "modulos"
 , "parsley.ptbr"
 ], function(
   aplicativo
 , Roteador
+, Regis
 , Xmpp
 , modulos
 , parsleyPtBr
 ) {
   'use strict';
+
+  Regis.nivel(Regis.TODOS);
+
+  var Registro = Regis.reg.bind({ envolucro: 'principal' });
 
   aplicativo.xmpp = {
     'Strophe': Xmpp.Strophe
@@ -21,9 +28,10 @@ define([
   aplicativo.sessao.on("change:autenticado", function() {
     var conta = aplicativo.sessao.conta;
     var seAutenticado = aplicativo.sessao.get('autenticado');
-    console.log('nome?? ' + conta.get('nome'));
-    console.log('Funçao?? ' + conta.funcao.get('nome'))
 
+    Registro(Regis.BAIXO,'nome?? ' + conta.get('nome'));
+    Registro(Regis.BAIXO, 'Funçao?? ' + conta.funcao.get('nome'));
+ 
     if (seAutenticado) { 
       var Strophe = aplicativo.xmpp.Strophe;
       var Estatos = Strophe.Status;
@@ -32,25 +40,25 @@ define([
       cliente.connect('fulana@localhost', 'felippe101', function(estatos) {
         
         if(estatos === Estatos.ERROR) {
-          console.log('An error has occurred');
+          Registro(Regis.BAIXO, 'An error has occurred');
         } else if (estatos === Estatos.CONNECTING) {
-          console.log('The connection is currently being made');
+          Registro(Regis.BAIXO, 'The connection is currently being made');
         } else if(estatos === Estatos.CONNFAIL) {
-          console.log('The connection attempt failed');
+          Registro(Regis.BAIXO, 'The connection attempt failed');
         } else if(estatos === Estatos.AUTHENTICATING) {
-          console.log('The connection is authenticating');
+          Registro(Regis.BAIXO, 'The connection is authenticating');
         } else if(estatos === Estatos.AUTHFAIL) {
-          console.log('The authentication attempt failed');
+          Registro(Regis.BAIXO, 'The authentication attempt failed');
         } else if(estatos === Estatos.CONNECTED) {
-          console.log('The connection has succeeded');
+          Registro(Regis.BAIXO, 'The connection has succeeded');
         } else if(estatos === Estatos.DISCONNECTED) {
-          console.log('The connection has been terminated');
+          Registro(Regis.BAIXO, 'The connection has been terminated');
         } else if(estatos === Estatos.DISCONNECTING) {
-          console.log('The connection is currently being terminated');
+          Registro(Regis.BAIXO, 'The connection is currently being terminated');
         } else if(estatos === Estatos.ATTACHED) {
-          console.log('The connection has been attached');
+          Registro(Regis.BAIXO, 'The connection has been attached');
         } else if(estatos === Estatos.CONNTIMEOUT) {
-          console.log('The connection has timed out');
+          Registro(Regis.BAIXO, 'The connection has timed out');
         }
       });
     }

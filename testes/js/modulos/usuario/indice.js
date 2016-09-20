@@ -1,6 +1,7 @@
 
 define([
   "aplicativo"
+, "registrador"
 , "backbone"
 , "modulos/usuario/roteador/rotas"
 , "modelos/usuario/usuario"
@@ -10,6 +11,7 @@ define([
 , "modulos/funcao/indice" 
 ], function (
   aplicativo
+, Regis
 , Backbone
 , Rotas
 , ModeloDeUsuario
@@ -21,6 +23,8 @@ define([
   'use strict';
 
   // Aqui nós carregamos tudo que for necessário para este modulo.
+
+  Regis.reg(Regis.BAIXO, 'Iniciando o modulo de usuários.');
 
   var Usuario = aplicativo.modulo("Usuario");
 

@@ -1,6 +1,7 @@
 
 define([
   'aplicativo'
+, 'registrador'
 , 'backbone' 
 , "modulos/baseDasVisoes"
 , 'urls'
@@ -8,6 +9,7 @@ define([
 , 'text!modulos/usuario/templantes/cadastro.html' 
 ], function(
   aplicativo
+, Regis
 , Backbone
 , Base
 , URLs
@@ -15,6 +17,8 @@ define([
 , Templante
 ) {
   'use strict';
+
+  var Registro = Regis.reg.bind({ envolucro: 'cadastro' });
 
   var VisaoDeCadastro = Backbone.View.extend({
 
@@ -85,13 +89,13 @@ define([
           // Inicia novamente a validação
           meuObj.validacao.reset();
           
-          console.log('Novo usuario salvo com sucesso');
+          Registro(Regis.BAIXO, 'Novo usuario cadastrado com sucesso');
         }).fail(function(modelo, resposta, opcoes) {
-          console.log('Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+          Registro(Regis.ALTO, 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         });
 
-      }).fail(function(){
-        console.log('É necessário informar os dados corretos para realizar o cadastro.');
+      }).fail(function() {
+        Registro(Regis.ALTO, 'É necessário informar os dados corretos para realizar o cadastro.');
       })
     },
 

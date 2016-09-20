@@ -1,18 +1,22 @@
 
 define([
   "aplicativo"
+, 'registrador'
 , "modulos/baseDasRotas"
 , "modulos/usuario/visoes/cadastro"
 , "modulos/usuario/visoes/leitura"
 , "modulos/usuario/visoes/paginacao"
 ], function (
   aplicativo
+, Regis
 , Base
 , VisaoDeCadastro
 , VisaoDeLeitura
 , VisaoDePaginacao
 ) {
   'use strict';
+
+  var Registro = Regis.reg.bind({ envolucro: 'rotas' });
 
   var Rotas = {
 
@@ -60,7 +64,7 @@ define([
         // Leitura de um item em específico
         this.verificarPermissao("LEITURA", function(sePermitido) {
           if (sePermitido) {
-            console.log('Leitura');
+            Registro(Regis.BAIXO, 'Leitura de usuario.');
 
             meuObj.procurarUsuario(id, function(usuario) {
               if (usuario) {
@@ -80,8 +84,8 @@ define([
       } else if ((id && id <= 0) || (rota == 'UsuariosCadastro')) {
         this.verificarPermissao("CADASTRO", function(sePermitido) {
           if (sePermitido) {
-            console.log('Cadastro');
-            
+            Registro(Regis.BAIXO, 'Cadastro de usuario.');
+
             meuObj.visaoDeCadastro = meuObj.reusarVisao("VisaoDeCadastroDeUsuario", function() {
               return new VisaoDeCadastro();
             });
@@ -94,7 +98,7 @@ define([
         // Listagem
         this.verificarPermissao("LEITURA", function(sePermitido) {
           if (sePermitido) {
-            console.log('Listagem');
+            Registro(Regis.BAIXO, 'Listagem de usuario.');
 
             meuObj.visaoDePaginacao = meuObj.reusarVisao("VisaoDePaginacaoDeUsuario", function() {
               return new VisaoDePaginacao();
@@ -127,8 +131,8 @@ define([
           cd(modelo);
         }
       , error: function (modelo, resposta, opcoes) {
+          Registro(Regis.BAIXO, 'Não foi possível requisitar dados deste usuário.');
           cd(null);
-          console.log('Não foi possível requisitar dados deste usuário.')
         }
       });
     }

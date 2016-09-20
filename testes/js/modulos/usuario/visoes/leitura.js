@@ -1,18 +1,22 @@
 
 define([
   'backbone' 
+, 'registrador'
 , 'parsley'
 , 'modulos/baseDasVisoes'
 , 'handlebars'
 , 'text!modulos/usuario/templantes/leitura.html'
 ], function(
   Backbone
+, Regis
 , parsley
 , Base
 , hbs
 , Templante
 ) {
   'use strict';
+
+  var Registro = Regis.reg.bind({ envolucro: 'leitura' });
 
   var VisaoDeLeitura = Backbone.View.extend({
 
@@ -89,15 +93,14 @@ define([
           
           // Inicia novamente a validação
           meuObj.validacao.reset();
-
-          console.log('Dados do usuario foram salvos com sucesso');
+          Registro(Regis.BAIXO, 'Dados do usuario foram salvos com sucesso');
         })
-        .fail(function(modelo, resposta, opcoes){
-          console.log('Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+        .fail(function(modelo, resposta, opcoes) {
+          Registro(Regis.ALTO, 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         }); 
 
       }).fail(function() {
-        console.log('É necessário informar os dados corretos para salvar.');
+        Registro(Regis.ALTO, 'É necessário informar os dados corretos para salvar.');
       })
     },
 

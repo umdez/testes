@@ -1,10 +1,12 @@
 
 define([
   'aplicativo'
+, 'registrador'
 , 'parsley'
 , 'text!templantes/base/entrada.html'
 ], function(
   aplicativo
+, Regis
 , parsley
 , Templante
 ) {
@@ -55,9 +57,11 @@ define([
 
           // Inicia novamente a validação
           meuObj.validacao.reset();
+
+          Regis.reg(Regis.BAIXO, 'Você acaba de entrar no sistema.');
         },
         'erro': function(modelo, resposta, opcoes) {
-          console.log('Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+          Regis.reg(Regis.ALTO, 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         }
       });
     }, 
