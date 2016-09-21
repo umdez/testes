@@ -67,5 +67,5 @@ define([
   _.extend(Uniao, Base);
   _.extend(Uniao, Rotas);
 
-  Uniao.iniciar();
+  return Uniao;
 });
