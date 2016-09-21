@@ -5,7 +5,7 @@ define([
 , "modelos/funcao/funcao"
 ], function(
   Backbone
-, URLs
+, gerarUrl
 , ModeloDeFuncao
 ) {
   'use strict';
@@ -13,7 +13,7 @@ define([
   var ModeloDeConta = Backbone.Model.extend({
  
     url: function() {
-      return URLs.gerarUrl('Contas');
+      return gerarUrl('Contas');
     },
     
     idAttribute: 'id',

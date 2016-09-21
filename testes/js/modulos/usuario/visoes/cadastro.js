@@ -10,7 +10,7 @@ define([
   aplic
 , Backbone
 , Base
-, URLs
+, gerarUrl
 , parsley
 , Templante
 ) {
@@ -74,7 +74,7 @@ define([
           'nome': meuObj.nome, 
           'senha': meuObj.senha 
         });
-        usuario.url = URLs.gerarUrl('Usuarios');
+        usuario.url = gerarUrl('Usuarios');
 
         usuario.save().done(function(modelo, resposta, opcoes) {
           usuarios.add(modelo);
@@ -82,7 +82,7 @@ define([
           meuObj.limparFormulario();
 
           // Navega para visão de leitura
-          aplic.roteador.navigate(URLs.gerarUrl('#Usuario', modelo.id), true);
+          aplic.roteador.navigate(gerarUrl('#Usuario', modelo.id), true);
           
           // Inicia novamente a validação
           meuObj.validacao.reset();

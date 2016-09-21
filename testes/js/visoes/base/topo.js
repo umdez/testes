@@ -6,7 +6,7 @@ define([
 , 'text!templantes/base/topo.html'
 ], function(
   aplic
-, URLs
+, gerarUrl
 , hbs
 , Templante
 ) {
@@ -54,10 +54,10 @@ define([
 
       switch (id) {
         case 'item-grupo-um': 
-          aplic.roteador.navigate(URLs.gerarUrl('#GrupoUm'), true);
+          aplic.roteador.navigate(gerarUrl('#GrupoUm'), true);
           break;
         case 'item-grupo-dois': 
-          aplic.roteador.navigate(URLs.gerarUrl('#GrupoDois'), true);
+          aplic.roteador.navigate(gerarUrl('#GrupoDois'), true);
           break;
       };
     },

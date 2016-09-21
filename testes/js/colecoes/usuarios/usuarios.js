@@ -5,7 +5,7 @@ define([
 , "modelos/usuario/usuario"
 ], function(
   Backbone
-, URLs
+, gerarUrl
 , ModeloDeUsuario
 ) {
   'use strict';
@@ -15,7 +15,7 @@ define([
     model: ModeloDeUsuario,
     
     url: function() {
-      return URLs.gerarUrl('Usuarios');
+      return gerarUrl('Usuarios');
     }
 
   });

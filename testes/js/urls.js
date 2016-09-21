@@ -55,9 +55,9 @@ define([
  
   console.log('(urls) URLs foram carregadas.');
 
-  return {
-    gerarUrl: function(tipo) {
-      return URLs[tipo] ? URLs[tipo].apply(this, [].slice.call(arguments, 1)) : undefined;
-    }
+  var gerarUrl = function(tipo) {
+    return URLs[tipo] ? URLs[tipo].apply(this, [].slice.call(arguments, 1)) : undefined;
   };
+
+  return gerarUrl;
 });

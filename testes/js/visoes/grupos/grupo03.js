@@ -5,7 +5,7 @@ define([
 , 'text!templantes/grupos/grupo03.html'
 ], function(
   modulos
-, URLs
+, gerarUrl
 , hbs
 , Templante
 ) {

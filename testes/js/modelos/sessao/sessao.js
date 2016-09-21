@@ -4,7 +4,7 @@ define([
 , "modelos/conta/conta"
 ], function(
   Backbone
-, URLs
+, gerarUrl
 , ModeloDeConta
 ) {
   'use strict';
@@ -12,7 +12,7 @@ define([
   var ModeloDeSessao = Backbone.Model.extend({
 
     url: function() {
-      return URLs.gerarUrl('Contas');
+      return gerarUrl('Contas');
     },
 
     idAttribute: 'id',
@@ -70,14 +70,14 @@ define([
       var meuObjt = this;
       
       // Adc. url da nossa conta a ser destruida
-      this.conta.url = URLs.gerarUrl('Conta', this.id);
+      this.conta.url = gerarUrl('Conta', this.id);
    
       // Realiza a saida do usuario de sua conta.
       this.conta.destroy()
       .done(function(modelo, resposta) {
          meuObjt.conta.funcao.clear();
          meuObjt.conta.clear();
-         meuObjt.conta.url = URLs.gerarUrl('Contas');
+         meuObjt.conta.url = gerarUrl('Contas');
          meuObjt.unset('id');
          meuObjt.set({ 'autenticado': false });
 

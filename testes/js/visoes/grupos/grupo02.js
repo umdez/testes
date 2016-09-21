@@ -7,7 +7,7 @@ define([
 ], function(
   aplic
 , modulos
-, URLs
+, gerarUrl
 , hbs
 , Templante
 ) {

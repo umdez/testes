@@ -9,7 +9,7 @@ define([
 ], function(
   aplic
 , modulos
-, URLs
+, gerarUrl
 , hbs
 , Templante
 ) {
@@ -57,10 +57,10 @@ define([
 
       switch (id) {
         case 'item-cadastrar-usuario': 
-          aplic.roteador.navigate(URLs.gerarUrl('#UsuariosCadastro'), true);
+          aplic.roteador.navigate(gerarUrl('#UsuariosCadastro'), true);
           break;
         case 'item-pesquisar-usuario': 
-          aplic.roteador.navigate(URLs.gerarUrl('#UsuariosListagem'), true);
+          aplic.roteador.navigate(gerarUrl('#UsuariosListagem'), true);
           break;
       };
     },
