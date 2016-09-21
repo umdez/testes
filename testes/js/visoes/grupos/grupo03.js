@@ -1,10 +1,10 @@
 define([
-  'modulos'
+  'modulosConfig'
 , 'urls'
 , 'handlebars'
 , 'text!templantes/grupos/grupo03.html'
 ], function(
-  modulos
+  modulosConfig
 , gerarUrl
 , hbs
 , Templante
@@ -23,7 +23,7 @@ define([
 
     render: function() {
       this.$el.html(this.templante({
-        'modulos': modulos.grupoTres
+        'modulos': modulosConfig.grupoTres
       }));
     },
 

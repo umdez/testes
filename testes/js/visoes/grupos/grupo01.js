@@ -2,13 +2,13 @@
 
 define([
   'aplicativo'
-, 'modulos'
+, 'modulosConfig'
 , 'urls'
 , 'handlebars'
 , 'text!templantes/grupos/grupo01.html'
 ], function(
   aplic
-, modulos
+, modulosConfig
 , gerarUrl
 , hbs
 , Templante
@@ -40,7 +40,7 @@ define([
 
     render: function() {
       this.$el.html(this.templante({
-        'modulos': modulos.grupoUm
+        'modulos': modulosConfig.grupoUm
       }));
     },
 

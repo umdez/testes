@@ -1,12 +1,10 @@
 
 define([
   'aplicativo'
-, 'modulos'
 , 'handlebars'
 , 'text!templantes/base/painel.html'
 ], function(
   aplic
-, modulos
 , hbs
 , Templante
 ) {
