@@ -11,10 +11,6 @@ define([
 
   var Rotas = {
 
-    visaoDoPainel: null,
-    visaoDoTopoPainel: null,
-    visaoDosGruposPainel: null,
-
     iniciar: function() {
       _.bindAll(this, 'suporte');
 
