@@ -16,7 +16,7 @@ define([
 ) {
   'use strict';
 
-  var Registrar = aplic.registrar.bind({ envolucro: 'modulos/usuario/roteador/rotas' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/roteador/rotas' });
 
   var Rotas = {
 
@@ -34,13 +34,14 @@ define([
     modUsuario: aplic.modulo("Usuario"),
 
     iniciar: function() {
-      
+      _.bindAll(this, 'suporte');
+
       Registrar('BAIXO', 'Adicionando as rotas do modulo de usuarios.');
 
-      aplic.adcRota(this.nome, this.suporte.bind(this));
-      aplic.adcRota('UsuariosLeitura', this.suporte.bind(this));
-      aplic.adcRota('UsuariosListagem', this.suporte.bind(this));
-      aplic.adcRota('UsuariosCadastro', this.suporte.bind(this));
+      aplic.adcRota(this.nome, this.suporte);
+      aplic.adcRota('UsuariosLeitura', this.suporte);
+      aplic.adcRota('UsuariosListagem', this.suporte);
+      aplic.adcRota('UsuariosCadastro', this.suporte);
     },
 
     suporte: function(rota, id) {

@@ -16,7 +16,7 @@ define([
 ) {
   'use strict';
 
-  var Registrar = aplic.registrar.bind({ envolucro: 'principal' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'principal' });
 
   aplic.xmpp = {
     'Strophe': Xmpp.Strophe

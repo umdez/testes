@@ -12,7 +12,7 @@ define([
 ) {
   'use strict';
  
-  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/base/topo' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'visoes/base/topo' });
 
   var VisaoDoTopoPainel = Backbone.View.extend({
 

@@ -7,8 +7,6 @@ define([
   aplic
 ) {
   'use strict';
-  
-  //var Registrar = aplic.registrar.bind({ envolucro: 'urls' });
 
   var URLs = {
     'Funcoes': function() {
@@ -49,7 +47,7 @@ define([
     }
   };
  
-  //Registrar('BAIXO', 'URLs foram carregadas.');
+  console.log('(urls) URLs foram carregadas.');
 
   return {
     gerarUrl: function(tipo) {

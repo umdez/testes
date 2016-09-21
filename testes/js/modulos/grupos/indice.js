@@ -11,7 +11,7 @@ define([
 ) {
   'use strict';
 
-  var Registrar = aplic.registrar.bind({ envolucro: 'modulos/grupos/indice' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/grupos/indice' });
 
   Registrar('BAIXO', 'Iniciando o modulo de grupos.');
 

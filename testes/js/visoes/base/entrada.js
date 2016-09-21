@@ -9,8 +9,8 @@ define([
 , Templante
 ) {
   'use strict';
-
-  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/base/entrada' });
+  
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'visoes/base/entrada' });
 
   var VisaoDeEntrada = Backbone.View.extend({
 

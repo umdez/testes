@@ -11,8 +11,8 @@ define([
 , Templante
 ) {
   'use strict';
-
-  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/base/painel' });
+  
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'visoes/base/painel' });
 
   var VisaoDoPainel = Backbone.View.extend({
 

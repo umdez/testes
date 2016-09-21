@@ -25,7 +25,7 @@ define([
 ) {
   'use strict';
 
-  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/base/base' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'visoes/base/base' });
 
   var VisaoDeBase = Backbone.View.extend({
     

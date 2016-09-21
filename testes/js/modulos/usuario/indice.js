@@ -20,7 +20,7 @@ define([
 ) {
   'use strict';
   
-  var Registrar = aplic.registrar.bind({ envolucro: 'modulos/usuario/indice' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/indice' });
 
   // Aqui nós carregamos tudo que for necessário para este modulo.
 

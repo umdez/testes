@@ -56,5 +56,7 @@ define([
  
   };
 
+  console.log('(gdv) Gerente de visões foi carregado com sucesso.');
+
   return GDV;
 });

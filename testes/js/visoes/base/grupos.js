@@ -12,7 +12,7 @@ define([
 ) {
   'use strict';
 
-  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/base/grupos' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'visoes/base/grupos' });
 
   var VisaoDosGrupos = Backbone.View.extend({
 

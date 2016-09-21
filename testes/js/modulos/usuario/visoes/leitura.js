@@ -16,7 +16,7 @@ define([
 ) {
   'use strict';
 
-  var Registrar = aplic.registrar.bind({ envolucro: 'modulos/usuario/visoes/leitura' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/visoes/leitura' });
 
   var VisaoDeLeitura = Backbone.View.extend({
 

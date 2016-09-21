@@ -20,7 +20,7 @@ define([
   };
 
   var Escopos = function(aplic) {
-    this.Registrar = aplic.registrar.bind( {envolucro: 'escopos' });
+    this.Registrar = _.bind(aplic.registrar, { envolucro: 'escopos' });
     this.sessao = aplic.sessao;
   };
  

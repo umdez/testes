@@ -13,8 +13,8 @@ define([
 , ModuloDeFuncao
 ) {
   'use strict';
- 
-  var Registrar = aplic.registrar.bind({ envolucro: 'modulos' });
+
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos' });
  
   Registrar('BAIXO', 'Os modulos foram todos carregados.')
 
