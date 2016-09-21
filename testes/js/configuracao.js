@@ -76,7 +76,10 @@ require([
 , 'domready'    
 ], function(Principal, aplicativo, quandoCarregado) {
 
+  console.log('(configuracao) Pontapé inicial.')
+
   quandoCarregado(function() {  
+    console.log('(configuracao) DOM carregado e pronto.');
     Principal.inicializar();
   });
 });
