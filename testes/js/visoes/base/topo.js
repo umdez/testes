@@ -2,19 +2,17 @@
 define([
   'aplicativo'
 , 'urls'
-, 'registrador'
 , 'handlebars'
 , 'text!templantes/base/topo.html'
 ], function(
-  aplicativo
+  aplic
 , URLs
-, Regis
 , hbs
 , Templante
 ) {
   'use strict';
  
-  var Registro = Regis.reg.bind({ envolucro: 'visoes/base/topo' });
+  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/base/topo' });
 
   var VisaoDoTopoPainel = Backbone.View.extend({
 
@@ -23,14 +21,14 @@ define([
     templante: hbs.compile(Templante),
 
     initialize: function () {
-      Registro(Regis.BAIXO, 'Iniciando a visão.');
+      Registrar('BAIXO', 'Iniciando a visão.');
 
       this.render();
     },
 
     render: function() {
       this.$el.html(this.templante({
-        'nome': aplicativo.sessao.conta.get('nome')
+        'nome': aplic.sessao.conta.get('nome')
       }));
       return this;
     },
@@ -43,24 +41,24 @@ define([
 
     aoClicarEmGrupoUm: function(evento) {
       evento.preventDefault();
-      aplicativo.roteador.navigate('GrupoUm', true);
+      aplic.roteador.navigate('GrupoUm', true);
     },
 
     aoClicarEmGrupoDois: function(evento) {
       evento.preventDefault();
-      aplicativo.roteador.navigate('GrupoDois', true);
+      aplic.roteador.navigate('GrupoDois', true);
     },
 
     aoClicarSair : function(evento) {
       evento.preventDefault();
 
-      aplicativo.sessao.sair({
+      aplic.sessao.sair({
         'sucesso': function(modulo, resposta) {
-          aplicativo.roteador.navigate('', true);
-          Registro(Regis.BAIXO, 'Você saiu do painel com sucesso.');
+          aplic.roteador.navigate('', true);
+          Registrar('BAIXO', 'Você saiu do painel com sucesso.');
         },
         'erro': function(modelo, resposta) {
-          Registro(Regis.BAIXO, 'Erro ao tentar sair do painel.');
+          Registrar('BAIXO', 'Erro ao tentar sair do painel.');
         }
       });
     },

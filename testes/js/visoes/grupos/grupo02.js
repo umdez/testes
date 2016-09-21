@@ -1,19 +1,19 @@
 define([
-  'modulos'
+  'aplicativo'
+, 'modulos'
 , 'urls'
-, 'registrador'
 , 'handlebars'
 , 'text!templantes/grupos/grupo02.html'
 ], function(
-  modulos
+  aplic
+, modulos
 , URLs
-, Regis
 , hbs
 , Templante
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'visoes/grupos/grupo02' });
+  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/grupos/grupo02' });
 
   var VisaoDoGrupoDois = Backbone.View.extend({
 
@@ -22,7 +22,7 @@ define([
     templante: hbs.compile(Templante),
 
     initialize: function () {
-      Registro(Regis.BAIXO, 'Iniciando a visão.');
+      Registrar('BAIXO', 'Iniciando a visão.');
 
       this.render();
     },

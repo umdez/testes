@@ -1,18 +1,18 @@
 
 define([
-  'modulos'
-, 'registrador'
+  'aplicativo'
+, 'modulos'
 , 'handlebars'
 , 'text!templantes/base/painel.html'
 ], function(
-  modulos
-, Regis
+  aplic
+, modulos
 , hbs
 , Templante
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'visoes/base/painel' });
+  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/base/painel' });
 
   var VisaoDoPainel = Backbone.View.extend({
 
@@ -21,7 +21,7 @@ define([
     templante: hbs.compile(Templante),
 
     initialize: function () {
-      Registro(Regis.BAIXO, 'Iniciando a visão.');
+      Registrar('BAIXO', 'Iniciando a visão.');
       
       this.render();
     },

@@ -1,14 +1,14 @@
 
 define([
   "aplicativo"
-, 'registrador'
+, "backbone"
 , "modulos/baseDasRotas"
 , "modulos/usuario/visoes/cadastro"
 , "modulos/usuario/visoes/leitura"
 , "modulos/usuario/visoes/paginacao"
 ], function (
-  aplicativo
-, Regis
+  aplic
+, Backbone
 , Base
 , VisaoDeCadastro
 , VisaoDeLeitura
@@ -16,7 +16,7 @@ define([
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'modulos/usuario/roteador/rotas' });
+  var Registrar = aplic.registrar.bind({ envolucro: 'modulos/usuario/roteador/rotas' });
 
   var Rotas = {
 
@@ -31,21 +31,22 @@ define([
     visaoDeCadastro: null,
     visaoDePaginacao: null,
 
-    modUsuario: aplicativo.modulo("Usuario"),
+    modUsuario: aplic.modulo("Usuario"),
 
     iniciar: function() {
-      Registro(Regis.BAIXO, 'Adicionando rotas de usuarios.');
+      
+      Registrar('BAIXO', 'Adicionando as rotas do modulo de usuarios.');
 
-      aplicativo.adcRota(this.nome, this.suporte.bind(this));
-      aplicativo.adcRota('UsuariosLeitura', this.suporte.bind(this));
-      aplicativo.adcRota('UsuariosListagem', this.suporte.bind(this));
-      aplicativo.adcRota('UsuariosCadastro', this.suporte.bind(this));
+      aplic.adcRota(this.nome, this.suporte.bind(this));
+      aplic.adcRota('UsuariosLeitura', this.suporte.bind(this));
+      aplic.adcRota('UsuariosListagem', this.suporte.bind(this));
+      aplic.adcRota('UsuariosCadastro', this.suporte.bind(this));
     },
 
     suporte: function(rota, id) {
       var meuObj = this;
 
-      Registro(Regis.BAIXO, 'Acessando suporte da rota '+ rota);
+      Registrar('BAIXO', 'Acessando o suporte da rota '+ rota)
 
       var painel = this.visaoDoPainel = this.reusarVisao("VisaoBaseDePainel", function() { });
       var topoDoPainel = this.visaoDoTopoPainel = this.reusarVisao("VisaoBaseDeTopoPainel", function() { });
@@ -68,7 +69,7 @@ define([
         // Leitura de um item em específico
         this.verificarPermissao("LEITURA", function(sePermitido) {
           if (sePermitido) {
-            Registro(Regis.BAIXO, 'Leitura de usuario.');
+            Registrar('BAIXO', 'Leitura de usuario.');
 
             meuObj.procurarUsuario(id, function(usuario) {
               if (usuario) {
@@ -88,7 +89,7 @@ define([
       } else if ((id && id <= 0) || (rota == 'UsuariosCadastro')) {
         this.verificarPermissao("CADASTRO", function(sePermitido) {
           if (sePermitido) {
-            Registro(Regis.BAIXO, 'Cadastro de usuario.');
+            Registrar('BAIXO', 'Cadastro de usuario.');
 
             meuObj.visaoDeCadastro = meuObj.reusarVisao("VisaoDeCadastroDeUsuario", function() {
               return new VisaoDeCadastro();
@@ -102,7 +103,7 @@ define([
         // Listagem
         this.verificarPermissao("LEITURA", function(sePermitido) {
           if (sePermitido) {
-            Registro(Regis.BAIXO, 'Listagem de usuario.');
+            Registrar('BAIXO', 'Listagem de usuario.');
 
             meuObj.visaoDePaginacao = meuObj.reusarVisao("VisaoDePaginacaoDeUsuario", function() {
               return new VisaoDePaginacao();
@@ -135,7 +136,7 @@ define([
           cd(modelo);
         }
       , error: function (modelo, resposta, opcoes) {
-          Registro(Regis.BAIXO, 'Não foi possível requisitar dados deste usuário.');
+          Registrar('BAIXO', 'Não foi possível requisitar dados deste usuário.');
           cd(null);
         }
       });

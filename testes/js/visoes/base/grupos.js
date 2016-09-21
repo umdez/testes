@@ -1,18 +1,18 @@
 
 define([
-  'gdv'
-, 'registrador'
+  'aplicativo'
+, 'gdv'
 , 'visoes/grupos/grupo01'
 , 'visoes/grupos/grupo02'
 ], function(
-  GDV
-, Regis
+  aplic
+, GDV
 , VisaoDoGrupoUm
 , VisaoDoGrupoDois
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'visoes/base/grupos' });
+  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/base/grupos' });
 
   var VisaoDosGrupos = Backbone.View.extend({
 
@@ -22,7 +22,7 @@ define([
     visaoDoGrupoDois: null,
 
     initialize: function () {
-      Registro(Regis.BAIXO, 'Iniciando a visão.');
+      Registrar('BAIXO', 'Iniciando a visão.');
       
       this.render();
     },

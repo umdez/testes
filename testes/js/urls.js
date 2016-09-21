@@ -2,12 +2,14 @@
  */
 
 define([ 
-  
+  'aplicativo'
 ], function(
-  
+  aplic
 ) {
   'use strict';
   
+  //var Registrar = aplic.registrar.bind({ envolucro: 'urls' });
+
   var URLs = {
     'Funcoes': function() {
       return "/Funcoes";
@@ -47,6 +49,8 @@ define([
     }
   };
  
+  //Registrar('BAIXO', 'URLs foram carregadas.');
+
   return {
     gerarUrl: function(tipo) {
       return URLs[tipo] ? URLs[tipo].apply(this, [].slice.call(arguments, 1)) : undefined;

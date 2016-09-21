@@ -10,11 +10,16 @@ define([
 ) {
   'use strict';
   
+  console.log('(aplicativo) Iniciando o aplicativo.');
+
   var aplicativo = {
     
     sessao: new ModeloDeSessao({}),
 
-    eventos: _.extend({}, Backbone.Events),
+    depuracao: 'BAIXO',
+
+    // eventos globais
+    evts: _.extend({}, Backbone.Events),
 
     modulos: {},
 
@@ -41,9 +46,13 @@ define([
       }
     },
 
+    registrar: function(nivel, msg) {
+      aplicativo.evts.trigger('registrador:registrar', this.envolucro, nivel, msg);
+    }
+
   };
 
-  aplicativo.escopos = new Escopos(aplicativo.sessao);
+  aplicativo.escopos = new Escopos(aplicativo);
 
   return aplicativo;
 });

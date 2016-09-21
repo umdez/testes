@@ -1,15 +1,13 @@
 
 define([
   'aplicativo'
-, 'registrador'
 , 'backbone' 
 , "modulos/baseDasVisoes"
 , 'urls'
 , 'parsley'
 , 'text!modulos/usuario/templantes/cadastro.html' 
 ], function(
-  aplicativo
-, Regis
+  aplic
 , Backbone
 , Base
 , URLs
@@ -18,7 +16,7 @@ define([
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'modulos/usuario/visoes/cadastro' });
+  var Registrar = aplic.registrar.bind({ envolucro: 'modulos/usuario/visoes/cadastro' });
 
   var VisaoDeCadastro = Backbone.View.extend({
 
@@ -30,7 +28,7 @@ define([
 
     templante: _.template(Templante),
     
-    modUsuario: aplicativo.modulo("Usuario"),
+    modUsuario: aplic.modulo("Usuario"),
     
     validacao: null,
 
@@ -84,18 +82,18 @@ define([
           meuObj.limparFormulario();
 
           // Navega para visão de leitura
-          aplicativo.roteador.navigate(URLs.gerarUrl('#Usuario', modelo.id), true);
+          aplic.roteador.navigate(URLs.gerarUrl('#Usuario', modelo.id), true);
           
           // Inicia novamente a validação
           meuObj.validacao.reset();
           
-          Registro(Regis.BAIXO, 'Novo usuario cadastrado com sucesso');
+          Registrar('BAIXO', 'Novo usuario cadastrado com sucesso');
         }).fail(function(modelo, resposta, opcoes) {
-          Registro(Regis.ALTO, 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+          Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         });
 
       }).fail(function() {
-        Registro(Regis.BAIXO, 'É necessário informar os dados corretos para realizar o cadastro.');
+        Registrar('BAIXO', 'É necessário informar os dados corretos para realizar o cadastro.');
       })
     },
 

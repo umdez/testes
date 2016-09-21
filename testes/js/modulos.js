@@ -1,12 +1,12 @@
 
 define([ 
-  "registrador"
+  "aplicativo"
 , "modulos/grupos/indice"
 , "modulos/usuario/indice"
 , "modulos/exemplo/indice"
 , "modulos/funcao/indice"
 ], function(
-  Regis
+  aplic
 , ModuloDosGrupos
 , ModuloDeUsuario
 , ModuloDeExemplo
@@ -14,9 +14,9 @@ define([
 ) {
   'use strict';
  
-  var Registro = Regis.reg.bind({ envolucro: 'modulos' });
-
-  Registro(Regis.BAIXO, 'Os modulos foram todos carregados.');
+  var Registrar = aplic.registrar.bind({ envolucro: 'modulos' });
+ 
+  Registrar('BAIXO', 'Os modulos foram todos carregados.')
 
   var modulos = {
     grupoUm: [

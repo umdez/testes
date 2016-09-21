@@ -5,7 +5,6 @@
 define([
   'aplicativo'
 , 'backbone' 
-, 'registrador'
 , 'gdv'
 , 'bootstrap'
 , 'jasny'
@@ -14,9 +13,8 @@ define([
 , 'visoes/base/topo'
 , 'visoes/base/grupos'
 ], function(
-  aplicativo
+  aplic
 , Backbone
-, Regis
 , GDV
 , BootStrap
 , Jasny
@@ -27,7 +25,7 @@ define([
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'visoes/base/base' });
+  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/base/base' });
 
   var VisaoDeBase = Backbone.View.extend({
     
@@ -39,7 +37,7 @@ define([
     visaoDosGruposPainel: null,
 
     initialize: function() {
-      Registro(Regis.BAIXO, 'Iniciando a visão.');
+      Registrar('BAIXO', 'Iniciando a visão.');
       
       this.visaoDeEntrada = GDV.reusarVisao("VisaoBaseDeEntrada", function() {
         return new VisaoDeEntrada();
@@ -59,15 +57,17 @@ define([
       });
       
       this.render();
-      aplicativo.sessao.on("change:autenticado", this.render.bind(this));
+      aplic.sessao.on("change:autenticado", this.render.bind(this));
     },
 
     render: function() {
       // esconde todas visões de base
       this.$el.find('div.paginas-base').hide();
 
-      if(aplicativo.sessao.get('autenticado')) {
+      if(aplic.sessao.get('autenticado')) {
         
+        Registrar('BAIXO', 'Usuário realizou a entrada com sucesso. Mudando visão.');
+
         // Sempre renderizar a cada nova autenticacao.
         this.visaoDoTopoPainel = GDV.criarVisao("VisaoBaseDeTopoPainel", function() {
           return new VisaoDoTopoPainel();
@@ -76,6 +76,8 @@ define([
 
         this.$el.find('div#painel').show();
       } else {
+        Registrar('BAIXO', 'Usuário realizou a saida com sucesso. Mudando visão.');
+
         this.$el.find('div#entrada').show();
       } 
       return this;

@@ -1,7 +1,6 @@
 
 define([
   "aplicativo"
-, "registrador"
 , "backbone"
 , "modulos/usuario/roteador/rotas"
 , "modelos/usuario/usuario"
@@ -10,8 +9,7 @@ define([
 , "modulos/exemplo/indice" 
 , "modulos/funcao/indice" 
 ], function (
-  aplicativo
-, Regis
+  aplic
 , Backbone
 , Rotas
 , ModeloDeUsuario
@@ -21,14 +19,14 @@ define([
 , Dependencia02
 ) {
   'use strict';
-
-  var Registro = Regis.reg.bind({ envolucro: 'modulos/usuario/indice' });
+  
+  var Registrar = aplic.registrar.bind({ envolucro: 'modulos/usuario/indice' });
 
   // Aqui nós carregamos tudo que for necessário para este modulo.
 
-  Registro(Regis.BAIXO, 'Iniciando o modulo de usuários.');
+  Registrar('BAIXO', 'Iniciando o modulo de usuários.');
 
-  var Usuario = aplicativo.modulo("Usuario");
+  var Usuario = aplic.modulo("Usuario");
 
   Usuario.Modelo = ModeloDeUsuario;
 
@@ -36,7 +34,8 @@ define([
 
   //Usuario.Paginacao = new PaginacaoDeUsuario({});
 
-  Usuario.eventos = _.extend({}, Backbone.Events);
+  // eventos locais deste modulo
+  Usuario.evts = _.extend({}, Backbone.Events);
 
   Rotas.iniciar();
  

@@ -72,8 +72,9 @@ require.config({
 
 require([
   'principal' 
+, 'aplicativo'
 , 'domready'    
-], function(Principal, quandoCarregado) {
+], function(Principal, aplicativo, quandoCarregado) {
 
   quandoCarregado(function() {  
     Principal.inicializar();

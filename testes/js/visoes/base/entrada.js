@@ -1,18 +1,16 @@
 
 define([
   'aplicativo'
-, 'registrador'
 , 'parsley'
 , 'text!templantes/base/entrada.html'
 ], function(
-  aplicativo
-, Regis
+  aplic
 , parsley
 , Templante
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'visoes/base/entrada' });
+  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/base/entrada' });
 
   var VisaoDeEntrada = Backbone.View.extend({
 
@@ -26,7 +24,7 @@ define([
     validacao: null,
 
     initialize: function () {
-      Registro(Regis.BAIXO, 'Iniciando a visão.');
+      Registrar('BAIXO', 'Iniciando a visão.');
       
       this.render();
     },
@@ -54,7 +52,7 @@ define([
       evento.preventDefault();
       var meuObj = this;
 
-      aplicativo.sessao.entrar({ 'jid': this.jid, 'senha': this.senha }, {
+      aplic.sessao.entrar({ 'jid': this.jid, 'senha': this.senha }, {
         'sucesso': function(modelo, resposta, opcoes) {
           meuObj.limparFormulario();
           meuObj.jid = meuObj.senha = null;
@@ -62,10 +60,10 @@ define([
           // Inicia novamente a validação
           meuObj.validacao.reset();
 
-          Registro(Regis.BAIXO, 'Você acaba de entrar no sistema.');
+          Registrar('BAIXO', 'Você acaba de entrar no sistema.');
         },
         'erro': function(modelo, resposta, opcoes) {
-          Registro(Regis.ALTO, 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+          Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         }
       });
     }, 

@@ -4,20 +4,18 @@ define([
   'aplicativo'
 , 'modulos'
 , 'urls'
-, 'registrador'
 , 'handlebars'
 , 'text!templantes/grupos/grupo01.html'
 ], function(
-  aplicativo
+  aplic
 , modulos
 , URLs
-, Regis
 , hbs
 , Templante
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'visoes/grupos/grupo01' });
+  var Registrar = aplic.registrar.bind({ envolucro: 'visoes/grupos/grupo01' });
 
   var VisaoDoGrupoUm = Backbone.View.extend({
 
@@ -26,7 +24,7 @@ define([
     templante: hbs.compile(Templante),
 
     initialize: function () {
-      Registro(Regis.BAIXO, 'Iniciando a visão.');
+      Registrar('BAIXO', 'Iniciando a visão.');
       
       this.render();
     },
@@ -46,14 +44,14 @@ define([
 
       var id = $(evento.currentTarget).attr('id');
       
-      Registro(Regis.BAIXO, 'Recebido clique em item ('+ id +') do menu esquerdo.');
+      Registrar('BAIXO', 'Recebido clique em item ('+ id +') do menu esquerdo.');
 
       switch (id) {
         case 'item-cadastrar-usuario': 
-          aplicativo.roteador.navigate(URLs.gerarUrl('#UsuariosCadastro'), true);
+          aplic.roteador.navigate(URLs.gerarUrl('#UsuariosCadastro'), true);
           break;
         case 'item-pesquisar-usuario': 
-          aplicativo.roteador.navigate(URLs.gerarUrl('#UsuariosListagem'), true);
+          aplic.roteador.navigate(URLs.gerarUrl('#UsuariosListagem'), true);
           break;
       };
     },

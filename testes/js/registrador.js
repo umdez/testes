@@ -2,9 +2,11 @@
  */
 
 define([ 
-  
+  "aplicativo"
+, 'backbone'
 ], function(
-  
+  aplic
+, Backbone
 ) {
   'use strict';
 
@@ -46,22 +48,29 @@ define([
 
   registrador.filtrar = FILTRO.NENHUM;
 
-  return {
+  var VisaoDeRegistro = Backbone.View.extend({
+    
+    initialize: function() {
+      this.listenTo(aplic.evts, 'registrador:registrar', this.registrar);
+    },
 
-    'BAIXO': NIVEL.BAIXO,
-    'MEDIO': NIVEL.MEDIO,
-    'ALTO':  NIVEL.ALTO,
-  
+    registrar: function(envolucro, nivel, msg) {
+      registrador.registrar(envolucro, NIVEL[nivel.toUpperCase()], msg);
+    }
+  });
+
+  var visaoDeRegistro = new VisaoDeRegistro({});
+
+  registrador.registrar('registrador', NIVEL.BAIXO, 'Iniciando o registrador.');
+
+  return {
+    
     'NENHUM': 'NENHUM',
     'MEDIOS': 'MEDIOS',   
     'BAIXOS':'BAIXOS',    
     'TODOS': 'TODOS',     
 
-    reg: function(nivel, msg) {
-      registrador.registrar(this.envolucro, nivel, msg);
-    },
-
-    nivel: function(nivel) {
+    filtrar: function(nivel) {
       registrador.setarFiltro(nivel);
     }
   };

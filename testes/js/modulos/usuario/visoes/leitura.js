@@ -1,14 +1,14 @@
 
 define([
-  'backbone' 
-, 'registrador'
+  'aplicativo'
+, 'backbone' 
 , 'parsley'
 , 'modulos/baseDasVisoes'
 , 'handlebars'
 , 'text!modulos/usuario/templantes/leitura.html'
 ], function(
-  Backbone
-, Regis
+  aplic
+, Backbone
 , parsley
 , Base
 , hbs
@@ -16,7 +16,7 @@ define([
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'modulos/usuario/visoes/leitura' });
+  var Registrar = aplic.registrar.bind({ envolucro: 'modulos/usuario/visoes/leitura' });
 
   var VisaoDeLeitura = Backbone.View.extend({
 
@@ -93,15 +93,15 @@ define([
           
           // Inicia novamente a validação
           meuObj.validacao.reset();
-          Registro(Regis.BAIXO, 'Dados do usuario foram salvos com sucesso');
+          Registrar('BAIXO', 'Dados do usuario foram salvos com sucesso');
         })
         .fail(function(modelo, resposta, opcoes) {
-          Registro(Regis.ALTO, 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+          Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         }); 
 
       }).fail(function() {
-        Registro(Regis.BAIXO, 'É necessário informar os dados corretos para salvar.');
-      })
+        Registrar('BAIXO', 'É necessário informar os dados corretos para salvar.');
+      });
     },
 
     aoClicarEmRemover: function(evento) {

@@ -4,18 +4,16 @@
 
 define([
   "aplicativo"
-, "registrador"
 , "modulos/baseDasRotas"
 ], function (
-  aplicativo
-, Regis
+  aplic
 , Base
 ) {
   'use strict';
 
-  var Registro = Regis.reg.bind({ envolucro: 'modulos/grupos/indice' });
+  var Registrar = aplic.registrar.bind({ envolucro: 'modulos/grupos/indice' });
 
-  Registro(Regis.BAIXO, 'Iniciando o modulo de grupos.');
+  Registrar('BAIXO', 'Iniciando o modulo de grupos.');
 
   var Rotas = {
 
@@ -24,16 +22,16 @@ define([
     visaoDosGruposPainel: null,
 
     iniciar: function() {
-      Registro(Regis.BAIXO, 'Adicionando rotas dos grupos.');
+      Registrar('BAIXO', 'Adicionando rotas dos grupos.');
 
-      aplicativo.adcRota('GrupoUm', this.suporte.bind(this));
-      aplicativo.adcRota('GrupoDois', this.suporte.bind(this));
-      aplicativo.adcRota('GrupoTres', this.suporte.bind(this));
+      aplic.adcRota('GrupoUm', this.suporte.bind(this));
+      aplic.adcRota('GrupoDois', this.suporte.bind(this));
+      aplic.adcRota('GrupoTres', this.suporte.bind(this));
     },
 
     suporte: function(rota, id) {
 
-      Registro(Regis.BAIXO, 'Acessando suporte da rota '+ rota);
+      Registrar('BAIXO', 'Acessando suporte da rota '+ rota);
 
       var painel = this.visaoDoPainel = this.reusarVisao("VisaoBaseDePainel", function() { });
       var topoDoPainel = this.visaoDoTopoPainel = this.reusarVisao("VisaoBaseDeTopoPainel", function() { });

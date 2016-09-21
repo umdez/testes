@@ -6,19 +6,17 @@
 define([
   "aplicativo"
 , "backbone"
-, "registrador"
 , "gdv"
 , "visoes/base/base"
 ], function(
-  aplicativo
+  aplic
 , Backbone
-, Regis
 , GDV
 , VisaoDeBase
 ) {
   'use strict';
-  
-  var Registro = Regis.reg.bind({ envolucro: 'roteador' });
+
+  var Registrar = aplic.registrar.bind({ envolucro: 'roteador' });
 
   var SitioRoteador = Backbone.Router.extend({
     
@@ -29,7 +27,7 @@ define([
     },
     
     initialize: function () {
-      Registro(Regis.BAIXO, 'Iniciando roteador.');
+      Registrar('BAIXO', 'Iniciando roteador.');
 
       this.visaoDeBase = GDV.reusarVisao("VisaoDeBase", function() {
         return new VisaoDeBase();
@@ -37,17 +35,17 @@ define([
     },
     
     inicio: function() {
-      Registro(Regis.BAIXO, 'Acessando rota de inicio.');
+      Registrar('BAIXO', 'Acessando rota de inicio.');
     },
     
     asRotasDeUmNivel: function(modulo) {
-      Registro(Regis.BAIXO, 'Buscando a rota '+ modulo);
-      aplicativo.buscarRota(modulo, null);
+      Registrar('BAIXO', 'Buscando a rota '+ modulo);
+      aplic.buscarRota(modulo, null);
     },
 
     asRotasDeDoisNiveis: function(modulo, id) {
-      Registro(Regis.BAIXO, 'Buscando a rota '+ modulo +'/'+ id);
-      aplicativo.buscarRota(modulo, id);
+      Registrar('BAIXO', 'Buscando a rota '+ modulo +'/'+ id);
+      aplic.buscarRota(modulo, id);
     }
     
   });
@@ -55,18 +53,18 @@ define([
   var inicializar = function() {
     
     var roteamento = function() {
-      aplicativo.roteador = new SitioRoteador();
+      aplic.roteador = new SitioRoteador();
       Backbone.history.start(); 
-      Registro(Regis.BAIXO, 'Roteador e historio de rotas iniciados com sucesso.');
+      Registrar('BAIXO', 'Roteador e historio de rotas iniciados com sucesso.');
     }
     
-    aplicativo.sessao.seAutenticado({
+    aplic.sessao.seAutenticado({
       'sucesso': function(modelo, resposta, opcoes) {
-        Registro(Regis.BAIXO, 'Usuario autenticado com sucesso.');
+        Registrar('BAIXO', 'Usuario autenticado com sucesso.');
         roteamento();
       },
       'erro': function(modelo, resposta, opcoes) {
-        Registro(Regis.ALTO, 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+        Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         roteamento();
       }
     });
