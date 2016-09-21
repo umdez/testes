@@ -9,3 +9,4 @@ A cada perscurso nós teremos alguma caracteristica em especifico desenvolvida. 
 | Entrada| Realização de autenticação, autorização e a saida do usuário. | Pronto |
 | Navegação | Realização da troca de visões do sistema de forma dinamica. | Pronto | 
 | Paginação | Realização da paginação (incluindo autocompletar e pesquisa) de registros. | Em andamento |
+| Registro | Realização de registro das atividades do sistema. | Pronto |
