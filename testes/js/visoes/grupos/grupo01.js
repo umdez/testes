@@ -24,8 +24,17 @@ define([
     templante: hbs.compile(Templante),
 
     initialize: function () {
+      _.bindAll(this, 
+        'apresentarAvisoDeErro', 
+        'esconderTodosAvisos',
+        'aoClicarEmItemDoMenuEsquerdo'
+      );
+
       Registrar('BAIXO', 'Iniciando a visão.');
       
+      this.listenTo(aplic.evts, 'grupo-um-aviso-erro:mostrar', this.apresentarAvisoDeErro);
+      this.listenTo(aplic.evts, 'grupo-um-avisos:esconder', this.esconderTodosAvisos);
+
       this.render();
     },
 
@@ -56,8 +65,8 @@ define([
       };
     },
 
-    apresentarAvisoDeErro: function(mensagem) {
-      this.$el.find('div#aviso-erro.conteudo-grupo-um > span#mensagem').text(mensagem);
+    apresentarAvisoDeErro: function(msg) {
+      this.$el.find('div#aviso-erro.conteudo-grupo-um > span#mensagem').text(msg);
       this.$el.find('div#aviso-erro.conteudo-grupo-um').show();
     },
 

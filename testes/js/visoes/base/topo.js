@@ -21,7 +21,14 @@ define([
     templante: hbs.compile(Templante),
 
     initialize: function () {
+      _.bindAll(this,
+        'selecionarItemMenu',
+        'aoClicarEmItemDaBarraDeNav'
+      );
+
       Registrar('BAIXO', 'Iniciando a visão.');
+
+      this.listenTo(aplic.evts, 'item-navegacao-topo:selecionar', this.selecionarItemMenu);
 
       this.render();
     },
@@ -34,19 +41,25 @@ define([
     },
 
     events: {
-      'click ul.menu-painel-topo li.item-grupo-um a': 'aoClicarEmGrupoUm',
-      'click ul.menu-painel-topo li.item-grupo-dois a': 'aoClicarEmGrupoDois',
+      'click ul.menu-painel-topo li.item-menu a': 'aoClicarEmItemDaBarraDeNav',
       'click li#sair-painel a': 'aoClicarSair'
     },
 
-    aoClicarEmGrupoUm: function(evento) {
+    aoClicarEmItemDaBarraDeNav: function(evento) {
       evento.preventDefault();
-      aplic.roteador.navigate('GrupoUm', true);
-    },
 
-    aoClicarEmGrupoDois: function(evento) {
-      evento.preventDefault();
-      aplic.roteador.navigate('GrupoDois', true);
+      var id = $(evento.currentTarget).attr('id');
+      
+      Registrar('BAIXO', 'Recebido clique em item ('+ id +') do menu de nav. do topo.');
+
+      switch (id) {
+        case 'item-grupo-um': 
+          aplic.roteador.navigate(URLs.gerarUrl('#GrupoUm'), true);
+          break;
+        case 'item-grupo-dois': 
+          aplic.roteador.navigate(URLs.gerarUrl('#GrupoDois'), true);
+          break;
+      };
     },
 
     aoClicarSair : function(evento) {

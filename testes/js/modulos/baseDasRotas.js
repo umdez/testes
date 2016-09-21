@@ -22,6 +22,16 @@ define([
       escopos.verificarPermissao(this.nome, acao, function(sePermitido) {
         cd(sePermitido);
       });
+    },
+
+    verificarUmaPermissaoDeAcesso: function (acao, cd, msg) {
+      this.verificarPermissao(acao, function(sePermitido) {
+        if (sePermitido) {
+          if ('prosseguir' in cd) cd.prosseguir();
+        } else {
+          if ('proibir' in cd) cd.proibir(msg);
+        }
+      });
     }
   };
  

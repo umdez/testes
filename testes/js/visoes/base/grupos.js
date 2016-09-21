@@ -1,3 +1,5 @@
+/* Trabalhar com um conjunto de grupos. 
+ */
 
 define([
   'aplicativo'
@@ -22,8 +24,16 @@ define([
     visaoDoGrupoDois: null,
 
     initialize: function () {
+      _.bindAll(this,
+        'esconderTodosOsConteudosDosGrupos',
+        'mostrarConteudoDeUmGrupo'
+      );
+
       Registrar('BAIXO', 'Iniciando a visão.');
       
+      this.listenTo(aplic.evts, 'grupos-conteudos:esconder', this.esconderTodosOsConteudosDosGrupos);
+      this.listenTo(aplic.evts, 'grupos-conteudo:mostrar', this.mostrarConteudoDeUmGrupo);
+
       this.render();
     },
 

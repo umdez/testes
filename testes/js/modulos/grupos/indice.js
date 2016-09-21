@@ -10,7 +10,7 @@ define([
 , Base
 ) {
   'use strict';
-
+ 
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/grupos/indice' });
 
   Registrar('BAIXO', 'Iniciando o modulo de grupos.');
@@ -22,11 +22,13 @@ define([
     visaoDosGruposPainel: null,
 
     iniciar: function() {
+      _.bindAll(this, 'suporte');
+
       Registrar('BAIXO', 'Adicionando rotas dos grupos.');
 
-      aplic.adcRota('GrupoUm', this.suporte.bind(this));
-      aplic.adcRota('GrupoDois', this.suporte.bind(this));
-      aplic.adcRota('GrupoTres', this.suporte.bind(this));
+      aplic.adcRota('GrupoUm', this.suporte);
+      aplic.adcRota('GrupoDois', this.suporte);
+      aplic.adcRota('GrupoTres', this.suporte);
     },
 
     suporte: function(rota, id) {

@@ -21,8 +21,18 @@ define([
     templante: hbs.compile(Templante),
 
     initialize: function () {
+      _.bindAll(this,
+        'esconderTodosOsGrupos',
+        'mostrarUmGrupo',
+        'esconderTodosAvisos'
+      );
+
       Registrar('BAIXO', 'Iniciando a visão.');
       
+      this.listenTo(aplic.evts, 'painel-avisos:esconder', this.esconderTodosAvisos);
+      this.listenTo(aplic.evts, 'painel-grupos:esconder', this.esconderTodosOsGrupos);
+      this.listenTo(aplic.evts, 'painel-grupo:mostrar', this.mostrarUmGrupo);
+
       this.render();
     },
 

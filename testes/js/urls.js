@@ -44,6 +44,12 @@ define([
     },
     '#UsuariosListagem': function() {
       return "UsuariosListagem";
+    },
+    '#GrupoUm': function() {
+      return "GrupoUm";
+    },
+    '#GrupoDois': function() {
+      return "GrupoDois";
     }
   };
  
