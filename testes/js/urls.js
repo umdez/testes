@@ -2,9 +2,9 @@
  */
 
 define([ 
-  'aplicativo'
+  
 ], function(
-  aplic
+  
 ) {
   'use strict';
 
