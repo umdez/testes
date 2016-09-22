@@ -47,23 +47,16 @@ require.config({
   // não vai funcionar corretamente se informado um script AMD.
   shim: {
     
-    'backbone': {
-      deps: ['underscore', 'jquery'], 
-      exports: 'Backbone'             // Ao ser carregado, use a variavel global 'Backbone' como valor do modulo.
+    'bootstrap': {
+      deps: [ 'jquery' ]
     },
     'underscore': {
       exports: '_'  
     },
-    'strophe': {
-
-    },
-    'parsley': {
-      deps: [ 'jquery']
-    },
     'parsley.ptbr': {
       deps: [ 'parsley']
     },
-    'jasny': {
+    'jasny': {  
       deps: [ 'bootstrap' ]
     }
   }

@@ -4,15 +4,17 @@ define([
 , 'backbone' 
 , "modulos/baseDasVisoes"
 , 'urls'
-, 'parsley'
-, 'text!modulos/usuario/templantes/cadastro.html' 
+, 'handlebars'
+, 'modulos/usuario/visoes/cadastro/funcoes'
+, 'text!modulos/usuario/templantes/cadastro/cadastro.html' 
 ], function(
   aplic
 , Backbone
 , Base
 , gerarUrl
-, parsley
-, Templante
+, hbs
+, VisaoDasFuncoes
+, TemplanteCadastro
 ) {
   'use strict';
 
@@ -22,23 +24,33 @@ define([
 
     el: 'div.grupo-um div#usuario-cadastro.conteudo-grupo-um',
 
+    visaoDasFuncoes: null,
+
     jid: null,  
     senha: null, 
     nome: null,
+    funcao_id: null, 
 
-    templante: _.template(Templante),
+    templante: hbs.compile(TemplanteCadastro), 
     
     modUsuario: aplic.modulo("Usuario"),
-    
+
     validacao: null,
 
     initialize: function() {
+      _.bindAll(this, 'aoSelecionarUmaFuncaoDeUsuario');
+
+      this.listenTo(this.modUsuario.evts, 'funcao-do-usuario:selecionada', this.aoSelecionarUmaFuncaoDeUsuario);
       this.render();
     },
 
     render: function() {
-      this.$el.html(this.templante());
+      this.$el.html(this.templante({}));
       this.validacao = this.$el.find('form.cadastro-usuario').parsley();
+
+      this.visaoDasFuncoes = this.reusarVisao("VisaoDeFuncaoDoCadastroDeUsuarios", function() {
+        return new VisaoDasFuncoes({});
+      });
     },
 
     events: {
@@ -47,6 +59,10 @@ define([
       'change input#jid-usuario': 'aoEscreverAtualizarJid',
       'change input#senha-usuario': 'aoEscreverAtualizarSenha',
       'change input#nome-usuario': 'aoEscreverAtualizarNome'
+    },
+
+    aoSelecionarUmaFuncaoDeUsuario: function(valorDaFuncao) {
+      this.funcao_id = valorDaFuncao;
     },
 
     aoEscreverAtualizarJid: function(evento) {
@@ -72,7 +88,8 @@ define([
         var usuario = new Modelo({
           'jid': meuObj.jid, 
           'nome': meuObj.nome, 
-          'senha': meuObj.senha 
+          'senha': meuObj.senha,
+          'funcao_id': meuObj.funcao_id
         });
         usuario.url = gerarUrl('Usuarios');
 

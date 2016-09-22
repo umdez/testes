@@ -3,7 +3,7 @@ define([
   "aplicativo"
 , "backbone"
 , "modulos/baseDasRotas"
-, "modulos/usuario/visoes/cadastro"
+, "modulos/usuario/visoes/cadastro/cadastro"
 , "modulos/usuario/visoes/leitura"
 , "modulos/usuario/visoes/paginacao"
 ], function (

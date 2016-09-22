@@ -7,7 +7,7 @@ define([
 , "colecoes/funcoes/funcoes"
 , "paginacoes/funcoes/funcoes"
 ], function (
-  aplicativo
+  aplic
 , Backbone
 , Rotas
 , ModeloDeFuncao
@@ -16,13 +16,17 @@ define([
 ) {
   'use strict';
 
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/funcao/indice' });
+
   // Aqui nós carregamos tudo que for necessário para este modulo.
 
-  var Funcao = aplicativo.modulo("Funcao");
+  Registrar('BAIXO', 'Iniciando o modulo de funções.');
 
-  Funcao.Modelo = new ModeloDeFuncao({});
+  var Funcao = aplic.modulo("Funcao");
 
-  //Funcao.Lista = new ColecaoDeFuncao({});
+  Funcao.Modelo = ModeloDeFuncao;
+
+  Funcao.Lista = new ColecaoDeFuncao();
 
   //Funcao.Paginacao = PaginacaoDeFuncao;
  

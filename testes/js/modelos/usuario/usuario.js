@@ -21,7 +21,7 @@ define([
     idAttribute: 'id',
 
     initialize: function(){
-      //this.funcao = new ModeloDeFuncao({});
+      this.funcao = new ModeloDeFuncao({});
       //this.escopos = new ColecaoDeEscopos.Colecao({});
     },
 

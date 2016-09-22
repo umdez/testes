@@ -6,8 +6,7 @@ define([
   'aplicativo'
 , 'backbone' 
 , 'gdv'
-, 'bootstrap'
-, 'jasny'
+, "modulos/indice"
 , 'visoes/base/entrada'
 , 'visoes/base/painel'
 , 'visoes/base/topo'
@@ -16,8 +15,7 @@ define([
   aplic
 , Backbone
 , GDV
-, BootStrap
-, Jasny
+, modulos  // inicia os modulos
 , VisaoDeEntrada
 , VisaoDoPainel
 , VisaoDoTopoPainel

@@ -6,6 +6,8 @@ define([
 ) {
   'use strict';
 
+  console.log('(escopos) Iniciando verificador de escopos.');
+
   var PERMISSAO_ACESSAR = 0x00000001;  // Ler ou Listar
   var PERMISSAO_CADASTRAR = 0x00000002;
   var PERMISSAO_REMOVER = 0x00000004;

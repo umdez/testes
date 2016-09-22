@@ -30,7 +30,7 @@ define([
 
   Usuario.Modelo = ModeloDeUsuario;
 
-  Usuario.Lista = new ColecaoDeUsuario({});
+  Usuario.Lista = new ColecaoDeUsuario();
 
   //Usuario.Paginacao = new PaginacaoDeUsuario({});
 

@@ -1,8 +1,10 @@
 
 define([
   "aplicativo"
+, "gdv"
 ], function (
   aplicativo
+, GDV
 ) {
   'use strict';
 
@@ -15,5 +17,8 @@ define([
     }
   };
 
-  return BaseDasVisoes;
+  var Uniao = {};
+  _.extend(Uniao, GDV);
+  _.extend(Uniao, BaseDasVisoes);
+  return Uniao;
 });

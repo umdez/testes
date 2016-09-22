@@ -10,10 +10,19 @@
         <input type="text" class="form-control" id="nome-usuario" placeholder="Nome completo" 
         data-parsley-required="true" data-parsley-length="[10, 80]">
       </div>
-      <div class="form-group">
-        <label for="jid-usuario">Endereço de Email</label>
-        <input type="email" class="form-control" id="jid-usuario" placeholder="Email" 
-        data-parsley-type="email" data-parsley-required="true" data-parsley-length="[6, 60]">
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="form-group">
+            <label for="jid-usuario">Endereço de Email</label>
+            <input type="email" class="form-control" id="jid-usuario" placeholder="Email" 
+            data-parsley-type="email" data-parsley-required="true" data-parsley-length="[6, 60]">
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="form-group" id="funcoes-usuario">
+            &nbsp;
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="senha-usuario">Senha</label>
@@ -25,3 +34,7 @@
 
   </div>
 </div>
+
+<!--
+  
+-->

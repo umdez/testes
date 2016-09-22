@@ -1,11 +1,15 @@
 define([ 
   "aplicativo"
+, 'jasny'
+, "parsley.ptbr"
 , "modulos/grupos/indice"
 , "modulos/usuario/indice"
 , "modulos/exemplo/indice"
 , "modulos/funcao/indice"
 ], function(
   aplic
+, Jasny
+, parsleyPtBr
 , ModuloDosGrupos
 , ModuloDeUsuario
 , ModuloDeExemplo

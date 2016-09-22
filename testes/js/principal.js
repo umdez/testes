@@ -4,15 +4,11 @@ define([
 , 'registrador'
 , "roteador"
 , "strophe"
-, "modulos/indice"
-, "parsley.ptbr"
 ], function(
   aplic
 , Regis
 , Roteador
 , Xmpp
-, modulos  // inicia os modulos
-, parsleyPtBr
 ) {
   'use strict';
 

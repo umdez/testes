@@ -1,10 +1,12 @@
 
 define([ 
   "backbone"
+, 'bootstrap'
 , "escopos"
 , "modelos/sessao/sessao"
 ], function(
   Backbone
+, BootStrap
 , Escopos
 , ModeloDeSessao
 ) {

@@ -43,7 +43,7 @@ define([
     },
 
     /* Sempre retorna uma visão existente ou chamará cd() para criar uma nova.
-    */
+     */
     reusarVisao: function(nome, cd) {
       
       if (typeof this.visoes[nome] !== 'undefined') {
