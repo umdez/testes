@@ -44,16 +44,27 @@ define([
       }
 
       this.$el.find('select').on( "change", this.aoSelecionarUmaOpcao);
+
+      //for (var x = 8; x <= 10; x++) {
+      //  var modelo = new this.modFuncao.Modelo({nome: 'Louco '+x})
+      //  modelo.url = gerarUrl('Funcoes')
+      //  modelo.save().done(function( modl){
+      //    colecaoDeFuncoes.add(modl);
+      //  });
+      //}
     },
 
     adcUmaOpcaoDeFuncao: function (funcao) {
       var visaoDeUmaFuncao = new VisaoDeUmaFuncao({ model: funcao });
       this.$el.find('select').append(visaoDeUmaFuncao.render().el); 
+
+     // if (funcao.get('id') > 4) funcao.destroy()
     },
 
     aoSelecionarUmaOpcao: function(evento) {
       var valorDaFuncao = $(evento.currentTarget).val();
       this.modUsuario.evts.trigger('funcao-do-usuario:selecionada', valorDaFuncao);
+      console.log('valor '+ valorDaFuncao)
     }
     
   });

@@ -21,7 +21,7 @@ define([
     },
 
     defaults: {
-      'id': 0
+      'id': null
     , 'nome': ''
     }
 
