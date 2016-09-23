@@ -55,7 +55,7 @@ define([
         this.$el.find('button#cadastrar-usuario').prop("disabled", false); 
       }
 
-      this.visaoDasFuncoes = this.reusarVisao("ModuloUsuario", "VisaoDasFuncoes", function() {
+      this.visaoDasFuncoes = this.reusarVisao("VisaoDeCadastroDeUsuario", "VisaoDasFuncoes", function() {
         return new VisaoDasFuncoes({});
       });
     },
@@ -76,7 +76,10 @@ define([
     },
 
     aoClicarEmCadastrar: function(evento) {
-      if(!this.sePodeCadastrarUsuario) return;
+      if(!this.sePodeCadastrarUsuario) {
+        Registrar('BAIXO', 'Você não possui a permissão necessária para cadastrar usuários.');
+        return;
+      }
 
       var meuObj = this;
       var usuarios = this.modUsuario.Lista;
@@ -94,7 +97,7 @@ define([
 
           // Navega para visão de leitura
           aplic.roteador.navigate(gerarUrl('#Usuario', usuario.id), true);
-          
+
           // Inicia novamente a validação
           meuObj.validacao.reset();
           
@@ -124,7 +127,7 @@ define([
 
     limparFormulario: function() {
       this.funcao_id = null;
-    
+
       this.$el.find('input#jid-usuario').val('');
       this.$el.find('input#senha-usuario').val('');
       this.$el.find('input#nome-usuario').val('');

@@ -1,16 +1,15 @@
+
 define([
   'aplicativo'
 , 'backbone' 
-, "modulos/baseDasVisoes"
-, 'urls'
 , 'handlebars'
+, "modulos/baseDasVisoes"
 , 'text!modulos/usuario/templantes/cadastro/funcoes.html' 
 ], function(
   aplic
 , Backbone
-, Base
-, gerarUrl
 , hbs
+, Base
 , TemplanteFuncoes
 ) {
   'use strict';
@@ -34,37 +33,24 @@ define([
       this.$el.html(this.templante());
 
       var funcoes = this.modFuncao.Lista;
-
       funcoes.on('add', this.adcUmaOpcaoDeFuncao);
 
       if (funcoes.length > 0) {
         _.each(funcoes.models, this.adcUmaOpcaoDeFuncao);
-      } else {
-        funcoes.fetch();
-      }
+      } 
+      funcoes.fetch();
 
       this.$el.find('select').on( "change", this.aoSelecionarUmaOpcao);
-
-      //for (var x = 8; x <= 10; x++) {
-      //  var modelo = new this.modFuncao.Modelo({nome: 'Louco '+x})
-      //  modelo.url = gerarUrl('Funcoes')
-      //  modelo.save().done(function( modl){
-      //    colecaoDeFuncoes.add(modl);
-      //  });
-      //}
     },
 
     adcUmaOpcaoDeFuncao: function (funcao) {
-      var visaoDeUmaFuncao = new VisaoDeUmaFuncao({ model: funcao });
+      var visaoDeUmaFuncao = new VisaoDeUmaFuncao({ 'model': funcao });
       this.$el.find('select').append(visaoDeUmaFuncao.render().el); 
-
-      //if (funcao.get('id') > 4) funcao.destroy()
     },
 
     aoSelecionarUmaOpcao: function(evento) {
       var valorDaFuncao = $(evento.currentTarget).val();
       this.modUsuario.evts.trigger('funcao-do-usuario:selecionada', valorDaFuncao);
-      console.log('valor '+ valorDaFuncao)
     }
     
   });

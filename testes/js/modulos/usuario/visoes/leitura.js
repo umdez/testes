@@ -68,7 +68,10 @@ define([
     },
 
     aoClicarEmSalvar: function(evento) {
-      if(!this.sePodeAtualizarUsuario) return;
+      if(!this.sePodeAtualizarUsuario) {
+        Registrar('BAIXO', 'Você não possui a permissão necessária para salvar os dados de usuários.');
+        return;
+      }
 
       var meuObj = this;
 
@@ -90,7 +93,10 @@ define([
     },
 
     aoClicarEmRemover: function(evento) {
-      if (!this.sePodeRemoverUsuario) return;
+      if (!this.sePodeRemoverUsuario) {
+        Registrar('BAIXO', 'Você não possui a permissão necessária para remover usuários.');
+        return;
+      }
     },
 
     onClose: function() {
