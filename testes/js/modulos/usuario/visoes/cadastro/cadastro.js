@@ -24,8 +24,6 @@ define([
 
     el: 'div.grupo-um div#usuario-cadastro.conteudo-grupo-um',
 
-    sePodeCadastrarUsuario: false,
-
     visaoDasFuncoes: null,
 
     funcao_id: null, 
@@ -49,12 +47,6 @@ define([
 
       this.validacao = this.$el.find('form.cadastro-usuario').parsley();
 
-      this.sePodeCadastrarUsuario = this.verificarEscopo('Usuarios', "CADASTRO");
-
-      if (this.sePodeCadastrarUsuario) {
-        this.$el.find('button#cadastrar-usuario').prop("disabled", false); 
-      }
-
       this.visaoDasFuncoes = this.reusarVisao("VisaoDeCadastroDeUsuario", "VisaoDasFuncoes", function() {
         return new VisaoDasFuncoes({});
       });
@@ -76,11 +68,6 @@ define([
     },
 
     aoClicarEmCadastrar: function(evento) {
-      if(!this.sePodeCadastrarUsuario) {
-        Registrar('BAIXO', 'Você não possui a permissão necessária para cadastrar usuários.');
-        return;
-      }
-
       var meuObj = this;
       var usuarios = this.modUsuario.Lista;
       var ModUsuario = this.modUsuario.Modelo;
@@ -134,13 +121,7 @@ define([
     },
 
     aoReusar: function() {
-      this.sePodeCadastrarUsuario = this.verificarEscopo('Usuarios', "CADASTRO");
 
-      if (this.sePodeCadastrarUsuario) {
-        this.$el.find('button#cadastrar-usuario').prop("disabled", false); 
-      } else {
-        this.$el.find('button#cadastrar-usuario').prop("disabled", true); 
-      }
     }
     
   });
