@@ -96,7 +96,7 @@ define([
           meuObj.limparFormulario();
 
           // Navega para visão de leitura
-          aplic.roteador.navigate(gerarUrl('#Usuario', usuario.id), true);
+          aplic.navegar('#Usuario', usuario.id);
 
           // Inicia novamente a validação
           meuObj.validacao.reset();
