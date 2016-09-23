@@ -8,7 +8,7 @@ define([
 ) {
   'use strict';
 
-  var URLs = {
+  var grupoDeUrls = {
     'Funcoes': function() {
       return "/Funcoes";
     },
@@ -56,7 +56,7 @@ define([
   console.log('(urls) URLs foram carregadas.');
 
   var gerarUrl = function(tipo) {
-    return URLs[tipo] ? URLs[tipo].apply(this, [].slice.call(arguments, 1)) : undefined;
+    return grupoDeUrls[tipo] ? grupoDeUrls[tipo].apply(this, [].slice.call(arguments, 1)) : undefined;
   };
 
   return gerarUrl;

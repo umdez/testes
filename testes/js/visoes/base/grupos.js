@@ -38,11 +38,11 @@ define([
     },
 
     render: function() {
-      this.visaoDoGrupoUm = GDV.reusarVisao("VisaoDoGrupoUm", function() {
+      this.visaoDoGrupoUm = GDV.reusarVisao("Grupos", "VisaoDoGrupoUm", function() {
         return new VisaoDoGrupoUm();
       });
 
-      this.visaoDoGrupoDois = GDV.reusarVisao("VisaoDoGrupoDois", function() {
+      this.visaoDoGrupoDois = GDV.reusarVisao("Grupos", "VisaoDoGrupoDois", function() {
         return new VisaoDoGrupoDois();
       });
     },

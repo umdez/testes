@@ -3,11 +3,13 @@ define([
   "backbone"
 , 'bootstrap'
 , "escopos"
+, "urls"
 , "modelos/sessao/sessao"
 ], function(
   Backbone
 , BootStrap
 , Escopos
+, gerarUrl
 , ModeloDeSessao
 ) {
   'use strict';
@@ -28,6 +30,17 @@ define([
     rotas: {},
 
     escopos: null, 
+
+    navegar: function(tipo, id) {
+      var url = null;
+      
+      if (typeof id !== 'undefined') {
+        url = gerarUrl(tipo, id);
+      } else {
+        url = gerarUrl(tipo);
+      }
+      this.roteador.navigate(url, true);
+    }, 
 
     roteador: null,
 

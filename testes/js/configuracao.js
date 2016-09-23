@@ -29,10 +29,10 @@ require.config({
   
   // Os caminhos de cada um dos nossos modulos.
   paths: {
-    'text': '/bibliotecas/text'                              // Para carregamento de arquivos. por exemplo, os arquivos .html
+    'text': '/bibliotecas/text'                     // Para carregamento de arquivos. por exemplo, os arquivos .html
   , 'underscore': '/bibliotecas/underscore.min'
-  , 'backbone': '/bibliotecas/backbone.min'                  // Backbone
-  , 'backbone.paginator': '/bibliotecas/backbone.paginator'  // Adicionar paginação ao BackBone. @veja https://github.com/backbone-paginator/backbone.paginator
+  , 'backbone': '/bibliotecas/backbone.min'         // Backbone
+  , 'paginator': '/bibliotecas/backbone.paginator'  // Adicionar paginação ao BackBone. @veja https://github.com/backbone-paginator/backbone.paginator
   , 'jquery': '/bibliotecas/jquery.min'
   , 'domready': '/bibliotecas/domready'
   , 'strophe': '/bibliotecas/strophe.min'
@@ -41,6 +41,7 @@ require.config({
   , 'handlebars': '/bibliotecas/handlebars'
   , 'bootstrap': '/bibliotecas/bootstrap.min'
   , 'jasny': '/bibliotecas/jasny-bootstrap.min'
+  , 'stickit': '/bibliotecas/backbone.stickit'
   },
   
   // Lembre-se: Somente usar o shim para aqueles scripts que não são AMD. Ele

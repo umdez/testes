@@ -3,13 +3,11 @@
 define([
   'aplicativo'
 , 'modulosConfig'
-, 'urls'
 , 'handlebars'
 , 'text!templantes/grupos/grupo01.html'
 ], function(
   aplic
 , modulosConfig
-, gerarUrl
 , hbs
 , Templante
 ) {
@@ -57,10 +55,10 @@ define([
 
       switch (id) {
         case 'item-cadastrar-usuario': 
-          aplic.roteador.navigate(gerarUrl('#UsuariosCadastro'), true);
+          aplic.navegar('#UsuariosCadastro');
           break;
         case 'item-pesquisar-usuario': 
-          aplic.roteador.navigate(gerarUrl('#UsuariosListagem'), true);
+          aplic.navegar('#UsuariosListagem');
           break;
       };
     },

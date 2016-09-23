@@ -97,7 +97,7 @@ define([
 
       this.procurarUsuario(id, function(usuario) {
         if (usuario) {
-          meuObj.visaoDeLeitura = meuObj.criarVisao("VisaoDeLeituraDeUsuario", function() {
+          meuObj.visaoDeLeitura = meuObj.criarVisao("ModuloUsuario", "VisaoDeLeitura", function() {
             return new VisaoDeLeitura({ 'model': usuario });
           });
           $('div.grupo-um div#usuario-leitura.conteudo-grupo-um').html(meuObj.visaoDeLeitura.render().el);
@@ -111,10 +111,12 @@ define([
     },
 
     cadastroDeUsuario: function () {
+      var ModUsuario = this.modUsuario.Modelo;
+
       Registrar('BAIXO', 'Cadastro de usuario.');
 
-      this.visaoDeCadastro = this.reusarVisao("VisaoDeCadastroDeUsuario", function() {
-        return new VisaoDeCadastro();
+      this.visaoDeCadastro = this.reusarVisao("ModuloUsuario", "VisaoDeCadastro", function() {
+        return new VisaoDeCadastro({ 'model': new ModUsuario({}) });
       });
       this.apresentarConteudo('div#usuario-cadastro');
     },
@@ -122,7 +124,7 @@ define([
     paginacaoDeUsuario: function() {
       Registrar('BAIXO', 'Paginação de usuarios.');
 
-      this.visaoDePaginacao = this.reusarVisao("VisaoDePaginacaoDeUsuario", function() {
+      this.visaoDePaginacao = this.reusarVisao("ModuloUsuario", "VisaoDePaginacao", function() {
         return new VisaoDePaginacao();
       });
       this.apresentarConteudo('div#usuario-pesquisa');   
@@ -130,18 +132,18 @@ define([
 
     procurarUsuario: function(id, cd) {
       var usuarios = this.modUsuario.Lista;
-      var Modelo = this.modUsuario.Modelo;
+      var ModUsuario = this.modUsuario.Modelo;
       var usuario = usuarios.get(id);
       
       if (!usuario) {
-        usuario = new Modelo({ 'id': id });
+        usuario = new ModUsuario({ 'id': id });
       } 
 
       usuario.fetch({
         reset: true
-      , success: function (modelo, resposta, opcoes) {
-          usuarios.add(modelo, {merge: true});
-          cd(modelo);
+      , success: function (usuario, resposta, opcoes) {
+          usuarios.add(usuario, {merge: true});
+          cd(usuario);
         }
       , error: function (modelo, resposta, opcoes) {
           Registrar('BAIXO', 'Não foi possível requisitar dados deste usuário.');

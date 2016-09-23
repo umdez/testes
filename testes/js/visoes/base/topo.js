@@ -1,13 +1,11 @@
 
 define([
   'aplicativo'
-, 'urls'
 , 'handlebars'
 , 'text!templantes/base/topo.html'
 ], function(
   aplic
-, gerarUrl
-, hbs
+, hbs 
 , Templante
 ) {
   'use strict';
@@ -54,10 +52,10 @@ define([
 
       switch (id) {
         case 'item-grupo-um': 
-          aplic.roteador.navigate(gerarUrl('#GrupoUm'), true);
+          aplic.navegar('#GrupoUm'); 
           break;
         case 'item-grupo-dois': 
-          aplic.roteador.navigate(gerarUrl('#GrupoDois'), true);
+          aplic.navegar('#GrupoDois');
           break;
       };
     },
@@ -67,7 +65,7 @@ define([
 
       aplic.sessao.sair({
         'sucesso': function(modulo, resposta) {
-          aplic.roteador.navigate('', true);
+          aplic.navegar('', null);
           Registrar('BAIXO', 'Você saiu do painel com sucesso.');
         },
         'erro': function(modelo, resposta) {

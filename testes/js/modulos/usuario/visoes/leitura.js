@@ -22,9 +22,6 @@ define([
 
     tagName: "div",
 
-    jid: null,
-    nome: null,
-
     sePodeAtualizarUsuario: false,
     sePodeRemoverUsuario: false,
     
@@ -37,7 +34,8 @@ define([
     render: function() {
 
       this.$el.html(this.templante(this.model.toJSON()));
-      
+      this.stickit();
+
       this.validacao = this.$el.find('form.leitura-usuario').parsley();
 
       this.sePodeAtualizarUsuario = this.verificarEscopo('Usuarios', "ATUALIZACAO");
@@ -53,20 +51,15 @@ define([
       return this;
     },
 
+    bindings: {
+      'input#jid-usuario': 'jid',
+      'input#nome-usuario': 'nome'
+    },
+
     events: {
       'submit form.leitura-usuario': 'aoClicarEmSubmeter',
       'click button#salvar-usuario': 'aoClicarEmSalvar',
       'click button#remover-usuario': 'aoClicarEmRemover',
-      'change input#jid-usuario': 'aoEscreverAtualizarJid',
-      'change input#nome-usuario': 'aoEscreverAtualizarNome'
-    },
-    
-    aoEscreverAtualizarJid: function(evento) {
-      this.jid = this.$el.find('input#jid-usuario').val();
-    },
-
-    aoEscreverAtualizarNome: function(evento) {
-      this.nome = this.$el.find('input#nome-usuario').val();
     },
 
     aoClicarEmSubmeter: function(evento) {
@@ -80,14 +73,6 @@ define([
       var meuObj = this;
 
       this.validacao.whenValid({}).then(function() {
-        
-        // Ter certeza que possuimos os dados de entrada atuais
-        meuObj.pegarEntradas();
- 
-        meuObj.model.set({ 
-          'jid': meuObj.jid,
-          'nome': meuObj.nome
-        });
 
         meuObj.model.save().done(function(modelo, resposta, opcoes) {
           
@@ -106,11 +91,6 @@ define([
 
     aoClicarEmRemover: function(evento) {
       if (!this.sePodeRemoverUsuario) return;
-    },
-
-    pegarEntradas: function() {
-      this.jid = this.$el.find('input#jid-usuario').val();
-      this.nome = this.$el.find('input#nome-usuario').val();
     },
 
     onClose: function() {

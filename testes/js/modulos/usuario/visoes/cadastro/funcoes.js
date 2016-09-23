@@ -33,14 +33,14 @@ define([
     render: function() {
       this.$el.html(this.templante());
 
-      var colecaoDeFuncoes = this.modFuncao.Lista;
+      var funcoes = this.modFuncao.Lista;
 
-      colecaoDeFuncoes.on('add', this.adcUmaOpcaoDeFuncao);
+      funcoes.on('add', this.adcUmaOpcaoDeFuncao);
 
-      if (colecaoDeFuncoes.length > 0) {
-        _.each(colecaoDeFuncoes.models, this.adcUmaOpcaoDeFuncao);
+      if (funcoes.length > 0) {
+        _.each(funcoes.models, this.adcUmaOpcaoDeFuncao);
       } else {
-        colecaoDeFuncoes.fetch();
+        funcoes.fetch();
       }
 
       this.$el.find('select').on( "change", this.aoSelecionarUmaOpcao);
@@ -58,7 +58,7 @@ define([
       var visaoDeUmaFuncao = new VisaoDeUmaFuncao({ model: funcao });
       this.$el.find('select').append(visaoDeUmaFuncao.render().el); 
 
-     // if (funcao.get('id') > 4) funcao.destroy()
+      //if (funcao.get('id') > 4) funcao.destroy()
     },
 
     aoSelecionarUmaOpcao: function(evento) {

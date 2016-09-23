@@ -2,6 +2,7 @@ define([
   "aplicativo"
 , 'jasny'
 , "parsley.ptbr"
+, 'stickit'
 , "modulos/grupos/indice"
 , "modulos/usuario/indice"
 , "modulos/exemplo/indice"
@@ -10,6 +11,7 @@ define([
   aplic
 , Jasny
 , parsleyPtBr
+, stickit
 , ModuloDosGrupos
 , ModuloDeUsuario
 , ModuloDeExemplo

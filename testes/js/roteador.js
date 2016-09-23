@@ -29,7 +29,7 @@ define([
     initialize: function () {
       Registrar('BAIXO', 'Iniciando roteador.');
 
-      this.visaoDeBase = GDV.reusarVisao("VisaoDeBase", function() {
+      this.visaoDeBase = GDV.reusarVisao("Nucleo", "VisaoDeBase", function() {
         return new VisaoDeBase();
       });
     },

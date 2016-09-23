@@ -24,11 +24,10 @@ define([
 
     el: 'div.grupo-um div#usuario-cadastro.conteudo-grupo-um',
 
+    sePodeCadastrarUsuario: false,
+
     visaoDasFuncoes: null,
 
-    jid: null,  
-    senha: null, 
-    nome: null,
     funcao_id: null, 
 
     templante: hbs.compile(TemplanteCadastro), 
@@ -38,72 +37,76 @@ define([
     validacao: null,
 
     initialize: function() {
-      _.bindAll(this, 'aoSelecionarUmaFuncaoDeUsuario');
+      _.bindAll(this, 'aoSelecionarUmaOpcaoDeFuncao');
 
-      this.listenTo(this.modUsuario.evts, 'funcao-do-usuario:selecionada', this.aoSelecionarUmaFuncaoDeUsuario);
+      this.listenTo(this.modUsuario.evts, 'funcao-do-usuario:selecionada', this.aoSelecionarUmaOpcaoDeFuncao);
       this.render();
     },
 
     render: function() {
       this.$el.html(this.templante({}));
+      this.stickit();
+
       this.validacao = this.$el.find('form.cadastro-usuario').parsley();
 
-      this.visaoDasFuncoes = this.reusarVisao("VisaoDeFuncaoDoCadastroDeUsuarios", function() {
+      this.sePodeCadastrarUsuario = this.verificarEscopo('Usuarios', "CADASTRO");
+
+      if (this.sePodeCadastrarUsuario) {
+        this.$el.find('button#cadastrar-usuario').prop("disabled", false); 
+      }
+
+      this.visaoDasFuncoes = this.reusarVisao("ModuloUsuario", "VisaoDasFuncoes", function() {
         return new VisaoDasFuncoes({});
       });
+    },
+
+    bindings: {
+      'input#jid-usuario': 'jid',
+      'input#nome-usuario': 'nome',
+      'input#senha-usuario': 'senha'
     },
 
     events: {
       'submit form.cadastro-usuario': 'aoClicarEmSubmeter',
       'click button#cadastrar-usuario': 'aoClicarEmCadastrar',
-      'change input#jid-usuario': 'aoEscreverAtualizarJid',
-      'change input#senha-usuario': 'aoEscreverAtualizarSenha',
-      'change input#nome-usuario': 'aoEscreverAtualizarNome'
     },
 
-    aoSelecionarUmaFuncaoDeUsuario: function(valorDaFuncao) {
+    aoSelecionarUmaOpcaoDeFuncao: function(valorDaFuncao) {
       this.funcao_id = valorDaFuncao;
     },
 
-    aoEscreverAtualizarJid: function(evento) {
-      this.jid = this.$el.find('input#jid-usuario').val();
-    },
-
-    aoEscreverAtualizarSenha: function(evento) {
-      this.senha = this.$el.find('input#senha-usuario').val();
-    },
-
-    aoEscreverAtualizarNome: function(evento) {
-      this.nome = this.$el.find('input#nome-usuario').val();
-    },
-
     aoClicarEmCadastrar: function(evento) {
-      
+      if(!this.sePodeCadastrarUsuario) return;
+
       var meuObj = this;
       var usuarios = this.modUsuario.Lista;
-      var Modelo = this.modUsuario.Modelo;
+      var ModUsuario = this.modUsuario.Modelo;
 
       this.validacao.whenValid({}).then(function() {
 
-        var usuario = new Modelo({
-          'jid': meuObj.jid, 
-          'nome': meuObj.nome, 
-          'senha': meuObj.senha,
-          'funcao_id': meuObj.funcao_id
-        });
-        usuario.url = gerarUrl('Usuarios');
+        meuObj.model.set({'funcao_id': meuObj.funcao_id });
+        meuObj.model.url = gerarUrl('Usuarios');
 
-        usuario.save().done(function(modelo, resposta, opcoes) {
-          usuarios.add(modelo);
+        meuObj.model.save().done(function(usuario, resposta, opcoes) {
+          usuarios.add(usuario);
 
           meuObj.limparFormulario();
 
           // Navega para visão de leitura
-          aplic.roteador.navigate(gerarUrl('#Usuario', modelo.id), true);
+          aplic.roteador.navigate(gerarUrl('#Usuario', usuario.id), true);
           
           // Inicia novamente a validação
           meuObj.validacao.reset();
           
+          // Remove bindings deste modelo salvo
+          meuObj.unstickit(meuObj.model);
+
+          // Inicia novo modelo
+          meuObj.model = new ModUsuario({});
+
+          // Adiciona bindings para novo modelo
+          meuObj.stickit(meuObj.model);
+
           Registrar('BAIXO', 'Novo usuario cadastrado com sucesso');
         }).fail(function(modelo, resposta, opcoes) {
           Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
@@ -120,11 +123,21 @@ define([
     },
 
     limparFormulario: function() {
-      this.jid = this.senha = this.nome = null;
+      this.funcao_id = null;
     
       this.$el.find('input#jid-usuario').val('');
       this.$el.find('input#senha-usuario').val('');
       this.$el.find('input#nome-usuario').val('');
+    },
+
+    aoReusar: function() {
+      this.sePodeCadastrarUsuario = this.verificarEscopo('Usuarios', "CADASTRO");
+
+      if (this.sePodeCadastrarUsuario) {
+        this.$el.find('button#cadastrar-usuario').prop("disabled", false); 
+      } else {
+        this.$el.find('button#cadastrar-usuario').prop("disabled", true); 
+      }
     }
     
   });

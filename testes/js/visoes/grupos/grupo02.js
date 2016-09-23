@@ -1,13 +1,11 @@
 define([
   'aplicativo'
 , 'modulosConfig'
-, 'urls'
 , 'handlebars'
 , 'text!templantes/grupos/grupo02.html'
 ], function(
   aplic
 , modulosConfig
-, gerarUrl
 , hbs
 , Templante
 ) {

@@ -13,45 +13,66 @@ define([
 
     /* Possui todas as referencias às visões existentes. 
      */
-    visoes: {},
+    visoes: [],
   
     /* Fecha uma visão existente. 
      */
-    fecharVisao: function(nome) {
-      if (typeof this.visoes[nome] !== 'undefined') {
-        // Limpa a visão
-        // Remove todos os eventos delegados a visão.
-        this.visoes[nome].undelegateEvents();
+    fecharVisao: function(envolucro, nome) {
+      if (typeof this.visoes[envolucro][nome] !== 'undefined') {
+        // Limpa a visão removendo todos os eventos delegados a visão.
+        this.visoes[envolucro][nome].undelegateEvents();
         // Remove a visão do DOM.
-        this.visoes[nome].remove();
+        this.visoes[envolucro][nome].remove();
         // Remove todas as funções CDs (callbacks)
-        this.visoes[nome].off();
+        this.visoes[envolucro][nome].off();
         
         // Se a visão possuir uma função para chamarmos depois da limpeza.
-        if (typeof this.visoes[nome].aoFechar === 'function') {
-          this.visoes[nome].aoFechar();
+        if (typeof this.visoes[envolucro][nome].aoFechar === 'function') {
+          this.visoes[envolucro][nome].aoFechar();
         }
       }
     },
     
     /* Sempre limpa uma visão existente antes de criar uma nova visão. 
      */
-    criarVisao: function(nome, cd) {
-      this.fecharVisao(nome);
-      this.visoes[nome] = cd();
-      return this.visoes[nome];
+    criarVisao: function(envolucro, nome, cd) {
+      console.log('(GDV) Criando a visão '+ nome +' do envolucro '+ envolucro);
+      if (typeof this.visoes[envolucro] !== 'undefined') {
+        this.fecharVisao(envolucro, nome);
+        this.visoes[envolucro][nome] = cd();
+      } else {
+        this.visoes[envolucro] = [];
+        this.visoes[envolucro][nome] = cd();
+      }
+      
+      // Chamada sempre que a visão for ser recriada
+      if (typeof this.visoes[envolucro][nome].aoRecriar === 'function') {
+        this.visoes[envolucro][nome].aoRecriar();
+      }
+
+      return this.visoes[envolucro][nome];
     },
 
     /* Sempre retorna uma visão existente ou chamará cd() para criar uma nova.
      */
-    reusarVisao: function(nome, cd) {
-      
-      if (typeof this.visoes[nome] !== 'undefined') {
-        return this.visoes[nome];
+    reusarVisao: function(envolucro, nome, cd) {
+      console.log('(GDV) Reusando a visão '+ nome +' do envolucro '+ envolucro);
+      if ((typeof this.visoes[envolucro] !== 'undefined') ) {
+        if (typeof this.visoes[envolucro][nome] === 'undefined') {
+           this.visoes[envolucro][nome] = cd();
+        } 
+      } else {
+        this.visoes[envolucro] = [];
+        // Executa cd() para retornar nova visão.
+        this.visoes[envolucro][nome] = cd();
       }
-      // Executa cd() para retornar nova visão.
-      this.visoes[nome] = cd();
-      return this.visoes[nome];
+
+      // Chamada sempre que a visão for ser reusada
+      if (typeof this.visoes[envolucro][nome].aoReusar === 'function') {
+        this.visoes[envolucro][nome].aoReusar();
+      }
+
+      return this.visoes[envolucro][nome];
     }
  
   };

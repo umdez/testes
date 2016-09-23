@@ -1,11 +1,9 @@
 define([
   'modulosConfig'
-, 'urls'
 , 'handlebars'
 , 'text!templantes/grupos/grupo03.html'
 ], function(
   modulosConfig
-, gerarUrl
 , hbs
 , Templante
 ) {
