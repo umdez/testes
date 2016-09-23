@@ -62,14 +62,14 @@ define([
       // esconde todas visões de base
       this.$el.find('div.paginas-base').hide();
 
-      // Sempre renderizar a cada nova autenticacao.
-      this.visaoDoTopoPainel = GDV.criarVisao("Nucleo", "VisaoDoTopoPainel", function() {
-        return new VisaoDoTopoPainel();
-      });
-      this.$el.find('div#painel > div#topo').html(this.visaoDoTopoPainel.render().el);
-
       if(aplic.sessao.get('autenticado')) {
         Registrar('BAIXO', 'Usuário realizou a entrada com sucesso. Mudando visão.');
+        
+        // Sempre renderizar a cada nova autenticacao.
+        this.visaoDoTopoPainel = GDV.criarVisao("Nucleo", "VisaoDoTopoPainel", function() {
+          return new VisaoDoTopoPainel();
+        });
+        this.$el.find('div#painel > div#topo').html(this.visaoDoTopoPainel.render().el);
         this.$el.find('div#painel').show();
       } else {
         Registrar('BAIXO', 'Usuário realizou a saida com sucesso. Mudando visão.');

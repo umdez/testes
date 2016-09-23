@@ -20,8 +20,6 @@ define([
     
     sessao: new ModeloDeSessao({}),
 
-    depuracao: 'BAIXO',
-
     // eventos globais
     evts: _.extend({}, Backbone.Events),
 
