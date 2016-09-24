@@ -150,6 +150,10 @@ define([
       return this.visoes[envolucro][nome].visao;
     },
 
+    removerVisao: function() {
+
+    },
+
     /* recria uma subvisão para determinada visão 
      */
     criarSubVisao: function(opcoes, cd) {
@@ -207,8 +211,23 @@ define([
 
     /* Remove uma ou todas as sub visões
      */
-    removerSubVisao: function(envolucro, nomeVisao, nomeSubVisao, cd) {
-      // se nomeSubVisao for null então remover todas sub visões
+    removerSubVisao: function(opcoes, cd) {
+      var envolucro = opcoes.envolucro;
+      var nomeVisao = opcoes.nome;
+      var nomeSubVisao = opcoes.subVisao;
+
+      if (nomeSubVisao === false) {
+        // removemos todas as sub visões
+
+        //_.each(this.childViews, function(subVisao){
+        //  this.fecharVisao()
+        //  if (childView.close){
+        //    childView.close();
+        //  }
+        //});
+      } else {
+        //var seSubVisaoExiste = this.verificarSubVisao(envolucro, nomeVisao, nomeSubVisao);
+      }
     }
   
   };

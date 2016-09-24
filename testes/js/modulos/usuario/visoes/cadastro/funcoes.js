@@ -64,7 +64,7 @@ define([
 
     aoSelecionarUmaOpcao: function(evento) {
       var valorDaFuncao = $(evento.currentTarget).val();
-      this.modUsuario.evts.trigger('funcao-do-usuario:selecionada', valorDaFuncao);
+      this.modUsuario.evts.trigger('funcao-do-usuario-cadastro:selecionada', valorDaFuncao);
     },
 
     aoReusar: function() {

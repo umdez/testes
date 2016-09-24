@@ -37,7 +37,7 @@ define([
     initialize: function() {
       _.bindAll(this, 'aoSelecionarUmaOpcaoDeFuncao');
 
-      this.listenTo(this.modUsuario.evts, 'funcao-do-usuario:selecionada', this.aoSelecionarUmaOpcaoDeFuncao);
+      this.listenTo(this.modUsuario.evts, 'funcao-do-usuario-cadastro:selecionada', this.aoSelecionarUmaOpcaoDeFuncao);
       this.render();
     },
 
