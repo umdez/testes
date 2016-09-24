@@ -99,8 +99,14 @@ define([
       }
     },
 
-    onClose: function() {
-      
+    aoFechar: function() {
+      Registrar('BAIXO', 'A visão (VisaoDeLeitura) acaba de fechar.');
+      // quando fecharmos essa visão remover visões filhas?
+    },
+
+    aoRecriar: function() {
+      Registrar('BAIXO', 'A visão (VisaoDeLeitura) acaba de ser recriada.');
+      // remover visões filhas e recria-las?
     }
   });
 

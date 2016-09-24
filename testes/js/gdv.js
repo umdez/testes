@@ -15,20 +15,62 @@ define([
      */
     visoes: [],
   
+    verificarEnvolucro: function(envolucro) {
+      return (typeof this.visoes[envolucro] !== 'undefined');
+    },
+
+    verificarVisao: function(envolucro, nome) {
+      if (this.verificarEnvolucro(envolucro)) {
+        return (typeof this.visoes[envolucro][nome] !== 'undefined');
+      }
+      return false;
+    },
+
+    verificarSubVisao: function(envolucro, nomeVisao, nomeSubVisao) {
+      if (this.verificarVisao(envolucro, nomeVisao)) {
+        return (typeof this.visoes[envolucro][nomeVisao].subVisoes[nomeSubVisao] !== 'undefined');
+      }
+      return false;
+    },
+
+    buscarEnvolucro: function(envolucro) {
+      if (this.verificarEnvolucro(envolucro)) {
+        return this.visoes[envolucro];
+      } 
+      console.log('(gdv) O envolucro '+ envolucro + 'não foi encontrado');
+      return null;
+    },
+
+    buscarVisao: function(envolucro, nome) {
+      if (this.verificarVisao(envolucro, nome)) {
+        return this.visoes[envolucro][nome];
+      } 
+      console.log('(gdv) A visão '+ nome + 'não foi encontrado');
+      return null;
+    },
+
+    buscarSubVisao: function(envolucro, nomeVisao, nomeSubVisao) {
+      if (this.verificarSubVisao(envolucro, nomeVisao, nomeSubVisao)) {
+        return this.visoes[envolucro][nome].subVisoes[nomeSubVisao];
+      }
+      console.log('(gdv) A sub visão '+ nomeSubVisao + 'não foi encontrada.');
+      return null;
+    },
+
     /* Fecha uma visão existente. 
      */
-    fecharVisao: function(envolucro, nome) {
-      if (typeof this.visoes[envolucro][nome] !== 'undefined') {
+    fecharVisao: function(visao) {
+      if (typeof visao !== 'undefined') {
         // Limpa a visão removendo todos os eventos delegados a visão.
-        this.visoes[envolucro][nome].undelegateEvents();
+        visao.undelegateEvents();
         // Remove a visão do DOM.
-        this.visoes[envolucro][nome].remove();
+        visao.remove();
         // Remove todas as funções CDs (callbacks)
-        this.visoes[envolucro][nome].off();
-        
+        visao.off();
+      
         // Se a visão possuir uma função para chamarmos depois da limpeza.
-        if (typeof this.visoes[envolucro][nome].aoFechar === 'function') {
-          this.visoes[envolucro][nome].aoFechar();
+        if (typeof visao.aoFechar === 'function') {
+          visao.aoFechar();
         }
       }
     },
@@ -37,44 +79,138 @@ define([
      */
     criarVisao: function(envolucro, nome, cd) {
       console.log('(GDV) Criando a visão '+ nome +' do envolucro '+ envolucro);
-      if (typeof this.visoes[envolucro] !== 'undefined') {
-        this.fecharVisao(envolucro, nome);
-        this.visoes[envolucro][nome] = cd();
-      } else {
+      
+      var seEnvolucroJaExiste = this.verificarEnvolucro(envolucro);
+      var seVisaoJaExiste = this.verificarVisao(envolucro, nome);
+      var seEnvolucroNaoExiste = !seEnvolucroJaExiste;
+      var seVisaoNaoExiste = !seVisaoJaExiste;
+
+      if (seEnvolucroJaExiste && seVisaoJaExiste) {
+        // envolucro e visão já iniciados
+        this.fecharVisao(this.visoes[envolucro][nome].visao);
+        this.visoes[envolucro][nome].visao = cd();
+      } else if (seEnvolucroJaExiste && seVisaoNaoExiste) {
+        // apenas a visao ainda não existe
+        this.visoes[envolucro][nome] = {
+          visao: null,
+          subVisoes: [ ]
+        };
+        this.visoes[envolucro][nome].visao = cd();
+      } else if (seEnvolucroNaoExiste) {
+        // envolucro e visão tem que ser iniciados
         this.visoes[envolucro] = [];
-        this.visoes[envolucro][nome] = cd();
+        this.visoes[envolucro][nome] = {
+          visao: null,
+          subVisoes: [ ]
+        };
+        this.visoes[envolucro][nome].visao = cd();
       }
       
       // Chamada sempre que a visão for ser recriada
-      if (typeof this.visoes[envolucro][nome].aoRecriar === 'function') {
-        this.visoes[envolucro][nome].aoRecriar();
+      if (typeof this.visoes[envolucro][nome].visao.aoRecriar === 'function') {
+        this.visoes[envolucro][nome].visao.aoRecriar();
       }
 
-      return this.visoes[envolucro][nome];
+      return this.visoes[envolucro][nome].visao;
     },
 
     /* Sempre retorna uma visão existente ou chamará cd() para criar uma nova.
      */
     reusarVisao: function(envolucro, nome, cd) {
       console.log('(GDV) Reusando a visão '+ nome +' do envolucro '+ envolucro);
-      if ((typeof this.visoes[envolucro] !== 'undefined') ) {
-        if (typeof this.visoes[envolucro][nome] === 'undefined') {
-           this.visoes[envolucro][nome] = cd();
-        } 
-      } else {
+
+      var seEnvolucroJaExiste = this.verificarEnvolucro(envolucro);
+      var seVisaoJaExiste = this.verificarVisao(envolucro, nome);
+      var seEnvolucroNaoExiste = !seEnvolucroJaExiste;
+      var seVisaoNaoExiste = !seVisaoJaExiste;
+
+      if (seEnvolucroJaExiste && seVisaoNaoExiste) {
+        // Cria mais uma visão para o envolucro já iniciado
+        this.visoes[envolucro][nome] = {
+          visao: null,
+          subVisoes: [ ]
+        };
+        this.visoes[envolucro][nome].visao = cd();
+      } else if (seEnvolucroNaoExiste) {
+        // inicia envolucro e também uma visão
         this.visoes[envolucro] = [];
+        this.visoes[envolucro][nome] = {
+          visao: null,
+          subVisoes: [ ]
+        };
         // Executa cd() para retornar nova visão.
-        this.visoes[envolucro][nome] = cd();
+        this.visoes[envolucro][nome].visao = cd();
       }
 
       // Chamada sempre que a visão for ser reusada
-      if (typeof this.visoes[envolucro][nome].aoReusar === 'function') {
-        this.visoes[envolucro][nome].aoReusar();
+      if (typeof this.visoes[envolucro][nome].visao.aoReusar === 'function') {
+        this.visoes[envolucro][nome].visao.aoReusar();
       }
 
-      return this.visoes[envolucro][nome];
+      return this.visoes[envolucro][nome].visao;
+    },
+
+    /* recria uma subvisão para determinada visão 
+     */
+    criarSubVisao: function(opcoes, cd) {
+      var envolucro = opcoes.envolucro;
+      var nomeVisao = opcoes.visao;
+      var nomeSubVisao = opcoes.subVisao;
+
+      var seVisaoExiste = this.verificarVisao(envolucro, nomeVisao);
+      var seSubVisaoExiste = this.verificarSubVisao(envolucro, nomeVisao, nomeSubVisao);
+      var visao = this.buscarVisao(envolucro, nomeVisao);
+      
+      if (seVisaoExiste) {
+        if (seSubVisaoExiste) {
+          this.fecharVisao(visao.subVisoes[nomeSubVisao]); 
+        } 
+        visao.subVisoes[nomeSubVisao] = cd();
+
+        // Chamada sempre que a sub visão for ser recriada
+        if ((typeof visao.subVisoes[nomeSubVisao].aoRecriar) === 'function') {
+          visao.subVisoes[nomeSubVisao].aoRecriar();
+        }
+        return visao.subVisoes[nomeSubVisao];
+      } else {
+        console.log('(GDV) Tentando recriar sub visão de uma visão('+ nomeVisao +') que não pode ser encontrada.');
+      }
+      return null;
+    },
+
+    /* Reusa uma sub visao para determinada visão
+     */
+    reusarSubVisao: function(opcoes, cd) {
+      var envolucro = opcoes.envolucro;
+      var nomeVisao = opcoes.visao;
+      var nomeSubVisao = opcoes.subVisao;
+
+      var seVisaoExiste = this.verificarVisao(envolucro, nomeVisao);
+      var seSubVisaoNaoExiste = !this.verificarSubVisao(envolucro, nomeVisao, nomeSubVisao);
+      var visao = this.buscarVisao(envolucro, nomeVisao);
+
+      if (seVisaoExiste) {
+        if (seSubVisaoNaoExiste) {
+          visao.subVisoes[nomeSubVisao] = cd();
+        } 
+
+        // Chamada sempre que a sub visão for ser reusada
+        if ((typeof visao.subVisoes[nomeSubVisao].aoReusar) === 'function') {
+          visao.subVisoes[nomeSubVisao].aoReusar();
+        }
+        return visao.subVisoes[nomeSubVisao];
+      } else {
+        console.log('(GDV) Tentando reusar sub visão de uma visão ('+ nomeVisao +') que não pode ser encontrada.');
+      }
+      return null;
+    },
+
+    /* Remove uma ou todas as sub visões
+     */
+    removerSubVisao: function(envolucro, nomeVisao, nomeSubVisao, cd) {
+      // se nomeSubVisao for null então remover todas sub visões
     }
- 
+  
   };
 
   console.log('(gdv) Gerente de visões foi carregado com sucesso.');

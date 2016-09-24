@@ -14,6 +14,8 @@ define([
 ) {
   'use strict';
 
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/visoes/cadastro/funcoes' });
+
   var VisaoDasFuncoes = Backbone.View.extend({
 
     el: 'div.grupo-um div#usuario-cadastro.conteudo-grupo-um form.cadastro-usuario div#funcoes-usuario',
@@ -24,7 +26,7 @@ define([
     modFuncao: aplic.modulo("Funcao"),
 
     initialize: function() {
-      _.bindAll(this, 'adcUmaOpcaoDeFuncao', 'aoSelecionarUmaOpcao'); 
+      _.bindAll(this, 'adcUmaOpcaoDeFuncao', 'aoSelecionarUmaOpcao', 'remUmaOpcaoDeFuncao'); 
 
       this.render();
     },
@@ -44,13 +46,29 @@ define([
     },
 
     adcUmaOpcaoDeFuncao: function (funcao) {
-      var visaoDeUmaFuncao = new VisaoDeUmaFuncao({ 'model': funcao });
+      funcao.on('destroy', this.remUmaOpcaoDeFuncao);
+
+      var visaoDeUmaFuncao = this.reusarSubVisao({ 
+        'envolucro': 'VisaoDeCadastroDeUsuario',
+        'visao': 'VisaoDasFuncoes',
+        'subVisao': funcao.get('id')
+      }, function() {
+        return new VisaoDeUmaFuncao({ 'model': funcao });
+      });
       this.$el.find('select').append(visaoDeUmaFuncao.render().el); 
+    },
+    
+    remUmaOpcaoDeFuncao: function() {
+
     },
 
     aoSelecionarUmaOpcao: function(evento) {
       var valorDaFuncao = $(evento.currentTarget).val();
       this.modUsuario.evts.trigger('funcao-do-usuario:selecionada', valorDaFuncao);
+    },
+
+    aoReusar: function() {
+      Registrar('BAIXO', 'A visão (VisaoDasFuncoes) acaba de ser reusada.');
     }
     
   });
@@ -60,10 +78,9 @@ define([
     tagName:'option',
     
     initialize: function() {
-      _.bindAll(this, 'render', 'remover');
+      _.bindAll(this, 'render', 'aoReusar');
 
       this.model.on('change:nome', this.render);
-      this.model.on('destroy', this.remover);
       
       this.render();
     },
@@ -73,17 +90,14 @@ define([
       return this; 
     },
 
-    remover: function() {
-      console.log('Removendo eu mesmo');
-      this.undelegateEvents();
-      this.remove();
-      this.off();
-    },
- 
     attributes : function () {
       return {
         'value': this.model.get('id')
       };
+    },
+
+    aoReusar: function() {
+      Registrar('BAIXO', 'A visão (VisaoDeUmaFuncao)['+ this.model.get('id') +'] acaba de ser reusada.');
     }
   });
 

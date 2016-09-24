@@ -18,7 +18,7 @@ define([
 ) {
   'use strict';
 
-  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/visoes/cadastro' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/visoes/cadastro/cadastro' });
 
   var VisaoDeCadastro = Backbone.View.extend({
 
@@ -121,7 +121,7 @@ define([
     },
 
     aoReusar: function() {
-
+      Registrar('BAIXO', 'A visão (VisaoDeCadastro) acaba de ser reusada.');
     }
     
   });
