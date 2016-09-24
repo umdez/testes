@@ -25,10 +25,18 @@ define([
     modUsuario: aplic.modulo("Usuario"),
     modFuncao: aplic.modulo("Funcao"),
 
-    initialize: function() {
-      _.bindAll(this, 'adcUmaOpcaoDeFuncao', 'aoSelecionarUmaOpcao', 'remUmaOpcaoDeFuncao'); 
+    opcoes: null, 
 
-      this.render();
+    initialize: function(opcoes) {
+      _.bindAll(this, 
+        'adcUmaOpcaoDeFuncao', 
+        'aoSelecionarUmaOpcao', 
+        'render', 
+        'remUmaOpcaoDeFuncao', 
+        'aoRecriar'
+      ); 
+
+      this.opcoes = opcoes;
     },
 
     render: function() {
@@ -46,8 +54,9 @@ define([
 
       return this;
     },
-
+ 
     adcUmaOpcaoDeFuncao: function (funcao) {
+      var meuObj = this;
       funcao.on('destroy', this.remUmaOpcaoDeFuncao);
 
       var visaoDeUmaFuncao = this.criarSubVisao({ 
@@ -55,13 +64,17 @@ define([
         'visao': 'VisaoDasFuncoes',
         'subVisao': funcao.get('id')
       }, function() {
-        return new VisaoDeUmaFuncao({ 'model': funcao });
+        return new VisaoDeUmaFuncao({ 'model': funcao, 'funcao_id': meuObj.opcoes.funcao_id });
       });
       this.$el.find('select').append(visaoDeUmaFuncao.render().el); 
     },
     
     remUmaOpcaoDeFuncao: function() {
-      // usar gerente de visoes para remover esta visão filha????
+      //this.removerSubVisao({
+      //  'envolucro': 'VisaoDeLeituraDeUsuario',
+      //  'visao': 'VisaoDasFuncoes',
+      //  'subVisao': funcao.get('id')
+      //});
     },
 
     aoSelecionarUmaOpcao: function(evento) {
@@ -79,15 +92,21 @@ define([
  
     tagName:'option',
     
-    initialize: function() {
-      _.bindAll(this, 'render', 'aoRecriar');
+    opcoes: null,
 
+    initialize: function(opcoes) {
+      _.bindAll(this, 'render', 'aoRecriar');
+       
+      this.opcoes = opcoes;
       this.model.on('change:nome', this.render);
-      
       this.render();
     },
 
     render: function() {
+      // selecionamos a funcao deste usuario
+      if (this.opcoes.funcao_id === this.model.get('id')){
+        this.$el.prop('selected','selected');
+      };
       this.$el.text(this.model.get('nome'));
       return this; 
     },

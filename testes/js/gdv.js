@@ -211,22 +211,30 @@ define([
 
     /* Remove uma ou todas as sub visões
      */
-    removerSubVisao: function(opcoes, cd) {
+    removerSubVisao: function(opcoes) {
       var envolucro = opcoes.envolucro;
       var nomeVisao = opcoes.nome;
       var nomeSubVisao = opcoes.subVisao;
 
-      if (nomeSubVisao === false) {
-        // removemos todas as sub visões
+      var seVisaoExiste = this.verificarVisao(envolucro, nomeVisao);
 
-        //_.each(this.childViews, function(subVisao){
-        //  this.fecharVisao()
-        //  if (childView.close){
-        //    childView.close();
-        //  }
-        //});
-      } else {
-        //var seSubVisaoExiste = this.verificarSubVisao(envolucro, nomeVisao, nomeSubVisao);
+      if (seVisaoExiste) {
+        var visao = this.buscarVisao(envolucro, nomeVisao);
+
+        if (nomeSubVisao === false) {
+          // removemos todas as sub visões
+          var meuObj = this;
+          _.each(visao.subVisoes, function(subVisao){
+            meuObj.fecharVisao(subVisao)
+          });
+          visao.subVisoes = [];
+        } else {
+          // removemos apenas uma visão
+          if (visao.subVisoes[nomeSubVisao]) {
+            this.fecharVisao(visao.subVisoes[nomeSubVisao]);
+            delete visao.subVisoes[nomeSubVisao];
+          }
+        }
       }
     }
   

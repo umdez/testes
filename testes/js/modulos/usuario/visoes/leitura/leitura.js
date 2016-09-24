@@ -36,14 +36,13 @@ define([
     modUsuario: aplic.modulo("Usuario"),
 
     initialize: function() {
-      _.bindAll(this, 'aoSelecionarUmaOpcaoDeFuncao');
+      _.bindAll(this, 'aoSelecionarUmaOpcaoDeFuncao', 'aoRecriar');
 
       this.listenTo(this.modUsuario.evts, 'funcao-do-usuario-leitura:selecionada', this.aoSelecionarUmaOpcaoDeFuncao);
-
-      this.render();
     },
 
     render: function() {
+      var meuObj = this;
 
       this.$el.html(this.templante(this.model.toJSON()));
       this.stickit();
@@ -60,12 +59,12 @@ define([
       if (this.sePodeRemoverUsuario) {
         this.$el.find('button#remover-usuario').prop("disabled", false); 
       }
-
+      
       this.visaoDasFuncoes = this.criarVisao("VisaoDeLeituraDeUsuario", "VisaoDasFuncoes", function() {
-        return new VisaoDasFuncoes({});
+        return new VisaoDasFuncoes({'funcao_id': meuObj.model.get('funcao_id')});
       });
       this.$el.find('form.leitura-usuario div#funcoes-usuario').html(this.visaoDasFuncoes.render().el);
-
+ 
       return this;
     },
 
@@ -120,10 +119,6 @@ define([
         Registrar('BAIXO', 'Você não possui a permissão necessária para remover usuários.');
         return;
       }
-    },
-
-    aoFechar: function() {
-      Registrar('BAIXO', 'A visão (VisaoDeLeitura) acaba de fechar.');
     },
 
     aoRecriar: function() {
