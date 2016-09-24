@@ -5,13 +5,15 @@ define([
 , 'parsley'
 , 'modulos/baseDasVisoes'
 , 'handlebars'
-, 'text!modulos/usuario/templantes/leitura.html'
+, 'modulos/usuario/visoes/leitura/funcoes'
+, 'text!modulos/usuario/templantes/leitura/leitura.html'
 ], function(
   aplic
 , Backbone
 , parsley
 , Base
 , hbs
+, VisaoDasFuncoes
 , Templante
 ) {
   'use strict';
@@ -22,12 +24,22 @@ define([
 
     tagName: "div",
 
+    visaoDasFuncoes: null,
+
+    funcao_id: null, 
+
     sePodeAtualizarUsuario: false,
     sePodeRemoverUsuario: false,
     
     templante: hbs.compile(Templante),
 
+    modUsuario: aplic.modulo("Usuario"),
+
     initialize: function() {
+      _.bindAll(this, 'aoSelecionarUmaOpcaoDeFuncao');
+
+      this.listenTo(this.modUsuario.evts, 'funcao-do-usuario-leitura:selecionada', this.aoSelecionarUmaOpcaoDeFuncao);
+
       this.render();
     },
 
@@ -48,6 +60,12 @@ define([
       if (this.sePodeRemoverUsuario) {
         this.$el.find('button#remover-usuario').prop("disabled", false); 
       }
+
+      this.visaoDasFuncoes = this.criarVisao("VisaoDeLeituraDeUsuario", "VisaoDasFuncoes", function() {
+        return new VisaoDasFuncoes({});
+      });
+      this.$el.find('form.leitura-usuario div#funcoes-usuario').html(this.visaoDasFuncoes.render().el);
+
       return this;
     },
 
@@ -60,6 +78,10 @@ define([
       'submit form.leitura-usuario': 'aoClicarEmSubmeter',
       'click button#salvar-usuario': 'aoClicarEmSalvar',
       'click button#remover-usuario': 'aoClicarEmRemover',
+    },
+
+    aoSelecionarUmaOpcaoDeFuncao: function(valorDaFuncao) {
+      this.funcao_id = valorDaFuncao;
     },
 
     aoClicarEmSubmeter: function(evento) {
@@ -76,7 +98,8 @@ define([
       var meuObj = this;
 
       this.validacao.whenValid({}).then(function() {
-
+ 
+        meuObj.model.set({'funcao_id': meuObj.funcao_id });
         meuObj.model.save().done(function(modelo, resposta, opcoes) {
           
           // Inicia novamente a validação
@@ -101,12 +124,10 @@ define([
 
     aoFechar: function() {
       Registrar('BAIXO', 'A visão (VisaoDeLeitura) acaba de fechar.');
-      // quando fecharmos essa visão remover visões filhas?
     },
 
     aoRecriar: function() {
       Registrar('BAIXO', 'A visão (VisaoDeLeitura) acaba de ser recriada.');
-      // remover visões filhas e recria-las?
     }
   });
 

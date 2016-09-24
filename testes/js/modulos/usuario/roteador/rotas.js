@@ -4,7 +4,7 @@ define([
 , "backbone"
 , "modulos/baseDasRotas"
 , "modulos/usuario/visoes/cadastro/cadastro"
-, "modulos/usuario/visoes/leitura"
+, "modulos/usuario/visoes/leitura/leitura"
 , "modulos/usuario/visoes/paginacao"
 ], function (
   aplic

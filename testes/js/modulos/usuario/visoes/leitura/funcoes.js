@@ -4,7 +4,7 @@ define([
 , 'backbone' 
 , 'handlebars'
 , "modulos/baseDasVisoes"
-, 'text!modulos/usuario/templantes/cadastro/funcoes.html' 
+, 'text!modulos/usuario/templantes/leitura/funcoes.html' 
 ], function(
   aplic
 , Backbone
@@ -14,11 +14,11 @@ define([
 ) {
   'use strict';
 
-  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/visoes/cadastro/funcoes' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/visoes/leitura/funcoes' });
 
   var VisaoDasFuncoes = Backbone.View.extend({
 
-    el: 'div.grupo-um div#usuario-cadastro.conteudo-grupo-um form.cadastro-usuario div#funcoes-usuario',
+    tagName: 'div',
 
     templante: hbs.compile(TemplanteFuncoes),
     
@@ -43,13 +43,15 @@ define([
       funcoes.fetch();
 
       this.$el.find('select').on( "change", this.aoSelecionarUmaOpcao);
+
+      return this;
     },
 
     adcUmaOpcaoDeFuncao: function (funcao) {
       funcao.on('destroy', this.remUmaOpcaoDeFuncao);
 
-      var visaoDeUmaFuncao = this.reusarSubVisao({ 
-        'envolucro': 'VisaoDeCadastroDeUsuario',
+      var visaoDeUmaFuncao = this.criarSubVisao({ 
+        'envolucro': 'VisaoDeLeituraDeUsuario',
         'visao': 'VisaoDasFuncoes',
         'subVisao': funcao.get('id')
       }, function() {
@@ -64,11 +66,11 @@ define([
 
     aoSelecionarUmaOpcao: function(evento) {
       var valorDaFuncao = $(evento.currentTarget).val();
-      this.modUsuario.evts.trigger('funcao-do-usuario:selecionada', valorDaFuncao);
+      this.modUsuario.evts.trigger('funcao-do-usuario-leitura:selecionada', valorDaFuncao);
     },
 
-    aoReusar: function() {
-      Registrar('BAIXO', 'A visão (VisaoDasFuncoes) acaba de ser reusada.');
+    aoRecriar: function() {
+      Registrar('BAIXO', 'A visão (VisaoDasFuncoes) acaba de ser recriada.');
     }
     
   });
@@ -78,7 +80,7 @@ define([
     tagName:'option',
     
     initialize: function() {
-      _.bindAll(this, 'render', 'aoReusar');
+      _.bindAll(this, 'render', 'aoRecriar');
 
       this.model.on('change:nome', this.render);
       
@@ -96,8 +98,8 @@ define([
       };
     },
 
-    aoReusar: function() {
-      Registrar('BAIXO', 'A visão (VisaoDeUmaFuncao)['+ this.model.get('id') +'] acaba de ser reusada.');
+    aoRecriar: function() {
+      Registrar('BAIXO', 'A visão (VisaoDeUmaFuncao)['+ this.model.get('id') +'] acaba de ser recriada.');
     }
   });
 
