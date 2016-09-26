@@ -34,25 +34,25 @@ define([
       cliente.connect('fulana@localhost', 'felippe101', function(estatos) {
         
         if(estatos === Estatos.ERROR) {
-          Registrar('BAIXO', 'An error has occurred');
+          Registrar('BAIXO', '(XMPP) An error has occurred');
         } else if (estatos === Estatos.CONNECTING) {
-          Registrar('BAIXO', 'The connection is currently being made');
+          Registrar('BAIXO', '(XMPP) The connection is currently being made');
         } else if(estatos === Estatos.CONNFAIL) {
-          Registrar('BAIXO', 'The connection attempt failed');
+          Registrar('BAIXO', '(XMPP) The connection attempt failed');
         } else if(estatos === Estatos.AUTHENTICATING) {
-          Registrar('BAIXO', 'The connection is authenticating');
+          Registrar('BAIXO', '(XMPP) The connection is authenticating');
         } else if(estatos === Estatos.AUTHFAIL) {
-          Registrar('BAIXO', 'The authentication attempt failed');
+          Registrar('BAIXO', '(XMPP) The authentication attempt failed');
         } else if(estatos === Estatos.CONNECTED) {
-          Registrar('BAIXO', 'The connection has succeeded');
+          Registrar('BAIXO', '(XMPP) The connection has succeeded');
         } else if(estatos === Estatos.DISCONNECTED) {
-          Registrar('BAIXO', 'The connection has been terminated');
+          Registrar('BAIXO', '(XMPP) The connection has been terminated');
         } else if(estatos === Estatos.DISCONNECTING) {
-          Registrar('BAIXO', 'The connection is currently being terminated');
+          Registrar('BAIXO', '(XMPP) The connection is currently being terminated');
         } else if(estatos === Estatos.ATTACHED) {
-          Registrar('BAIXO', 'The connection has been attached');
+          Registrar('BAIXO', '(XMPP) The connection has been attached');
         } else if(estatos === Estatos.CONNTIMEOUT) {
-          Registrar('BAIXO', 'The connection has timed out');
+          Registrar('BAIXO', '(XMPP) The connection has timed out');
         }
       });
     }

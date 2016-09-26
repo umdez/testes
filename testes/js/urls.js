@@ -8,30 +8,32 @@ define([
 ) {
   'use strict';
 
+  var base = "/restificando";
+
   var grupoDeUrls = {
     'Funcoes': function() {
-      return "/restificando/Funcoes";
+      return base +"/Funcoes";
     },
     'Funcao': function(id) {
-      return "/restificando/Funcoes/"+ id;
+      return base +"/Funcoes/"+ id;
     },
     'Escopos': function() {
-      return "/restificando/Escopos";
+      return base +"/Escopos";
     },
     'Escopo': function(idDafuncao, id) {
-      return "/restificando/Funcoes/"+ idDafuncao +"/Escopos/"+ id;
+      return base +"/Funcoes/"+ idDafuncao +"/Escopos/"+ id;
     },
     'Contas': function() {
-      return "/restificando/Contas";
+      return base +"/Contas";
     },
     'Conta': function(id) {
-      return "/restificando/Contas/"+ id;
+      return base +"/Contas/"+ id;
     },
     'Usuarios': function() {
-      return "/restificando/Usuarios";
+      return base +"/Usuarios";
     },
     'Usuario': function(id) {
-      return "/restificando/Usuarios/"+ id;
+      return base +"/Usuarios/"+ id;
     }, 
     '#Usuarios': function() {
       return "Usuarios";
@@ -44,6 +46,9 @@ define([
     },
     '#UsuariosListagem': function() {
       return "UsuariosListagem";
+    },
+    '#UsuariosLeitura': function(id) {
+      return "UsuariosLeitura/"+ id;
     },
     '#GrupoUm': function() {
       return "GrupoUm";

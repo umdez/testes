@@ -83,7 +83,7 @@ define([
           meuObj.limparFormulario();
 
           // Navega para visão de leitura
-          aplic.navegar('#Usuario', usuario.id);
+          aplic.navegar('#UsuariosLeitura', usuario.id); 
 
           // Inicia novamente a validação
           meuObj.validacao.reset();
