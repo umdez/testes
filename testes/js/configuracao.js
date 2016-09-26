@@ -42,6 +42,7 @@ require.config({
   , 'bootstrap': '/bibliotecas/bootstrap.min'
   , 'jasny': '/bibliotecas/jasny-bootstrap.min'
   , 'stickit': '/bibliotecas/backbone.stickit'
+  , 'roteando': '/bibliotecas/roteando'
   },
   
   // Lembre-se: Somente usar o shim para aqueles scripts que não são AMD. Ele

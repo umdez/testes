@@ -10,28 +10,28 @@ define([
 
   var grupoDeUrls = {
     'Funcoes': function() {
-      return "/Funcoes";
+      return "/restificando/Funcoes";
     },
     'Funcao': function(id) {
-      return "/Funcoes/"+ id;
+      return "/restificando/Funcoes/"+ id;
     },
     'Escopos': function() {
-      return "/Escopos";
+      return "/restificando/Escopos";
     },
     'Escopo': function(idDafuncao, id) {
-      return "/Funcoes/"+ idDafuncao +"/Escopos/"+ id;
+      return "/restificando/Funcoes/"+ idDafuncao +"/Escopos/"+ id;
     },
     'Contas': function() {
-      return "/Contas";
+      return "/restificando/Contas";
     },
     'Conta': function(id) {
-      return "/Contas/"+ id;
+      return "/restificando/Contas/"+ id;
     },
     'Usuarios': function() {
-      return "/Usuarios";
+      return "/restificando/Usuarios";
     },
     'Usuario': function(id) {
-      return "/Usuarios/"+ id;
+      return "/restificando/Usuarios/"+ id;
     }, 
     '#Usuarios': function() {
       return "Usuarios";

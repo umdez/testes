@@ -29,63 +29,84 @@ define([
     modUsuario: aplic.modulo("Usuario"),
 
     iniciar: function() {
-      _.bindAll(this, 'suporte');
+      _.bindAll(this, 
+        'suporte', 
+        'suporteAnterior', 
+        'suportePosterior',
+        'suporteDeCadastro', 
+        'suporteDeListagem', 
+        'suporteDeLeitura'
+      );
 
       Registrar('BAIXO', 'Adicionando as rotas do modulo de usuarios.');
 
-      aplic.adcRota(this.nome, this.suporte);
-      aplic.adcRota('UsuariosLeitura', this.suporte);
-      aplic.adcRota('UsuariosListagem', this.suporte);
-      aplic.adcRota('UsuariosCadastro', this.suporte);
+      // Rotas chamadas primeiro
+      aplic.adcRotaAnterior('UsuariosLeitura/:idUsuario', this.suporteAnterior);
+      aplic.adcRotaAnterior('UsuariosListagem', this.suporteAnterior);
+      aplic.adcRotaAnterior('UsuariosCadastro', this.suporteAnterior);
+
+      aplic.adcRota('UsuariosLeitura/:idUsuario', this.nome, this.suporteDeLeitura);
+      aplic.adcRota('UsuariosListagem', this.nome, this.suporteDeListagem);
+      aplic.adcRota('UsuariosCadastro', this.nome, this.suporteDeCadastro);
+
+      // Rotas chamadas por fim
+      aplic.adcRotaPosterior('UsuariosLeitura/:idUsuario', this.suportePosterior);
+      aplic.adcRotaPosterior('UsuariosListagem', this.suportePosterior);
+      aplic.adcRotaPosterior('UsuariosCadastro', this.suportePosterior);
     },
 
-    suporte: function(rota, id) {
+    // cadastro de usuário
+    suporteDeCadastro: function() {
       var meuObj = this;
+    
+      this.verificarUmaPermissaoDeAcesso('CADASTRO', {
+        prosseguir: function() { meuObj.cadastroDeUsuario(); },
+        proibir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
+      }, 'Você não possui permissão de cadastro de usuários');
+    },
 
-      Registrar('BAIXO', 'Acessando o suporte da rota '+ rota)
+    // Paginação de usuários
+    suporteDeListagem: function() {
+      var meuObj = this;
+    
+      this.verificarUmaPermissaoDeAcesso('LEITURA', {
+        prosseguir: function() { meuObj.paginacaoDeUsuario(); },
+        proibir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
+      }, 'Você não possui permissão de listagem de usuários');
+    },
+
+    // Leitura de um usuário em específico
+    suporteDeLeitura: function(idUsuario) {
+      var meuObj = this;
+    
+      this.verificarUmaPermissaoDeAcesso('LEITURA', {
+        prosseguir: function() { meuObj.leituraDeUsuario(idUsuario); },
+        proibir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
+      }, 'Você não possui permissão de leitura aos usuários');
+    },
+
+    suporteAnterior: function() {
+      Registrar('BAIXO', 'Acessando o suporte anterior das rotas de '+ this.nome)
 
       // NOTA: Podemos precisar acessar uma visão diretamente. Um exemplo:
       // var topoDoPainel = this.reusarVisao("VisaoBaseDeTopoPainel", function() { });
 
       // Esconde todos os conteudos de todos os grupos.
       aplic.evts.trigger('grupos-conteudos:esconder');
-
       // Esconde qualquer aviso anteriormente apresentado neste grupo.
       aplic.evts.trigger('grupo-um-avisos:esconder');
-
       // não apresenta qualquer aviso anteriormente apresentada
       aplic.evts.trigger('painel-avisos:esconder');
-
       // Esconde todos os grupos do conteudo do painel
       aplic.evts.trigger('painel-grupos:esconder');
+      return true;
+    },
 
-      if (id && id > 0) {
-
-        // Leitura de um usuário em específico
-        this.verificarUmaPermissaoDeAcesso('LEITURA', {
-          prosseguir: function() { meuObj.leituraDeUsuario(id); },
-          proibir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
-        }, 'Você não possui permissão de leitura aos usuários');
-
-      } else if ((id && id <= 0) || (rota == 'UsuariosCadastro')) {
-        
-        // cadastro de usuário
-        this.verificarUmaPermissaoDeAcesso('CADASTRO', {
-          prosseguir: function() { meuObj.cadastroDeUsuario(); },
-          proibir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
-        }, 'Você não possui permissão de cadastro de usuários');
-
-      } else {
-        // Paginação de usuários
-        this.verificarUmaPermissaoDeAcesso('LEITURA', {
-          prosseguir: function() { meuObj.paginacaoDeUsuario(); },
-          proibir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
-        }, 'Você não possui permissão de listagem de usuários');
-      }
+    suportePosterior: function() {
+      Registrar('BAIXO', 'Acessando o suporte posterior das rotas dos '+ this.nome);
 
       // pertencemos ao grupo um então mostramos ele.
       aplic.evts.trigger('painel-grupo:mostrar', 'div.grupo-um'); 
-
       // selecionamos um item do menu de navegação do topo.
       aplic.evts.trigger('item-navegacao-topo:selecionar', 'ul.menu-painel-topo li.item-grupo-um'); 
     },

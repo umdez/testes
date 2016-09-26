@@ -4,12 +4,14 @@ define([
 , 'bootstrap'
 , "escopos"
 , "urls"
+//, "roteador"
 , "modelos/sessao/sessao"
 ], function(
   Backbone
 , BootStrap
 , Escopos
 , gerarUrl
+//, roteador
 , ModeloDeSessao
 ) {
   'use strict';
@@ -25,7 +27,10 @@ define([
 
     modulos: {},
 
-    rotas: {},
+    rotas: [],
+
+    anteriores: {},
+    posteriores: {},
 
     escopos: null, 
 
@@ -48,15 +53,17 @@ define([
       }
       return this.modulos[nome] = { };
     },
-
-    adcRota: function(rota, funcao) {
-      this.rotas[rota] = funcao; 
+ 
+    adcRotaAnterior: function(rota, cd) {
+      this.anteriores[rota] = cd;
     },
 
-    buscarRota: function(rota, id) {
-      if (this.rotas[rota]) {
-        this.rotas[rota](rota, id);
-      }
+    adcRotaPosterior: function(rota, cd) {
+      this.posteriores[rota] = cd;
+    },
+
+    adcRota: function(rota, nome, cd) {
+      this.rotas.push({'rota': rota, 'nome': nome, 'cd': cd});
     },
 
     registrar: function(nivel, msg) {

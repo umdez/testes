@@ -119,7 +119,7 @@ config.servidor.certificados = {
  *   dos tokens de acesso.
  */
 config.restificando = {
-  "base": ""
+  "base": "/restificando"
 , "superSegredo": "meuSuperSegredo"
 };
 

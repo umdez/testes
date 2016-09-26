@@ -5,12 +5,12 @@
   
 define([
   "aplicativo"
-, "backbone"
+, "roteando"
 , "gdv"
 , "visoes/base/base"
 ], function(
   aplic
-, Backbone
+, roteando
 , GDV
 , VisaoDeBase
 ) {
@@ -21,11 +21,12 @@ define([
   var SitioRoteador = Backbone.Router.extend({
     
     routes: {
-      '':            'inicio'
-    , ':modulo':     'asRotasDeUmNivel'
-    , ':modulo/:id': 'asRotasDeDoisNiveis'
+       '':            'inicio'
     },
     
+    anterior: { },
+    posterior: { },
+
     initialize: function () {
       Registrar('BAIXO', 'Iniciando roteador.');
 
@@ -33,19 +34,13 @@ define([
         return new VisaoDeBase();
       });
     },
-    
+
     inicio: function() {
       Registrar('BAIXO', 'Acessando rota de inicio.');
     },
     
-    asRotasDeUmNivel: function(modulo) {
-      Registrar('BAIXO', 'Buscando a rota '+ modulo);
-      aplic.buscarRota(modulo, null);
-    },
-
-    asRotasDeDoisNiveis: function(modulo, id) {
-      Registrar('BAIXO', 'Buscando a rota '+ modulo +'/'+ id);
-      aplic.buscarRota(modulo, id);
+    registrador: function(rota, nome, args) {
+      Registrar('BAIXO', 'Acessando a rota ('+ rota +') de nome ('+ nome +') com argumentos ('+ args +')');
     }
     
   });
@@ -54,7 +49,19 @@ define([
     
     var roteamento = function() {
       aplic.roteador = new SitioRoteador();
-      Backbone.history.start(); 
+
+      // Adicionamos todas as rotas anteriores
+      aplic.roteador.anterior = aplic.anteriores || {};
+
+      // Adicionamos todas as rotas posteriores
+      aplic.roteador.posterior = aplic.posteriores || {};
+
+      // Adic cada uma das rotas
+      _.each(aplic.rotas, function(item){
+        aplic.roteador.route(item.rota, item.nome, item.cd);
+      });
+
+      Backbone.history.start({pushState: false, root: '/'}); 
       Registrar('BAIXO', 'Roteador e historio de rotas iniciados com sucesso.');
     }
     
