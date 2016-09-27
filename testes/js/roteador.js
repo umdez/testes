@@ -21,7 +21,7 @@ define([
   var SitioRoteador = Backbone.Router.extend({
     
     routes: {
-       '':            'inicio'
+      '': 'inicio'
     },
     
     anterior: { },
@@ -57,8 +57,8 @@ define([
       aplic.roteador.posterior = aplic.posteriores || {};
 
       // Adic cada uma das rotas
-      _.each(aplic.rotas, function(item){
-        aplic.roteador.route(item.rota, item.nome, item.cd);
+      _.each(aplic.rotas, function(rota){
+        aplic.roteador.route(rota.rota, rota.nome, rota.cd);
       });
 
       Backbone.history.start({pushState: false, root: '/'}); 

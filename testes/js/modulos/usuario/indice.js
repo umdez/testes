@@ -1,3 +1,4 @@
+/* Aqui nós carregamos tudo que for necessário para este modulo. */
 
 define([
   "aplicativo"
@@ -6,8 +7,6 @@ define([
 , "modelos/usuario/usuario"
 , "colecoes/usuarios/usuarios"
 , "paginacoes/usuarios/usuarios"
-, "modulos/exemplo/indice" 
-, "modulos/funcao/indice" 
 ], function (
   aplic
 , Backbone
@@ -15,14 +14,10 @@ define([
 , ModeloDeUsuario
 , ColecaoDeUsuario
 , PaginacaoDeUsuario
-, Dependencia01
-, Dependencia02
 ) {
   'use strict';
   
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/indice' });
-
-  // Aqui nós carregamos tudo que for necessário para este modulo.
 
   Registrar('BAIXO', 'Iniciando o modulo de usuários.');
 

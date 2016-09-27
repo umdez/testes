@@ -29,7 +29,7 @@ define([
         if (sePermitido) {
           if ('prosseguir' in cd) cd.prosseguir();
         } else {
-          if ('proibir' in cd) cd.proibir(msg);
+          if ('impedir' in cd) cd.proibir(msg);
         }
       });
     }

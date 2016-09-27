@@ -4,14 +4,12 @@ define([
 , 'bootstrap'
 , "escopos"
 , "urls"
-//, "roteador"
 , "modelos/sessao/sessao"
 ], function(
   Backbone
 , BootStrap
 , Escopos
 , gerarUrl
-//, roteador
 , ModeloDeSessao
 ) {
   'use strict';
@@ -28,7 +26,6 @@ define([
     modulos: {},
 
     rotas: [],
-
     anteriores: {},
     posteriores: {},
 

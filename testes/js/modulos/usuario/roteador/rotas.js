@@ -42,26 +42,30 @@ define([
 
       // Rotas chamadas primeiro
       aplic.adcRotaAnterior('UsuariosLeitura/:idUsuario', this.suporteAnterior);
+      aplic.adcRotaAnterior('UsuariosLeitura/:idUsuario/aba/:nome', this.suporteAnterior);
       aplic.adcRotaAnterior('UsuariosListagem', this.suporteAnterior);
       aplic.adcRotaAnterior('UsuariosCadastro', this.suporteAnterior);
 
       aplic.adcRota('UsuariosLeitura/:idUsuario', this.nome, this.suporteDeLeitura);
+      aplic.adcRota('UsuariosLeitura/:idUsuario/aba/:nome', this.nome, this.suporteDeLeitura);
       aplic.adcRota('UsuariosListagem', this.nome, this.suporteDeListagem);
       aplic.adcRota('UsuariosCadastro', this.nome, this.suporteDeCadastro);
 
       // Rotas chamadas por fim
       aplic.adcRotaPosterior('UsuariosLeitura/:idUsuario', this.suportePosterior);
+      aplic.adcRotaPosterior('UsuariosLeitura/:idUsuario/aba/:nome', this.suportePosterior);
       aplic.adcRotaPosterior('UsuariosListagem', this.suportePosterior);
       aplic.adcRotaPosterior('UsuariosCadastro', this.suportePosterior);
+
     },
 
     // cadastro de usuário
     suporteDeCadastro: function() {
       var meuObj = this;
-    
+
       this.verificarUmaPermissaoDeAcesso('CADASTRO', {
         prosseguir: function() { meuObj.cadastroDeUsuario(); },
-        proibir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
+        impedir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
       }, 'Você não possui permissão de cadastro de usuários');
     },
 
@@ -71,17 +75,17 @@ define([
     
       this.verificarUmaPermissaoDeAcesso('LEITURA', {
         prosseguir: function() { meuObj.paginacaoDeUsuario(); },
-        proibir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
+        impedir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
       }, 'Você não possui permissão de listagem de usuários');
     },
 
     // Leitura de um usuário em específico
-    suporteDeLeitura: function(idUsuario) {
+    suporteDeLeitura: function(idUsuario, aba) {
       var meuObj = this;
-    
+
       this.verificarUmaPermissaoDeAcesso('LEITURA', {
-        prosseguir: function() { meuObj.leituraDeUsuario(idUsuario); },
-        proibir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
+        prosseguir: function() { meuObj.leituraDeUsuario(idUsuario, aba); },
+        impedir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
       }, 'Você não possui permissão de leitura aos usuários');
     },
 
@@ -111,7 +115,7 @@ define([
       aplic.evts.trigger('item-navegacao-topo:selecionar', 'ul.menu-painel-topo li.item-grupo-um'); 
     },
 
-    leituraDeUsuario: function(id) {
+    leituraDeUsuario: function(id, aba) {
       var meuObj = this;
 
       Registrar('BAIXO', 'Leitura de usuario.');

@@ -41,6 +41,8 @@ define([
       aplic.evts.trigger('painel-grupos:esconder');
       // não apresenta qualquer aviso anteriormente apresentada no painel.
       aplic.evts.trigger('painel-avisos:esconder');
+
+      return true;
     },
 
     suporteDoGrupoUm: function() {
