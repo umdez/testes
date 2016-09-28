@@ -2,14 +2,14 @@
 define([
   "aplicativo"
 , "backbone"
-, "modulos/funcao/roteador/rotas"
+, "modulos/funcao/controlador/controlador"
 , "modelos/funcao/funcao"
 , "colecoes/funcoes/funcoes"
 , "paginacoes/funcoes/funcoes"
 ], function (
   aplic
 , Backbone
-, Rotas
+, Controlador
 , ModeloDeFuncao
 , ColecaoDeFuncao
 , PaginacaoDeFuncao

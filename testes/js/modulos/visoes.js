@@ -1,3 +1,4 @@
+/* Contêm métodos utilizados por várias visões dos vários módulos. */
 
 define([
   "aplicativo"

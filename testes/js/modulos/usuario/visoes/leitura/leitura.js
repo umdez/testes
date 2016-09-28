@@ -2,15 +2,13 @@
 define([
   'aplicativo'
 , 'backbone' 
-, 'parsley'
-, 'modulos/baseDasVisoes'
+, 'modulos/visoes'
 , 'handlebars'
 , 'modulos/usuario/visoes/leitura/funcoes'
 , 'text!modulos/usuario/templantes/leitura/leitura.html'
 ], function(
   aplic
 , Backbone
-, parsley
 , Base
 , hbs
 , VisaoDasFuncoes
@@ -50,15 +48,15 @@ define([
       this.validacao = this.$el.find('form.leitura-usuario').parsley();
 
       this.sePodeAtualizarUsuario = this.verificarEscopo('Usuarios', "ATUALIZACAO");
-      this.sePodeRemoverUsuario = this.verificarEscopo('Usuarios', "REMOCAO");
+      //this.sePodeRemoverUsuario = this.verificarEscopo('Usuarios', "REMOCAO");
 
       if (this.sePodeAtualizarUsuario) {
         this.$el.find('button#salvar-usuario').prop("disabled", false); 
       }
 
-      if (this.sePodeRemoverUsuario) {
-        this.$el.find('button#remover-usuario').prop("disabled", false); 
-      }
+      //if (this.sePodeRemoverUsuario) {
+      //  this.$el.find('button#remover-usuario').prop("disabled", false); 
+      //}
       
       this.visaoDasFuncoes = this.criarVisao("VisaoDeLeituraDeUsuario", "VisaoDasFuncoes", function() {
         return new VisaoDasFuncoes({'funcao_id': meuObj.model.get('funcao_id')});
@@ -115,10 +113,10 @@ define([
     },
 
     aoClicarEmRemover: function(evento) {
-      if (!this.sePodeRemoverUsuario) {
-        Registrar('BAIXO', 'Você não possui a permissão necessária para remover usuários.');
-        return;
-      }
+      //if (!this.sePodeRemoverUsuario) {
+      //  Registrar('BAIXO', 'Você não possui a permissão necessária para remover usuários.');
+      //  return;
+      //}
     },
 
     aoRecriar: function() {

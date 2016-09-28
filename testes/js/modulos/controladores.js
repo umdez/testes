@@ -1,3 +1,4 @@
+/* Contêm métodos utilizados por vários controladores de vários módulos. */
 
 define([
   "aplicativo"
@@ -8,7 +9,7 @@ define([
 ) {
   'use strict';
 
-  var BaseDasRotas = {
+  var BaseDosControladores = {
     
     nome: null,
 
@@ -37,7 +38,7 @@ define([
  
   var Uniao = {};
   _.extend(Uniao, GDV);
-  _.extend(Uniao, BaseDasRotas);
+  _.extend(Uniao, BaseDosControladores);
 
   return Uniao;
 });

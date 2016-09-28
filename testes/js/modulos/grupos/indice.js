@@ -4,12 +4,10 @@
 
 define([
   "aplicativo"
-, "modulos/baseDasRotas"
-, "modulos/grupos/roteador/rotas"
+, "modulos/grupos/controlador/controlador"
 ], function (
   aplic
-, Base
-, Rotas
+, Controlador
 ) {
   'use strict';
  
@@ -17,5 +15,5 @@ define([
 
   Registrar('BAIXO', 'Iniciando o modulo de grupos.');
 
-  Rotas.iniciar();
+  Controlador.iniciar();
 });

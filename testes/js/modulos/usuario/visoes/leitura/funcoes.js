@@ -3,7 +3,7 @@ define([
   'aplicativo'
 , 'backbone' 
 , 'handlebars'
-, "modulos/baseDasVisoes"
+, "modulos/visoes"
 , 'text!modulos/usuario/templantes/leitura/funcoes.html' 
 ], function(
   aplic

@@ -1,7 +1,7 @@
 
 define([
   'backbone'
-, "modulos/baseDasVisoes"
+, "modulos/visoes"
 , 'text!modulos/usuario/templantes/paginacao.html'
 ], function(
   Backbone

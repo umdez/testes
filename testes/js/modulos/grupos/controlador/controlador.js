@@ -1,6 +1,6 @@
 define([
   "aplicativo"
-, "modulos/baseDasRotas"
+, "modulos/controladores"
 ], function (
   aplic
 , Base
@@ -9,7 +9,7 @@ define([
 
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/grupos/roteador/rotas' });
 
-  var Rotas = {
+  var Controlador = _.extend(Base, {
 
     nome: 'Grupos',  // Usado para nome das rotas
 
@@ -21,8 +21,9 @@ define([
         'suporteDoGrupoTres'
       );
 
-      Registrar('BAIXO', 'Adicionando rotas dos grupos.');
+      Registrar('BAIXO', 'Adicionando rotas dos '+ this.nome);
 
+      // Rotas chamadas primeiro
       aplic.adcRotaAnterior('GrupoUm', this.suporteAnterior);
       aplic.adcRotaAnterior('GrupoDois', this.suporteAnterior);
       aplic.adcRotaAnterior('GrupoTres', this.suporteAnterior);
@@ -65,11 +66,7 @@ define([
       // mostra o grupo três do painel.
       aplic.evts.trigger('painel-grupo:mostrar', 'div.grupo-tres');
     }
-  }
+  });
 
-  var Uniao = {};
-  _.extend(Uniao, Base);
-  _.extend(Uniao, Rotas);
-
-  return Uniao;
+  return Controlador;
 });

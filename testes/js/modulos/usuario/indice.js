@@ -3,14 +3,14 @@
 define([
   "aplicativo"
 , "backbone"
-, "modulos/usuario/roteador/rotas"
+, "modulos/usuario/controlador/controlador"
 , "modelos/usuario/usuario"
 , "colecoes/usuarios/usuarios"
 , "paginacoes/usuarios/usuarios"
 ], function (
   aplic
 , Backbone
-, Rotas
+, Controlador
 , ModeloDeUsuario
 , ColecaoDeUsuario
 , PaginacaoDeUsuario
@@ -32,7 +32,7 @@ define([
   // eventos locais deste modulo
   Usuario.evts = _.extend({}, Backbone.Events);
 
-  Rotas.iniciar();
+  Controlador.iniciar();
  
   return Usuario;
 });

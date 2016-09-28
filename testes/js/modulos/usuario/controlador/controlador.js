@@ -1,8 +1,9 @@
+/* Controlador deste modulo */
 
 define([
   "aplicativo"
 , "backbone"
-, "modulos/baseDasRotas"
+, "modulos/controladores"
 , "modulos/usuario/visoes/cadastro/cadastro"
 , "modulos/usuario/visoes/leitura/leitura"
 , "modulos/usuario/visoes/paginacao"
@@ -18,7 +19,7 @@ define([
 
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/roteador/rotas' });
 
-  var Rotas = {
+  var Controlador = _.extend(Base, {
 
     nome: 'Usuarios',  // Usado para nome da tabela e das rotas
 
@@ -38,7 +39,7 @@ define([
         'suporteDeLeitura'
       );
 
-      Registrar('BAIXO', 'Adicionando as rotas do modulo de usuarios.');
+      Registrar('BAIXO', 'Adicionando as rotas do modulo de '+ this.nome);
 
       // Rotas chamadas primeiro
       aplic.adcRotaAnterior('UsuariosLeitura/:idUsuario', this.suporteAnterior);
@@ -165,8 +166,7 @@ define([
       } 
 
       usuario.fetch({
-        reset: true
-      , success: function (usuario, resposta, opcoes) {
+        success: function (usuario, resposta, opcoes) {
           usuarios.add(usuario, {merge: true});
           cd(usuario);
         }
@@ -185,11 +185,7 @@ define([
       aplic.evts.trigger('grupos-conteudo:mostrar', 'div.grupo-um '+ item +'.conteudo-grupo-um'); 
     }
 
-  };
- 
-  var Uniao = {};
-  _.extend(Uniao, Base);
-  _.extend(Uniao, Rotas);
+  });
 
-  return Uniao;
+  return Controlador;
 });

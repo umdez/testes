@@ -2,7 +2,7 @@
 define([
   'aplicativo'
 , 'backbone' 
-, "modulos/baseDasVisoes"
+, "modulos/visoes"
 , 'urls'
 , 'handlebars'
 , 'modulos/usuario/visoes/cadastro/funcoes'
