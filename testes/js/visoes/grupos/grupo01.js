@@ -55,10 +55,10 @@ define([
 
       switch (id) {
         case 'item-cadastrar-usuario': 
-          aplic.navegar('#UsuariosCadastro');
+          aplic.navegar('#UsuariosCadastro', null, true);
           break;
         case 'item-pesquisar-usuario': 
-          aplic.navegar('#UsuariosListagem');
+          aplic.navegar('#UsuariosListagem', null, true);
           break;
       };
     },

@@ -15,8 +15,6 @@ define([
 
     iniciar: function() { },
 
-    suporte: function(id) { },
-
     verificarPermissao: function(acao, cd) {
       var escopos = aplicativo.escopos;
 

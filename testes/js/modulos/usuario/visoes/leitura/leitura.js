@@ -98,7 +98,6 @@ define([
  
         meuObj.model.set({'funcao_id': meuObj.funcao_id });
         meuObj.model.save().done(function(modelo, resposta, opcoes) {
-          
           // Inicia novamente a validação
           meuObj.validacao.reset();
           Registrar('BAIXO', 'Dados do usuario foram salvos com sucesso');

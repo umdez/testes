@@ -7,7 +7,7 @@ define([
 ) {
   'use strict';
 
-  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/grupos/roteador/rotas' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/grupos/controlador/controlador' });
 
   var Controlador = _.extend(Base, {
 

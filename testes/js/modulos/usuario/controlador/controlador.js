@@ -17,7 +17,7 @@ define([
 ) {
   'use strict';
 
-  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/roteador/rotas' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/controlador/controlador' });
 
   var Controlador = _.extend(Base, {
 
@@ -30,8 +30,7 @@ define([
     modUsuario: aplic.modulo("Usuario"),
 
     iniciar: function() {
-      _.bindAll(this, 
-        'suporte', 
+      _.bindAll(this,  
         'suporteAnterior', 
         'suportePosterior',
         'suporteDeCadastro', 

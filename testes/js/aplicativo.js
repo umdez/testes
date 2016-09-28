@@ -31,15 +31,15 @@ define([
 
     escopos: null, 
 
-    navegar: function(tipo, id) {
+    navegar: function(tipo, id, seDisparar) {
       var url = null;
       
-      if (typeof id !== 'undefined') {
+      if (typeof id != null) {
         url = gerarUrl(tipo, id);
       } else {
         url = gerarUrl(tipo);
       }
-      this.roteador.navigate(url, true);
+      this.roteador.navigate(url,  {'trigger': seDisparar});
     }, 
 
     roteador: null,

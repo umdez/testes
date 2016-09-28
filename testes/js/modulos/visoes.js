@@ -10,7 +10,7 @@ define([
   'use strict';
 
   var BaseDasVisoes = {
-    
+
     verificarEscopo: function(nome, acao) {
       var escopos = aplicativo.escopos;
 

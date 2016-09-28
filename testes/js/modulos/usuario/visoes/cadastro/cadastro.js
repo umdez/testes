@@ -41,7 +41,7 @@ define([
       this.render();
     },
 
-    render: function() {
+    render: function() { 
       this.$el.html(this.templante({}));
       this.stickit();
 
@@ -83,7 +83,7 @@ define([
           meuObj.limparFormulario();
 
           // Navega para visão de leitura
-          aplic.navegar('#UsuariosLeitura', usuario.id); 
+          aplic.navegar('#UsuariosLeitura', usuario.id, true); 
 
           // Inicia novamente a validação
           meuObj.validacao.reset();
