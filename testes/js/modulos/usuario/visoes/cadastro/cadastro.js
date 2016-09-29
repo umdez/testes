@@ -40,12 +40,14 @@ define([
     render: function() { 
       this.$el.html(this.templante({}));
       this.stickit();
-      this.validacao = this.$el.find('form.cadastro-usuario').parsley();
 
-      //var meuObj = this;
-      //this.visaoDeEndereco = this.criarVisao("VisaoDeCadastro", "VisaoDeEndereco", function() {
-      //  return new VisaoDeEndereco({ 'model': meuObj.model.endereco });
-      //});
+      var meuObj = this;
+      this.visaoDeEndereco = this.criarVisao("VisaoDeCadastro", "VisaoDeEndereco", function() {
+        return new VisaoDeEndereco({ 'model': meuObj.model.endereco });
+      });
+      this.$el.find('div#capsula-endereco-usuario').html(this.visaoDeEndereco.render().el);
+
+      this.validacao = this.$el.find('form.cadastro-usuario').parsley();
 
       return this;
     },
@@ -76,11 +78,11 @@ define([
 
       this.validacao.whenValid({}).then(function() {
         meuObj.model.url = gerarUrl('Usuarios');
-  
-        //meuObj.model.endereco.url = gerarUrl('UsuarioEndereco', null, this.id);
 
         meuObj.model.save().done(function(usuario, resposta, opcoes) {
           usuarios.add(usuario);
+
+          //meuObj.model.endereco.url = gerarUrl('UsuarioEndereco', null, this.id);
 
           // Navega para visão de leitura
           aplic.navegar('#UsuariosLeitura', usuario.id, true); 

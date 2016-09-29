@@ -4,22 +4,34 @@ define([
   'aplicativo'
 , 'backbone' 
 , "modulos/visoes"
+, 'handlebars'
 , 'urls'
+, 'text!modulos/usuario/templantes/cadastro/endereco.html' 
 ], function(
   aplic
 , Backbone
 , Base
+, hbs
 , gerarUrl
+, TemplanteEndereco
 ) {
   'use strict';
 
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/visoes/cadastro/endereco' });
 
   var VisaoDeEndereco = Backbone.View.extend({
-    el: 'div.grupo-um div#usuario-cadastro.conteudo-grupo-um',
+    tagName: "div",
+
+    templante: hbs.compile(TemplanteEndereco), 
 
     initialize: function() {
        _.bindAll(this, 'aoRecriar');
+    },
+
+    render: function() { 
+      this.$el.html(this.templante({}));
+      this.stickit();
+      return this;
     },
 
     bindings: {
