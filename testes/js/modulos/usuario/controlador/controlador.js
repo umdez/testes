@@ -19,7 +19,7 @@ define([
 
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/controlador/controlador' });
 
-  var Controlador = _.extend(Base, {
+  var Controlador = _.extend({
 
     nome: 'Usuarios',  // Usado para nome da tabela e das rotas
 
@@ -140,9 +140,10 @@ define([
 
       Registrar('BAIXO', 'Cadastro de usuario.');
 
-      this.visaoDeCadastro = this.reusarVisao("ModuloUsuario", "VisaoDeCadastro", function() {
+      this.visaoDeCadastro = this.criarVisao("ModuloUsuario", "VisaoDeCadastro", function() {
         return new VisaoDeCadastro({ 'model': new ModUsuario({}) });
       });
+      $('div.grupo-um div#usuario-cadastro.conteudo-grupo-um').html(this.visaoDeCadastro.render().el);
       this.apresentarConteudo('div#usuario-cadastro');
     },
 
@@ -186,5 +187,9 @@ define([
 
   });
 
-  return Controlador;
+  var Uniao = {};
+  _.extend(Uniao, Base);
+  _.extend(Uniao, Controlador);
+
+  return Uniao;
 });

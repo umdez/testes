@@ -1,3 +1,4 @@
+/* Aqui nós carregamos tudo o que for necessário para este modulo. */
 
 define([
   "aplicativo"
@@ -18,8 +19,6 @@ define([
 
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/funcao/indice' });
 
-  // Aqui nós carregamos tudo que for necessário para este modulo.
-
   Registrar('BAIXO', 'Iniciando o modulo de funções.');
 
   var Funcao = aplic.modulo("Funcao");
@@ -27,6 +26,9 @@ define([
   Funcao.Modelo = ModeloDeFuncao;
 
   Funcao.Lista = new ColecaoDeFuncao();
+  
+  // pegamos as funções 
+  Funcao.Lista.fetch();
 
   //Funcao.Paginacao = PaginacaoDeFuncao;
  

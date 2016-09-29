@@ -23,7 +23,7 @@ Usuarios.prototype.carregarConfig = function(opcoes) {
 
   var config = {
      nome: 'Usuarios'                 // É o nome dado a tabela (modelo) no banco de dados.
-  ,  sePossuiAssociacoes: false       // Se possui associações.
+  ,  sePossuiAssociacoes: true        // Se possui associações.
   ,  seForRealizarPaginacao: true     // Caso seja necessário possuir suporte à paginação.
   ,  controladores: null              // Os controladores desta fonte.
   ,  controladoresFuncionais: null

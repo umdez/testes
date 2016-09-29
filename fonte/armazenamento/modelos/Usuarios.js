@@ -11,20 +11,32 @@ module.exports = function (database, DataTypes) {
 
   var Usuarios = database.define('Usuarios', {
 
-    nome: { type: DataTypes.STRING, validate: {} },  // Nome do nosso usuário
+    nome: { type: DataTypes.STRING, validate: {} },  
 
-    jid: { type: DataTypes.STRING, unique: true, validate: {} },  // JID do usuário.
+    sobrenome: { type: DataTypes.STRING, validate: {} },  
+
+    jid: { type: DataTypes.STRING, unique: true, validate: {} },  // Jabber Identifier do usuário.
 
     uuid: { type: DataTypes.UUID, unique: true, defaultValue: uuid.v4, validate: { isUUID: 4 } },  // Identificador unico deste usuário.
     
-    senha: { type: DataTypes.STRING, validate: {} },  // A senha do usuário.
+    senha: { type: DataTypes.STRING, validate: {} },  
     
     estatos: { type: DataTypes.STRING, validate: {} }  // Validado? Bloqueado?
   }, {
-
+    
     associar: function (modelos) {
       modelos.Usuarios.belongsTo(modelos.Funcoes, { foreignKey: 'funcao_id', as: 'Funcoes' });
       modelos.Usuarios.hasMany(modelos.Projetos, { foreignKey: 'usuario_id' }); 
+      modelos.Usuarios.hasOne(modelos.UsuarioEndereco, { foreignKey: 'usuario_id' }); 
+
+      // <umdez> realizando este teste de escopo abaixo.
+      modelos.Usuarios.addScope("projetos", function () {
+        return {
+          include: [
+            { model: modelos.Projetos }
+          ]
+        }
+      });
     },
     classMethods:{
       

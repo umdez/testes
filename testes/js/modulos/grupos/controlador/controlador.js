@@ -9,7 +9,7 @@ define([
 
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/grupos/controlador/controlador' });
 
-  var Controlador = _.extend(Base, {
+  var Controlador = _.extend({
 
     nome: 'Grupos',  // Usado para nome das rotas
 
@@ -67,6 +67,10 @@ define([
       aplic.evts.trigger('painel-grupo:mostrar', 'div.grupo-tres');
     }
   });
+  
+  var Uniao = {};
+  _.extend(Uniao, Base);
+  _.extend(Uniao, Controlador);
 
-  return Controlador;
+  return Uniao;
 });

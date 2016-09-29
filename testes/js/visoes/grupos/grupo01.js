@@ -60,6 +60,12 @@ define([
         case 'item-pesquisar-usuario': 
           aplic.navegar('#UsuariosListagem', null, true);
           break;
+        case 'item-reusar-visao':
+          aplic.navegar('#ExemploDeReuso', null, true);
+          break;
+        default:
+          Registrar('BAIXO', 'O item clicado não era esperado.');
+          break;
       };
     },
 

@@ -26,17 +26,17 @@ Usuarios.prototype.iniciar = function() {
     return meuObj.limiteDeLeituras.afunilarServico(requisicao, resposta, contexto);
   });
   
-  fonte.ler.iniciar.antesQue(function(requisicao, resposta, contexto) {
-    return meuObj.jwt.autorizar(requisicao, resposta, contexto, function(seAutorizado) { 
-      if (seAutorizado) { };
-    });
-  });
+  //fonte.ler.iniciar.antesQue(function(requisicao, resposta, contexto) {
+  //  return meuObj.jwt.autorizar(requisicao, resposta, contexto, function(seAutorizado) { 
+  //    if (seAutorizado) { };
+  //  });
+  //});
 
-  fonte.ler.iniciar.antesQue(function(requisicao, resposta, contexto) {
-    return meuObj.verificarPermissao(requisicao, contexto, function(sePermitido) {
-      if (sePermitido) { };
-    }); 
-  });
+  //fonte.ler.iniciar.antesQue(function(requisicao, resposta, contexto) {
+  //  return meuObj.verificarPermissao(requisicao, contexto, function(sePermitido) {
+  //    if (sePermitido) { };
+  //  }); 
+  //});
 
   fonte.ler.iniciar(function(requisicao, resposta, contexto) {
     return contexto.continuar;

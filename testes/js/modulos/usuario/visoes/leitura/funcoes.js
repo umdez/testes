@@ -123,7 +123,6 @@ define([
   });
 
   VisaoDeUmaFuncao = VisaoDeUmaFuncao.extend(Base);
-  VisaoDasFuncoes = VisaoDasFuncoes.extend(Base);
 
-  return VisaoDasFuncoes;
+  return VisaoDasFuncoes.extend(Base);
 });

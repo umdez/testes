@@ -10,10 +10,6 @@ define([
   'use strict';
 
   var BaseDosControladores = {
-    
-    nome: null,
-
-    iniciar: function() { },
 
     verificarPermissao: function(acao, cd) {
       var escopos = aplicativo.escopos;
@@ -28,7 +24,7 @@ define([
         if (sePermitido) {
           if ('prosseguir' in cd) cd.prosseguir();
         } else {
-          if ('impedir' in cd) cd.proibir(msg);
+          if ('impedir' in cd) cd.impedir(msg);
         }
       });
     }

@@ -3,11 +3,13 @@ define([
   "backbone"
 , "urls"
 , "modelos/funcao/funcao"
+, "modelos/usuario/usuarioEndereco"
 , "colecoes/escopos/escopos"
 ], function(
   Backbone
 , gerarUrl
 , ModeloDeFuncao
+, ModeloDeEndereco
 , ColecaoDeEscopos
 ) {
   'use strict';
@@ -22,12 +24,14 @@ define([
 
     initialize: function(){
       this.funcao = new ModeloDeFuncao({});
+      this.endereco = new ModeloDeEndereco({});
       //this.escopos = new ColecaoDeEscopos.Colecao({});
     },
 
     defaults: {
       'id': null
     , 'nome': null
+    , 'sobrenome': null
     , 'jid': null
     , 'uuid': null
     , 'estatos': null

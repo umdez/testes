@@ -4,14 +4,12 @@ define([
 , 'backbone' 
 , 'modulos/visoes'
 , 'handlebars'
-, 'modulos/usuario/visoes/leitura/funcoes'
 , 'text!modulos/usuario/templantes/leitura/leitura.html'
 ], function(
   aplic
 , Backbone
 , Base
 , hbs
-, VisaoDasFuncoes
 , Templante
 ) {
   'use strict';
@@ -22,29 +20,21 @@ define([
 
     tagName: "div",
 
-    visaoDasFuncoes: null,
-
-    funcao_id: null, 
-
     sePodeAtualizarUsuario: false,
     sePodeRemoverUsuario: false,
     
     templante: hbs.compile(Templante),
 
     modUsuario: aplic.modulo("Usuario"),
+    modFuncao: aplic.modulo("Funcao"),
 
     initialize: function() {
-      _.bindAll(this, 'aoSelecionarUmaOpcaoDeFuncao', 'aoRecriar');
-
-      this.listenTo(this.modUsuario.evts, 'funcao-do-usuario-leitura:selecionada', this.aoSelecionarUmaOpcaoDeFuncao);
+      _.bindAll(this, 'aoRecriar');
     },
 
     render: function() {
-      var meuObj = this;
-
       this.$el.html(this.templante(this.model.toJSON()));
       this.stickit();
-
       this.validacao = this.$el.find('form.leitura-usuario').parsley();
 
       this.sePodeAtualizarUsuario = this.verificarEscopo('Usuarios', "ATUALIZACAO");
@@ -57,28 +47,27 @@ define([
       //if (this.sePodeRemoverUsuario) {
       //  this.$el.find('button#remover-usuario').prop("disabled", false); 
       //}
-      
-      this.visaoDasFuncoes = this.criarVisao("VisaoDeLeituraDeUsuario", "VisaoDasFuncoes", function() {
-        return new VisaoDasFuncoes({'funcao_id': meuObj.model.get('funcao_id')});
-      });
-      this.$el.find('form.leitura-usuario div#funcoes-usuario').html(this.visaoDasFuncoes.render().el);
- 
       return this;
     },
 
     bindings: {
       'input#jid-usuario': 'jid',
-      'input#nome-usuario': 'nome'
+      'input#nome-usuario': 'nome',
+      'input#sobrenome-usuario': 'sobrenome',
+      'select#funcao-usuario': {
+        observe: 'funcao_id',
+        selectOptions: {
+          collection: 'this.modFuncao.Lista',
+          labelPath: 'nome',
+          valuePath: 'id'
+        }
+      }
     },
 
     events: {
       'submit form.leitura-usuario': 'aoClicarEmSubmeter',
       'click button#salvar-usuario': 'aoClicarEmSalvar',
       'click button#remover-usuario': 'aoClicarEmRemover',
-    },
-
-    aoSelecionarUmaOpcaoDeFuncao: function(valorDaFuncao) {
-      this.funcao_id = valorDaFuncao;
     },
 
     aoClicarEmSubmeter: function(evento) {
@@ -96,7 +85,6 @@ define([
 
       this.validacao.whenValid({}).then(function() {
  
-        meuObj.model.set({'funcao_id': meuObj.funcao_id });
         meuObj.model.save().done(function(modelo, resposta, opcoes) {
           // Inicia novamente a validação
           meuObj.validacao.reset();
@@ -123,7 +111,5 @@ define([
     }
   });
 
-  VisaoDeLeitura = VisaoDeLeitura.extend(Base);
-
-  return VisaoDeLeitura;
+  return VisaoDeLeitura.extend(Base);
 });

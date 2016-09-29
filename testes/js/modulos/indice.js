@@ -7,6 +7,7 @@ define([
 , "modulos/usuario/indice"
 , "modulos/exemplo/indice"
 , "modulos/funcao/indice"
+, "modulos/exemploVisaoReusada/indice"
 ], function(
   aplic
 , Jasny
@@ -16,6 +17,7 @@ define([
 , ModuloDeUsuario
 , ModuloDeExemplo
 , ModuloDeFuncao
+, ModuloExemploVisaoReusada
 ) {
   'use strict';
 

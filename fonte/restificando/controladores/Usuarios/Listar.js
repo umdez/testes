@@ -27,17 +27,17 @@ Usuarios.prototype.iniciar = function() {
     return meuObj.limiteDeListagens.afunilarServico(requisicao, resposta, contexto);
   });
   
-  fonte.listar.iniciar.antesQue(function(requisicao, resposta, contexto) {
-    return meuObj.jwt.autorizar(requisicao, resposta, contexto, function(seAutorizado) { 
-      if (seAutorizado) { };
-    });
-  });
+  //fonte.listar.iniciar.antesQue(function(requisicao, resposta, contexto) {
+  //  return meuObj.jwt.autorizar(requisicao, resposta, contexto, function(seAutorizado) { 
+  //    if (seAutorizado) { };
+  //  });
+  //});
 
-  fonte.listar.iniciar.antesQue(function(requisicao, resposta, contexto) {
-    return meuObj.verificarPermissao(requisicao, contexto, function(sePermitido) {
-      if (sePermitido) { };
-    }); 
-  });
+  //fonte.listar.iniciar.antesQue(function(requisicao, resposta, contexto) {
+  //  return meuObj.verificarPermissao(requisicao, contexto, function(sePermitido) {
+  //    if (sePermitido) { };
+  //  }); 
+  //});
 
   fonte.listar.iniciar(function(requisicao, resposta, contexto) {
     return contexto.continuar;

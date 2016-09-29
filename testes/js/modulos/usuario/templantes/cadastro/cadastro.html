@@ -5,11 +5,22 @@
   <div class="panel-body">
 
     <form class="cadastro-usuario" data-parsley-validate="parsley">
-      <div class="form-group">
-        <label for="nome-usuario">Nome completo</label>
-        <input type="text" class="form-control" id="nome-usuario" placeholder="Nome completo" 
-        data-parsley-required="true" data-parsley-length="[10, 80]">
-      </div>
+      <div class="row">
+        <div class="col-xs-5">
+          <div class="form-group">
+            <label for="nome-usuario">Nome</label>
+            <input type="text" class="form-control" id="nome-usuario" placeholder="Nome" 
+            data-parsley-required="true" data-parsley-length="[2, 30]">
+          </div>
+        </div>
+        <div class="col-xs-7">
+          <div class="form-group">
+            <label for="sobrenome-usuario">Sobrenome</label>
+            <input type="text" class="form-control" id="sobrenome-usuario" placeholder="sobrenome" 
+            data-parsley-required="true" data-parsley-length="[4, 50]">
+          </div>
+        </div>
+      </div>  
       <div class="row">
         <div class="col-xs-8">
           <div class="form-group">
@@ -20,7 +31,26 @@
         </div>
         <div class="col-xs-4">
           <div class="form-group" id="funcoes-usuario">
-            &nbsp; <!-- Aqui acrescentaremos as funções atuais de usuário. -->
+            <label for="funcao-usuario">Função</label>
+            <select id="funcao-usuario" class="form-control" required="">
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-5">
+          <div class="form-group">
+            <label for="logradouro-endereco-usuario">Logradouro</label>
+            <input type="text" class="form-control" id="logradouro-endereco-usuario" placeholder="Rua ou Avenida..." 
+            data-parsley-required="true" data-parsley-length="[2, 50]">
+          </div>
+        </div>
+        <div class="col-xs-7">
+          <div class="form-group">
+            <label for="bairro-endereco-usuario">Bairro</label>
+            <input type="text" class="form-control" id="bairro-endereco-usuario" placeholder="Nome do bairro" 
+            data-parsley-required="true" data-parsley-length="[2, 50]">
+            </select>
           </div>
         </div>
       </div>
@@ -34,7 +64,3 @@
 
   </div>
 </div>
-
-<!--
-  
--->

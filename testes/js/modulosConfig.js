@@ -15,7 +15,8 @@ define([
     grupoUm: [
       { 'id': 'usuario-cadastro'},
       { 'id': 'usuario-pesquisa'},
-      { 'id': 'usuario-leitura'}
+      { 'id': 'usuario-leitura'},
+      { 'id': 'visao-reusada-exemplo'}
     ],
     grupoDois: [
 

@@ -1,3 +1,4 @@
+/* Visão de cadastro de usuários */
 
 define([
   'aplicativo'
@@ -5,7 +6,7 @@ define([
 , "modulos/visoes"
 , 'urls'
 , 'handlebars'
-, 'modulos/usuario/visoes/cadastro/funcoes'
+, 'modulos/usuario/visoes/cadastro/endereco'
 , 'text!modulos/usuario/templantes/cadastro/cadastro.html' 
 ], function(
   aplic
@@ -13,7 +14,7 @@ define([
 , Base
 , gerarUrl
 , hbs
-, VisaoDasFuncoes
+, VisaoDeEndereco
 , TemplanteCadastro
 ) {
   'use strict';
@@ -21,41 +22,47 @@ define([
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/visoes/cadastro/cadastro' });
 
   var VisaoDeCadastro = Backbone.View.extend({
-
-    el: 'div.grupo-um div#usuario-cadastro.conteudo-grupo-um',
-
-    visaoDasFuncoes: null,
-
-    funcao_id: null, 
+    tagName: "div",
 
     templante: hbs.compile(TemplanteCadastro), 
     
     modUsuario: aplic.modulo("Usuario"),
+    modFuncao: aplic.modulo("Funcao"),
 
     validacao: null,
 
-    initialize: function() {
-      _.bindAll(this, 'aoSelecionarUmaOpcaoDeFuncao');
+    visaoDeEndereco: null,
 
-      this.listenTo(this.modUsuario.evts, 'funcao-do-usuario-cadastro:selecionada', this.aoSelecionarUmaOpcaoDeFuncao);
-      this.render();
+    initialize: function() {
+       _.bindAll(this, 'aoRecriar');
     },
 
     render: function() { 
       this.$el.html(this.templante({}));
       this.stickit();
-
       this.validacao = this.$el.find('form.cadastro-usuario').parsley();
 
-      this.visaoDasFuncoes = this.reusarVisao("VisaoDeCadastroDeUsuario", "VisaoDasFuncoes", function() {
-        return new VisaoDasFuncoes({});
-      });
+      //var meuObj = this;
+      //this.visaoDeEndereco = this.criarVisao("VisaoDeCadastro", "VisaoDeEndereco", function() {
+      //  return new VisaoDeEndereco({ 'model': meuObj.model.endereco });
+      //});
+
+      return this;
     },
 
     bindings: {
       'input#jid-usuario': 'jid',
       'input#nome-usuario': 'nome',
-      'input#senha-usuario': 'senha'
+      'input#sobrenome-usuario': 'sobrenome',
+      'input#senha-usuario': 'senha',
+      'select#funcao-usuario': {
+        observe: 'funcao_id',
+        selectOptions: {
+          collection: 'this.modFuncao.Lista',
+          labelPath: 'nome',
+          valuePath: 'id'
+        }
+      }
     },
 
     events: {
@@ -63,48 +70,29 @@ define([
       'click button#cadastrar-usuario': 'aoClicarEmCadastrar',
     },
 
-    aoSelecionarUmaOpcaoDeFuncao: function(valorDaFuncao) {
-      this.funcao_id = valorDaFuncao;
-    },
-
     aoClicarEmCadastrar: function(evento) {
       var meuObj = this;
       var usuarios = this.modUsuario.Lista;
-      var ModUsuario = this.modUsuario.Modelo;
 
       this.validacao.whenValid({}).then(function() {
-
-        meuObj.model.set({'funcao_id': meuObj.funcao_id });
         meuObj.model.url = gerarUrl('Usuarios');
+  
+        //meuObj.model.endereco.url = gerarUrl('UsuarioEndereco', null, this.id);
 
         meuObj.model.save().done(function(usuario, resposta, opcoes) {
           usuarios.add(usuario);
 
-          meuObj.limparFormulario();
-
           // Navega para visão de leitura
           aplic.navegar('#UsuariosLeitura', usuario.id, true); 
 
-          // Inicia novamente a validação
-          meuObj.validacao.reset();
-          
-          // Remove bindings deste modelo salvo
-          meuObj.unstickit(meuObj.model);
-
-          // Inicia novo modelo
-          meuObj.model = new ModUsuario({});
-
-          // Adiciona bindings para novo modelo
-          meuObj.stickit(meuObj.model);
-
           Registrar('BAIXO', 'Novo usuario cadastrado com sucesso');
-        }).fail(function(modelo, resposta, opcoes) {
+        })
+        .fail(function(modelo, resposta, opcoes) {
           Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
-        });
-
+        }); 
       }).fail(function() {
         Registrar('BAIXO', 'É necessário informar os dados corretos para realizar o cadastro.');
-      })
+      });
     },
 
     aoClicarEmSubmeter: function(evento) {
@@ -112,21 +100,11 @@ define([
       evento.preventDefault();
     },
 
-    limparFormulario: function() {
-      this.funcao_id = null;
-
-      this.$el.find('input#jid-usuario').val('');
-      this.$el.find('input#senha-usuario').val('');
-      this.$el.find('input#nome-usuario').val('');
-    },
-
-    aoReusar: function() {
-      Registrar('BAIXO', 'A visão (VisaoDeCadastro) acaba de ser reusada.');
+    aoRecriar: function() {
+      Registrar('BAIXO', 'A visão (VisaoDeCadastro) acaba de ser recriada.');
     }
     
   });
-
-  VisaoDeCadastro = VisaoDeCadastro.extend(Base);
-
-  return VisaoDeCadastro;
+  
+  return VisaoDeCadastro.extend(Base);
 });

@@ -1,5 +1,4 @@
-/* Agrupa todas as URLs das rotas dos modelos e também do roteador.
- */
+/* Agrupa todas as URLs das rotas dos modelos e também do roteador. */
 
 define([ 
   
@@ -35,6 +34,9 @@ define([
     'Usuario': function(id) {
       return base +"/Usuarios/"+ id;
     }, 
+    'UsuarioEndereco': function(idUsuario, id) {
+      return base +"/Usuarios/"+ idUsuario +"/UsuarioEndereco/"+ id;
+    },
     '#Usuarios': function() {
       return "Usuarios";
     },
@@ -49,6 +51,9 @@ define([
     },
     '#UsuariosLeitura': function(id) {
       return "UsuariosLeitura/"+ id;
+    },
+    '#ExemploDeReuso': function() {
+      return "ExemploDeReuso";
     },
     '#GrupoUm': function() {
       return "GrupoUm";

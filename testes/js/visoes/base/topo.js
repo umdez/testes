@@ -57,6 +57,9 @@ define([
         case 'item-grupo-dois': 
           aplic.navegar('#GrupoDois', null, true);
           break;
+        default:
+          Registrar('BAIXO', 'O item clicado não era esperado.');
+          break;
       };
     },
 
