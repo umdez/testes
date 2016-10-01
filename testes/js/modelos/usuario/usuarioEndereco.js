@@ -8,16 +8,16 @@ define([
 ) {
   'use strict';
 
-  var ModeloDeEndereco = Backbone.Model.extend({
+  var ModeloDeEndereco = Backbone.RelationalModel.extend({
 
     url: function() {
-      return gerarUrl('UsuarioEndereco', null, this.id);
+      return gerarUrl('UsuarioEndereco', this.idEndereco);
     },
     
     idAttribute: 'id',
 
-    initialize: function(){
-      
+    initialize: function(propriedades) {
+      this.idEndereco = propriedades.idEndereco;
     },
 
     defaults: {

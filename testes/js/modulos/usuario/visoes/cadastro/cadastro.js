@@ -6,7 +6,7 @@ define([
 , "modulos/visoes"
 , 'urls'
 , 'handlebars'
-, 'modulos/usuario/visoes/cadastro/endereco'
+, 'modulos/usuario/visoes/cadastro/endereco' 
 , 'text!modulos/usuario/templantes/cadastro/cadastro.html' 
 ], function(
   aplic
@@ -40,13 +40,15 @@ define([
     render: function() { 
       this.$el.html(this.templante({}));
       this.stickit();
-
-      var meuObj = this;
+ 
+      var modeloDeEndereco = new this.modUsuario.ModeloDeEndereco({});
       this.visaoDeEndereco = this.criarVisao("VisaoDeCadastro", "VisaoDeEndereco", function() {
-        return new VisaoDeEndereco({ 'model': meuObj.model.endereco });
+        return new VisaoDeEndereco({ 'model': modeloDeEndereco });
       });
-      this.$el.find('div#capsula-endereco-usuario').html(this.visaoDeEndereco.render().el);
+      this.model.set({'UsuarioEndereco': modeloDeEndereco});
+      this.$el.find('div#acondicionar-endereco-usuario').html(this.visaoDeEndereco.render().el);
 
+      // depois de preencher toda a visão dai nós vamos iniciar a validação
       this.validacao = this.$el.find('form.cadastro-usuario').parsley();
 
       return this;
@@ -75,18 +77,29 @@ define([
     aoClicarEmCadastrar: function(evento) {
       var meuObj = this;
       var usuarios = this.modUsuario.Lista;
+      var usuario = meuObj.model;
+      var endereco = usuario.get('UsuarioEndereco');
 
       this.validacao.whenValid({}).then(function() {
-        meuObj.model.url = gerarUrl('Usuarios');
+        usuario.url = gerarUrl('Usuarios');
 
-        meuObj.model.save().done(function(usuario, resposta, opcoes) {
+        usuario.save().done(function(modelo, resposta, opcoes) {
           usuarios.add(usuario);
 
-          //meuObj.model.endereco.url = gerarUrl('UsuarioEndereco', null, this.id);
+          endereco.set({'usuario_id': usuario.get('id')});
+          endereco.url = gerarUrl('UsuarioEnderecos');
 
-          // Navega para visão de leitura
-          aplic.navegar('#UsuariosLeitura', usuario.id, true); 
+          endereco.save().done(function(modelo, resposta, opcoes) {
+            
+            // Navega para visão de leitura
+            aplic.navegar('#UsuariosLeitura', usuario.get('id'), true); 
 
+            Registrar('BAIXO', 'Novo endereco cadastrado com sucesso');
+          })
+          .fail(function(modelo, resposta, opcoes) {
+            Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+          });
+          
           Registrar('BAIXO', 'Novo usuario cadastrado com sucesso');
         })
         .fail(function(modelo, resposta, opcoes) {

@@ -42,18 +42,21 @@ define([
   Escopos.prototype.verificarEscopo = function(modelo, acao) {
     var sePossui = 0;
     var permissao = PERMISSAO_SUPERIOR;
-    var conta = this.sessao.conta;
-    var escopos = conta.funcao.get('Escopos');
+    var conta = this.sessao.get('Conta');
+    var escopos = conta.get('Funcoes').get('Escopos');
 
     permissao |= acoes[acao.toUpperCase()];
 
-    _.find(escopos, function(escopo){ 
-      if (escopo && escopo.nome === modelo) {
-        var bandeira = escopo.bandeira;
+    escopos.each(function(escopo, indice, contexto) {
+      if (sePossui !== 0) {
+        return;
+      }
+      if (escopo && escopo.get('nome') === modelo) {
+        var bandeira = escopo.get('bandeira');
         sePossui = (bandeira & permissao);
       }
-      return (sePossui != 0);
     });
+
     return (sePossui != 0);
   };
 

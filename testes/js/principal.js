@@ -20,11 +20,13 @@ define([
   };
 
   aplic.sessao.on("change:autenticado", function() {
-    var conta = aplic.sessao.conta;
+    var conta = aplic.sessao.get('Conta');
     var seAutenticado = aplic.sessao.get('autenticado');
 
-    Registrar('BAIXO', 'nome?? ' + conta.get('nome'));
-    Registrar('BAIXO', 'Funçao?? ' + conta.funcao.get('nome'));
+    if (seAutenticado) {
+      Registrar('BAIXO', 'nome?? ' + conta.get('nome'));
+      Registrar('BAIXO', 'Funçao?? ' + conta.get('Funcoes').get('nome'));
+    }
  
     if (seAutenticado) { 
       var Strophe = aplic.xmpp.Strophe;

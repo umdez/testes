@@ -12,5 +12,6 @@ module.exports = [
 
 // {modelo: 'Usuarios', arquivo: pasta.join(__dirname, 'Usuarios.js') }
 
+// {modelo: 'UsuarioEndereco', arquivo: pasta.join(__dirname, 'UsuarioEndereco.js') }
 // {modelo: 'Projetos', arquivo: pasta.join(__dirname, 'Projetos.js') }
 ];

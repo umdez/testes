@@ -3,13 +3,17 @@ define([
   'aplicativo'
 , 'backbone' 
 , 'modulos/visoes'
+, 'urls'
 , 'handlebars'
+, 'modulos/usuario/visoes/leitura/endereco'
 , 'text!modulos/usuario/templantes/leitura/leitura.html'
 ], function(
   aplic
 , Backbone
 , Base
+, gerarUrl
 , hbs
+, VisaoDeEndereco
 , Templante
 ) {
   'use strict';
@@ -28,14 +32,17 @@ define([
     modUsuario: aplic.modulo("Usuario"),
     modFuncao: aplic.modulo("Funcao"),
 
+    visaoDeEndereco: null,
+
     initialize: function() {
-      _.bindAll(this, 'aoRecriar');
+      _.bindAll(this, 
+        'aoRecriar'
+      );
     },
 
     render: function() {
       this.$el.html(this.templante(this.model.toJSON()));
       this.stickit();
-      this.validacao = this.$el.find('form.leitura-usuario').parsley();
 
       this.sePodeAtualizarUsuario = this.verificarEscopo('Usuarios', "ATUALIZACAO");
       //this.sePodeRemoverUsuario = this.verificarEscopo('Usuarios', "REMOCAO");
@@ -44,9 +51,25 @@ define([
         this.$el.find('button#salvar-usuario').prop("disabled", false); 
       }
 
+      //console.log('Funcao do usu...........: '+ this.model.get('Funcoes').get('nome'));
+
+      //this.modFuncao.Lista.each(function(funcao) {
+      //  console.log('Lista........: '+ funcao.get('Escopos').at(1).get('Funcoes').get('nome'));
+      //});
+
       //if (this.sePodeRemoverUsuario) {
       //  this.$el.find('button#remover-usuario').prop("disabled", false); 
       //}
+
+      var endereco = this.model.get('UsuarioEndereco');
+      this.visaoDeEndereco = this.criarVisao("VisaoDeCadastro", "VisaoDeEndereco", function() {
+        return new VisaoDeEndereco({ 'model': endereco });
+      });
+      this.$el.find('div#acondicionar-endereco-usuario').html(this.visaoDeEndereco.render().el);
+
+      // depois de preencher toda a visão dai nós vamos iniciar a validação
+      this.validacao = this.$el.find('form.leitura-usuario').parsley();
+
       return this;
     },
 
@@ -82,21 +105,47 @@ define([
       }
 
       var meuObj = this;
+      var usuarios = this.modUsuario.Lista;
+      var usuario = this.model;
+      var endereco = usuario.get('UsuarioEndereco');
+      var ModeloDeFuncao = aplic.modulo("Funcao").Modelo;
+      var funcao = ModeloDeFuncao.findOrCreate({'id': usuario.get("funcao_id")});
 
       this.validacao.whenValid({}).then(function() {
- 
-        meuObj.model.save().done(function(modelo, resposta, opcoes) {
-          // Inicia novamente a validação
-          meuObj.validacao.reset();
-          Registrar('BAIXO', 'Dados do usuario foram salvos com sucesso');
-        })
-        .fail(function(modelo, resposta, opcoes) {
-          Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
-        }); 
+        
+        // Inicialmente requisitaremos a nossa função
+        funcao.url = gerarUrl('Funcao', usuario.get("funcao_id"));
+        funcao.fetch().done(function(modelo, resposta, opcoes) {
+          usuario.set({'Funcoes': funcao });
+          
+          // Salvamos este usuário
+          usuario.save().done(function(modelo, resposta, opcoes) {
+            usuarios.add(usuario, {merge: true});
+
+            // Salvamos o endereço deste usuário.
+            endereco.url = gerarUrl('UsuarioEndereco', endereco.get('id'));
+            endereco.save().done(function(modelo, resposta, opcoes) {
+
+              // Inicia novamente a validação
+              meuObj.validacao.reset();
+              Registrar('BAIXO', 'Dados do endereço do usuario foram salvos com sucesso');
+            })
+            .fail(function(modelo, resposta, opcoes) {
+              Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+            });
+
+            Registrar('BAIXO', 'Dados do usuario foram salvos com sucesso');
+          })
+          .fail(function(modelo, resposta, opcoes) {
+            Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+          });
+          Registrar('BAIXO', 'Dados da função do usuario foram salvos com sucesso');
+        });
 
       }).fail(function() {
         Registrar('BAIXO', 'É necessário informar os dados corretos para salvar.');
       });
+
     },
 
     aoClicarEmRemover: function(evento) {

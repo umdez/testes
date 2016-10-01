@@ -33,7 +33,7 @@ define([
 
     render: function() {
       this.$el.html(this.templante({
-        'nome': aplic.sessao.conta.get('nome')
+        'nome': aplic.sessao.get('Conta') ? aplic.sessao.get('Conta').get('nome') : ''
       }));
       return this;
     },

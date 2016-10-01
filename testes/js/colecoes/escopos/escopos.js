@@ -1,4 +1,3 @@
-
 define([
   "backbone"
 , "urls"
@@ -9,13 +8,17 @@ define([
 , ModeloDeEscopo
 ) {
   'use strict';
-
+ 
   var ColecaoDeEscopos = Backbone.Collection.extend({
 
     model: ModeloDeEscopo,
     
     url: function() {
-      return gerarUrl('Escopos');
+      return gerarUrl('Escopos', this.idDaFuncao);
+    },
+
+    initialize: function(modelos, propriedades) {
+      this.idDaFuncao = propriedades.idDaFuncao;
     }
 
   });

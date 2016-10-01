@@ -14,7 +14,7 @@ define([
 ) {
   'use strict';
 
-  var ModeloDeUsuario = Backbone.Model.extend({
+  var ModeloDeUsuario = Backbone.RelationalModel.extend({
 
     url: function() {
       return gerarUrl('Usuario', this.id);
@@ -23,9 +23,7 @@ define([
     idAttribute: 'id',
 
     initialize: function(){
-      this.funcao = new ModeloDeFuncao({});
-      this.endereco = new ModeloDeEndereco({});
-      //this.escopos = new ColecaoDeEscopos.Colecao({});
+      
     },
 
     defaults: {
@@ -36,7 +34,28 @@ define([
     , 'uuid': null
     , 'estatos': null
     , 'funcao_id': null
-    }
+    },
+
+    relations: [{
+      type: Backbone.HasOne,
+      key: 'Funcoes',
+      relatedModel: ModeloDeFuncao,
+      reverseRelation: {
+        key: 'Usuarios',
+        type: Backbone.HasMany,
+        includeInJSON: true
+      }
+    },
+    {
+      type: Backbone.HasOne,
+      key: 'UsuarioEndereco',
+      relatedModel: ModeloDeEndereco,
+      reverseRelation: {
+        key: 'Usuarios',
+        type: Backbone.HasOne,
+        includeInJSON: true
+      }
+    }]
 
   });
   

@@ -1,4 +1,3 @@
-
 define([
   "backbone"
 , "urls"
@@ -10,16 +9,14 @@ define([
 ) {
   'use strict';
 
-  var ModeloDeConta = Backbone.Model.extend({
- 
+  var ModeloDeConta = Backbone.RelationalModel.extend({
+    
     url: function() {
       return gerarUrl('Contas');
     },
-    
-    idAttribute: 'id',
 
     initialize: function(){
-      this.funcao = new ModeloDeFuncao({});
+      
     },
 
     defaults: {
@@ -28,9 +25,19 @@ define([
     , 'estatos': ''
     , 'jid': ''
     , 'funcao_id': null
-    }
+    },
 
+    relations: [{
+      type: Backbone.HasOne,
+      key: 'Funcoes',
+      relatedModel: ModeloDeFuncao,
+      reverseRelation: {
+        key: 'Conta',
+        type: Backbone.HasOne,
+        includeInJSON: true
+      }
+    }]
   });
-  
+
   return ModeloDeConta;
 });

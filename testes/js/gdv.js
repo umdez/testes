@@ -5,7 +5,7 @@
 define([
 
 ], function (
-
+  
 ) {
   'use strict';
 

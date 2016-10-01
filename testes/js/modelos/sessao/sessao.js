@@ -1,15 +1,19 @@
 define([
   "backbone"
 , "urls"
-, "modelos/conta/conta"
+, "modelos/conta/conta" 
+, "modelos/funcao/funcao"
+, "colecoes/escopos/escopos"
 ], function(
   Backbone
 , gerarUrl
 , ModeloDeConta
+, ModeloDeFuncao
+, ColecaoDeEscopo
 ) {
   'use strict';
 
-  var ModeloDeSessao = Backbone.Model.extend({
+  var ModeloDeSessao = Backbone.RelationalModel.extend({
 
     url: function() {
       return gerarUrl('Contas');
@@ -22,68 +26,107 @@ define([
     , 'autenticado': false
     },
 
+    conta: null,
+
     initialize: function(){
 
-      this.conta = new ModeloDeConta({});
+      this.set('Conta', new ModeloDeConta({}));
     },
 
+    relations: [{
+      type: Backbone.HasOne,
+      key: 'Conta',
+      relatedModel: ModeloDeConta,
+      reverseRelation: {
+        key: 'Sessao',
+        type: Backbone.HasOne,
+        includeInJSON: true
+      }
+    }],
+
     entrar: function(credenciais, cd) {
-      var meuObjt = this;
-      var conta = this.conta;
-      var funcao = this.conta.funcao;
+      var meuObj = this;
+      var conta = this.get('Conta');
+      var funcao = null;
+      var escopos = null;
 
       var suporteDeFalhas = function(modelo, resposta, opcoes) {
-        meuObjt.conta.funcao.clear();
-        meuObjt.conta.clear();
-        meuObjt.unset('id');
-        meuObjt.set({ 'autenticado': false });
+        meuObj.get('Conta').url = gerarUrl('Contas');
+        meuObj.get('Conta').unset('id');
+  
+        meuObj.unset('id');
+        meuObj.set({ 'autenticado': false });
         if('erro' in cd) cd.erro(modelo, resposta, opcoes);
       };
 
-      var mediador = function(modelo) {
-        funcao.set({'id': conta.get('funcao_id')});
-        meuObjt.set({'id': modelo.id });
-        conta.set({'id': modelo.id });
+      var mediador = function(conta) {
+        meuObj.set({'Conta': conta})
+        meuObj.set({'id': conta.id });
 
+        funcao = ModeloDeFuncao.findOrCreate({'id': conta.get('funcao_id')});
+        funcao.url = gerarUrl('Funcao', conta.get('funcao_id'));
         funcao.fetch().done(function(modelo, resposta, opcoes) {
-          meuObjt.set({ 'autenticado': true });
-          if('sucesso' in cd) cd.sucesso(modelo, resposta, opcoes); 
+          conta.set('Funcoes', funcao);
+
+          escopos = funcao.get('Escopos');
+          escopos.url = gerarUrl('Escopos', funcao.get('id'));
+          escopos.fetch({'reset': true}).done(function() {
+            
+            //funcao.get('Escopos').at(1).get('Funcao').get('nome');
+            conta.get('Sessao').set({ 'autenticado': true });
+            if('sucesso' in cd) cd.sucesso(modelo, resposta, opcoes);
+          }).fail(suporteDeFalhas);
+
         })
         .fail(suporteDeFalhas);
+
       };
 
       if (credenciais) {
+        conta.url = gerarUrl('Contas');
+
         // Realiza a entrada do usuário na conta.
         conta.save(credenciais).done(function(modelo, resposta, opcoes) {
-          mediador(modelo);
+          mediador(conta);
         })
         .fail(suporteDeFalhas); 
       } else {
+        conta = ModeloDeConta.findOrCreate({'id': this.get('id')});
+
         // Retorna a situação da sessão atual.
         conta.fetch().done(function(modelo, resposta, opcoes) {
-          mediador(modelo);
+          mediador(conta);
         }).fail(suporteDeFalhas);
       }
     },
 
     sair: function(cd) {
-      var meuObjt = this;
+      var meuObj = this;
+      var conta = this.get('Conta');
       
       // Adc. url da nossa conta a ser destruida
-      this.conta.url = gerarUrl('Conta', this.id);
-   
+      conta.url = gerarUrl('Conta', this.id);
+    
       // Realiza a saida do usuario de sua conta.
-      this.conta.destroy()
-      .done(function(modelo, resposta) {
-         meuObjt.conta.funcao.clear();
-         meuObjt.conta.clear();
-         meuObjt.conta.url = gerarUrl('Contas');
-         meuObjt.unset('id');
-         meuObjt.set({ 'autenticado': false });
+      conta.destroy().done(function(modelo, resposta) {
+
+         meuObj.set('Conta', new ModeloDeConta({}));
+         
+         // volta a url original
+         meuObj.get('Conta').url = gerarUrl('Contas');
+         meuObj.unset('id');
+         meuObj.set({ 'autenticado': false });
 
          if('sucesso' in cd) cd.sucesso(modelo, resposta); 
       })
       .fail(function(modelo, resposta) {
+        
+        meuObj.set('Conta', new ModeloDeConta({}));
+        meuObj.get('Conta').url = gerarUrl('Contas');
+
+        meuObj.unset('id');
+        meuObj.set({ 'autenticado': false });
+
         if('erro' in cd) cd.erro(modelo, resposta); 
       });     
     },

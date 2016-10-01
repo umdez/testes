@@ -1,33 +1,34 @@
-
 define([
   "backbone"
 , "urls"
+, "relational"
 ], function(
   Backbone
 , gerarUrl
+, Relacional
 ) {
   'use strict';
 
-  var ModeloDeEscopo = Backbone.Model.extend({
+  var ModeloDeEscopo = Backbone.RelationalModel.extend({
     
     url: function() {
-      return gerarUrl('Escopo', this.funcao_id, this.id);
+      return gerarUrl('Escopo', this.idDaFuncao, this.idDoEscopo);
+    },
+    
+    initialize: function(propriedades){
+      this.idDaFuncao = propriedades.idDaFuncao;
+      this.idDoEscopo = propriedades.idDoEscopo;
     },
 
     idAttribute: 'id',
 
-    initialize: function(){
-      
-    },
-
     defaults: {
       'id': null
-    , 'nome': ''
+    , 'nome': null
     , 'bandeira': null
     , 'funcao_id': null
     }
-
   });
-  
+
   return ModeloDeEscopo;
 });

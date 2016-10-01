@@ -16,8 +16,8 @@ define([
     'Funcao': function(id) {
       return base +"/Funcoes/"+ id;
     },
-    'Escopos': function() {
-      return base +"/Escopos";
+    'Escopos': function(idDafuncao) {
+      return base +"/funcoes/"+ idDafuncao +"/Escopos";
     },
     'Escopo': function(idDafuncao, id) {
       return base +"/Funcoes/"+ idDafuncao +"/Escopos/"+ id;
@@ -34,8 +34,11 @@ define([
     'Usuario': function(id) {
       return base +"/Usuarios/"+ id;
     }, 
-    'UsuarioEndereco': function(idUsuario, id) {
-      return base +"/Usuarios/"+ idUsuario +"/UsuarioEndereco/"+ id;
+    'UsuarioEndereco': function(idEndereco) {
+      return base +"/UsuarioEndereco/"+ idEndereco;
+    },
+    'UsuarioEnderecos': function() {
+      return base +"/UsuarioEndereco";
     },
     '#Usuarios': function() {
       return "Usuarios";

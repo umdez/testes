@@ -4,12 +4,14 @@ define([
 , 'bootstrap'
 , "escopos"
 , "urls"
+, "relational"
 , "modelos/sessao/sessao"
 ], function(
   Backbone
 , BootStrap
 , Escopos
 , gerarUrl
+, Relacional
 , ModeloDeSessao
 ) {
   'use strict';

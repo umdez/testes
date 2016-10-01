@@ -5,6 +5,7 @@ define([
 , "backbone"
 , "modulos/usuario/controlador/controlador"
 , "modelos/usuario/usuario"
+, "modelos/usuario/usuarioEndereco"
 , "colecoes/usuarios/usuarios"
 , "paginacoes/usuarios/usuarios"
 ], function (
@@ -12,6 +13,7 @@ define([
 , Backbone
 , Controlador
 , ModeloDeUsuario
+, ModeloDeEndereco
 , ColecaoDeUsuario
 , PaginacaoDeUsuario
 ) {
@@ -22,6 +24,8 @@ define([
   Registrar('BAIXO', 'Iniciando o modulo de usuários.');
 
   var Usuario = aplic.modulo("Usuario");
+
+  Usuario.ModeloDeEndereco = ModeloDeEndereco;
 
   Usuario.Modelo = ModeloDeUsuario;
 
