@@ -16,7 +16,7 @@ define([
 ) {
   'use strict';
 
-  var Registrar = _.bind(aplic.registrar, { envolucro: 'roteador' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'nucleo/roteador' });
 
   var SitioRoteador = Backbone.Router.extend({
     
