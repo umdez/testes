@@ -3,7 +3,7 @@
 
 define([
   'aplicativo'
-, 'gdv'
+, 'utilitarios/gdv'
 , 'visoes/grupos/grupo01'
 , 'visoes/grupos/grupo02'
 ], function(

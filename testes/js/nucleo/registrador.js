@@ -1,5 +1,4 @@
-/* Registrar mensagens do nosso sistema para depuração.
- */
+/* Registrar mensagens do nosso sistema para depuração. */
 
 define([ 
   "aplicativo"

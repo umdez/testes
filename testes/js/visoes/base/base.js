@@ -5,7 +5,7 @@
 define([
   'aplicativo'
 , 'backbone' 
-, 'gdv'
+, 'utilitarios/gdv'
 , "modulos/indice"
 , 'visoes/base/entrada'
 , 'visoes/base/painel'

@@ -6,11 +6,11 @@ define([
 ) {
   'use strict';
 
-  var Registrar = _.bind(aplic.registrar, { envolucro: 'modulosConfig' });
+  var Registrar = _.bind(aplic.registrar, { envolucro: 'visoes/grupos/configuracao' });
  
-  Registrar('BAIXO', 'As configurações dos modulos foram todos carregadas.');
+  Registrar('BAIXO', 'As configurações dos grupos foram todos carregadas.');
 
-  var modulosConfig = {
+  var configuracao = {
     
     grupoUm: [
       { 'id': 'usuario-cadastro'},
@@ -27,8 +27,8 @@ define([
   };
 
   return {
-    'grupoUm': modulosConfig.grupoUm,
-    'grupoDois': modulosConfig.grupoDois,
-    'grupoTres': modulosConfig.grupoTres
+    'grupoUm': configuracao.grupoUm,
+    'grupoDois': configuracao.grupoDois,
+    'grupoTres': configuracao.grupoTres
   }
 });

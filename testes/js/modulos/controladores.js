@@ -2,7 +2,7 @@
 
 define([
   "aplicativo"
-, "gdv"
+, "utilitarios/gdv"
 ], function (
   aplicativo
 , GDV

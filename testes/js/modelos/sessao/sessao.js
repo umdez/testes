@@ -1,6 +1,6 @@
 define([
   "backbone"
-, "urls"
+, "urls/indice"
 , "modelos/conta/conta" 
 , "modelos/funcao/funcao"
 , "colecoes/escopos/escopos"
@@ -51,11 +51,13 @@ define([
       var escopos = null;
 
       var suporteDeFalhas = function(modelo, resposta, opcoes) {
+        
         meuObj.get('Conta').url = gerarUrl('Contas');
         meuObj.get('Conta').unset('id');
-  
         meuObj.unset('id');
         meuObj.set({ 'autenticado': false });
+
+        console.log('(modelos/sessao/sessao) Alguma falha ocorreu ao tentarmos realizar a entrada/autorização.');
         if('erro' in cd) cd.erro(modelo, resposta, opcoes);
       };
 
@@ -68,12 +70,16 @@ define([
         funcao.fetch().done(function(modelo, resposta, opcoes) {
           conta.set('Funcoes', funcao);
 
+          console.log('(modelos/sessao/sessao) Dados da sua função foram carregados com sucesso.');
+
           escopos = funcao.get('Escopos');
           escopos.url = gerarUrl('Escopos', funcao.get('id'));
           escopos.fetch({'reset': true}).done(function() {
             
             //funcao.get('Escopos').at(1).get('Funcao').get('nome');
             conta.get('Sessao').set({ 'autenticado': true });
+
+            console.log('(modelos/sessao/sessao) Dados dos seus escopos foram carregados com sucesso.');
             if('sucesso' in cd) cd.sucesso(modelo, resposta, opcoes);
           }).fail(suporteDeFalhas);
 
@@ -87,6 +93,7 @@ define([
 
         // Realiza a entrada do usuário na conta.
         conta.save(credenciais).done(function(modelo, resposta, opcoes) {
+          console.log('(modelos/sessao/sessao) Entrada realizada com sucesso.');
           mediador(conta);
         })
         .fail(suporteDeFalhas); 
@@ -95,6 +102,7 @@ define([
 
         // Retorna a situação da sessão atual.
         conta.fetch().done(function(modelo, resposta, opcoes) {
+          console.log('(modelos/sessao/sessao) Requisição de autorização foi aceita com sucesso.');
           mediador(conta);
         }).fail(suporteDeFalhas);
       }
@@ -104,11 +112,15 @@ define([
       var meuObj = this;
       var conta = this.get('Conta');
       
+      console.log('(modelos/sessao/sessao) Realizando a saida.');
+
       // Adc. url da nossa conta a ser destruida
       conta.url = gerarUrl('Conta', this.id);
     
       // Realiza a saida do usuario de sua conta.
       conta.destroy().done(function(modelo, resposta) {
+
+         //Backbone.Relational.store.reset();
 
          meuObj.set('Conta', new ModeloDeConta({}));
          
@@ -117,16 +129,20 @@ define([
          meuObj.unset('id');
          meuObj.set({ 'autenticado': false });
 
+         console.log('(modelos/sessao/sessao) Saida realizada com sucesso.');
          if('sucesso' in cd) cd.sucesso(modelo, resposta); 
       })
       .fail(function(modelo, resposta) {
         
+        //Backbone.Relational.store.reset();
+
         meuObj.set('Conta', new ModeloDeConta({}));
         meuObj.get('Conta').url = gerarUrl('Contas');
 
         meuObj.unset('id');
         meuObj.set({ 'autenticado': false });
 
+        console.log('(modelos/sessao/sessao) Erro ao tentar realizar a saida.');
         if('erro' in cd) cd.erro(modelo, resposta); 
       });     
     },

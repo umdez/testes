@@ -1,6 +1,6 @@
 define([
   "backbone"
-, "urls"
+, "urls/indice"
 , "relational"
 ], function(
   Backbone

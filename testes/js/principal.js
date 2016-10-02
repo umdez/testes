@@ -1,8 +1,8 @@
 
 define([ 
   "aplicativo"
-, 'registrador'
-, "roteador"
+, 'nucleo/registrador'
+, "nucleo/roteador"
 , "strophe"
 ], function(
   aplic

@@ -5,14 +5,12 @@ define([
 , 'backbone' 
 , "modulos/visoes"
 , 'handlebars'
-, 'urls'
 , 'text!modulos/usuario/templantes/leitura/endereco.html' 
 ], function(
   aplic
 , Backbone
 , Base
 , hbs
-, gerarUrl
 , TemplanteEndereco
 ) {
   'use strict';

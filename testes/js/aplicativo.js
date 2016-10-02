@@ -2,8 +2,8 @@
 define([ 
   "backbone"
 , 'bootstrap'
-, "escopos"
-, "urls"
+, "nucleo/escopos"
+, "urls/indice"
 , "relational"
 , "modelos/sessao/sessao"
 ], function(

@@ -6,7 +6,7 @@
 define([
   "aplicativo"
 , "roteando"
-, "gdv"
+, "utilitarios/gdv"
 , "visoes/base/base"
 ], function(
   aplic

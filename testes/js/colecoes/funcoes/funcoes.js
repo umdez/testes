@@ -1,7 +1,7 @@
 
 define([
   "backbone"
-, "urls"
+, "urls/indice"
 , "modelos/funcao/funcao"
 ], function(
   Backbone

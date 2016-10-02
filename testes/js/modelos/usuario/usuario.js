@@ -1,7 +1,7 @@
 
 define([
   "backbone"
-, "urls"
+, "urls/indice"
 , "modelos/funcao/funcao"
 , "modelos/usuario/usuarioEndereco"
 , "colecoes/escopos/escopos"

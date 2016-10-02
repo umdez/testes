@@ -1,10 +1,10 @@
 
 define([
   "backbone"
-, "urls"
+, "urls/indice"
 ], function(
   Backbone
-, Urls
+, gerarUrl
 ) {
   'use strict';
 

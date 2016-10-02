@@ -1,5 +1,5 @@
 define([
-  'modulosConfig'
+  'visoes/grupos/configuracao'
 , 'handlebars'
 , 'text!templantes/grupos/grupo03.html'
 ], function(

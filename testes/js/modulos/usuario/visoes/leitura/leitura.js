@@ -3,7 +3,7 @@ define([
   'aplicativo'
 , 'backbone' 
 , 'modulos/visoes'
-, 'urls'
+, 'urls/indice'
 , 'handlebars'
 , 'modulos/usuario/visoes/leitura/endereco'
 , 'text!modulos/usuario/templantes/leitura/leitura.html'
@@ -118,6 +118,7 @@ define([
         funcao.fetch().done(function(modelo, resposta, opcoes) {
           usuario.set({'Funcoes': funcao });
           
+          usuario.url = gerarUrl('Usuario', usuario.get('id'));
           // Salvamos este usuário
           usuario.save().done(function(modelo, resposta, opcoes) {
             usuarios.add(usuario, {merge: true});

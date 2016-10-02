@@ -4,7 +4,7 @@ define([
   'aplicativo'
 , 'backbone' 
 , "modulos/visoes"
-, 'urls'
+, 'urls/indice'
 , 'handlebars'
 , 'modulos/usuario/visoes/cadastro/endereco' 
 , 'text!modulos/usuario/templantes/cadastro/cadastro.html' 

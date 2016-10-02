@@ -1,6 +1,6 @@
 define([
   'aplicativo'
-, 'modulosConfig'
+, 'visoes/grupos/configuracao'
 , 'handlebars'
 , 'text!templantes/grupos/grupo02.html'
 ], function(
