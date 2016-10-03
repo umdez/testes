@@ -53,16 +53,20 @@ define([
       return this.modulos[nome] = { };
     },
  
-    adcRotaAnterior: function(rota, cd) {
-      this.anteriores[rota] = cd;
-    },
+    adcRotas: function() {
+      var meuObj = this;
 
-    adcRotaPosterior: function(rota, cd) {
-      this.posteriores[rota] = cd;
-    },
-
-    adcRota: function(rota, nome, cd) {
-      this.rotas.push({'rota': rota, 'nome': nome, 'cd': cd});
+      return {
+        adcAnterior: function(rota, cd){
+           meuObj.anteriores[rota] = cd;
+        },
+        adcPosterior: function(rota, cd) {
+           meuObj.posteriores[rota] = cd;
+        }, 
+        adcRota: function(rota, nome, cd) {
+          meuObj.rotas.push({'rota': rota, 'nome': nome, 'cd': cd});
+        }
+      };
     },
 
     registrar: function(nivel, msg) {

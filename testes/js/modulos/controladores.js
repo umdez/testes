@@ -30,17 +30,7 @@ define([
     },
 
     rotasDoControlador: function() {
-      return {
-        adcAnterior: function(rota, cd){
-           aplic.adcRotaAnterior(rota, cd);
-        },
-        adcPosterior: function(rota, cd) {
-           aplic.adcRotaPosterior(rota, cd);
-        }, 
-        adcRota: function(rota, nome, cd) {
-          aplic.adcRota(rota, nome, cd);
-        }
-      }
+      return aplic.adcRotas();
     }
 
   };
