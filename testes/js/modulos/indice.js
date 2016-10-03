@@ -30,5 +30,5 @@ define([
     'usuario': ModuloDeUsuario,
     'exemplo': ModuloDeExemplo,
     'funcao': ModuloDeFuncao
-  }
+  };
 });

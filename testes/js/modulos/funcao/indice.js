@@ -11,7 +11,7 @@ define([
   aplic
 , Backbone
 , Controlador
-, ModeloDeFuncao
+, ModeloDeFuncao 
 , ColecaoDeFuncao
 , PaginacaoDeFuncao
 ) {

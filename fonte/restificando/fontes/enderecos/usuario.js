@@ -4,7 +4,7 @@
  * @Veja https://github.com/umdez/restificando/blob/master/docs/aConfiguracao.md
  */
 
-var Base = require('./base');
+var Base = require('../base');
 var utilitario = require('util');
 
 var UsuarioEndereco = function(argumentos) {

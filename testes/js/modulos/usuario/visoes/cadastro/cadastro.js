@@ -6,7 +6,7 @@ define([
 , "modulos/visoes"
 , 'urls/indice'
 , 'handlebars'
-, 'modulos/usuario/visoes/cadastro/endereco' 
+, './endereco' 
 , 'text!modulos/usuario/templantes/cadastro/cadastro.html' 
 ], function(
   aplic
@@ -34,7 +34,12 @@ define([
     visaoDeEndereco: null,
 
     initialize: function() {
-       _.bindAll(this, 'aoRecriar');
+       _.bindAll(
+         this
+      , 'aoRecriar'
+      , 'cadastrarUsuario'
+      , 'cadastrarEndereco'
+      , 'aoClicarEmCadastrar');
     },
 
     render: function() { 
@@ -64,7 +69,11 @@ define([
         selectOptions: {
           collection: 'this.modFuncao.Lista',
           labelPath: 'nome',
-          valuePath: 'id'
+          valuePath: 'id',
+          defaultOption: {
+            label: 'Escolha uma...',
+            value: null
+          }
         }
       }
     },
@@ -73,41 +82,64 @@ define([
       'submit form.cadastro-usuario': 'aoClicarEmSubmeter',
       'click button#cadastrar-usuario': 'aoClicarEmCadastrar',
     },
-
+    
     aoClicarEmCadastrar: function(evento) {
       var meuObj = this;
-      var usuarios = this.modUsuario.Lista;
-      var usuario = meuObj.model;
+      var colecaoDeUsuarios = this.modUsuario.Lista;
+      var usuario = this.model;
       var endereco = usuario.get('UsuarioEndereco');
 
       this.validacao.whenValid({}).then(function() {
-        usuario.url = gerarUrl('Usuarios');
+        
+        var acoes = [ 
+          meuObj.cadastrarUsuario({}, colecaoDeUsuarios, usuario, { 'sucesso': function() {} }),
+          meuObj.cadastrarEndereco(usuario, endereco, { 'sucesso': function() {} })
+        ];
 
-        usuario.save().done(function(modelo, resposta, opcoes) {
-          usuarios.add(usuario);
+        Registrar('BAIXO', 'Cadastrando o usuário ('+ usuario.get('nome') +').');
 
-          endereco.set({'usuario_id': usuario.get('id')});
-          endereco.url = gerarUrl('UsuarioEnderecos');
-
-          endereco.save().done(function(modelo, resposta, opcoes) {
-            
-            // Navega para visão de leitura
-            aplic.navegar('#UsuariosLeitura', usuario.get('id'), true); 
-
-            Registrar('BAIXO', 'Novo endereco cadastrado com sucesso');
-          })
-          .fail(function(modelo, resposta, opcoes) {
-            Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
-          });
+        meuObj.executarAcoes(acoes, function(){
+          Registrar('BAIXO', 'Etapas do Cadastro do usuário ('+ usuario.get('nome') +') realizadas.');
           
-          Registrar('BAIXO', 'Novo usuario cadastrado com sucesso');
-        })
-        .fail(function(modelo, resposta, opcoes) {
-          Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
-        }); 
+          // após cadastrar tudo nós navegamos para visão de leitura
+          aplic.navegar('#UsuariosLeitura', usuario.get('id'), true); 
+        });
+
       }).fail(function() {
         Registrar('BAIXO', 'É necessário informar os dados corretos para realizar o cadastro.');
       });
+    },
+
+    cadastrarUsuario: function(dados, colecaoDeUsuarios, usuario, cd) {
+      return function(proximo) { 
+        usuario.url = gerarUrl('Usuarios');
+
+        usuario.save().done(function(modelo, resposta, opcoes) {
+          colecaoDeUsuarios.add(usuario);
+          Registrar('BAIXO', 'Novo usuario ('+ usuario.get('nome') +') foi cadastrado com sucesso');
+          if ('sucesso' in cd) cd.sucesso();
+          proximo(dados);
+        })
+        .fail(this.suporteDeFalhas); 
+      };
+    },
+
+    cadastrarEndereco: function(usuario, endereco, cd) {
+      return function(proximo, dados) { 
+        endereco.set({'usuario_id': usuario.get('id')});
+        endereco.url = gerarUrl('UsuarioEnderecos');
+
+        endereco.save().done(function(modelo, resposta, opcoes) {
+          Registrar('BAIXO', 'Novo endereco do usuário ('+ usuario.get('nome') +') cadastrado com sucesso');
+          if ('sucesso' in cd) cd.sucesso();
+          proximo(dados);
+        })
+        .fail(this.suporteDeFalhas); 
+      };
+    },
+
+    suporteDeFalhas: function(modelo, resposta, opcoes) {
+      Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
     },
 
     aoClicarEmSubmeter: function(evento) {

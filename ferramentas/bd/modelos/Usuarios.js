@@ -27,16 +27,16 @@ module.exports = function (database, DataTypes) {
     associar: function (modelos) {
       modelos.Usuarios.belongsTo(modelos.Funcoes, { foreignKey: 'funcao_id', as: 'Funcoes' });
       modelos.Usuarios.hasMany(modelos.Projetos, { foreignKey: 'usuario_id' }); 
-      modelos.Usuarios.hasOne(modelos.UsuarioEndereco, { foreignKey: 'usuario_id' }); 
+      modelos.Usuarios.hasOne(modelos.UsuarioEndereco, { foreignKey: 'usuario_id' });  
 
       // <umdez> realizando este teste de escopo abaixo.
-      modelos.Usuarios.addScope("projetos", function () {
-        return {
-          include: [
-            { model: modelos.Projetos }
-          ]
-        }
-      });
+      //modelos.Usuarios.addScope("projetos", function () {
+      //  return {
+      //    include: [
+      //      { model: modelos.Projetos }
+      //    ]
+      //  }
+      //});
     },
     classMethods:{
       

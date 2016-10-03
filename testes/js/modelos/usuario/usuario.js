@@ -46,7 +46,7 @@ define([
         includeInJSON: true
       }
     },
-    {
+    { 
       type: Backbone.HasOne,
       key: 'UsuarioEndereco',
       relatedModel: ModeloDeEndereco,

@@ -15,6 +15,10 @@ define([
       var escopos = aplicativo.escopos;
 
       return escopos.verificarEscopo(nome, acao);
+    },
+
+    executarAcoes: function(acoes, cd) {
+      _(acoes).reduceRight(_.wrap, cd)();
     }
   };
 

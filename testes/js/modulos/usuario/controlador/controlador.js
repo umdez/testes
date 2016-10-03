@@ -157,11 +157,11 @@ define([
     },
 
     procurarUsuario: function(id, cd) {
-      var usuarios = this.modUsuario.Lista;
+      var colecaoDeUsuarios = this.modUsuario.Lista;
       var ModUsuario = this.modUsuario.Modelo;
 
       var usuario = ModUsuario.findOrCreate({'id': id});
-      //var usuario = usuarios.get(id);
+      //var usuario = colecaoDeUsuarios.get(id);
       
       //if (!usuario) {
       //  usuario = new ModUsuario({ 'id': id });
@@ -169,7 +169,7 @@ define([
 
       usuario.fetch({
         success: function (modelo, resposta, opcoes) {
-          usuarios.add(usuario, {merge: true});
+          colecaoDeUsuarios.add(usuario, {merge: true});
           cd(usuario);
         }
       , error: function (modelo, resposta, opcoes) {

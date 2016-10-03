@@ -5,7 +5,7 @@ define([
 , 'modulos/visoes'
 , 'urls/indice'
 , 'handlebars'
-, 'modulos/usuario/visoes/leitura/endereco'
+, './endereco'
 , 'text!modulos/usuario/templantes/leitura/leitura.html'
 ], function(
   aplic
@@ -32,11 +32,16 @@ define([
     modUsuario: aplic.modulo("Usuario"),
     modFuncao: aplic.modulo("Funcao"),
 
+    colecaoDeUsuarios: aplic.modulo("Usuario").Lista,
+
     visaoDeEndereco: null,
 
     initialize: function() {
       _.bindAll(this, 
         'aoRecriar'
+      , 'carregarFuncao'
+      , 'salvarUsuario'
+      , 'salvarEndereco'
       );
     },
 
@@ -62,6 +67,11 @@ define([
       //}
 
       var endereco = this.model.get('UsuarioEndereco');
+      if (!endereco) {
+        Registrar('ALTO', 'Usuário não possui endereço previamente cadastrado.');
+        //endereco = new this.modUsuario.ModeloDeEndereco({});
+        //this.model.set({'UsuarioEndereco': endereco});
+      }
       this.visaoDeEndereco = this.criarVisao("VisaoDeCadastro", "VisaoDeEndereco", function() {
         return new VisaoDeEndereco({ 'model': endereco });
       });
@@ -105,7 +115,7 @@ define([
       }
 
       var meuObj = this;
-      var usuarios = this.modUsuario.Lista;
+      var colecaoDeUsuarios = this.modUsuario.Lista;
       var usuario = this.model;
       var endereco = usuario.get('UsuarioEndereco');
       var ModeloDeFuncao = aplic.modulo("Funcao").Modelo;
@@ -113,40 +123,70 @@ define([
 
       this.validacao.whenValid({}).then(function() {
         
-        // Inicialmente requisitaremos a nossa função
-        funcao.url = gerarUrl('Funcao', usuario.get("funcao_id"));
-        funcao.fetch().done(function(modelo, resposta, opcoes) {
-          usuario.set({'Funcoes': funcao });
+        var acoes = [ 
+          meuObj.carregarFuncao({}, usuario, funcao, { 'sucesso': function() {} }),
+          meuObj.salvarUsuario(usuario, colecaoDeUsuarios, { 'sucesso': function() {} }),
+          meuObj.salvarEndereco(usuario, endereco, { 'sucesso': function() {} })
+        ];
+
+        Registrar('BAIXO', 'Salvando dos dados do usuário ('+ usuario.get('nome') +').');
+
+        meuObj.executarAcoes(acoes, function() {
+          Registrar('BAIXO', 'Todas as etapas de salvamento foram bem sucedidas.');
           
-          usuario.url = gerarUrl('Usuario', usuario.get('id'));
-          // Salvamos este usuário
-          usuario.save().done(function(modelo, resposta, opcoes) {
-            usuarios.add(usuario, {merge: true});
-
-            // Salvamos o endereço deste usuário.
-            endereco.url = gerarUrl('UsuarioEndereco', endereco.get('id'));
-            endereco.save().done(function(modelo, resposta, opcoes) {
-
-              // Inicia novamente a validação
-              meuObj.validacao.reset();
-              Registrar('BAIXO', 'Dados do endereço do usuario foram salvos com sucesso');
-            })
-            .fail(function(modelo, resposta, opcoes) {
-              Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
-            });
-
-            Registrar('BAIXO', 'Dados do usuario foram salvos com sucesso');
-          })
-          .fail(function(modelo, resposta, opcoes) {
-            Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
-          });
-          Registrar('BAIXO', 'Dados da função do usuario foram salvos com sucesso');
+          // Inicia novamente a validação
+          meuObj.validacao.reset();
         });
 
       }).fail(function() {
         Registrar('BAIXO', 'É necessário informar os dados corretos para salvar.');
       });
 
+    },
+
+    carregarFuncao: function(dados, usuario, funcao, cd) {
+      return function(proximo) { 
+        // Inicialmente requisitaremos a nossa função
+        funcao.url = gerarUrl('Funcao', usuario.get("funcao_id"));
+        funcao.fetch().done(function(modelo, resposta, opcoes) {
+          usuario.set({'Funcoes': funcao });
+          Registrar('BAIXO', 'Dados da função do usuario foram carregados com sucesso');
+          if ('sucesso' in cd) cd.sucesso();
+          proximo(dados);
+        })
+        .fail(this.suporteDeFalhas);
+      };
+    },
+
+    salvarUsuario: function(usuario, colecaoDeUsuarios, cd) {
+      return function(proximo, dados) { 
+        usuario.url = gerarUrl('Usuario', usuario.get('id'));
+        // Salvamos este usuário
+        usuario.save().done(function(modelo, resposta, opcoes) {
+          colecaoDeUsuarios.add(usuario, {merge: true});
+          Registrar('BAIXO', 'Dados do usuario foram salvos com sucesso');
+          if ('sucesso' in cd) cd.sucesso();
+          proximo(dados);
+        })
+        .fail(this.suporteDeFalhas);
+      };
+    },
+
+    salvarEndereco: function(usuario, endereco, cd) {
+      return function(proximo, dados) {
+        // Salvamos o endereço deste usuário.
+        endereco.url = gerarUrl('UsuarioEndereco', endereco.get('id'));
+        endereco.save().done(function(modelo, resposta, opcoes) {
+          Registrar('BAIXO', 'Dados do endereço do usuario foram salvos com sucesso');
+          if ('sucesso' in cd) cd.sucesso();
+          proximo(dados);
+        })
+        .fail(this.suporteDeFalhas);
+      };
+    },
+
+    suporteDeFalhas: function(modelo, resposta, opcoes) {
+      Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
     },
 
     aoClicarEmRemover: function(evento) {
