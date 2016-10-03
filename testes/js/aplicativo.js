@@ -19,7 +19,7 @@ define([
   console.log('(aplicativo) Iniciando o aplicativo.');
 
   var aplicativo = {
-    
+
     sessao: new ModeloDeSessao({}),
 
     // eventos globais
