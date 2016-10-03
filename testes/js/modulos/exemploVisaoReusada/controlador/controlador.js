@@ -30,13 +30,15 @@ define([
 
       Registrar('BAIXO', 'Adicionando as rotas do modulo de '+ this.nome);
 
-      // Rotas chamadas primeiro
-      aplic.adcRotaAnterior('ExemploDeReuso', this.suporteAnterior);
+      var Rotas = this.rotasDoControlador();
 
-      aplic.adcRota('ExemploDeReuso', this.nome, this.suporteDeVisaoExemplo);
+      // Rotas chamadas primeiro
+      Rotas.adcAnterior('ExemploDeReuso', this.suporteAnterior);
+
+      Rotas.adcRota('ExemploDeReuso', this.nome, this.suporteDeVisaoExemplo);
 
       // Rotas chamadas por fim
-      aplic.adcRotaPosterior('ExemploDeReuso', this.suportePosterior);
+      Rotas.adcPosterior('ExemploDeReuso', this.suportePosterior);
 
     },
 

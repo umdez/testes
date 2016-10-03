@@ -40,22 +40,24 @@ define([
 
       Registrar('BAIXO', 'Adicionando as rotas do modulo de '+ this.nome);
 
-      // Rotas chamadas primeiro
-      aplic.adcRotaAnterior('UsuariosLeitura/:idUsuario', this.suporteAnterior);
-      aplic.adcRotaAnterior('UsuariosLeitura/:idUsuario/aba/:nome', this.suporteAnterior);
-      aplic.adcRotaAnterior('UsuariosListagem', this.suporteAnterior);
-      aplic.adcRotaAnterior('UsuariosCadastro', this.suporteAnterior);
+      var Rotas = this.rotasDoControlador();
 
-      aplic.adcRota('UsuariosLeitura/:idUsuario', this.nome, this.suporteDeLeitura);
-      aplic.adcRota('UsuariosLeitura/:idUsuario/aba/:nome', this.nome, this.suporteDeLeitura);
-      aplic.adcRota('UsuariosListagem', this.nome, this.suporteDeListagem);
-      aplic.adcRota('UsuariosCadastro', this.nome, this.suporteDeCadastro);
+      // Rotas chamadas primeiro
+      Rotas.adcAnterior('UsuariosLeitura/:idUsuario', this.suporteAnterior);
+      Rotas.adcAnterior('UsuariosLeitura/:idUsuario/aba/:nome', this.suporteAnterior);
+      Rotas.adcAnterior('UsuariosListagem', this.suporteAnterior);
+      Rotas.adcAnterior('UsuariosCadastro', this.suporteAnterior);
+
+      Rotas.adcRota('UsuariosLeitura/:idUsuario', this.nome, this.suporteDeLeitura);
+      Rotas.adcRota('UsuariosLeitura/:idUsuario/aba/:nome', this.nome, this.suporteDeLeitura);
+      Rotas.adcRota('UsuariosListagem', this.nome, this.suporteDeListagem);
+      Rotas.adcRota('UsuariosCadastro', this.nome, this.suporteDeCadastro);
 
       // Rotas chamadas por fim
-      aplic.adcRotaPosterior('UsuariosLeitura/:idUsuario', this.suportePosterior);
-      aplic.adcRotaPosterior('UsuariosLeitura/:idUsuario/aba/:nome', this.suportePosterior);
-      aplic.adcRotaPosterior('UsuariosListagem', this.suportePosterior);
-      aplic.adcRotaPosterior('UsuariosCadastro', this.suportePosterior);
+      Rotas.adcPosterior('UsuariosLeitura/:idUsuario', this.suportePosterior);
+      Rotas.adcPosterior('UsuariosLeitura/:idUsuario/aba/:nome', this.suportePosterior);
+      Rotas.adcPosterior('UsuariosListagem', this.suportePosterior);
+      Rotas.adcPosterior('UsuariosCadastro', this.suportePosterior);
 
     },
 

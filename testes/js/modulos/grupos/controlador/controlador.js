@@ -23,14 +23,16 @@ define([
 
       Registrar('BAIXO', 'Adicionando rotas dos '+ this.nome);
 
-      // Rotas chamadas primeiro
-      aplic.adcRotaAnterior('GrupoUm', this.suporteAnterior);
-      aplic.adcRotaAnterior('GrupoDois', this.suporteAnterior);
-      aplic.adcRotaAnterior('GrupoTres', this.suporteAnterior);
+      var Rotas = this.rotasDoControlador();
 
-      aplic.adcRota('GrupoUm', this.nome, this.suporteDoGrupoUm);
-      aplic.adcRota('GrupoDois', this.nome, this.suporteDoGrupoDois);
-      aplic.adcRota('GrupoTres', this.nome, this.suporteDoGrupoTres);
+      // Rotas chamadas primeiro
+      Rotas.adcAnterior('GrupoUm', this.suporteAnterior);
+      Rotas.adcAnterior('GrupoDois', this.suporteAnterior);
+      Rotas.adcAnterior('GrupoTres', this.suporteAnterior);
+
+      Rotas.adcRota('GrupoUm', this.nome, this.suporteDoGrupoUm);
+      Rotas.adcRota('GrupoDois', this.nome, this.suporteDoGrupoDois);
+      Rotas.adcRota('GrupoTres', this.nome, this.suporteDoGrupoTres);
     },
 
     suporteAnterior: function() {
