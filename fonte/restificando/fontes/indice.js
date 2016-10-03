@@ -6,5 +6,4 @@ module.exports = [
 , {modelo: 'Funcoes', aliase: 'Funcoes', Fonte: require('./funcoes')}
 , {modelo: 'Escopos', aliase: 'Escopos', Fonte: require('./escopos')}
 , {modelo: 'UsuarioEndereco', aliase: 'UsuarioEndereco', Fonte: require('./enderecos/usuario')}
-, {modelo: 'UsuEnd', aliase: 'UsuEnd', Fonte: require('./usuend')}
 ];
