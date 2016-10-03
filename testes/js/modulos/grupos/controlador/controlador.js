@@ -23,7 +23,7 @@ define([
 
       Registrar('BAIXO', 'Adicionando rotas dos '+ this.nome);
 
-      var Rotas = this.rotasDoControlador();
+      var Rotas = this.Rotas;
 
       // Rotas chamadas primeiro
       Rotas.adcAnterior('GrupoUm', this.suporteAnterior);

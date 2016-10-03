@@ -40,7 +40,7 @@ define([
 
       Registrar('BAIXO', 'Adicionando as rotas do modulo de '+ this.nome);
 
-      var Rotas = this.rotasDoControlador();
+      var Rotas = this.Rotas;
 
       // Rotas chamadas primeiro
       Rotas.adcAnterior('UsuariosLeitura/:idUsuario', this.suporteAnterior);

@@ -29,9 +29,7 @@ define([
       });
     },
 
-    rotasDoControlador: function() {
-      return aplic.adcRotas();
-    }
+    Rotas: aplic.adcRotas()
 
   };
  
