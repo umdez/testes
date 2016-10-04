@@ -138,12 +138,12 @@ define([
     },
 
     cadastroDeUsuario: function () {
-      var ModUsuario = this.modUsuario.Modelo;
+      var ModeloDeUsuario = this.modUsuario.Modelo;
 
       Registrar('BAIXO', 'Cadastro de usuario.');
 
       this.visaoDeCadastro = this.criarVisao("ModuloUsuario", "VisaoDeCadastro", function() {
-        return new VisaoDeCadastro({ 'model': new ModUsuario({}) });
+        return new VisaoDeCadastro({ 'model': new ModeloDeUsuario({}) });
       });
       $('div.grupo-um div#usuario-cadastro.conteudo-grupo-um').html(this.visaoDeCadastro.render().el);
       this.apresentarConteudo('div#usuario-cadastro');
@@ -160,14 +160,8 @@ define([
 
     procurarUsuario: function(id, cd) {
       var colecaoDeUsuarios = this.modUsuario.Lista;
-      var ModUsuario = this.modUsuario.Modelo;
-
-      var usuario = ModUsuario.findOrCreate({'id': id});
-      //var usuario = colecaoDeUsuarios.get(id);
-      
-      //if (!usuario) {
-      //  usuario = new ModUsuario({ 'id': id });
-      //} 
+      var ModeloDeUsuario = this.modUsuario.Modelo;
+      var usuario = ModeloDeUsuario.findOrCreate({'id': id});
 
       usuario.fetch({
         success: function (modelo, resposta, opcoes) {
@@ -175,7 +169,7 @@ define([
           cd(usuario);
         }
       , error: function (modelo, resposta, opcoes) {
-          Registrar('BAIXO', 'Não foi possível requisitar dados deste usuário.');
+          Registrar('ALTO', 'Não foi possível requisitar dados deste usuário.');
           cd(null);
         }
       });

@@ -3,7 +3,7 @@ define([
   "backbone"
 , "urls/indice"
 , "modelos/funcao/funcao"
-, "modelos/usuario/usuarioEndereco"
+, "modelos/usuario/endereco"
 , "colecoes/escopos/escopos"
 ], function(
   Backbone

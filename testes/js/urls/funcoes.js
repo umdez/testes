@@ -1,7 +1,7 @@
 /* Agrupa todas as URLs das funcoes */
 
 define([ 
-  'urls/configuracao'
+  './configuracao'
 ], function(
   configuracao
 ) {
@@ -13,8 +13,8 @@ define([
     'Funcoes': function() {
       return configuracao.base +"/Funcoes";
     },
-    'Funcao': function(id) {
-      return configuracao.base +"/Funcoes/"+ id;
+    'Funcao': function(idDaFuncao) {
+      return configuracao.base +"/Funcoes/"+ idDaFuncao;
     }
   };
  

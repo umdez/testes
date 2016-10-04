@@ -2,12 +2,13 @@
 
 define([ 
   'underscore'
-, 'urls/configuracao'
-, 'urls/funcoes'
-, 'urls/grupos'
-, 'urls/escopos'
-, 'urls/usuarios'
-, 'urls/contas'
+, './configuracao'
+, './funcoes'
+, './grupos'
+, './escopos'
+, './usuarios'
+, './contas'
+, './exemplos'
 ], function(
   _
 , configuracao
@@ -16,6 +17,7 @@ define([
 , escopos
 , usuarios
 , contas
+, exemplos
 ) {
   'use strict';
 
@@ -26,6 +28,7 @@ define([
   _.extend(grupoDeUrls, escopos);
   _.extend(grupoDeUrls, usuarios);
   _.extend(grupoDeUrls, contas);
+  _.extend(grupoDeUrls, exemplos);
 
   console.log('(urls) URLs foram todas carregadas.');
 

@@ -55,13 +55,13 @@ define([
 
       switch (id) {
         case 'item-cadastrar-usuario': 
-          aplic.navegar('#UsuariosCadastro', null, true);
+          aplic.navegar('#UsuariosCadastro', null, null, true);
           break;
         case 'item-pesquisar-usuario': 
-          aplic.navegar('#UsuariosListagem', null, true);
+          aplic.navegar('#UsuariosListagem', null, null, true);
           break;
         case 'item-reusar-visao':
-          aplic.navegar('#ExemploDeReuso', null, true);
+          aplic.navegar('#ExemploDeReuso', null, null, true);
           break;
         default:
           Registrar('BAIXO', 'O item clicado não era esperado.');

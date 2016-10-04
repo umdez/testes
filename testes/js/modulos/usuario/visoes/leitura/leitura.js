@@ -69,9 +69,8 @@ define([
       var endereco = this.model.get('UsuarioEndereco');
       if (!endereco) {
         Registrar('ALTO', 'Usuário não possui endereço previamente cadastrado.');
-        //endereco = new this.modUsuario.ModeloDeEndereco({});
-        //this.model.set({'UsuarioEndereco': endereco});
       }
+      
       this.visaoDeEndereco = this.criarVisao("VisaoDeCadastro", "VisaoDeEndereco", function() {
         return new VisaoDeEndereco({ 'model': endereco });
       });
@@ -98,14 +97,9 @@ define([
     },
 
     events: {
-      'submit form.leitura-usuario': 'aoClicarEmSubmeter',
+      'submit form.leitura-usuario': 'aoSubmeter',
       'click button#salvar-usuario': 'aoClicarEmSalvar',
       'click button#remover-usuario': 'aoClicarEmRemover',
-    },
-
-    aoClicarEmSubmeter: function(evento) {
-      // Previnimos a submissão
-      evento.preventDefault();
     },
 
     aoClicarEmSalvar: function(evento) {
@@ -189,6 +183,11 @@ define([
       Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
     },
 
+    aoSubmeter: function(evento) {
+      // Previnimos a submissão
+      evento.preventDefault();
+    },
+    
     aoClicarEmRemover: function(evento) {
       //if (!this.sePodeRemoverUsuario) {
       //  Registrar('BAIXO', 'Você não possui a permissão necessária para remover usuários.');

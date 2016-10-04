@@ -52,10 +52,10 @@ define([
 
       switch (id) {
         case 'item-grupo-um': 
-          aplic.navegar('#GrupoUm', null, true); 
+          aplic.navegar('#GrupoUm', null, null, true); 
           break;
         case 'item-grupo-dois': 
-          aplic.navegar('#GrupoDois', null, true);
+          aplic.navegar('#GrupoDois', null, null, true);
           break;
         default:
           Registrar('BAIXO', 'O item clicado não era esperado.');
@@ -68,7 +68,7 @@ define([
 
       aplic.sessao.sair({
         'sucesso': function(modulo, resposta) {
-          aplic.navegar('', null, true);
+          aplic.navegar('', null, null, true);
           Registrar('BAIXO', 'Você saiu do painel com sucesso.');
         },
         'erro': function(modelo, resposta) {

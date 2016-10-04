@@ -79,7 +79,7 @@ define([
     },
 
     events: {
-      'submit form.cadastro-usuario': 'aoClicarEmSubmeter',
+      'submit form.cadastro-usuario': 'aoSubmeter',
       'click button#cadastrar-usuario': 'aoClicarEmCadastrar',
     },
     
@@ -142,7 +142,7 @@ define([
       Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
     },
 
-    aoClicarEmSubmeter: function(evento) {
+    aoSubmeter: function(evento) {
       // Previnimos a submissão
       evento.preventDefault();
     },

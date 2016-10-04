@@ -33,11 +33,13 @@ define([
 
     escopos: null, 
 
-    navegar: function(tipo, id, seDisparar) {
+    navegar: function(tipo, idNivelUm, idNivelDois, seDisparar) {
       var url = null;
       
-      if (typeof id != null) {
-        url = gerarUrl(tipo, id);
+      if ((typeof idNivelUm != null) && (typeof idNivelDois != null)) {
+        url = gerarUrl(tipo, idNivelUm, idNivelDois);
+      } else if (typeof idNivelUm != null) {
+        url = gerarUrl(tipo, idNivelUm);
       } else {
         url = gerarUrl(tipo);
       }

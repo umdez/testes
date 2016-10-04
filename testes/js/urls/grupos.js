@@ -1,7 +1,7 @@
 /* Agrupa todas as URLs dos grupos */
 
 define([ 
-  'urls/configuracao'
+  './configuracao'
 ], function(
   configuracao
 ) {

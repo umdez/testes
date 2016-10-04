@@ -35,7 +35,7 @@ define([
     },
 
     events: {
-      'submit form.entrada': 'aoClicarEntrar',
+      'submit form.entrada': 'aoSubmeter',
       'change input#entrada-jid': 'aoEscreverAtualizarJid',
       'change input#entrada-senha': 'aoEscreverAtualizarSenha'
     },
@@ -48,7 +48,7 @@ define([
       this.senha = this.$el.find('input#entrada-senha').val();
     },
 
-    aoClicarEntrar: function (evento) {
+    aoSubmeter: function (evento) {
       evento.preventDefault();
       var meuObj = this;
 

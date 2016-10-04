@@ -1,7 +1,7 @@
 /* Agrupa todas as URLs dos escopos */
 
 define([ 
-  'urls/configuracao'
+  './configuracao'
 ], function(
   configuracao
 ) {
@@ -11,8 +11,8 @@ define([
     'Escopos': function(idDafuncao) {
       return configuracao.base +"/funcoes/"+ idDafuncao +"/Escopos";
     },
-    'Escopo': function(idDafuncao, id) {
-      return configuracao.base +"/Funcoes/"+ idDafuncao +"/Escopos/"+ id;
+    'Escopo': function(idDafuncao, idDoEscopo) {
+      return configuracao.base +"/Funcoes/"+ idDafuncao +"/Escopos/"+ idDoEscopo;
     }
   };
  

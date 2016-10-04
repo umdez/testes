@@ -5,7 +5,7 @@ define([
 , "backbone"
 , "modulos/usuario/controlador/controlador"
 , "modelos/usuario/usuario"
-, "modelos/usuario/usuarioEndereco"
+, "modelos/usuario/endereco"
 , "colecoes/usuarios/usuarios"
 , "paginacoes/usuarios/usuarios"
 ], function (

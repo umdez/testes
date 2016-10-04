@@ -1,7 +1,7 @@
 /* Agrupa todas as URLs dos usuários */
 
 define([ 
-  'urls/configuracao'
+  './configuracao'
 ], function(
   configuracao
 ) {
@@ -11,11 +11,11 @@ define([
     'Usuarios': function() {
       return configuracao.base +"/Usuarios";
     },
-    'Usuario': function(id) {
-      return configuracao.base +"/Usuarios/"+ id;
+    'Usuario': function(idDoUsuario) {
+      return configuracao.base +"/Usuarios/"+ idDoUsuario;
     }, 
-    'UsuarioEndereco': function(idEndereco) {
-      return configuracao.base +"/UsuarioEndereco/"+ idEndereco;
+    'UsuarioEndereco': function(idDoEndereco) {
+      return configuracao.base +"/UsuarioEndereco/"+ idDoEndereco;
     },
     'UsuarioEnderecos': function() {
       return configuracao.base +"/UsuarioEndereco";
@@ -23,8 +23,8 @@ define([
     '#Usuarios': function() {
       return "Usuarios";
     },
-    '#Usuario': function(id) {
-      return "Usuarios/"+ id;
+    '#Usuario': function(idDoUsuario) {
+      return "Usuarios/"+ idDoUsuario;
     },
     '#UsuariosCadastro': function() {
       return "UsuariosCadastro";
@@ -32,11 +32,11 @@ define([
     '#UsuariosListagem': function() {
       return "UsuariosListagem";
     },
-    '#UsuariosLeitura': function(id) {
-      return "UsuariosLeitura/"+ id;
+    '#UsuariosLeitura': function(idDoUsuario) {
+      return "UsuariosLeitura/"+ idDoUsuario;
     },
-    '#ExemploDeReuso': function() {
-      return "ExemploDeReuso";
+    '#UsuariosLeituraAba': function(idDoUsuario, nomeDaAba) {
+      return "UsuariosLeitura/"+ idDoUsuario + "aba/"+ nomeDaAba;
     }
   };
  
