@@ -1,0 +1,44 @@
+{
+  "MODULO": {
+    
+    "ERRO": {
+      
+    },
+    "ALERTA": {
+      "PERMISSAO_NEGADA": "Você não possui permissão de <%= acao %> de <%= nome %>"
+    },
+    "INFO": {
+      "ADICIONANDO_ROTAS": "Adicionando as rotas do modulo de <%= nome %>.",
+      "ACESSANDO_SUPORTE_ANTERIOR": "Acessando o suporte anterior das rotas de <%= nome %>.",
+      "ACESSANDO_SUPORTE_POSTERIOR": "Acessando o suporte posterior das rotas dos <%= nome %>.",
+      "MODULOS_CARREGADOS": "Os modulos foram todos carregados com sucesso.",
+      "MODULO_INICIANDO": "Iniciando o modulo <%= nome %>." 
+    }
+  },
+  "USUARIO": {
+    "ERRO": {
+      "PROPRIEDADE_INEXISTENTE": "A propriedade <%= prop %> deste modelo não foi encontrada. abortando ação.",
+      "CADASTRO_NAO_ENCONTRADO": "Os dados de cadastro deste usuário não foram encontrados.",
+      "ENDERECO_NAO_ENCONTRADO": "Usuário não possui endereço previamente cadastrado."
+    },
+    "ALERTA": {
+      
+    },
+    "INFO": {
+      "DE_PERCURSO": "Realizando <%= acao %> de usuario."
+    }
+  },
+
+  "EXEMPLO": {
+
+    "ERRO": {
+      
+    },
+    "ALERTA": {
+      
+    },
+    "INFO": {
+      
+    }
+  }
+}

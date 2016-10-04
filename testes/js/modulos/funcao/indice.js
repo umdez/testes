@@ -3,6 +3,7 @@
 define([
   "aplicativo"
 , "backbone"
+, "linguas/indice"
 , "modulos/funcao/controlador/controlador"
 , "modelos/funcao/funcao"
 , "colecoes/funcoes/funcoes"
@@ -10,6 +11,7 @@ define([
 ], function (
   aplic
 , Backbone
+, Lingua
 , Controlador
 , ModeloDeFuncao 
 , ColecaoDeFuncao
@@ -19,7 +21,7 @@ define([
  
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/funcao/indice' });
 
-  Registrar('BAIXO', 'Iniciando o modulo de funções.');
+  Registrar('BAIXO', Lingua.gerar('MODULO.INFO.MODULO_INICIANDO', { 'nome': 'funções' }));
 
   var Funcao = aplic.modulo("Funcao");
 

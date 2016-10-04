@@ -1,0 +1,7 @@
+{
+	"ola": "ola!",
+	"olaComUmParametro": "Olá, <%= usuario %>!",
+	"aninhado": {
+		"ola": "Olá aninhado!"
+	}
+}

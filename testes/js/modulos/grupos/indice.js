@@ -4,16 +4,18 @@
 
 define([
   "aplicativo"
+, "linguas/indice"
 , "modulos/grupos/controlador/controlador"
 ], function (
   aplic
+, Lingua
 , Controlador
 ) {
   'use strict';
  
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/grupos/indice' });
 
-  Registrar('BAIXO', 'Iniciando o modulo de grupos.');
+  Registrar('BAIXO', Lingua.gerar('MODULO.INFO.MODULO_INICIANDO', { 'nome': 'grupos' }));
 
   Controlador.iniciar();
 });

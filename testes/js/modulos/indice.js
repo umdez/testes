@@ -3,6 +3,7 @@ define([
 , 'jasny'
 , "parsley.ptbr"
 , 'stickit'
+, "linguas/indice"
 , "modulos/grupos/indice"
 , "modulos/usuario/indice"
 , "modulos/exemplo/indice"
@@ -13,6 +14,7 @@ define([
 , Jasny
 , parsleyPtBr
 , stickit
+, Lingua
 , ModuloDosGrupos
 , ModuloDeUsuario
 , ModuloDeExemplo
@@ -23,7 +25,7 @@ define([
 
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/indice' });
  
-  Registrar('BAIXO', 'Os modulos foram todos carregados.');
+  Registrar('BAIXO', Lingua.gerar('MODULO.INFO.MODULOS_CARREGADOS'));
 
   return {
     'grupos': ModuloDosGrupos,

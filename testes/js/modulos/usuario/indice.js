@@ -3,6 +3,7 @@
 define([
   "aplicativo"
 , "backbone"
+, "linguas/indice"
 , "modulos/usuario/controlador/controlador"
 , "modelos/usuario/usuario"
 , "modelos/usuario/endereco"
@@ -11,6 +12,7 @@ define([
 ], function (
   aplic
 , Backbone
+, Lingua
 , Controlador
 , ModeloDeUsuario
 , ModeloDeEndereco
@@ -21,7 +23,7 @@ define([
   
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/usuario/indice' });
 
-  Registrar('BAIXO', 'Iniciando o modulo de usuários.');
+  Registrar('BAIXO', Lingua.gerar('MODULO.INFO.MODULO_INICIANDO', { 'nome': 'usuários' }));
 
   var Usuario = aplic.modulo("Usuario");
 

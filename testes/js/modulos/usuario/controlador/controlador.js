@@ -3,6 +3,7 @@
 define([
   "aplicativo"
 , "backbone"
+, "linguas/indice"
 , "modulos/controladores"
 , "modulos/usuario/visoes/cadastro/cadastro"
 , "modulos/usuario/visoes/leitura/leitura"
@@ -10,6 +11,7 @@ define([
 ], function (
   aplic
 , Backbone
+, Lingua
 , Base
 , VisaoDeCadastro
 , VisaoDeLeitura
@@ -38,7 +40,7 @@ define([
         'suporteDeLeitura'
       );
 
-      Registrar('BAIXO', 'Adicionando as rotas do modulo de '+ this.nome);
+      Registrar('BAIXO', Lingua.gerar('MODULO.INFO.ADICIONANDO_ROTAS', { 'nome': this.nome }));
 
       var Rotas = this.Rotas;
 
@@ -68,7 +70,7 @@ define([
       this.verificarUmaPermissaoDeAcesso('CADASTRO', {
         prosseguir: function() { meuObj.cadastroDeUsuario(); },
         impedir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
-      }, 'Você não possui permissão de cadastro de usuários');
+      }, Lingua.gerar('MODULO.ALERTA.PERMISSAO_NEGADA', { 'acao': 'cadastro', 'nome': this.nome }));
     },
 
     // Paginação de usuários
@@ -78,7 +80,7 @@ define([
       this.verificarUmaPermissaoDeAcesso('LEITURA', {
         prosseguir: function() { meuObj.paginacaoDeUsuario(); },
         impedir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
-      }, 'Você não possui permissão de listagem de usuários');
+      }, Lingua.gerar('MODULO.ALERTA.PERMISSAO_NEGADA', { 'acao': 'listagem', 'nome': this.nome }));
     },
 
     // Leitura de um usuário em específico
@@ -88,11 +90,11 @@ define([
       this.verificarUmaPermissaoDeAcesso('LEITURA', {
         prosseguir: function() { meuObj.leituraDeUsuario(idUsuario, aba); },
         impedir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
-      }, 'Você não possui permissão de leitura aos usuários');
+      }, Lingua.gerar('MODULO.ALERTA.PERMISSAO_NEGADA', { 'acao': 'leitura', 'nome': this.nome }));
     },
 
     suporteAnterior: function() {
-      Registrar('BAIXO', 'Acessando o suporte anterior das rotas de '+ this.nome)
+      Registrar('BAIXO', Lingua.gerar('MODULO.INFO.ACESSANDO_SUPORTE_ANTERIOR', { 'nome': this.nome }));
 
       // NOTA: Podemos precisar acessar uma visão diretamente. Um exemplo:
       // var topoDoPainel = this.reusarVisao("VisaoBaseDeTopoPainel", function() { });
@@ -109,7 +111,7 @@ define([
     },
 
     suportePosterior: function() {
-      Registrar('BAIXO', 'Acessando o suporte posterior das rotas dos '+ this.nome);
+      Registrar('BAIXO', Lingua.gerar('MODULO.INFO.ACESSANDO_SUPORTE_POSTERIOR', { 'nome': this.nome }));
 
       // pertencemos ao grupo um então mostramos ele.
       aplic.evts.trigger('painel-grupo:mostrar', 'div.grupo-um'); 
@@ -120,7 +122,7 @@ define([
     leituraDeUsuario: function(id, aba) {
       var meuObj = this;
 
-      Registrar('BAIXO', 'Leitura de usuario.');
+      Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.DE_PERCURSO', {'acao': 'leitura'}));
 
       // aqui limpamos essa visão
       $('div.grupo-um div#usuario-leitura.conteudo-grupo-um').html('<span></span>');
@@ -132,12 +134,12 @@ define([
       var acoes = [ 
         meuObj.procurarUsuario({}, colecaoDeUsuario, usuario, id, { 
           'erro': function(){
-            meuObj.apresentarAvisoDeErro('Os dados de cadastro deste usuário não foram encontrados.');
+            meuObj.apresentarAvisoDeErro(Lingua.gerar('USUARIO.ERRO.CADASTRO_NAO_ENCONTRADO'));
           }
         }),
         meuObj.sePropriedadeExiste(usuario, 'UsuarioEndereco', { 
           'erro': function() {
-            meuObj.apresentarAvisoDeErro('Usuário não possui endereço previamente cadastrado.');
+            meuObj.apresentarAvisoDeErro(Lingua.gerar('USUARIO.ERRO.ENDERECO_NAO_ENCONTRADO'));
           } 
         })
       ];
@@ -154,7 +156,7 @@ define([
     },
 
     cadastroDeUsuario: function () {
-      Registrar('BAIXO', 'Cadastro de usuario.');
+      Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.DE_PERCURSO', {'acao': 'cadastro'}));
       
       var ModeloDeUsuario = this.modUsuario['ModeloDeUsuario'];
 
@@ -169,7 +171,7 @@ define([
     },
 
     paginacaoDeUsuario: function() {
-      Registrar('BAIXO', 'Paginação de usuarios.');
+      Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.DE_PERCURSO', {'acao': 'paginação'}));
 
       this.visaoDePaginacao = this.reusarVisao("ModuloUsuario", "VisaoDePaginacao", function() {
         return new VisaoDePaginacao();
@@ -186,7 +188,7 @@ define([
             proximo(dados)
           }
         , error: function (modelo, resposta, opcoes) {
-            Registrar('ALTO', 'Não foi possível requisitar dados deste usuário.');
+            Registrar('ALTO', Lingua.gerar('USUARIO.ERRO.CADASTRO_NAO_ENCONTRADO'));
             if ('erro' in cd) cd.erro(null);
           }
         });
@@ -198,7 +200,7 @@ define([
         var prop = modelo.get(propriedade);
         
         if (!prop) {
-          Registrar('ALTO', 'A propriedade '+ propriedade +' do modelo não foram encontrados. abortando ação.');
+          Registrar('ALTO', Lingua.gerar('USUARIO.ERRO.PROPRIEDADE_INEXISTENTE', {'prop': propriedade}));
           if ('erro' in cd) cd.erro(null);
         } else {
           if ('sucesso' in cd) cd.sucesso(prop);

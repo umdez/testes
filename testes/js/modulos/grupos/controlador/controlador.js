@@ -1,8 +1,10 @@
 define([
   "aplicativo"
+, "linguas/indice"
 , "modulos/controladores"
 ], function (
   aplic
+, Lingua
 , Base
 ) {
   'use strict';
@@ -21,7 +23,7 @@ define([
         'suporteDoGrupoTres'
       );
 
-      Registrar('BAIXO', 'Adicionando rotas dos '+ this.nome);
+      Registrar('BAIXO', Lingua.gerar('MODULO.INFO.ADICIONANDO_ROTAS', { 'nome': this.nome }));
 
       var Rotas = this.Rotas;
 
@@ -36,7 +38,7 @@ define([
     },
 
     suporteAnterior: function() {
-      Registrar('BAIXO', 'Acessando suporte das rotas dos '+ this.nome);
+      Registrar('BAIXO', Lingua.gerar('MODULO.INFO.ACESSANDO_SUPORTE_ANTERIOR', { 'nome': this.nome }));
 
       // Esconde todos os conteudos de todos os grupos.
       aplic.evts.trigger('grupos-conteudos:esconder');

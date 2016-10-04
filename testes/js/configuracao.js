@@ -44,6 +44,7 @@ require.config({
   , 'stickit': '/bibliotecas/backbone.stickit'
   , 'roteando': '/bibliotecas/roteando'
   , 'relational': '/bibliotecas/backbone-relational'
+  , 'localidade': '/bibliotecas/localidade'
   },
   
   // Lembre-se: Somente usar o shim para aqueles scripts que não são AMD. Ele
