@@ -34,7 +34,10 @@ define([
 
     bindings: {
       'input#logradouro-endereco-usuario': 'logradouro',
-      'input#bairro-endereco-usuario': 'bairro'
+      'input#bairro-endereco-usuario': 'bairro',
+      'input#complemento-endereco-usuario': 'complemento',
+      'input#numero-endereco-usuario': 'numero',
+      'input#cidade-endereco-usuario': 'cidade'
     },
 
     aoRecriar: function() {
