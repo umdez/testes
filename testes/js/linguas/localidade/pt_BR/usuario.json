@@ -1,0 +1,15 @@
+{
+  "USUARIO": {
+    "ERRO": {
+      "PROPRIEDADE_INEXISTENTE": "A propriedade <%= prop %> deste modelo não foi encontrada. abortando ação.",
+      "CADASTRO_NAO_ENCONTRADO": "Os dados de cadastro deste usuário não foram encontrados.",
+      "ENDERECO_NAO_ENCONTRADO": "Usuário não possui endereço previamente cadastrado."
+    },
+    "ALERTA": {
+      
+    },
+    "INFO": {
+      "DE_PERCURSO": "Realizando <%= acao %> de usuario."
+    }
+  }
+}

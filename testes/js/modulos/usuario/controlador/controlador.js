@@ -145,7 +145,7 @@ define([
       ];
 
       meuObj.executarAcoes(acoes, function(){
-        // tudo deu certo, vamos agora criar a nossa visão de endereço
+        // se tudo deu certo, vamos então criar a nossa visão de leitura
         meuObj.visaoDeLeitura = meuObj.criarVisao("ModuloUsuario", "VisaoDeLeitura", function() {
           return new VisaoDeLeitura({ 'model': usuario });
         });

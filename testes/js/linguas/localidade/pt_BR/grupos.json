@@ -1,0 +1,14 @@
+{
+  "GRUPOS": {
+
+    "ERRO": {
+      
+    },
+    "ALERTA": {
+      
+    },
+    "INFO": {
+      "INICIANDO_VISAO": "Iniciando a visão <%= nome %>."
+    }
+  }
+}

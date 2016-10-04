@@ -1,0 +1,15 @@
+{
+  "APLIC": {
+
+    "ERRO": {
+      "ERRO_COM_ESTATOS": "Erro: [<%= estatos %>] (<%= msg %>)"
+    },
+    "ALERTA": {
+      
+    },
+    "INFO": {
+      "ENTRADA_NO_SISTEMA": "Você acaba de entrar no sistema.",
+      "ENTRADA_NO_SISTEMA_MUDAR_VISAO": "Usuário realizou a <%= acao %> com sucesso. Mudando visão."
+    }
+  }
+}
