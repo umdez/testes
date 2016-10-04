@@ -46,11 +46,11 @@ define([
       this.$el.html(this.templante({}));
       this.stickit();
  
-      var modeloDeEndereco = new this.modUsuario.ModeloDeEndereco({});
+      var endereco = new this.modUsuario['ModeloDeEndereco']({});
       this.visaoDeEndereco = this.criarVisao("VisaoDeCadastro", "VisaoDeEndereco", function() {
-        return new VisaoDeEndereco({ 'model': modeloDeEndereco });
+        return new VisaoDeEndereco({ 'model': endereco });
       });
-      this.model.set({'UsuarioEndereco': modeloDeEndereco});
+      this.model.set({'UsuarioEndereco': endereco});
       this.$el.find('div#acondicionar-endereco-usuario').html(this.visaoDeEndereco.render().el);
 
       // depois de preencher toda a visão dai nós vamos iniciar a validação
@@ -58,7 +58,7 @@ define([
 
       return this;
     },
-
+ 
     bindings: {
       'input#jid-usuario': 'jid',
       'input#nome-usuario': 'nome',
@@ -67,7 +67,7 @@ define([
       'select#funcao-usuario': {
         observe: 'funcao_id',
         selectOptions: {
-          collection: 'this.modFuncao.Lista',
+          collection: 'this.modFuncao.colecaoDeFuncao',
           labelPath: 'nome',
           valuePath: 'id',
           defaultOption: {
@@ -85,7 +85,7 @@ define([
     
     aoClicarEmCadastrar: function(evento) {
       var meuObj = this;
-      var colecaoDeUsuarios = this.modUsuario.Lista;
+      var colecaoDeUsuarios = this.modUsuario['colecaoDeUsuario'];
       var usuario = this.model;
       var endereco = usuario.get('UsuarioEndereco');
 
@@ -102,7 +102,7 @@ define([
           Registrar('BAIXO', 'Etapas do Cadastro do usuário ('+ usuario.get('nome') +') realizadas.');
           
           // após cadastrar tudo nós navegamos para visão de leitura
-          aplic.navegar('#UsuariosLeitura', usuario.get('id'), true); 
+          aplic.navegar('#UsuariosLeitura', usuario.get('id'), null, true); 
         });
 
       }).fail(function() {

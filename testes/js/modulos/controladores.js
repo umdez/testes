@@ -29,7 +29,11 @@ define([
       });
     },
 
-    Rotas: aplic.adcRotas()
+    Rotas: aplic.adcRotas(),
+
+    executarAcoes: function(acoes, cd) {
+      _(acoes).reduceRight(_.wrap, cd)();
+    }
 
   };
  

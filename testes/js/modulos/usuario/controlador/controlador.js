@@ -122,25 +122,44 @@ define([
 
       Registrar('BAIXO', 'Leitura de usuario.');
 
-      this.procurarUsuario(id, function(usuario) {
-        if (usuario) {
-          meuObj.visaoDeLeitura = meuObj.criarVisao("ModuloUsuario", "VisaoDeLeitura", function() {
-            return new VisaoDeLeitura({ 'model': usuario });
-          });
-          $('div.grupo-um div#usuario-leitura.conteudo-grupo-um').html(meuObj.visaoDeLeitura.render().el);
-          
-          // Mostrar esse conteudo
-          meuObj.apresentarConteudo('div#usuario-leitura');
-        } else {
-          meuObj.apresentarAvisoDeErro('Os dados de cadastro deste usuário não foram encontrados.')
-        }
+      // aqui limpamos essa visão
+      $('div.grupo-um div#usuario-leitura.conteudo-grupo-um').html('<span></span>');
+
+      var colecaoDeUsuario = this.modUsuario['colecaoDeUsuario'];
+      var ModeloDeUsuario = this.modUsuario['ModeloDeUsuario'];
+      var usuario = ModeloDeUsuario.findOrCreate({'id': id});
+
+      var acoes = [ 
+        meuObj.procurarUsuario({}, colecaoDeUsuario, usuario, id, { 
+          'erro': function(){
+            meuObj.apresentarAvisoDeErro('Os dados de cadastro deste usuário não foram encontrados.');
+          }
+        }),
+        meuObj.sePropriedadeExiste(usuario, 'UsuarioEndereco', { 
+          'erro': function() {
+            meuObj.apresentarAvisoDeErro('Usuário não possui endereço previamente cadastrado.');
+          } 
+        })
+      ];
+
+      meuObj.executarAcoes(acoes, function(){
+        // tudo deu certo, vamos agora criar a nossa visão de endereço
+        meuObj.visaoDeLeitura = meuObj.criarVisao("ModuloUsuario", "VisaoDeLeitura", function() {
+          return new VisaoDeLeitura({ 'model': usuario });
+        });
+        $('div.grupo-um div#usuario-leitura.conteudo-grupo-um').html(meuObj.visaoDeLeitura.render().el);
       });
+    
+      meuObj.apresentarConteudo('div#usuario-leitura');     
     },
 
     cadastroDeUsuario: function () {
-      var ModeloDeUsuario = this.modUsuario.Modelo;
-
       Registrar('BAIXO', 'Cadastro de usuario.');
+      
+      var ModeloDeUsuario = this.modUsuario['ModeloDeUsuario'];
+
+      // aqui limpamos essa visão
+      $('div.grupo-um div#usuario-cadastro.conteudo-grupo-um').html('<span></span>');
 
       this.visaoDeCadastro = this.criarVisao("ModuloUsuario", "VisaoDeCadastro", function() {
         return new VisaoDeCadastro({ 'model': new ModeloDeUsuario({}) });
@@ -158,21 +177,34 @@ define([
       this.apresentarConteudo('div#usuario-pesquisa');   
     },
 
-    procurarUsuario: function(id, cd) {
-      var colecaoDeUsuarios = this.modUsuario.Lista;
-      var ModeloDeUsuario = this.modUsuario.Modelo;
-      var usuario = ModeloDeUsuario.findOrCreate({'id': id});
+    procurarUsuario: function(dados, colecaoDeUsuario, usuario, id, cd) {
+      return function(proximo) { 
+        usuario.fetch({
+          success: function (modelo, resposta, opcoes) {
+            colecaoDeUsuario.add(usuario, {merge: true});
+            if ('sucesso' in cd) cd.sucesso(usuario);
+            proximo(dados)
+          }
+        , error: function (modelo, resposta, opcoes) {
+            Registrar('ALTO', 'Não foi possível requisitar dados deste usuário.');
+            if ('erro' in cd) cd.erro(null);
+          }
+        });
+      }
+    },
 
-      usuario.fetch({
-        success: function (modelo, resposta, opcoes) {
-          colecaoDeUsuarios.add(usuario, {merge: true});
-          cd(usuario);
+    sePropriedadeExiste: function(modelo, propriedade, cd) {
+      return function(proximo, dados) { 
+        var prop = modelo.get(propriedade);
+        
+        if (!prop) {
+          Registrar('ALTO', 'A propriedade '+ propriedade +' do modelo não foram encontrados. abortando ação.');
+          if ('erro' in cd) cd.erro(null);
+        } else {
+          if ('sucesso' in cd) cd.sucesso(prop);
+          proximo(dados);
         }
-      , error: function (modelo, resposta, opcoes) {
-          Registrar('ALTO', 'Não foi possível requisitar dados deste usuário.');
-          cd(null);
-        }
-      });
+      }
     },
 
     apresentarAvisoDeErro: function(msg) {

@@ -16,21 +16,19 @@ define([
 , PaginacaoDeFuncao
 ) {
   'use strict';
-
+ 
   var Registrar = _.bind(aplic.registrar, { envolucro: 'modulos/funcao/indice' });
 
   Registrar('BAIXO', 'Iniciando o modulo de funções.');
 
   var Funcao = aplic.modulo("Funcao");
 
-  Funcao.Modelo = ModeloDeFuncao;
+  Funcao['ModeloDeFuncao'] = ModeloDeFuncao;
+  Funcao['colecaoDeFuncao'] = new ColecaoDeFuncao();
+  //Funcao['PaginacaoDeFuncao'] = PaginacaoDeFuncao;
 
-  Funcao.Lista = new ColecaoDeFuncao();
-  
   // pegamos as funções 
-  Funcao.Lista.fetch();
-
-  //Funcao.Paginacao = PaginacaoDeFuncao;
+  Funcao['colecaoDeFuncao'].fetch();
  
   return Funcao;
 });

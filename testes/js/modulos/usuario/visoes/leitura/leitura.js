@@ -32,8 +32,6 @@ define([
     modUsuario: aplic.modulo("Usuario"),
     modFuncao: aplic.modulo("Funcao"),
 
-    colecaoDeUsuarios: aplic.modulo("Usuario").Lista,
-
     visaoDeEndereco: null,
 
     initialize: function() {
@@ -56,21 +54,7 @@ define([
         this.$el.find('button#salvar-usuario').prop("disabled", false); 
       }
 
-      //console.log('Funcao do usu...........: '+ this.model.get('Funcoes').get('nome'));
-
-      //this.modFuncao.Lista.each(function(funcao) {
-      //  console.log('Lista........: '+ funcao.get('Escopos').at(1).get('Funcoes').get('nome'));
-      //});
-
-      //if (this.sePodeRemoverUsuario) {
-      //  this.$el.find('button#remover-usuario').prop("disabled", false); 
-      //}
-
-      var endereco = this.model.get('UsuarioEndereco');
-      if (!endereco) {
-        Registrar('ALTO', 'Usuário não possui endereço previamente cadastrado.');
-      }
-      
+      var endereco = this.model.get('UsuarioEndereco');      
       this.visaoDeEndereco = this.criarVisao("VisaoDeCadastro", "VisaoDeEndereco", function() {
         return new VisaoDeEndereco({ 'model': endereco });
       });
@@ -89,7 +73,7 @@ define([
       'select#funcao-usuario': {
         observe: 'funcao_id',
         selectOptions: {
-          collection: 'this.modFuncao.Lista',
+          collection: 'this.modFuncao.colecaoDeFuncao',
           labelPath: 'nome',
           valuePath: 'id'
         }
@@ -109,10 +93,10 @@ define([
       }
 
       var meuObj = this;
-      var colecaoDeUsuarios = this.modUsuario.Lista;
+      var colecaoDeUsuarios = this.modUsuario['colecaoDeUsuario'];
       var usuario = this.model;
       var endereco = usuario.get('UsuarioEndereco');
-      var ModeloDeFuncao = aplic.modulo("Funcao").Modelo;
+      var ModeloDeFuncao = this.modFuncao['ModeloDeFuncao'];
       var funcao = ModeloDeFuncao.findOrCreate({'id': usuario.get("funcao_id")});
 
       this.validacao.whenValid({}).then(function() {

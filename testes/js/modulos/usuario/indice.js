@@ -25,16 +25,13 @@ define([
 
   var Usuario = aplic.modulo("Usuario");
 
-  Usuario.ModeloDeEndereco = ModeloDeEndereco;
+  Usuario['ModeloDeEndereco'] = ModeloDeEndereco;
+  Usuario['ModeloDeUsuario'] = ModeloDeUsuario;
+  Usuario['colecaoDeUsuario'] = new ColecaoDeUsuario();
+  //Usuario.['paginacaoDeUsuario'] = new PaginacaoDeUsuario({});
 
-  Usuario.Modelo = ModeloDeUsuario;
-
-  Usuario.Lista = new ColecaoDeUsuario();
-
-  //Usuario.Paginacao = new PaginacaoDeUsuario({});
-
-  // eventos locais deste modulo
-  Usuario.evts = _.extend({}, Backbone.Events);
+  // os eventos locais deste modulo
+  Usuario['evts'] = _.extend({}, Backbone.Events);
 
   Controlador.iniciar();
  
