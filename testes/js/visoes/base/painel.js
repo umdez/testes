@@ -1,10 +1,12 @@
 
 define([
   'aplicativo'
+, "linguas/indice"
 , 'handlebars'
 , 'text!templantes/base/painel.html'
 ], function(
   aplic
+, Lingua
 , hbs
 , Templante
 ) {
@@ -25,7 +27,7 @@ define([
         'esconderTodosAvisos'
       );
 
-      Registrar('BAIXO', 'Iniciando a visão.');
+      Registrar('BAIXO', Lingua.gerar('BASE.INFO.INICIANDO_VISAO', {'nome': 'painel'}));
       
       this.listenTo(aplic.evts, 'painel-avisos:esconder', this.esconderTodosAvisos);
       this.listenTo(aplic.evts, 'painel-grupos:esconder', this.esconderTodosOsGrupos);

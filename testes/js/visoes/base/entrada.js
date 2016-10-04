@@ -1,10 +1,12 @@
 
 define([
   'aplicativo'
+, "linguas/indice"
 , 'parsley'
 , 'text!templantes/base/entrada.html'
 ], function(
   aplic
+, Lingua
 , parsley
 , Templante
 ) {
@@ -24,8 +26,8 @@ define([
     validacao: null,
 
     initialize: function () {
-      Registrar('BAIXO', 'Iniciando a visão.');
-      
+      Registrar('BAIXO', Lingua.gerar('BASE.INFO.INICIANDO_VISAO', {'nome': 'entrada'}));
+
       this.render();
     },
     
@@ -60,12 +62,17 @@ define([
           // Inicia novamente a validação
           meuObj.validacao.reset();
 
-          Registrar('BAIXO', 'Você acaba de entrar no sistema.');
+          Registrar('BAIXO', Lingua.gerar('APLIC.INFO.ENTRADA_NO_SISTEMA'));
         },
         'erro': function(modelo, resposta, opcoes) {
+          //Registrar('BAIXO', 
+          //    Lingua.gerar('APLIC.ERRO.ERRO_COM_ESTATOS'
+          //  , {'estatos': modelo.status, 'msg': JSON.parse(modelo.responseText).mensagem }
+          //));
+
           Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
         }
-      });
+      }); 
     }, 
 
     limparFormulario: function() {

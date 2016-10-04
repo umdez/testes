@@ -3,11 +3,13 @@
 
 define([
   'aplicativo'
+, "linguas/indice"
 , 'utilitarios/gdv'
 , 'visoes/grupos/grupo01'
 , 'visoes/grupos/grupo02'
 ], function(
   aplic
+, Lingua
 , GDV
 , VisaoDoGrupoUm
 , VisaoDoGrupoDois
@@ -28,8 +30,8 @@ define([
         'esconderTodosOsConteudosDosGrupos',
         'mostrarConteudoDeUmGrupo'
       );
-
-      Registrar('BAIXO', 'Iniciando a visão.');
+      
+      Registrar('BAIXO', Lingua.gerar('BASE.INFO.INICIANDO_VISAO', {'nome': 'grupos'}));
       
       this.listenTo(aplic.evts, 'grupos-conteudos:esconder', this.esconderTodosOsConteudosDosGrupos);
       this.listenTo(aplic.evts, 'grupos-conteudo:mostrar', this.mostrarConteudoDeUmGrupo);

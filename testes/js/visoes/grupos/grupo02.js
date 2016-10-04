@@ -1,10 +1,12 @@
 define([
   'aplicativo'
+, "linguas/indice"
 , 'visoes/grupos/configuracao'
 , 'handlebars'
 , 'text!templantes/grupos/grupo02.html'
 ], function(
   aplic
+, Lingua
 , modulosConfig
 , hbs
 , Templante
@@ -20,7 +22,7 @@ define([
     templante: hbs.compile(Templante),
 
     initialize: function () {
-      Registrar('BAIXO', 'Iniciando a visão.');
+      Registrar('BAIXO', Lingua.gerar('GRUPOS.INFO.INICIANDO_VISAO', {'nome': 'grupo02'}));
 
       this.render();
     },

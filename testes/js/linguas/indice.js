@@ -4,10 +4,10 @@
 
 define([ 
   'localidade'
-, 'text!linguas/localidade/pt_br.json'
+, 'text!linguas/localidade/pt_BR.json'
 ], function(
   Localidade
-, ptbrJson
+, pt_BR
 ) {
   'use strict';
 
@@ -15,7 +15,7 @@ define([
     pt_BR: 'pt_BR'
   });
 
-  localidade.carregar(localidade.pt_BR, JSON.parse(ptbrJson));
+  localidade.carregar(localidade.pt_BR, JSON.parse(pt_BR));
   localidade.adicionarLocalidade(localidade.pt_BR);
   
   return localidade;

@@ -1,4 +1,4 @@
-{
+{ 
   "MODULO": {
     
     "ERRO": {
@@ -15,6 +15,7 @@
       "MODULO_INICIANDO": "Iniciando o modulo <%= nome %>." 
     }
   },
+
   "USUARIO": {
     "ERRO": {
       "PROPRIEDADE_INEXISTENTE": "A propriedade <%= prop %> deste modelo não foi encontrada. abortando ação.",
@@ -26,6 +27,46 @@
     },
     "INFO": {
       "DE_PERCURSO": "Realizando <%= acao %> de usuario."
+    }
+  },
+
+  "BASE": {
+
+    "ERRO": {
+      
+    },
+    "ALERTA": {
+      
+    },
+    "INFO": {
+      "INICIANDO_VISAO": "Iniciando a visão <%= nome %>."
+    }
+  },
+
+  "APLIC": {
+
+    "ERRO": {
+      "ERRO_COM_ESTATOS": "Erro: [<%= estatos %>] (<%= msg %>)"
+    },
+    "ALERTA": {
+      
+    },
+    "INFO": {
+      "ENTRADA_NO_SISTEMA": "Você acaba de entrar no sistema.",
+      "ENTRADA_NO_SISTEMA_MUDAR_VISAO": "Usuário realizou a <%= acao %> com sucesso. Mudando visão."
+    }
+  },
+
+  "GRUPOS": {
+
+    "ERRO": {
+      
+    },
+    "ALERTA": {
+      
+    },
+    "INFO": {
+      "INICIANDO_VISAO": "Iniciando a visão <%= nome %>."
     }
   },
 

@@ -1,10 +1,12 @@
 
 define([
   'aplicativo'
+, "linguas/indice"
 , 'handlebars'
 , 'text!templantes/base/topo.html'
 ], function(
   aplic
+, Lingua
 , hbs 
 , Templante
 ) {
@@ -24,7 +26,7 @@ define([
         'aoClicarEmItemDaBarraDeNav'
       );
 
-      Registrar('BAIXO', 'Iniciando a visão.');
+      Registrar('BAIXO', Lingua.gerar('BASE.INFO.INICIANDO_VISAO', {'nome': 'topo'}));
 
       this.listenTo(aplic.evts, 'item-navegacao-topo:selecionar', this.selecionarItemMenu);
 

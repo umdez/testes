@@ -1,12 +1,14 @@
 /* Este é um agrupamento com diversas visões */
-
+ 
 define([
   'aplicativo'
+, "linguas/indice"
 , 'visoes/grupos/configuracao'
 , 'handlebars'
 , 'text!templantes/grupos/grupo01.html'
 ], function(
   aplic
+, Lingua
 , modulosConfig
 , hbs
 , Templante
@@ -28,7 +30,7 @@ define([
         'aoClicarEmItemDoMenuEsquerdo'
       );
 
-      Registrar('BAIXO', 'Iniciando a visão.');
+      Registrar('BAIXO', Lingua.gerar('GRUPOS.INFO.INICIANDO_VISAO', {'nome': 'grupo01'}));
       
       this.listenTo(aplic.evts, 'grupo-um-aviso-erro:mostrar', this.apresentarAvisoDeErro);
       this.listenTo(aplic.evts, 'grupo-um-avisos:esconder', this.esconderTodosAvisos);

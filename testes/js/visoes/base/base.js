@@ -4,6 +4,7 @@
 
 define([
   'aplicativo'
+, "linguas/indice"
 , 'backbone' 
 , 'utilitarios/gdv'
 , "modulos/indice"
@@ -13,6 +14,7 @@ define([
 , 'visoes/base/grupos'
 ], function(
   aplic
+, Lingua
 , Backbone
 , GDV
 , modulos  // inicia os modulos
@@ -22,7 +24,7 @@ define([
 , VisaoDosGruposPainel
 ) {
   'use strict';
-
+ 
   var Registrar = _.bind(aplic.registrar, { envolucro: 'visoes/base/base' });
 
   var VisaoDeBase = Backbone.View.extend({
@@ -35,8 +37,8 @@ define([
     visaoDosGruposPainel: null,
 
     initialize: function() {
-      Registrar('BAIXO', 'Iniciando a visão.');
-      
+      Registrar('BAIXO', Lingua.gerar('BASE.INFO.INICIANDO_VISAO', {'nome': 'base'}));
+
       this.visaoDeEntrada = GDV.reusarVisao("Nucleo", "VisaoDeEntrada", function() {
         return new VisaoDeEntrada();
       });
@@ -63,8 +65,8 @@ define([
       this.$el.find('div.paginas-base').hide();
 
       if(aplic.sessao.get('autenticado')) {
-        Registrar('BAIXO', 'Usuário realizou a entrada com sucesso. Mudando visão.');
-        
+        Registrar('BAIXO', Lingua.gerar('APLIC.INFO.ENTRADA_NO_SISTEMA_MUDAR_VISAO', {'acao': 'entrada'}));
+
         // Sempre renderizar a cada nova autenticacao.
         this.visaoDoTopoPainel = GDV.criarVisao("Nucleo", "VisaoDoTopoPainel", function() {
           return new VisaoDoTopoPainel();
@@ -72,8 +74,7 @@ define([
         this.$el.find('div#painel > div#topo').html(this.visaoDoTopoPainel.render().el);
         this.$el.find('div#painel').show();
       } else {
-        Registrar('BAIXO', 'Usuário realizou a saida com sucesso. Mudando visão.');
-
+        Registrar('BAIXO', Lingua.gerar('APLIC.INFO.ENTRADA_NO_SISTEMA_MUDAR_VISAO', {'acao': 'saida'}));
         this.$el.find('div#entrada').show();
       } 
       return this;
