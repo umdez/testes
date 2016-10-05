@@ -139,6 +139,7 @@ define([
         endereco.url = gerarUrl('UsuarioEnderecos');
 
         endereco.save().done(function(modelo, resposta, opcoes) {
+          usuario.set('UsuarioEndereco', endereco, { merge: true, add: true } );
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })

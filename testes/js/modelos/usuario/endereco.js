@@ -6,12 +6,12 @@ define([
   Backbone
 , gerarUrl
 ) {
-  'use strict';
+  'use strict'; 
 
   var ModeloDeEndereco = Backbone.RelationalModel.extend({
 
     url: function() {
-      return gerarUrl('UsuarioEndereco', this.idEndereco);
+     return gerarUrl('UsuarioEndereco', this.idEndereco);
     },
     
     idAttribute: 'id',

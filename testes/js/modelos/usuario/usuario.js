@@ -11,7 +11,7 @@ define([
 , ModeloDeFuncao
 , ModeloDeEndereco
 , ColecaoDeEscopos
-) {
+) { 
   'use strict';
 
   var ModeloDeUsuario = Backbone.RelationalModel.extend({
@@ -41,7 +41,7 @@ define([
       key: 'Funcoes',
       relatedModel: ModeloDeFuncao,
       reverseRelation: {
-        key: 'Usuarios',
+        key: 'Encarregado',
         type: Backbone.HasMany,
         includeInJSON: true
       }
@@ -51,7 +51,7 @@ define([
       key: 'UsuarioEndereco',
       relatedModel: ModeloDeEndereco,
       reverseRelation: {
-        key: 'Usuarios',
+        key: 'Residente',
         type: Backbone.HasOne,
         includeInJSON: true
       }

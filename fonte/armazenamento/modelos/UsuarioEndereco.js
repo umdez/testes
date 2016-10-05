@@ -16,7 +16,8 @@ module.exports = function (database, DataTypes) {
   }, {
     
     associar: function (modelos) {
-      modelos.UsuarioEndereco.belongsTo(modelos.Usuarios, { foreignKey: 'usuario_id', as: 'Usuarios' });
+      // NOTA: Não ativar esta relação abaixo, pois o BackBone-Relational não vai funcionar corretamente...
+      //modelos.UsuarioEndereco.belongsTo(modelos.Usuarios, { foreignKey: 'usuario_id', as: 'Usuarios' });
     },
     underscored: true, // Lembre-se de que utilizamos o padrão snake_case
     timestamps: false,

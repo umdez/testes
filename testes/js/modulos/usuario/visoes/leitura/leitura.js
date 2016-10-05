@@ -47,15 +47,15 @@ define([
 
     render: function() {
       this.$el.html(this.templante(this.model.toJSON()));
-      this.stickit();
-
+      this.stickit(); 
+     
       this.sePodeAtualizarUsuario = this.verificarEscopo('Usuarios', "ATUALIZACAO");
       //this.sePodeRemoverUsuario = this.verificarEscopo('Usuarios', "REMOCAO");
 
       if (this.sePodeAtualizarUsuario) {
         this.$el.find('button#salvar-usuario').prop("disabled", false); 
       }
-
+      
       var endereco = this.model.get('UsuarioEndereco');      
       this.visaoDeEndereco = this.criarVisao("VisaoDeCadastro", "VisaoDeEndereco", function() {
         return new VisaoDeEndereco({ 'model': endereco });
@@ -97,21 +97,23 @@ define([
       var meuObj = this;
       var colecaoDeUsuarios = this.modUsuario['colecaoDeUsuario'];
       var usuario = this.model;
-      var endereco = usuario.get('UsuarioEndereco');
+      var endereco = usuario.get('UsuarioEndereco'); 
       var ModeloDeFuncao = this.modFuncao['ModeloDeFuncao'];
       var funcao = ModeloDeFuncao.findOrCreate({'id': usuario.get("funcao_id")});
 
       this.validacao.whenValid({}).then(function() {
         
+        // NOTA: O backbone-relational parece que sempre serializa o resultado. Por causa disso, temos que
+        // salvar os dados seguindo a ordem abaixo (funcao -> endereco -> usuario).
         var acoes = [ 
           meuObj.carregarFuncao({}, usuario, funcao, { 'sucesso': function() {
             Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.CARREGAMENTO_FUNCAO_REALIZADA'));
           }}),
-          meuObj.salvarUsuario(usuario, colecaoDeUsuarios, { 'sucesso': function() {
-            Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.SALVAMENTO_REALIZADO'));
-          }}),
           meuObj.salvarEndereco(usuario, endereco, { 'sucesso': function() {
             Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.SALVAMENTO_ENDERECO_REALIZADO'));
+          }}),
+          meuObj.salvarUsuario(usuario, colecaoDeUsuarios, { 'sucesso': function() {
+            Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.SALVAMENTO_REALIZADO'));
           }})
         ];
 
@@ -133,7 +135,7 @@ define([
       return function(proximo) { 
         funcao.url = gerarUrl('Funcao', usuario.get("funcao_id"));
         funcao.fetch().done(function(modelo, resposta, opcoes) {
-          usuario.set({'Funcoes': funcao });
+          usuario.set('Funcoes', funcao, { merge: true, add: true } ); 
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
@@ -146,7 +148,7 @@ define([
       return function(proximo, dados) { 
         usuario.url = gerarUrl('Usuario', usuario.get('id'));
         usuario.save().done(function(modelo, resposta, opcoes) {
-          colecaoDeUsuarios.add(usuario, {merge: true});
+          colecaoDeUsuarios.add(usuario, { merge: true });
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
@@ -159,6 +161,7 @@ define([
       return function(proximo, dados) {
         endereco.url = gerarUrl('UsuarioEndereco', endereco.get('id'));
         endereco.save().done(function(modelo, resposta, opcoes) {
+          usuario.set('UsuarioEndereco', endereco, { merge: true, add: true } );
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
