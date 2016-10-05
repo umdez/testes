@@ -2,15 +2,17 @@
 /* Aqui vamos adicionar as caracteristicas de trabalhar com as rotas, Carregar
  * os arquivos de visão etc.  
  */
-  
+   
 define([
   "aplicativo"
 , "roteando"
+, "i18n/indice"
 , "utilitarios/gdv"
 , "visoes/base/base"
 ], function(
   aplic
 , roteando
+, Lingua
 , GDV
 , VisaoDeBase
 ) {
@@ -40,7 +42,9 @@ define([
     },
     
     registrador: function(rota, nome, args) {
-      Registrar('BAIXO', 'Acessando a rota ('+ rota +') de nome ('+ nome +') com argumentos ('+ args +')');
+      Registrar('BAIXO', Lingua.gerar('ROTEADOR.INFO.REGISTRAR_ACESSO', { 
+        'rota': rota, 'nome': nome, 'args': args
+      }));
     }
     
   });

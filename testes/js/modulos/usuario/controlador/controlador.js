@@ -40,7 +40,9 @@ define([
         'suporteDeLeitura'
       );
 
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ADICIONANDO_ROTAS', { 'nome': this.nome }));
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ADICIONANDO_ROTAS', { 
+        'nome': this.nome 
+      }));
 
       var Rotas = this.Rotas;
 
@@ -94,7 +96,9 @@ define([
     },
 
     suporteAnterior: function() {
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ACESSANDO_SUPORTE_ANTERIOR', { 'nome': this.nome }));
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ACESSANDO_SUPORTE_ANTERIOR', { 
+        'nome': this.nome 
+      }));
 
       // NOTA: Podemos precisar acessar uma visão diretamente. Um exemplo:
       // var topoDoPainel = this.reusarVisao("VisaoBaseDeTopoPainel", function() { });
@@ -111,7 +115,9 @@ define([
     },
 
     suportePosterior: function() {
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ACESSANDO_SUPORTE_POSTERIOR', { 'nome': this.nome }));
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ACESSANDO_SUPORTE_POSTERIOR', { 
+        'nome': this.nome 
+      }));
 
       // pertencemos ao grupo um então mostramos ele.
       aplic.evts.trigger('painel-grupo:mostrar', 'div.grupo-um'); 
@@ -122,7 +128,9 @@ define([
     leituraDeUsuario: function(id, aba) {
       var meuObj = this;
 
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.DE_PERCURSO', {'acao': 'leitura', 'nome': this.nome}));
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.DE_PERCURSO', {
+        'acao': 'leitura', 'nome': this.nome
+      }));
 
       // aqui limpamos essa visão
       $('div.grupo-um div#usuario-leitura.conteudo-grupo-um').html('<span></span>');
@@ -156,7 +164,9 @@ define([
     },
 
     cadastroDeUsuario: function () {
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.DE_PERCURSO', {'acao': 'cadastro', 'nome': this.nome}));
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.DE_PERCURSO', {
+        'acao': 'cadastro', 'nome': this.nome
+      }));
       
       var ModeloDeUsuario = this.modUsuario['ModeloDeUsuario'];
 
@@ -171,7 +181,9 @@ define([
     },
 
     paginacaoDeUsuario: function() {
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.DE_PERCURSO', {'acao': 'paginação', 'nome': this.nome}));
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.DE_PERCURSO', {
+        'acao': 'paginação', 'nome': this.nome
+      }));
 
       this.visaoDePaginacao = this.reusarVisao("ModuloUsuario", "VisaoDePaginacao", function() {
         return new VisaoDePaginacao();

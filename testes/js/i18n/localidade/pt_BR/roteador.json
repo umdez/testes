@@ -1,0 +1,14 @@
+{
+  "ROTEADOR": {
+
+    "ERRO": {
+      
+    },
+    "ALERTA": {
+      
+    },
+    "INFO": {
+      "REGISTRAR_ACESSO": "Acessando a rota <%= rota %> de nome <%= nome %> com argumentos <%= args %>."
+    }
+  }
+}

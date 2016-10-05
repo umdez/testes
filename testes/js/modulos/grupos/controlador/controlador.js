@@ -23,7 +23,9 @@ define([
         'suporteDoGrupoTres'
       );
 
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ADICIONANDO_ROTAS', { 'nome': this.nome }));
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ADICIONANDO_ROTAS', { 
+        'nome': this.nome 
+      }));
 
       var Rotas = this.Rotas;
 
@@ -38,7 +40,9 @@ define([
     },
 
     suporteAnterior: function() {
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ACESSANDO_SUPORTE_ANTERIOR', { 'nome': this.nome }));
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ACESSANDO_SUPORTE_ANTERIOR', { 
+        'nome': this.nome 
+      }));
 
       // Esconde todos os conteudos de todos os grupos.
       aplic.evts.trigger('grupos-conteudos:esconder');

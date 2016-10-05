@@ -95,15 +95,21 @@ define([
         
         var acoes = [ 
           meuObj.cadastrarUsuario({}, colecaoDeUsuarios, usuario, { 'sucesso': function() {
-            Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.CADASTRO_REALIZADO', { 'nome': usuario.get('nome') }));
+            Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.CADASTRO_REALIZADO', { 
+              'nome': usuario.get('nome') 
+            }));
           }}),
           meuObj.cadastrarEndereco(usuario, endereco, { 'sucesso': function() {
-            Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.CADASTRO_ENDERECO_REALIZADO', { 'nome': usuario.get('nome') }));
+            Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.CADASTRO_ENDERECO_REALIZADO', { 
+              'nome': usuario.get('nome') 
+            }));
           }})
         ];
 
         meuObj.executarAcoes(acoes, function(){
-          Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.ACOES_DO_CADASTRO_REALIZADO', { 'nome': usuario.get('nome') }));
+          Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.ACOES_DO_CADASTRO_REALIZADO', { 
+            'nome': usuario.get('nome') 
+          }));
           
           // após cadastrar tudo nós navegamos para visão de leitura
           aplic.navegar('#UsuariosLeitura', usuario.get('id'), null, true); 

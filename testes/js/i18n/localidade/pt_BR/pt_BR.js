@@ -8,6 +8,7 @@ define([
 , 'text!i18n/localidade/pt_BR/usuario.json'
 , 'text!i18n/localidade/pt_BR/controlador.json'
 , 'text!i18n/localidade/pt_BR/visao.json'
+, 'text!i18n/localidade/pt_BR/roteador.json'
 ], function(
   aplic
 , base
@@ -16,6 +17,7 @@ define([
 , usuario
 , controlador
 , visao
+, roteador
 ) {
   'use strict';
 
@@ -28,6 +30,7 @@ define([
   _.extend(grupoDeLinguas, JSON.parse(usuario));
   _.extend(grupoDeLinguas, JSON.parse(controlador));
   _.extend(grupoDeLinguas, JSON.parse(visao));
+  _.extend(grupoDeLinguas, JSON.parse(roteador));
 
   return grupoDeLinguas;
 });
