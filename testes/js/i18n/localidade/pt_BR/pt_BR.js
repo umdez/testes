@@ -6,12 +6,14 @@ define([
 , 'text!i18n/localidade/pt_BR/grupos.json'
 , 'text!i18n/localidade/pt_BR/modulo.json'
 , 'text!i18n/localidade/pt_BR/usuario.json'
+, 'text!i18n/localidade/pt_BR/controlador.json'
 ], function(
   aplic
 , base
 , grupos
 , modulo
 , usuario
+, controlador
 ) {
   'use strict';
 
@@ -22,6 +24,7 @@ define([
   _.extend(grupoDeLinguas, JSON.parse(grupos));
   _.extend(grupoDeLinguas, JSON.parse(modulo));
   _.extend(grupoDeLinguas, JSON.parse(usuario));
+  _.extend(grupoDeLinguas, JSON.parse(controlador));
   
   return grupoDeLinguas;
 });
