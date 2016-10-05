@@ -33,6 +33,36 @@ define([
 
     executarAcoes: function(acoes, cd) {
       _(acoes).reduceRight(_.wrap, cd)();
+    },
+
+    procurarUmModelo: function(dados, colecao, modelo, cd) {
+      return function(proximo) { 
+        modelo.fetch({
+          success: function (modeloRequisitado, resposta, opcoes) {
+            if (colecao) {
+              colecao.add(modelo, {merge: true});
+            }
+            if ('sucesso' in cd) cd.sucesso(modelo);
+            proximo(dados)
+          }
+        , error: function (modeloRequisitado, resposta, opcoes) {
+            if ('erro' in cd) cd.erro(null);
+          }
+        });
+      }
+    },
+
+    sePropriedadeExiste: function(modelo, propriedade, cd) {
+      return function(proximo, dados) { 
+        var prop = modelo.get(propriedade);
+
+        if (!prop) {
+          if ('erro' in cd) cd.erro(null);
+        } else {
+          if ('sucesso' in cd) cd.sucesso(prop);
+          proximo(dados);
+        }
+      }
     }
 
   };

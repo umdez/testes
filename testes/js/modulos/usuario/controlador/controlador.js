@@ -132,7 +132,7 @@ define([
       var usuario = ModeloDeUsuario.findOrCreate({'id': id});
 
       var acoes = [ 
-        meuObj.procurarUsuario({}, colecaoDeUsuario, usuario, id, { 
+        meuObj.procurarUmModelo({}, colecaoDeUsuario, usuario, { 
           'erro': function(){
             meuObj.apresentarAvisoDeErro(Lingua.gerar('USUARIO.ERRO.CADASTRO_NAO_ENCONTRADO'));
           }
@@ -177,36 +177,6 @@ define([
         return new VisaoDePaginacao();
       });
       this.apresentarConteudo('div#usuario-pesquisa');   
-    },
-
-    procurarUsuario: function(dados, colecaoDeUsuario, usuario, id, cd) {
-      return function(proximo) { 
-        usuario.fetch({
-          success: function (modelo, resposta, opcoes) {
-            colecaoDeUsuario.add(usuario, {merge: true});
-            if ('sucesso' in cd) cd.sucesso(usuario);
-            proximo(dados)
-          }
-        , error: function (modelo, resposta, opcoes) {
-            Registrar('ALTO', Lingua.gerar('USUARIO.ERRO.CADASTRO_NAO_ENCONTRADO'));
-            if ('erro' in cd) cd.erro(null);
-          }
-        });
-      }
-    },
-
-    sePropriedadeExiste: function(modelo, propriedade, cd) {
-      return function(proximo, dados) { 
-        var prop = modelo.get(propriedade);
-        
-        if (!prop) {
-          Registrar('ALTO', Lingua.gerar('USUARIO.ERRO.PROPRIEDADE_INEXISTENTE', {'prop': propriedade}));
-          if ('erro' in cd) cd.erro(null);
-        } else {
-          if ('sucesso' in cd) cd.sucesso(prop);
-          proximo(dados);
-        }
-      }
     },
 
     apresentarAvisoDeErro: function(msg) {
