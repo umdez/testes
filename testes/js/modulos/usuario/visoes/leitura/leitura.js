@@ -90,7 +90,7 @@ define([
 
     aoClicarEmSalvar: function(evento) {
       if(!this.sePodeAtualizarUsuario) {
-        Registrar('BAIXO', Lingua.gerar('VISAO.INFO.NAO_POSSUI_A_PERMISSAO_NECESSARIA'));
+        Registrar('BAIXO', Lingua.gerar('VISAO.ALERTA.NAO_POSSUI_A_PERMISSAO_NECESSARIA'));
         return;
       }
 
@@ -177,7 +177,7 @@ define([
     
     aoClicarEmRemover: function(evento) {
       //if (!this.sePodeRemoverUsuario) {
-      //  Registrar('BAIXO', Lingua.gerar('VISAO.INFO.NAO_POSSUI_A_PERMISSAO_NECESSARIA'));
+      //  Registrar('BAIXO', Lingua.gerar('VISAO.ALERTA.NAO_POSSUI_A_PERMISSAO_NECESSARIA'));
       //  return;
       //}
     },
