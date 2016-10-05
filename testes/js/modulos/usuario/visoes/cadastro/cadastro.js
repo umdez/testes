@@ -3,6 +3,7 @@
 define([
   'aplicativo'
 , 'backbone' 
+, 'i18n/indice'
 , "modulos/visoes"
 , 'urls/indice'
 , 'handlebars'
@@ -11,6 +12,7 @@ define([
 ], function(
   aplic
 , Backbone
+, Lingua
 , Base
 , gerarUrl
 , hbs
@@ -92,21 +94,23 @@ define([
       this.validacao.whenValid({}).then(function() {
         
         var acoes = [ 
-          meuObj.cadastrarUsuario({}, colecaoDeUsuarios, usuario, { 'sucesso': function() {} }),
-          meuObj.cadastrarEndereco(usuario, endereco, { 'sucesso': function() {} })
+          meuObj.cadastrarUsuario({}, colecaoDeUsuarios, usuario, { 'sucesso': function() {
+            Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.CADASTRO_REALIZADO', { 'nome': usuario.get('nome') }));
+          }}),
+          meuObj.cadastrarEndereco(usuario, endereco, { 'sucesso': function() {
+            Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.CADASTRO_ENDERECO_REALIZADO', { 'nome': usuario.get('nome') }));
+          }})
         ];
 
-        Registrar('BAIXO', 'Cadastrando o usuário ('+ usuario.get('nome') +').');
-
         meuObj.executarAcoes(acoes, function(){
-          Registrar('BAIXO', 'Etapas do Cadastro do usuário ('+ usuario.get('nome') +') realizadas.');
+          Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.ACOES_DO_CADASTRO_REALIZADO', { 'nome': usuario.get('nome') }));
           
           // após cadastrar tudo nós navegamos para visão de leitura
           aplic.navegar('#UsuariosLeitura', usuario.get('id'), null, true); 
         });
 
       }).fail(function() {
-        Registrar('BAIXO', 'É necessário informar os dados corretos para realizar o cadastro.');
+        Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.DADOS_DE_CADASTRO_INCORRETOS'));
       });
     },
 
@@ -116,7 +120,6 @@ define([
 
         usuario.save().done(function(modelo, resposta, opcoes) {
           colecaoDeUsuarios.add(usuario);
-          Registrar('BAIXO', 'Novo usuario ('+ usuario.get('nome') +') foi cadastrado com sucesso');
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
@@ -130,7 +133,6 @@ define([
         endereco.url = gerarUrl('UsuarioEnderecos');
 
         endereco.save().done(function(modelo, resposta, opcoes) {
-          Registrar('BAIXO', 'Novo endereco do usuário ('+ usuario.get('nome') +') cadastrado com sucesso');
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
@@ -148,7 +150,11 @@ define([
     },
 
     aoRecriar: function() {
-      Registrar('BAIXO', 'A visão (VisaoDeCadastro) acaba de ser recriada.');
+      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_RECRIAR', { 'nome': 'VisaoDeCadastro' }));
+    },
+
+    aoFechar: function() {
+      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_FECHAR', { 'nome': 'VisaoDeCadastro' }));
     }
     
   });

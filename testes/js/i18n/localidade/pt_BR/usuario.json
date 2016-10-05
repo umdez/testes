@@ -8,7 +8,10 @@
       
     },
     "INFO": {
-      
+      "CADASTRO_REALIZADO": "O usuario <%= nome %> foi cadastrado com sucesso",
+      "CADASTRO_ENDERECO_REALIZADO": "O endereco do usuário <%= nome %> foi cadastrado com sucesso",
+      "ACOES_DO_CADASTRO_REALIZADO": "As ações para o cadastro do usuário <%= nome %> foram realizadas com sucesso.",
+      "DADOS_DE_CADASTRO_INCORRETOS": "Os dados do formulário de cadastro informados estão incorretos."
     }
   }
 }

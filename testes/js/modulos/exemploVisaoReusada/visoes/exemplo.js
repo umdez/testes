@@ -2,12 +2,14 @@
 define([
   'aplicativo'
 , 'backbone' 
+, 'i18n/indice'
 , "modulos/visoes"
 , 'handlebars'
 , 'text!modulos/exemploVisaoReusada/templantes/exemplo.html' 
 ], function(
   aplic
 , Backbone
+, Lingua
 , Base
 , hbs
 , TemplanteCadastro
@@ -31,7 +33,7 @@ define([
     },
 
     aoReusar: function() {
-      Registrar('BAIXO', 'A visão (VisaoDeExemploReusada) acaba de ser reusada.');
+      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_REUSAR', { 'nome': 'VisaoDeExemploReusada' }));
     }
     
   });
