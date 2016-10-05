@@ -1,7 +1,7 @@
 
 define([
   'aplicativo'
-, "linguas/indice"
+, "i18n/indice"
 , 'handlebars'
 , 'text!templantes/base/painel.html'
 ], function(

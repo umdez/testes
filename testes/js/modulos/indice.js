@@ -3,7 +3,7 @@ define([
 , 'jasny'
 , "parsley.ptbr"
 , 'stickit'
-, "linguas/indice"
+, "i18n/indice"
 , "modulos/grupos/indice"
 , "modulos/usuario/indice"
 , "modulos/exemplo/indice"

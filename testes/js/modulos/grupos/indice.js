@@ -4,7 +4,7 @@
 
 define([
   "aplicativo"
-, "linguas/indice"
+, "i18n/indice"
 , "modulos/grupos/controlador/controlador"
 ], function (
   aplic

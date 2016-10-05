@@ -3,7 +3,7 @@
 define([
   "aplicativo"
 , "backbone"
-, "linguas/indice"
+, "i18n/indice"
 , "modulos/controladores"
 , "modulos/usuario/visoes/cadastro/cadastro"
 , "modulos/usuario/visoes/leitura/leitura"

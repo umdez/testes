@@ -1,7 +1,7 @@
 
 define([
   'aplicativo'
-, "linguas/indice"
+, "i18n/indice"
 , 'parsley'
 , 'text!templantes/base/entrada.html'
 ], function(

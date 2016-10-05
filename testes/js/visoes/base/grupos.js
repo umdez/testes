@@ -3,7 +3,7 @@
 
 define([
   'aplicativo'
-, "linguas/indice"
+, "i18n/indice"
 , 'utilitarios/gdv'
 , 'visoes/grupos/grupo01'
 , 'visoes/grupos/grupo02'

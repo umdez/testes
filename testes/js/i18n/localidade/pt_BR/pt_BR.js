@@ -1,11 +1,11 @@
 /* Uniao das linguas */
 
 define([ 
-  'text!linguas/localidade/pt_BR/aplic.json'
-, 'text!linguas/localidade/pt_BR/base.json'
-, 'text!linguas/localidade/pt_BR/grupos.json'
-, 'text!linguas/localidade/pt_BR/modulo.json'
-, 'text!linguas/localidade/pt_BR/usuario.json'
+  'text!i18n/localidade/pt_BR/aplic.json'
+, 'text!i18n/localidade/pt_BR/base.json'
+, 'text!i18n/localidade/pt_BR/grupos.json'
+, 'text!i18n/localidade/pt_BR/modulo.json'
+, 'text!i18n/localidade/pt_BR/usuario.json'
 ], function(
   aplic
 , base

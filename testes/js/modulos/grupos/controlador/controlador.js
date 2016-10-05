@@ -1,6 +1,6 @@
 define([
   "aplicativo"
-, "linguas/indice"
+, "i18n/indice"
 , "modulos/controladores"
 ], function (
   aplic

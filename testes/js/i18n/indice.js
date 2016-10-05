@@ -4,7 +4,7 @@
 
 define([ 
   'localidade'
-, 'linguas/localidade/pt_BR/pt_BR'
+, 'i18n/localidade/pt_BR/pt_BR'
 ], function(
   Localidade
 , pt_BR

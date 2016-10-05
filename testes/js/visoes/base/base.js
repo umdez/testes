@@ -4,7 +4,7 @@
 
 define([
   'aplicativo'
-, "linguas/indice"
+, "i18n/indice"
 , 'backbone' 
 , 'utilitarios/gdv'
 , "modulos/indice"

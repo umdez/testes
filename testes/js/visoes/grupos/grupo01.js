@@ -2,7 +2,7 @@
  
 define([
   'aplicativo'
-, "linguas/indice"
+, "i18n/indice"
 , 'visoes/grupos/configuracao'
 , 'handlebars'
 , 'text!templantes/grupos/grupo01.html'
