@@ -66,7 +66,7 @@ define([
       });
 
       Backbone.history.start({pushState: false, root: '/'}); 
-      Registrar('BAIXO', 'Roteador e historio de rotas iniciados com sucesso.');
+      Registrar('BAIXO', Lingua.gerar('ROTEADOR.INFO.INICIADO'));
     }
     
     aplic.sessao.seAutenticado({
