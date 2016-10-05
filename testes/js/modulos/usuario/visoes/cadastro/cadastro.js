@@ -52,7 +52,7 @@ define([
       this.visaoDeEndereco = this.criarVisao("VisaoDeCadastro", "VisaoDeEndereco", function() {
         return new VisaoDeEndereco({ 'model': endereco });
       });
-      this.model.set({'UsuarioEndereco': endereco});
+      this.model.set({'UsuarioEndereco': endereco}); 
       this.$el.find('div#acondicionar-endereco-usuario').html(this.visaoDeEndereco.render().el);
 
       // depois de preencher toda a visão dai nós vamos iniciar a validação

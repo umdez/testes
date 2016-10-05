@@ -40,10 +40,21 @@
       <!-- visão de endereço do usuário vai ser inserido aqui -->
       <div id="acondicionar-endereco-usuario"></div>
       <!-- visão de endereço do usuário fim -->
-      <div class="form-group">
-        <label for="senha-usuario">Senha</label>
-        <input type="password" class="form-control" id="senha-usuario" placeholder="Senha" 
-        data-parsley-required="true" data-parsley-length="[6, 20]">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="senha-usuario">Senha</label>
+            <input type="password" class="form-control" id="senha-usuario" placeholder="Senha" 
+            data-parsley-required="true" data-parsley-length="[6, 20]" data-parsley-equalto="#confirmacao-senha-usuario">
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="confirmacao-senha-usuario">Confirmar a senha</label>
+            <input type="password" class="form-control" id="confirmacao-senha-usuario" placeholder="Confirmar a senha" 
+            data-parsley-required="true" data-parsley-length="[6, 20]" data-parsley-equalto="#senha-usuario">
+          </div>
+        </div>
       </div>
       <button type="submit" class="btn btn-success" id="cadastrar-usuario">Cadastrar</button>
     </form>
