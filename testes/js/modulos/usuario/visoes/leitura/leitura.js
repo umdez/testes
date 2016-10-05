@@ -2,6 +2,7 @@
 define([
   'aplicativo'
 , 'backbone' 
+, 'i18n/indice'
 , 'modulos/visoes'
 , 'urls/indice'
 , 'handlebars'
@@ -10,6 +11,7 @@ define([
 ], function(
   aplic
 , Backbone
+, Lingua
 , Base
 , gerarUrl
 , hbs
@@ -88,7 +90,7 @@ define([
 
     aoClicarEmSalvar: function(evento) {
       if(!this.sePodeAtualizarUsuario) {
-        Registrar('BAIXO', 'Você não possui a permissão necessária para salvar os dados de usuários.');
+        Registrar('BAIXO', Lingua.gerar('VISAO.INFO.NAO_POSSUI_A_PERMISSAO_NECESSARIA'));
         return;
       }
 
@@ -102,33 +104,36 @@ define([
       this.validacao.whenValid({}).then(function() {
         
         var acoes = [ 
-          meuObj.carregarFuncao({}, usuario, funcao, { 'sucesso': function() {} }),
-          meuObj.salvarUsuario(usuario, colecaoDeUsuarios, { 'sucesso': function() {} }),
-          meuObj.salvarEndereco(usuario, endereco, { 'sucesso': function() {} })
+          meuObj.carregarFuncao({}, usuario, funcao, { 'sucesso': function() {
+            Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.CARREGAMENTO_FUNCAO_REALIZADA'));
+          }}),
+          meuObj.salvarUsuario(usuario, colecaoDeUsuarios, { 'sucesso': function() {
+            Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.SALVAMENTO_REALIZADO'));
+          }}),
+          meuObj.salvarEndereco(usuario, endereco, { 'sucesso': function() {
+            Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.SALVAMENTO_ENDERECO_REALIZADO'));
+          }})
         ];
 
-        Registrar('BAIXO', 'Salvando dos dados do usuário ('+ usuario.get('nome') +').');
-
         meuObj.executarAcoes(acoes, function() {
-          Registrar('BAIXO', 'Todas as ações de salvamento foram bem sucedidas.');
-          
+          Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.ACOES_DE_SALVAMENTO_REALIZADAS'));
+
           // Inicia novamente a validação
           meuObj.validacao.reset();
         });
 
       }).fail(function() {
-        Registrar('BAIXO', 'É necessário informar os dados corretos para salvar.');
+        Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.DADOS_DE_SALVAMENTO_INCORRETOS'));
       });
 
     },
 
+    // Precisamos requisitar a nossa função
     carregarFuncao: function(dados, usuario, funcao, cd) {
       return function(proximo) { 
-        // Inicialmente requisitaremos a nossa função
         funcao.url = gerarUrl('Funcao', usuario.get("funcao_id"));
         funcao.fetch().done(function(modelo, resposta, opcoes) {
           usuario.set({'Funcoes': funcao });
-          Registrar('BAIXO', 'Dados da função do usuario foram carregados com sucesso');
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
@@ -136,13 +141,12 @@ define([
       };
     },
 
+    // Salvamos este usuário
     salvarUsuario: function(usuario, colecaoDeUsuarios, cd) {
       return function(proximo, dados) { 
         usuario.url = gerarUrl('Usuario', usuario.get('id'));
-        // Salvamos este usuário
         usuario.save().done(function(modelo, resposta, opcoes) {
           colecaoDeUsuarios.add(usuario, {merge: true});
-          Registrar('BAIXO', 'Dados do usuario foram salvos com sucesso');
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
@@ -150,12 +154,11 @@ define([
       };
     },
 
+    // Salvamos o endereço deste usuário.
     salvarEndereco: function(usuario, endereco, cd) {
       return function(proximo, dados) {
-        // Salvamos o endereço deste usuário.
         endereco.url = gerarUrl('UsuarioEndereco', endereco.get('id'));
         endereco.save().done(function(modelo, resposta, opcoes) {
-          Registrar('BAIXO', 'Dados do endereço do usuario foram salvos com sucesso');
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
@@ -174,14 +177,19 @@ define([
     
     aoClicarEmRemover: function(evento) {
       //if (!this.sePodeRemoverUsuario) {
-      //  Registrar('BAIXO', 'Você não possui a permissão necessária para remover usuários.');
+      //  Registrar('BAIXO', Lingua.gerar('VISAO.INFO.NAO_POSSUI_A_PERMISSAO_NECESSARIA'));
       //  return;
       //}
     },
 
     aoRecriar: function() {
-      Registrar('BAIXO', 'A visão (VisaoDeLeitura) acaba de ser recriada.');
+      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_RECRIAR', { 'nome': 'VisaoDeLeitura' }));
+    },
+
+    aoFechar: function() {
+      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_FECHAR', { 'nome': 'VisaoDeLeitura' }));
     }
+
   });
 
   return VisaoDeLeitura.extend(Base);

@@ -10,7 +10,8 @@
     "INFO": {
       "AO_RECRIAR": "A visão <%= nome %> acaba de ser recriada.",
       "AO_FECHAR": "A visão <%= nome %> acaba de ser fechada.",
-      "AO_REUSAR": "A visão <%= nome %> acaba de ser reusada."
+      "AO_REUSAR": "A visão <%= nome %> acaba de ser reusada.",
+      "NAO_POSSUI_A_PERMISSAO_NECESSARIA": "Você não possui a permissão necessária para realizar esta ação."
     }
   }
 }

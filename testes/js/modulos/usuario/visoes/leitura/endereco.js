@@ -3,12 +3,14 @@
 define([
   'aplicativo'
 , 'backbone' 
+, 'i18n/indice'
 , "modulos/visoes"
 , 'handlebars'
 , 'text!modulos/usuario/templantes/leitura/endereco.html' 
 ], function(
   aplic
 , Backbone
+, Lingua
 , Base
 , hbs
 , TemplanteEndereco
@@ -41,7 +43,11 @@ define([
     },
 
     aoRecriar: function() {
-      Registrar('BAIXO', 'A visão (VisaoDeEndereco) acaba de ser recriada.');
+      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_RECRIAR', { 'nome': 'VisaoDeEndereco' }));
+    },
+
+    aoFechar: function() {
+      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_FECHAR', { 'nome': 'VisaoDeEndereco' }));
     }
     
   });
