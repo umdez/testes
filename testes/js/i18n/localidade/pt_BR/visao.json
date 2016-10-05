@@ -1,0 +1,14 @@
+{
+  "VISAO": {
+
+    "ERRO": {
+      
+    },
+    "ALERTA": {
+      
+    },
+    "INFO": {
+      "AO_RECRIAR": "A visão <%= nome %> acaba de ser recriada."
+    }
+  }
+}
