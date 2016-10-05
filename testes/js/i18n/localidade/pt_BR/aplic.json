@@ -4,7 +4,7 @@
     "ERRO": {
       "ERRO_COM_ESTATOS": "Erro: [<%= estatos %>] (<%= msg %>)"
     },
-    "ALERTA": {
+    "ALERTA": { 
       
     },
     "INFO": {

@@ -1,16 +1,13 @@
-{ 
+{  
   "MODULO": {
     
-    "ERRO": {
+    "ERRO": { 
+
+    },
+    "ALERTA": { 
       
     },
-    "ALERTA": {
-      "PERMISSAO_NEGADA": "Você não possui permissão de <%= acao %> de <%= nome %>"
-    },
     "INFO": {
-      "ADICIONANDO_ROTAS": "Adicionando as rotas do modulo de <%= nome %>.",
-      "ACESSANDO_SUPORTE_ANTERIOR": "Acessando o suporte anterior das rotas de <%= nome %>.",
-      "ACESSANDO_SUPORTE_POSTERIOR": "Acessando o suporte posterior das rotas dos <%= nome %>.",
       "MODULOS_CARREGADOS": "Os modulos foram todos carregados com sucesso.",
       "MODULO_INICIANDO": "Iniciando o modulo <%= nome %>." 
     }
