@@ -110,7 +110,7 @@ define([
         Registrar('BAIXO', 'Salvando dos dados do usuário ('+ usuario.get('nome') +').');
 
         meuObj.executarAcoes(acoes, function() {
-          Registrar('BAIXO', 'Todas as etapas de salvamento foram bem sucedidas.');
+          Registrar('BAIXO', 'Todas as ações de salvamento foram bem sucedidas.');
           
           // Inicia novamente a validação
           meuObj.validacao.reset();
