@@ -1,15 +1,15 @@
+/* Responsavel pela sessão do usuário */
+
 define([
   "backbone"
 , "urls/indice"
 , "modelos/conta/conta" 
 , "modelos/funcao/funcao"
-, "colecoes/escopos/escopos"
 ], function(
   Backbone
 , gerarUrl
 , ModeloDeConta
 , ModeloDeFuncao
-, ColecaoDeEscopo
 ) {
   'use strict';
 

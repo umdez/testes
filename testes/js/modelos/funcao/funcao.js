@@ -35,7 +35,7 @@ define([
       relatedModel: ModeloDeEscopo,
       collectionType: ColecaoDeEscopos,
       reverseRelation: {
-        key: 'Funcoes',
+        key: 'Funcao',
         type: Backbone.HasOne,
         includeInJSON: true
       }
