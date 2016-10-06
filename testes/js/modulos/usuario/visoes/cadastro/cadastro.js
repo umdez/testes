@@ -105,12 +105,15 @@ define([
             }));
           }})
         ];
-
+ 
         meuObj.executarAcoes(acoes, function(){
           Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.ACOES_DO_CADASTRO_REALIZADO', { 
             'nome': usuario.get('nome') 
           }));
           
+          // esconde qualquer mensagem de erro de estatos
+          aplic.evts.trigger('erro-de-estatos:esconder', 'div#aviso-erro.formulario-cadastro-de-usuario', 'span#mensagem');
+
           // após cadastrar tudo nós navegamos para visão de leitura
           aplic.navegar('#UsuariosLeitura', usuario.get('id'), null, true); 
         });
@@ -121,6 +124,7 @@ define([
     },
 
     cadastrarUsuario: function(dados, colecaoDeUsuarios, usuario, cd) {
+      var meuObj = this;
       return function(proximo) { 
         usuario.url = gerarUrl('Usuarios');
 
@@ -129,11 +133,14 @@ define([
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
-        .fail(this.suporteDeFalhas); 
+        .fail(function(xhr, err, opcoes) {
+           meuObj.suporteDeFalhas(xhr, err, opcoes);
+        })
       };
     },
 
     cadastrarEndereco: function(usuario, endereco, cd) {
+      var meuObj = this;
       return function(proximo, dados) { 
         endereco.set({'usuario_id': usuario.get('id')});
         endereco.url = gerarUrl('UsuarioEnderecos');
@@ -143,12 +150,16 @@ define([
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
-        .fail(this.suporteDeFalhas); 
+        .fail(function(xhr, err, opcoes){
+          meuObj.suporteDeFalhas(xhr, err, opcoes);
+        }); 
       };
     },
 
-    suporteDeFalhas: function(modelo, resposta, opcoes) {
-      Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+    suporteDeFalhas: function(xhr, err, opcoes) {
+      // apresenta erro dessa falha de estatos
+      aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.formulario-cadastro-de-usuario', 'span#mensagem', xhr, err, 'cadastrarUsuario');
+      Registrar('ALTO', 'Erro ao tentar realizar cadastro do usuário.');
     },
 
     aoSubmeter: function(evento) {

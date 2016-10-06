@@ -120,6 +120,9 @@ define([
         meuObj.executarAcoes(acoes, function() {
           Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.ACOES_DE_SALVAMENTO_REALIZADAS'));
 
+          // esconde qualquer mensagem de erro de estatos
+          aplic.evts.trigger('erro-de-estatos:esconder', 'div#aviso-erro.formulario-leitura-de-usuario', 'span#mensagem');
+
           // Inicia novamente a validação
           meuObj.validacao.reset();
         });
@@ -132,6 +135,7 @@ define([
 
     // Precisamos requisitar a nossa função
     carregarFuncao: function(dados, usuario, funcao, cd) {
+      var meuObj = this;
       return function(proximo) { 
         funcao.url = gerarUrl('Funcao', usuario.get("funcao_id"));
         funcao.fetch().done(function(modelo, resposta, opcoes) {
@@ -139,12 +143,15 @@ define([
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
-        .fail(this.suporteDeFalhas);
+        .fail(function(xhr, err, opcoes){
+          meuObj.suporteDeFalhas(xhr, err, opcoes);
+        });
       };
     },
 
     // Salvamos este usuário
     salvarUsuario: function(usuario, colecaoDeUsuarios, cd) {
+      var meuObj = this;
       return function(proximo, dados) { 
         usuario.url = gerarUrl('Usuario', usuario.get('id'));
         usuario.save().done(function(modelo, resposta, opcoes) {
@@ -152,12 +159,15 @@ define([
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
-        .fail(this.suporteDeFalhas);
+        .fail(function(xhr, err, opcoes){
+          meuObj.suporteDeFalhas(xhr, err, opcoes);
+        });
       };
     },
 
     // Salvamos o endereço deste usuário.
     salvarEndereco: function(usuario, endereco, cd) {
+      var meuObj = this;
       return function(proximo, dados) {
         endereco.url = gerarUrl('UsuarioEndereco', endereco.get('id'));
         endereco.save().done(function(modelo, resposta, opcoes) {
@@ -165,12 +175,16 @@ define([
           if ('sucesso' in cd) cd.sucesso();
           proximo(dados);
         })
-        .fail(this.suporteDeFalhas);
+        .fail(function(xhr, err, opcoes){
+          meuObj.suporteDeFalhas(xhr, err, opcoes);
+        });
       };
     },
 
-    suporteDeFalhas: function(modelo, resposta, opcoes) {
-      Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+    suporteDeFalhas: function(xhr, err, opcoes) {
+      // apresenta erro dessa falha de estatos
+      aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.formulario-leitura-de-usuario', 'span#mensagem', xhr, err, 'lerUsuario');
+      Registrar('ALTO', 'Erro ao tentar realizar o salvamento dos dados do usuário.');
     },
 
     aoSubmeter: function(evento) {

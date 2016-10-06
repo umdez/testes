@@ -68,7 +68,7 @@ define([
         },
         'erro': function(xhr, err, opcoes) {
 
-          aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.entrada-do-painel', 'span#mensagem', xhr, err, 'entrada');
+          aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.entrada-do-painel', 'span#mensagem', xhr, err, 'entrarNoPainel');
           
           Registrar('ALTO', 'Erro ao tentar realizar entrada no sistema.');
         }

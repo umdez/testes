@@ -13,5 +13,23 @@
     "403": "Recurso proibido não pode ser acessado.",
     "500": "Erro interno no servidor. Seu cadastro pode conter erros.",
     "503": "Serviço indisponível no momento."
+  },
+
+  "ERROS_DO_CADASTRO_DE_USUARIO": {
+    "102": "Parece que o servidor não está respondendo.",
+    "400": "Dados informados estão incorretos.",
+    "401": "Acesso não autorizado.",
+    "403": "Recurso proibido não pode ser acessado.",
+    "500": "Erro interno no servidor.",
+    "503": "Serviço indisponível no momento."
+  },
+
+  "ERROS_DA_LEITURA_DE_USUARIO": {
+    "102": "Parece que o servidor não está respondendo.",
+    "400": "Dados informados estão incorretos.",
+    "401": "Acesso não autorizado.",
+    "403": "Recurso proibido não pode ser acessado.",
+    "500": "Erro interno no servidor.",
+    "503": "Serviço indisponível no momento."
   }
 }
