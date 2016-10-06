@@ -19,6 +19,15 @@ define([
     'DESCONHECIDO': Lingua.gerar('ERROS_DE_REQUISICAO.DESCONHECIDO')
   };
   
+  mapaDeErrosDeEstatos['verificarSessao'] = {
+    '102' : Lingua.gerar('ERROS_DE_ENTRADA.102'),
+    '400' : Lingua.gerar('ERROS_DE_ENTRADA.400'),
+    '401' : Lingua.gerar('ERROS_DE_ENTRADA.401'),
+    '403' : Lingua.gerar('ERROS_DE_ENTRADA.403'),
+    '500' : Lingua.gerar('ERROS_DE_ENTRADA.500'),
+    '503' : Lingua.gerar('ERROS_DE_ENTRADA.503')
+  };
+
   // Erros relacionados a entrada no painel do sistema.
   mapaDeErrosDeEstatos['entrarNoPainel'] = {
     '102' : Lingua.gerar('ERROS_DE_ENTRADA.102'),

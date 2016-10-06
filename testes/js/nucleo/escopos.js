@@ -22,6 +22,7 @@ define([
   };
 
   var Escopos = function(aplic) {
+    this.aplic = aplic;
     this.Registrar = _.bind(aplic.registrar, { envolucro: 'escopos' });
     this.sessao = aplic.sessao;
   };
@@ -32,11 +33,13 @@ define([
       'sucesso': function(modelo, resposta, opcoes) {
         cd(true);
       },
-      'erro': function(modelo, resposta, opcoes) {
-        meuObj.Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')'); 
+      'erro': function(xhr, err, opcoes) {
+        // mostramos a mensagem de erro no painel de entrada.
+        meuObj.aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.entrada-do-painel', 'span#mensagem', xhr, err, 'verificarSessao');
+        meuObj.Registrar('ALTO', 'Um erro ocorreu ao tentar verificar a sessão.'); 
         cd(false);
       }
-    });
+    }); 
   };
 
   Escopos.prototype.verificarEscopo = function(modelo, acao) {
