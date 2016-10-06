@@ -116,7 +116,7 @@ define([
         });
 
       }).fail(function() {
-        Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.DADOS_DE_CADASTRO_INCORRETOS'));
+        Registrar('BAIXO', Lingua.gerar('VISAO.INFO.DADOS_DO_FORMULARIO_INCORRETOS'));
       });
     },
 

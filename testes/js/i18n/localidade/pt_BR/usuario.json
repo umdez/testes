@@ -11,12 +11,10 @@
       "CADASTRO_REALIZADO": "O usuario <%= nome %> foi cadastrado com sucesso",
       "CADASTRO_ENDERECO_REALIZADO": "O endereco do usuário <%= nome %> foi cadastrado com sucesso",
       "ACOES_DO_CADASTRO_REALIZADO": "As ações para o cadastro do usuário <%= nome %> foram realizadas com sucesso.",
-      "DADOS_DE_CADASTRO_INCORRETOS": "Os dados do formulário de cadastro informados estão incorretos.",
       "SALVAMENTO_REALIZADO": "Dados do usuario foram salvos com sucesso",
       "SALVAMENTO_ENDERECO_REALIZADO": "Dados do endereço do usuario foram salvos com sucesso.",
       "CARREGAMENTO_FUNCAO_REALIZADA": "Dados da função do usuario foram carregados com sucesso.",
-      "ACOES_DE_SALVAMENTO_REALIZADAS": "As ações de salvamento foram todas bem sucedidas.",
-      "DADOS_DE_SALVAMENTO_INCORRETOS": "É necessário informar os dados corretos para salvar."
+      "ACOES_DE_SALVAMENTO_REALIZADAS": "As ações de salvamento foram todas bem sucedidas."
     }
   }
 }
