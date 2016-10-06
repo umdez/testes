@@ -23,7 +23,7 @@ define([
         'suporteDoGrupoTres'
       );
 
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ADICIONANDO_ROTAS', { 
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR_MODULO.INFO.ADICIONANDO_ROTAS', { 
         'nome': this.nome 
       }));
 
@@ -40,7 +40,7 @@ define([
     },
 
     suporteAnterior: function() {
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ACESSANDO_SUPORTE_ANTERIOR', { 
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR_MODULO.INFO.ACESSANDO_SUPORTE_ANTERIOR', { 
         'nome': this.nome 
       }));
 

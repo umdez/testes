@@ -50,7 +50,7 @@ define([
 
       var id = $(evento.currentTarget).attr('id');
       
-      Registrar('BAIXO', 'Recebido clique em item ('+ id +') do menu de nav. do topo.');
+      Registrar('BAIXO', Lingua.gerar('TOPO.INFO.CLIQUE_ITEM_BARRA_DE_MENU', {'id': id}));
 
       switch (id) {
         case 'item-grupo-um': 
@@ -60,7 +60,7 @@ define([
           aplic.navegar('#GrupoDois', null, null, true);
           break;
         default:
-          Registrar('BAIXO', 'O item clicado não era esperado.');
+          Registrar('BAIXO', Lingua.gerar('TOPO.INFO.CLIQUE_ITEM_MENU_INESPERADO', {'id': id}));
           break;
       };
     },

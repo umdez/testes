@@ -186,11 +186,11 @@ define([
     },
 
     aoRecriar: function() {
-      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_RECRIAR', { 'nome': 'VisaoDeLeitura' }));
+      Registrar('BAIXO', Lingua.gerar('VISAO_MODULO.INFO.AO_RECRIAR', { 'nome': 'VisaoDeLeitura' }));
     },
 
     aoFechar: function() {
-      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_FECHAR', { 'nome': 'VisaoDeLeitura' }));
+      Registrar('BAIXO', Lingua.gerar('VISAO_MODULO.INFO.AO_FECHAR', { 'nome': 'VisaoDeLeitura' }));
     }
 
   });

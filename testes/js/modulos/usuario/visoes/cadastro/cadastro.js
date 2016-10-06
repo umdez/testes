@@ -157,11 +157,11 @@ define([
     },
 
     aoRecriar: function() {
-      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_RECRIAR', { 'nome': 'VisaoDeCadastro' }));
+      Registrar('BAIXO', Lingua.gerar('VISAO_MODULO.INFO.AO_RECRIAR', { 'nome': 'VisaoDeCadastro' }));
     },
 
     aoFechar: function() {
-      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_FECHAR', { 'nome': 'VisaoDeCadastro' }));
+      Registrar('BAIXO', Lingua.gerar('VISAO_MODULO.INFO.AO_FECHAR', { 'nome': 'VisaoDeCadastro' }));
     }
     
   });

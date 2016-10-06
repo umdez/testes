@@ -11,5 +11,37 @@
       "MODULOS_CARREGADOS": "Os modulos foram todos carregados com sucesso.",
       "MODULO_INICIANDO": "Iniciando o modulo <%= nome %>." 
     }
+  },
+
+  "VISAO_MODULO": {
+
+    "ERRO": {
+      
+    },
+    "ALERTA": {
+      "NAO_POSSUI_A_PERMISSAO_NECESSARIA": "Você não possui a permissão necessária para realizar esta ação."
+    },
+    "INFO": {
+      "AO_RECRIAR": "A visão <%= nome %> acaba de ser recriada.",
+      "AO_FECHAR": "A visão <%= nome %> acaba de ser fechada.",
+      "AO_REUSAR": "A visão <%= nome %> acaba de ser reusada.",
+      "DADOS_DO_FORMULARIO_INCORRETOS": "Dados do formulário foram preenchidos incorretamente."
+    }
+  },
+
+  "CONTROLADOR_MODULO": {
+    
+    "ERRO": { 
+      
+    },
+    "ALERTA": {
+      "PERMISSAO_NEGADA": "Você não possui permissão de <%= acao %> de <%= nome %>"
+    },
+    "INFO": {
+      "ADICIONANDO_ROTAS": "Adicionando as rotas do modulo de <%= nome %>.",
+      "ACESSANDO_SUPORTE_ANTERIOR": "Acessando o suporte anterior das rotas de <%= nome %>.",
+      "ACESSANDO_SUPORTE_POSTERIOR": "Acessando o suporte posterior das rotas dos <%= nome %>.",
+      "DE_PERCURSO": "Realizando <%= acao %> de <%= nome %>."
+    }
   }
 }

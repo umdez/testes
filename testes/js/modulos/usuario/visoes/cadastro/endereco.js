@@ -43,11 +43,11 @@ define([
     },
 
     aoRecriar: function() {
-      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_RECRIAR', { 'nome': 'VisaoDeEndereco' }));
+      Registrar('BAIXO', Lingua.gerar('VISAO_MODULO.INFO.AO_RECRIAR', { 'nome': 'VisaoDeEndereco' }));
     },
 
     aoFechar: function() {
-      Registrar('BAIXO', Lingua.gerar('VISAO.INFO.AO_FECHAR', { 'nome': 'VisaoDeEndereco' }));
+      Registrar('BAIXO', Lingua.gerar('VISAO_MODULO.INFO.AO_FECHAR', { 'nome': 'VisaoDeEndereco' }));
     }
     
   });

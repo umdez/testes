@@ -10,5 +10,19 @@
     "INFO": {
       "INICIANDO_VISAO": "Iniciando a visão <%= nome %>."
     }
+  },
+
+   "TOPO": {
+
+    "ERRO": {
+      
+    },
+    "ALERTA": { 
+      
+    },
+    "INFO": {
+      "CLIQUE_ITEM_BARRA_DE_MENU": "Recebido um clique em item <%= id %> do menu de navavegação do topo do painel.",
+      "CLIQUE_ITEM_MENU_INESPERADO": "O item <%= id %> do menu de navavegação que foi clicado não era esperado."
+    }
   }
 }

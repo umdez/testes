@@ -40,7 +40,7 @@ define([
         'suporteDeLeitura'
       );
 
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ADICIONANDO_ROTAS', { 
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR_MODULO.INFO.ADICIONANDO_ROTAS', { 
         'nome': this.nome 
       }));
 
@@ -72,7 +72,7 @@ define([
       this.verificarUmaPermissaoDeAcesso('CADASTRO', {
         prosseguir: function() { meuObj.cadastroDeUsuario(); },
         impedir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
-      }, Lingua.gerar('CONTROLADOR.ALERTA.PERMISSAO_NEGADA', { 'acao': 'cadastro', 'nome': this.nome }));
+      }, Lingua.gerar('CONTROLADOR_MODULO.ALERTA.PERMISSAO_NEGADA', { 'acao': 'cadastro', 'nome': this.nome }));
     },
 
     // Paginação de usuários
@@ -82,7 +82,7 @@ define([
       this.verificarUmaPermissaoDeAcesso('LEITURA', {
         prosseguir: function() { meuObj.paginacaoDeUsuario(); },
         impedir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
-      }, Lingua.gerar('CONTROLADOR.ALERTA.PERMISSAO_NEGADA', { 'acao': 'listagem', 'nome': this.nome }));
+      }, Lingua.gerar('CONTROLADOR_MODULO.ALERTA.PERMISSAO_NEGADA', { 'acao': 'listagem', 'nome': this.nome }));
     },
 
     // Leitura de um usuário em específico
@@ -92,11 +92,11 @@ define([
       this.verificarUmaPermissaoDeAcesso('LEITURA', {
         prosseguir: function() { meuObj.leituraDeUsuario(idUsuario, aba); },
         impedir: function(msg) { meuObj.apresentarAvisoDeErro(msg); }
-      }, Lingua.gerar('CONTROLADOR.ALERTA.PERMISSAO_NEGADA', { 'acao': 'leitura', 'nome': this.nome }));
+      }, Lingua.gerar('CONTROLADOR_MODULO.ALERTA.PERMISSAO_NEGADA', { 'acao': 'leitura', 'nome': this.nome }));
     },
 
     suporteAnterior: function() {
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ACESSANDO_SUPORTE_ANTERIOR', { 
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR_MODULO.INFO.ACESSANDO_SUPORTE_ANTERIOR', { 
         'nome': this.nome 
       }));
 
@@ -115,7 +115,7 @@ define([
     },
 
     suportePosterior: function() {
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.ACESSANDO_SUPORTE_POSTERIOR', { 
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR_MODULO.INFO.ACESSANDO_SUPORTE_POSTERIOR', { 
         'nome': this.nome 
       }));
 
@@ -128,7 +128,7 @@ define([
     leituraDeUsuario: function(idUsuario, aba) {
       var meuObj = this;
 
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.DE_PERCURSO', {
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR_MODULO.INFO.DE_PERCURSO', {
         'acao': 'leitura', 'nome': this.nome
       }));
 
@@ -164,7 +164,7 @@ define([
     },
 
     cadastroDeUsuario: function () {
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.DE_PERCURSO', {
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR_MODULO.INFO.DE_PERCURSO', {
         'acao': 'cadastro', 'nome': this.nome
       }));
       
@@ -181,7 +181,7 @@ define([
     },
 
     paginacaoDeUsuario: function() {
-      Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.DE_PERCURSO', {
+      Registrar('BAIXO', Lingua.gerar('CONTROLADOR_MODULO.INFO.DE_PERCURSO', {
         'acao': 'paginação', 'nome': this.nome
       }));
 
