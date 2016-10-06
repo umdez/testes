@@ -125,7 +125,7 @@ define([
       aplic.evts.trigger('item-navegacao-topo:selecionar', 'ul.menu-painel-topo li.item-grupo-um'); 
     },
 
-    leituraDeUsuario: function(id, aba) {
+    leituraDeUsuario: function(idUsuario, aba) {
       var meuObj = this;
 
       Registrar('BAIXO', Lingua.gerar('CONTROLADOR.INFO.DE_PERCURSO', {
@@ -137,7 +137,7 @@ define([
 
       var colecaoDeUsuario = this.modUsuario['colecaoDeUsuario'];
       var ModeloDeUsuario = this.modUsuario['ModeloDeUsuario'];
-      var usuario = ModeloDeUsuario.findOrCreate({'id': id});
+      var usuario = ModeloDeUsuario.findOrCreate({'id': idUsuario});
 
       var acoes = [ 
         meuObj.procurarUmModelo({}, colecaoDeUsuario, usuario, { 
