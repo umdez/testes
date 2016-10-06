@@ -3,11 +3,13 @@ define([
   "aplicativo"
 , 'nucleo/registrador'
 , "nucleo/roteador"
+, "nucleo/erros/indice"
 , "strophe"
 ], function(
   aplic
 , Regis
 , Roteador
+, ErrosDeRequisicao
 , Xmpp
 ) {
   'use strict';

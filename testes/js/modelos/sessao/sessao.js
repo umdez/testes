@@ -37,7 +37,7 @@ define([
       var conta = this.conta; 
       var funcao = null;
 
-      var suporteDeFalhas = function(modelo, resposta, opcoes) {
+      var suporteDeFalhas = function(xhr, err, opcoes) {
         
         console.log('(modelos/sessao/sessao) Alguma falha ocorreu ao tentarmos realizar a entrada/autorização.');
 
@@ -46,7 +46,7 @@ define([
         meuObj.unset('id');
         meuObj.set({ 'autenticado': false });
 
-        if('erro' in cd) cd.erro(modelo, resposta, opcoes);
+        if('erro' in cd) cd.erro(xhr, err, opcoes);
       };
 
       var mediador = function() {
@@ -63,7 +63,7 @@ define([
           meuObj.set({ 'autenticado': true });
 
           if('sucesso' in cd) cd.sucesso(modelo, resposta, opcoes);
-        })
+        }) 
         .fail(suporteDeFalhas);
 
       };
@@ -111,7 +111,7 @@ define([
 
          if('sucesso' in cd) cd.sucesso(modelo, resposta); 
       })
-      .fail(function(modelo, resposta) {
+      .fail(function(xhr, erro) {
 
         console.log('(modelos/sessao/sessao) Erro ao tentar realizar a saida.');
 
@@ -121,7 +121,7 @@ define([
         meuObj.unset('id');
         meuObj.set({ 'autenticado': false });
 
-        if('erro' in cd) cd.erro(modelo, resposta); 
+        if('erro' in cd) cd.erro(xhr, erro); 
       });     
     },
 

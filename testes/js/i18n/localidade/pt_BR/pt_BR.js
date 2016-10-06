@@ -7,6 +7,7 @@ define([
 , 'text!i18n/localidade/pt_BR/modulo.json'
 , 'text!i18n/localidade/pt_BR/modulos/usuario.json'
 , 'text!i18n/localidade/pt_BR/nucleo.json'
+, 'text!i18n/localidade/pt_BR/erros/erros.json'
 ], function(
   aplic
 , base
@@ -14,6 +15,7 @@ define([
 , modulo
 , moduloUsuario
 , nucleo
+, erros
 ) {
   'use strict';
 
@@ -25,6 +27,7 @@ define([
   _.extend(grupoDeLinguas, JSON.parse(modulo));
   _.extend(grupoDeLinguas, JSON.parse(moduloUsuario));
   _.extend(grupoDeLinguas, JSON.parse(nucleo));
+  _.extend(grupoDeLinguas, JSON.parse(erros));
 
   return grupoDeLinguas;
 });

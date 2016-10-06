@@ -73,7 +73,7 @@ define([
           aplic.navegar('', null, null, true);
           Registrar('BAIXO', 'Você saiu do painel com sucesso.');
         },
-        'erro': function(modelo, resposta) {
+        'erro': function(xhr, err) {
           Registrar('BAIXO', 'Erro ao tentar sair do painel.');
         }
       });

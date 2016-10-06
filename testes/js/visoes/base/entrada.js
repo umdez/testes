@@ -62,15 +62,15 @@ define([
           // Inicia novamente a validação
           meuObj.validacao.reset();
 
+          aplic.evts.trigger('erro-de-estatos:esconder', 'div#aviso-erro.entrada-do-painel', 'span#mensagem');
+
           Registrar('BAIXO', Lingua.gerar('APLIC.INFO.ENTRADA_NO_SISTEMA'));
         },
-        'erro': function(modelo, resposta, opcoes) {
-          //Registrar('BAIXO', 
-          //    Lingua.gerar('APLIC.ERRO.ERRO_COM_ESTATOS'
-          //  , {'estatos': modelo.status, 'msg': JSON.parse(modelo.responseText).mensagem }
-          //));
+        'erro': function(xhr, err, opcoes) {
 
-          Registrar('ALTO', 'Erro: ['+ modelo.status + '] ('+ JSON.parse(modelo.responseText).mensagem +')');
+          aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.entrada-do-painel', 'span#mensagem', xhr, err, 'entrada');
+          
+          Registrar('ALTO', 'Erro ao tentar realizar entrada no sistema.');
         }
       }); 
     }, 
