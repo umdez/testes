@@ -42,7 +42,7 @@ define([
   Escopos.prototype.verificarEscopo = function(modelo, acao) {
     var sePossui = 0;
     var permissao = PERMISSAO_SUPERIOR;
-    var conta = this.sessao.get('Conta');
+    var conta = this.sessao.conta;
     var escopos = conta.get('Funcoes').get('Escopos');
 
     permissao |= acoes[acao.toUpperCase()];

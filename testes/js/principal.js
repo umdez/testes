@@ -20,7 +20,7 @@ define([
   };
 
   aplic.sessao.on("change:autenticado", function() {
-    var conta = aplic.sessao.get('Conta');
+    var conta = aplic.sessao.conta;
     var seAutenticado = aplic.sessao.get('autenticado');
 
     if (seAutenticado) {
