@@ -93,6 +93,9 @@ define([
 
       this.validacao.whenValid({}).then(function() {
         
+        // faz botão apresentar mensagem de cadastrando.
+        meuObj.$el.find('button#cadastrar-usuario').button('loading');
+
         var acoes = [ 
           meuObj.cadastrarUsuario({}, colecaoDeUsuarios, usuario, { 'sucesso': function() {
             Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.CADASTRO_REALIZADO', { 
@@ -113,6 +116,8 @@ define([
           
           // esconde qualquer mensagem de erro de estatos
           aplic.evts.trigger('erro-de-estatos:esconder', 'div#aviso-erro.formulario-cadastro-de-usuario', 'span#mensagem');
+
+          meuObj.$el.find('button#cadastrar-usuario').button('reset');
 
           // após cadastrar tudo nós navegamos para visão de leitura
           aplic.navegar('#UsuariosLeitura', usuario.get('id'), null, true); 
@@ -157,6 +162,9 @@ define([
     },
 
     suporteDeFalhas: function(xhr, err, opcoes) {
+
+      this.$el.find('button#cadastrar-usuario').button('reset');
+      
       // apresenta erro dessa falha de estatos
       aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.formulario-cadastro-de-usuario', 'span#mensagem', xhr, err, 'cadastrarUsuario');
       Registrar('ALTO', 'Erro ao tentar realizar cadastro do usuário.');

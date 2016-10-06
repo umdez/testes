@@ -102,7 +102,13 @@ define([
       var funcao = ModeloDeFuncao.findOrCreate({'id': usuario.get("funcao_id")});
 
       this.validacao.whenValid({}).then(function() {
-        
+
+        // esconde qualquer mensagem de erro de estatos
+        aplic.evts.trigger('erro-de-estatos:esconder', 'div#aviso-erro.formulario-leitura-de-usuario', 'span#mensagem');
+
+        // faz botão apresentar mensagem de salvando.
+        meuObj.$el.find('button#salvar-usuario').button('loading');
+
         // NOTA: O backbone-relational parece que sempre serializa o resultado. Por causa disso, temos que
         // salvar os dados seguindo a ordem abaixo (funcao -> endereco -> usuario).
         var acoes = [ 
@@ -118,13 +124,12 @@ define([
         ];
 
         meuObj.executarAcoes(acoes, function() {
-          Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.ACOES_DE_SALVAMENTO_REALIZADAS'));
-
-          // esconde qualquer mensagem de erro de estatos
-          aplic.evts.trigger('erro-de-estatos:esconder', 'div#aviso-erro.formulario-leitura-de-usuario', 'span#mensagem');
-
           // Inicia novamente a validação
           meuObj.validacao.reset();
+         
+          Registrar('BAIXO', Lingua.gerar('USUARIO.INFO.ACOES_DE_SALVAMENTO_REALIZADAS'));
+
+          meuObj.$el.find('button#salvar-usuario').button('reset');
         });
 
       }).fail(function() {
@@ -184,6 +189,10 @@ define([
     suporteDeFalhas: function(xhr, err, opcoes) {
       // apresenta erro dessa falha de estatos
       aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.formulario-leitura-de-usuario', 'span#mensagem', xhr, err, 'lerUsuario');
+      
+      // remove mensagem de carregando do botão
+      this.$el.find('button#salvar-usuario').button('reset');
+
       Registrar('ALTO', 'Erro ao tentar realizar o salvamento dos dados do usuário.');
     },
 

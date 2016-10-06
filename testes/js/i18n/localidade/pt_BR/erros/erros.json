@@ -3,7 +3,7 @@
     "ANALISE": "Erro ao tentar analisar a resposta do servidor.",
     "TEMPO_ESGOTADO": "O tempo para a requisição terminar esgotou.",
     "ABORTAR": "A requisição foi abortada pelo servidor.",
-    "DESCONHECIDO": "Erro desconhecido."
+    "DESCONHECIDO": "Algum erro ocorreu. Não foi possivel completar esta ação. Tente novamente."
   },
 
   "ERROS_DE_ENTRADA": {
