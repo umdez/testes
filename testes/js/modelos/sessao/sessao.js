@@ -39,12 +39,13 @@ define([
 
       var suporteDeFalhas = function(modelo, resposta, opcoes) {
         
+        console.log('(modelos/sessao/sessao) Alguma falha ocorreu ao tentarmos realizar a entrada/autorização.');
+
         conta.url = gerarUrl('Contas');
         conta.unset('id');
         meuObj.unset('id');
         meuObj.set({ 'autenticado': false });
 
-        console.log('(modelos/sessao/sessao) Alguma falha ocorreu ao tentarmos realizar a entrada/autorização.');
         if('erro' in cd) cd.erro(modelo, resposta, opcoes);
       };
 
@@ -58,10 +59,9 @@ define([
           conta.set('Funcoes', funcao);
 
           console.log('(modelos/sessao/sessao) Dados da sua função foram carregados com sucesso.');
-
+          console.log('(modelos/sessao/sessao) Dados dos seus escopos foram carregados com sucesso.');
           meuObj.set({ 'autenticado': true });
 
-          console.log('(modelos/sessao/sessao) Dados dos seus escopos foram carregados com sucesso.');
           if('sucesso' in cd) cd.sucesso(modelo, resposta, opcoes);
         })
         .fail(suporteDeFalhas);
@@ -99,6 +99,8 @@ define([
     
       // Realiza a saida do usuario de sua conta.
       conta.destroy().done(function(modelo, resposta) {
+         
+         console.log('(modelos/sessao/sessao) Saida realizada com sucesso.');
 
          meuObj.conta = new ModeloDeConta({});
 
@@ -107,10 +109,11 @@ define([
          meuObj.unset('id');
          meuObj.set({ 'autenticado': false });
 
-         console.log('(modelos/sessao/sessao) Saida realizada com sucesso.');
          if('sucesso' in cd) cd.sucesso(modelo, resposta); 
       })
       .fail(function(modelo, resposta) {
+
+        console.log('(modelos/sessao/sessao) Erro ao tentar realizar a saida.');
 
         meuObj.conta = new ModeloDeConta({});
         meuObj.conta.url = gerarUrl('Contas');
@@ -118,7 +121,6 @@ define([
         meuObj.unset('id');
         meuObj.set({ 'autenticado': false });
 
-        console.log('(modelos/sessao/sessao) Erro ao tentar realizar a saida.');
         if('erro' in cd) cd.erro(modelo, resposta); 
       });     
     },
