@@ -3,33 +3,30 @@
     "ANALISE": "Erro ao tentar analisar a resposta do servidor.",
     "TEMPO_ESGOTADO": "O tempo para a requisição terminar esgotou.",
     "ABORTAR": "A requisição foi abortada pelo servidor.",
-    "DESCONHECIDO": "Algum erro ocorreu. Não foi possivel completar esta ação. Tente novamente."
+    "DESCONHECIDO": "Algum erro ocorreu e não foi possivel completar esta ação. Tente novamente."
   },
-
-  "ERROS_DE_ENTRADA": {
-    "102": "Parece que o servidor não está respondendo.",
-    "400": "Senha ou email informados estão incorretos.",
+ 
+  "ERROS_BASE_DE_REQUISICAO": {
+    "400": "Dados informados estão incorretos.",
     "401": "Acesso não autorizado.",
     "403": "Recurso proibido não pode ser acessado.",
+    "404": "Não encontrado.",
+    "429": "Muitas requisições a este recurso.",
     "500": "Erro interno no servidor. Seu cadastro pode conter erros.",
     "503": "Serviço indisponível no momento."
   },
 
-  "ERROS_DO_CADASTRO_DE_USUARIO": {
-    "102": "Parece que o servidor não está respondendo.",
-    "400": "Dados informados estão incorretos.",
-    "401": "Acesso não autorizado.",
-    "403": "Recurso proibido não pode ser acessado.",
-    "500": "Erro interno no servidor.",
-    "503": "Serviço indisponível no momento."
+  "ERROS_AO_REALIZAR_ENTRADA": {
+    "400": "Senha ou email informados estão incorretos.",
+    "401": "Seu cadastro não tem autorização de entrada.",
+    "429": "Muitas tentativas de autenticação. Por favor, tente novamente mais tarde."
   },
 
-  "ERROS_DA_LEITURA_DE_USUARIO": {
-    "102": "Parece que o servidor não está respondendo.",
-    "400": "Dados informados estão incorretos.",
-    "401": "Acesso não autorizado.",
-    "403": "Recurso proibido não pode ser acessado.",
-    "500": "Erro interno no servidor.",
-    "503": "Serviço indisponível no momento."
+  "ERROS_AO_CADASTRAR_USUARIO": {
+    "429": "Muitas tentativas de cadastro. Por favor, tente novamente mais tarde."
+  },
+
+  "ERROS_AO_SALVAR_USUARIO": {
+    "429": "Muitas tentativas de salvamento. Por favor, tente novamente mais tarde."
   }
 }

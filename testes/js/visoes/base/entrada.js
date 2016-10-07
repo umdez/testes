@@ -54,6 +54,9 @@ define([
       evento.preventDefault();
       var meuObj = this;
 
+      // faz botão apresentar mensagem de entrando.
+      this.$el.find('button#entrada-botao').button('loading');
+
       aplic.sessao.entrar({ 'jid': this.jid, 'senha': this.senha }, {
         'sucesso': function(modelo, resposta, opcoes) {
           meuObj.limparFormulario();
@@ -61,14 +64,21 @@ define([
 
           // Inicia novamente a validação
           meuObj.validacao.reset();
+ 
+          // remove mensagem de entrando do botão
+          meuObj.$el.find('button#entrada-botao').button('reset');
 
-          aplic.evts.trigger('erro-de-estatos:esconder', 'div#aviso-erro.entrada-do-painel', 'span#mensagem');
+          aplic.evts.trigger('erro-de-estatos:esconder', meuObj.$el.find('div#aviso-erro.entrada-do-painel'));
 
+          aplic.navegar('#GrupoZero', null, null, true);
           Registrar('BAIXO', Lingua.gerar('APLIC.INFO.ENTRADA_NO_SISTEMA'));
         },
         'erro': function(xhr, err, opcoes) {
 
-          aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.entrada-do-painel', 'span#mensagem', xhr, err, 'entrarNoPainel');
+          // remove mensagem de entrando do botão
+          meuObj.$el.find('button#entrada-botao').button('reset');
+
+          meuObj.apresentarAvisoDeErro(xhr, err, 'entrarNoPainel');
           
           Registrar('ALTO', 'Erro ao tentar realizar entrada no sistema.');
         }
@@ -78,6 +88,12 @@ define([
     limparFormulario: function() {
       this.$el.find('input#entrada-jid').val('');
       this.$el.find('input#entrada-senha').val('');
+    },
+
+    apresentarAvisoDeErro: function(xhr, err, acao) {
+      var envolucro = 'div#aviso-erro.entrada-do-painel';
+
+      aplic.evts.trigger('erro-de-estatos:apresentar', this.$el.find(envolucro), xhr, err, acao);
     }
 
   });

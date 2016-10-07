@@ -8,7 +8,7 @@ define([
   Lingua
 ) {
   'use strict';
-  
+
   var mapaDeErrosDeEstatos = [];
 
   // Erros estáticos
@@ -19,44 +19,34 @@ define([
     'DESCONHECIDO': Lingua.gerar('ERROS_DE_REQUISICAO.DESCONHECIDO')
   };
   
-  mapaDeErrosDeEstatos['verificarSessao'] = {
-    '102' : Lingua.gerar('ERROS_DE_ENTRADA.102'),
-    '400' : Lingua.gerar('ERROS_DE_ENTRADA.400'),
-    '401' : Lingua.gerar('ERROS_DE_ENTRADA.401'),
-    '403' : Lingua.gerar('ERROS_DE_ENTRADA.403'),
-    '500' : Lingua.gerar('ERROS_DE_ENTRADA.500'),
-    '503' : Lingua.gerar('ERROS_DE_ENTRADA.503')
+  // erros que serão extendidos
+  var errosDeBase = {
+    '400' : Lingua.gerar('ERROS_BASE_DE_REQUISICAO.400'),
+    '401' : Lingua.gerar('ERROS_BASE_DE_REQUISICAO.401'),
+    '403' : Lingua.gerar('ERROS_BASE_DE_REQUISICAO.403'),
+    '404' : Lingua.gerar('ERROS_BASE_DE_REQUISICAO.404'),
+    '500' : Lingua.gerar('ERROS_BASE_DE_REQUISICAO.500'),
+    '503' : Lingua.gerar('ERROS_BASE_DE_REQUISICAO.503')
   };
-
+ 
   // Erros relacionados a entrada no painel do sistema.
-  mapaDeErrosDeEstatos['entrarNoPainel'] = {
-    '102' : Lingua.gerar('ERROS_DE_ENTRADA.102'),
-    '400' : Lingua.gerar('ERROS_DE_ENTRADA.400'),
-    '401' : Lingua.gerar('ERROS_DE_ENTRADA.401'),
-    '403' : Lingua.gerar('ERROS_DE_ENTRADA.403'),
-    '500' : Lingua.gerar('ERROS_DE_ENTRADA.500'),
-    '503' : Lingua.gerar('ERROS_DE_ENTRADA.503')
-  };
+  mapaDeErrosDeEstatos['entrarNoPainel'] = _.extend({}, errosDeBase, {
+    '400' : Lingua.gerar('ERROS_AO_REALIZAR_ENTRADA.400'),
+    '401' : 'APRESENTAR_RESPOSTA_DO_SERVIDOR',
+    '429' : Lingua.gerar('ERROS_AO_REALIZAR_ENTRADA.429')
+  });
 
   // Erros relacionados ao cadastro de usuários.
-  mapaDeErrosDeEstatos['cadastrarUsuario'] = {
-    '102' : Lingua.gerar('ERROS_DO_CADASTRO_DE_USUARIO.102'),
-    '400' : Lingua.gerar('ERROS_DO_CADASTRO_DE_USUARIO.400'),
-    '401' : Lingua.gerar('ERROS_DO_CADASTRO_DE_USUARIO.401'),
-    '403' : Lingua.gerar('ERROS_DO_CADASTRO_DE_USUARIO.403'),
-    '500' : Lingua.gerar('ERROS_DO_CADASTRO_DE_USUARIO.500'),
-    '503' : Lingua.gerar('ERROS_DO_CADASTRO_DE_USUARIO.503')
-  };
+  mapaDeErrosDeEstatos['cadastrarUsuario'] = _.extend({}, errosDeBase, {
+    '400' : 'APRESENTAR_RESPOSTA_DO_SERVIDOR',
+    '429' : Lingua.gerar('ERROS_AO_CADASTRAR_USUARIO.429')
+  });
 
   // Erros relacionados a leitura dos dados de usuário.
-  mapaDeErrosDeEstatos['lerUsuario'] = {
-    '102' : Lingua.gerar('ERROS_DA_LEITURA_DE_USUARIO.102'),
-    '400' : Lingua.gerar('ERROS_DA_LEITURA_DE_USUARIO.400'),
-    '401' : Lingua.gerar('ERROS_DA_LEITURA_DE_USUARIO.401'),
-    '403' : Lingua.gerar('ERROS_DA_LEITURA_DE_USUARIO.403'),
-    '500' : Lingua.gerar('ERROS_DA_LEITURA_DE_USUARIO.500'),
-    '503' : Lingua.gerar('ERROS_DA_LEITURA_DE_USUARIO.503')
-  };
+  mapaDeErrosDeEstatos['salvarUsuario'] =  _.extend({}, errosDeBase, {
+    '400' : 'APRESENTAR_RESPOSTA_DO_SERVIDOR',
+    '429' : Lingua.gerar('ERROS_AO_SALVAR_USUARIO.429')
+  });
 
   return mapaDeErrosDeEstatos;
 });

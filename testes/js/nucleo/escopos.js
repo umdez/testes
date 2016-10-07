@@ -34,8 +34,6 @@ define([
         cd(true);
       },
       'erro': function(xhr, err, opcoes) {
-        // mostramos a mensagem de erro no painel de entrada.
-        meuObj.aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.entrada-do-painel', 'span#mensagem', xhr, err, 'verificarSessao');
         meuObj.Registrar('ALTO', 'Um erro ocorreu ao tentar verificar a sessão.'); 
         cd(false);
       }

@@ -5,12 +5,14 @@ define([
   'aplicativo'
 , "i18n/indice"
 , 'utilitarios/gdv'
+, 'visoes/grupos/grupo00'
 , 'visoes/grupos/grupo01'
 , 'visoes/grupos/grupo02'
 ], function(
   aplic
 , Lingua
 , GDV
+, VisaoDoGrupoZero
 , VisaoDoGrupoUm
 , VisaoDoGrupoDois
 ) {
@@ -22,6 +24,7 @@ define([
 
     el: "div#painel > div#conteudo", 
 
+    visaoDoGrupoZero: null,
     visaoDoGrupoUm: null,
     visaoDoGrupoDois: null,
 
@@ -40,6 +43,11 @@ define([
     },
 
     render: function() {
+
+      this.visaoDoGrupoZero = GDV.reusarVisao("Grupos", "VisaoDoGrupoZero", function() {
+        return new VisaoDoGrupoZero();
+      });
+
       this.visaoDoGrupoUm = GDV.reusarVisao("Grupos", "VisaoDoGrupoUm", function() {
         return new VisaoDoGrupoUm();
       });

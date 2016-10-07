@@ -104,7 +104,7 @@ define([
       this.validacao.whenValid({}).then(function() {
 
         // esconde qualquer mensagem de erro de estatos
-        aplic.evts.trigger('erro-de-estatos:esconder', 'div#aviso-erro.formulario-leitura-de-usuario', 'span#mensagem');
+        aplic.evts.trigger('erro-de-estatos:esconder', meuObj.$el.find('div#aviso-erro.formulario-leitura-de-usuario'));
 
         // faz botão apresentar mensagem de salvando.
         meuObj.$el.find('button#salvar-usuario').button('loading');
@@ -187,13 +187,23 @@ define([
     },
 
     suporteDeFalhas: function(xhr, err, opcoes) {
+            
       // apresenta erro dessa falha de estatos
-      aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.formulario-leitura-de-usuario', 'span#mensagem', xhr, err, 'lerUsuario');
+      this.apresentarAvisoDeErro(xhr, err, 'salvarUsuario');
       
+      // Inicia novamente a validação
+      this.validacao.reset();
+
       // remove mensagem de carregando do botão
       this.$el.find('button#salvar-usuario').button('reset');
 
       Registrar('ALTO', 'Erro ao tentar realizar o salvamento dos dados do usuário.');
+    },
+ 
+    apresentarAvisoDeErro: function(xhr, err, acao) {
+      var envolucro = 'div#aviso-erro.formulario-leitura-de-usuario';
+
+      aplic.evts.trigger('erro-de-estatos:apresentar', this.$el.find(envolucro), xhr, err, acao);
     },
 
     aoSubmeter: function(evento) {

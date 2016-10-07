@@ -18,6 +18,7 @@ define([
     iniciar: function() {
       _.bindAll(this, 
         'suporteAnterior',
+        'suporteDoGrupoZero',
         'suporteDoGrupoUm',
         'suporteDoGrupoDois',
         'suporteDoGrupoTres'
@@ -30,10 +31,12 @@ define([
       var Rotas = this.Rotas;
 
       // Rotas chamadas primeiro
+      Rotas.adcAnterior('GrupoZero', this.suporteAnterior);
       Rotas.adcAnterior('GrupoUm', this.suporteAnterior);
       Rotas.adcAnterior('GrupoDois', this.suporteAnterior);
       Rotas.adcAnterior('GrupoTres', this.suporteAnterior);
 
+      Rotas.adcRota('GrupoZero', this.nome, this.suporteDoGrupoZero);
       Rotas.adcRota('GrupoUm', this.nome, this.suporteDoGrupoUm);
       Rotas.adcRota('GrupoDois', this.nome, this.suporteDoGrupoDois);
       Rotas.adcRota('GrupoTres', this.nome, this.suporteDoGrupoTres);
@@ -52,6 +55,13 @@ define([
       aplic.evts.trigger('painel-avisos:esconder');
 
       return true;
+    },
+
+    suporteDoGrupoZero: function() {
+      // mostra o grupo zero do painel.
+      aplic.evts.trigger('painel-grupo:mostrar', 'div.grupo-zero');
+      // remove seleção dos items do menu do topo do painel
+      aplic.evts.trigger('item-navegacao-topo:deselecionar');
     },
 
     suporteDoGrupoUm: function() {

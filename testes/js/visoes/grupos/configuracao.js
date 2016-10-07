@@ -12,6 +12,9 @@ define([
 
   var configuracao = {
     
+    grupoZero: [
+      
+    ],
     grupoUm: [
       { 'id': 'usuario-cadastro'},
       { 'id': 'usuario-pesquisa'},
@@ -27,6 +30,7 @@ define([
   };
 
   return {
+    'grupoZero': configuracao.grupoZero,
     'grupoUm': configuracao.grupoUm,
     'grupoDois': configuracao.grupoDois,
     'grupoTres': configuracao.grupoTres

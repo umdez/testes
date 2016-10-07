@@ -7,17 +7,30 @@ define([
 ) {
   'use strict';
   
-  var ErrosDeRequisicao = {
+  var VisaoDeErrosDeEstatos = Backbone.View.extend({
+    
+    el: 'body > div#conteudo-raiz',
+
+    initialize: function() {
+      this.listenTo(aplic.evts, 'erro-de-estatos:apresentar', this.apresentar);
+      this.listenTo(aplic.evts, 'erro-de-estatos:esconder', this.esconder);
+    },
 
     formatarMsgDeErro: function(xhr, excessao, acao) {
-        
       var mensagem;
-      
-      if (xhr.status) {
-        mensagem = mapaDeErrosDeEstatos[acao][xhr.status];
-        if(!mensagem) {
+      var estatos = xhr.status;
+     
+      if (estatos) {
+        mensagem = mapaDeErrosDeEstatos[acao][estatos];
+        
+        if (mensagem == 'APRESENTAR_RESPOSTA_DO_SERVIDOR') {
+          // Caso a mensagem que nos importe seja informada pelo servidor, então
+          // nós a pegamos.
+          mensagem = xhr.responseText ? JSON.parse(xhr.responseText).mensagem : "Não contêm mensagem de resposta";
+        } else if (!mensagem) {
           mensagem = mapaDeErrosDeEstatos['estaticos']['DESCONHECIDO'];
         }
+
       } else if(excessao == 'parsererror'){
         mensagem = mapaDeErrosDeEstatos['estaticos']['ANALISE'];
       } else if(excessao == 'timeout'){
@@ -28,34 +41,16 @@ define([
         mensagem = mapaDeErrosDeEstatos['estaticos']['DESCONHECIDO'];
       }
       return mensagem;
-    }
-
-  };
-
-  var VisaoDeErrosDeEstatos = Backbone.View.extend({
-    
-    el: 'body > div#conteudo-raiz',
-
-    initialize: function() {
-      this.listenTo(aplic.evts, 'erro-de-estatos:apresentar', this.apresentar);
-      this.listenTo(aplic.evts, 'erro-de-estatos:esconder', this.esconder);
     },
 
-    apresentar: function(envolucro, envolucroMsg, xhr, excessao, acao) {
-      var $envolucro = this.$el.find(envolucro);
-      var $envolucroMsg = $envolucro.find(envolucroMsg);
-     
-      var msg = ErrosDeRequisicao.formatarMsgDeErro(xhr, excessao, acao);
+    apresentar: function($envolucro, xhr, excessao, acao) {
+      var $envolucroMsg = $envolucro.find('span#mensagem');
 
-      $envolucroMsg.text(msg);
+      $envolucroMsg.text(this.formatarMsgDeErro(xhr, excessao, acao));
       $envolucro.show();
     },
 
-    esconder: function(envolucro, envolucroMsg) {
-      var $envolucro = this.$el.find(envolucro);
-      var $envolucroMsg = $envolucro.find(envolucroMsg);
-      
-      $envolucroMsg.text("");
+    esconder: function($envolucro) {
       $envolucro.hide();
     }
   });

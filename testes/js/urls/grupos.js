@@ -8,6 +8,9 @@ define([
   'use strict';
 
   var urls = {
+    '#GrupoZero': function() {
+      return "GrupoZero";
+    },
     '#GrupoUm': function() {
       return "GrupoUm";
     },

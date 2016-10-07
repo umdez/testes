@@ -23,12 +23,14 @@ define([
     initialize: function () {
       _.bindAll(this,
         'selecionarItemMenu',
+        'deselecionarItemsMenu',
         'aoClicarEmItemDaBarraDeNav'
       );
 
       Registrar('BAIXO', Lingua.gerar('BASE.INFO.INICIANDO_VISAO', {'nome': 'topo'}));
 
       this.listenTo(aplic.evts, 'item-navegacao-topo:selecionar', this.selecionarItemMenu);
+      this.listenTo(aplic.evts, 'item-navegacao-topo:deselecionar', this.deselecionarItemsMenu);
 
       this.render();
     },

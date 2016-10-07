@@ -115,7 +115,7 @@ define([
           }));
           
           // esconde qualquer mensagem de erro de estatos
-          aplic.evts.trigger('erro-de-estatos:esconder', 'div#aviso-erro.formulario-cadastro-de-usuario', 'span#mensagem');
+          aplic.evts.trigger('erro-de-estatos:esconder', meuObj.$el.find('div#aviso-erro.formulario-cadastro-de-usuario'));
 
           meuObj.$el.find('button#cadastrar-usuario').button('reset');
 
@@ -162,12 +162,22 @@ define([
     },
 
     suporteDeFalhas: function(xhr, err, opcoes) {
-
+      // Inicia novamente a validação
+      this.validacao.reset();
+      
+      // remover mensagem de carregando deste botão
       this.$el.find('button#cadastrar-usuario').button('reset');
       
       // apresenta erro dessa falha de estatos
-      aplic.evts.trigger('erro-de-estatos:apresentar', 'div#aviso-erro.formulario-cadastro-de-usuario', 'span#mensagem', xhr, err, 'cadastrarUsuario');
+      this.apresentarAvisoDeErro(xhr, err, 'cadastrarUsuario');
+
       Registrar('ALTO', 'Erro ao tentar realizar cadastro do usuário.');
+    },
+
+    apresentarAvisoDeErro: function(xhr, err, acao) {
+      var envolucro = 'div#aviso-erro.formulario-cadastro-de-usuario';
+
+      aplic.evts.trigger('erro-de-estatos:apresentar', this.$el.find(envolucro), xhr, err, acao);
     },
 
     aoSubmeter: function(evento) {
