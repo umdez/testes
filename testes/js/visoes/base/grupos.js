@@ -5,9 +5,9 @@ define([
   'aplicativo'
 , "i18n/indice"
 , 'utilitarios/gdv'
-, 'visoes/grupos/grupo00'
-, 'visoes/grupos/grupo01'
-, 'visoes/grupos/grupo02'
+, 'visoes/grupos/painel/grupo00'
+, 'visoes/grupos/painel/grupo01'
+, 'visoes/grupos/painel/grupo02'
 ], function(
   aplic
 , Lingua

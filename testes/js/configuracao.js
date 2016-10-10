@@ -45,6 +45,7 @@ require.config({
   , 'roteando': '/bibliotecas/roteando'
   , 'relational': '/bibliotecas/backbone-relational'
   , 'localidade': '/bibliotecas/localidade'
+  , 'pace': '/bibliotecas/pace'
   },
   
   // Lembre-se: Somente usar o shim para aqueles scripts que não são AMD. Ele

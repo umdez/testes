@@ -12,27 +12,30 @@ define([
 
   var configuracao = {
     
-    grupoZero: [
+    painel: {
+      grupoZero: [
       
-    ],
-    grupoUm: [
-      { 'id': 'usuario-cadastro'},
-      { 'id': 'usuario-pesquisa'},
-      { 'id': 'usuario-leitura'},
-      { 'id': 'visao-reusada-exemplo'}
-    ],
-    grupoDois: [
+      ],
+      grupoUm: [
+        { 'id': 'usuario-cadastro'},
+        { 'id': 'usuario-pesquisa'},
+        { 'id': 'usuario-leitura'},
+        { 'id': 'visao-reusada-exemplo'}
+      ],
+      grupoDois: [
 
-    ],
-    grupoTres: [
+      ],
+      grupoTres: [
 
-    ]
+      ]
+    }
+    
   };
 
   return {
-    'grupoZero': configuracao.grupoZero,
-    'grupoUm': configuracao.grupoUm,
-    'grupoDois': configuracao.grupoDois,
-    'grupoTres': configuracao.grupoTres
+    'grupoZero': configuracao.painel.grupoZero,
+    'grupoUm': configuracao.painel.grupoUm,
+    'grupoDois': configuracao.painel.grupoDois,
+    'grupoTres': configuracao.painel.grupoTres
   }
 });

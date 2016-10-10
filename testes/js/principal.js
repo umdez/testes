@@ -4,12 +4,14 @@ define([
 , 'nucleo/registrador'
 , "nucleo/roteador"
 , "nucleo/erros/indice"
+, "nucleo/carregando"
 , "strophe"
 ], function(
   aplic
 , Regis
 , Roteador
 , ErrosDeRequisicao
+, Carregando
 , Xmpp
 ) {
   'use strict';

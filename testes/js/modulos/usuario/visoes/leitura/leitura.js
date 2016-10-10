@@ -106,6 +106,9 @@ define([
         // esconde qualquer mensagem de erro de estatos
         aplic.evts.trigger('erro-de-estatos:esconder', meuObj.$el.find('div#aviso-erro.formulario-leitura-de-usuario'));
 
+        // apresenta barra de carregando 
+        aplic.evts.trigger('carregando:apresentar');
+
         // faz botão apresentar mensagem de salvando.
         meuObj.$el.find('button#salvar-usuario').button('loading');
 

@@ -93,6 +93,9 @@ define([
 
       this.validacao.whenValid({}).then(function() {
         
+        // apresenta barra de carregando 
+        aplic.evts.trigger('carregando:apresentar');
+
         // faz botão apresentar mensagem de cadastrando.
         meuObj.$el.find('button#cadastrar-usuario').button('loading');
 

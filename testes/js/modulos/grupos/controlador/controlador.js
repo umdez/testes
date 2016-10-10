@@ -47,6 +47,9 @@ define([
         'nome': this.nome 
       }));
 
+      // apresenta barra de carregando 
+      aplic.evts.trigger('carregando:apresentar');
+
       // Esconde todos os conteudos de todos os grupos.
       aplic.evts.trigger('grupos-conteudos:esconder');
       // Esconde todos os grupos do conteudo do painel

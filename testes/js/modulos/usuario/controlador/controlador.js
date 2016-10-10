@@ -103,6 +103,9 @@ define([
       // NOTA: Podemos precisar acessar uma visão diretamente. Um exemplo:
       // var topoDoPainel = this.reusarVisao("VisaoBaseDeTopoPainel", function() { });
 
+      // apresenta barra de carregando 
+      aplic.evts.trigger('carregando:apresentar');
+
       // Esconde todos os conteudos de todos os grupos.
       aplic.evts.trigger('grupos-conteudos:esconder');
       // Esconde qualquer aviso anteriormente apresentado neste grupo.
