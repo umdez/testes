@@ -3,11 +3,11 @@ define([
 , "i18n/indice"
 , 'visoes/grupos/configuracao'
 , 'handlebars'
-, 'text!templantes/grupos/grupo00.html'
+, 'text!templantes/grupos/painel/grupo00.html'
 ], function(
   aplic
 , Lingua
-, modulosConfig
+, config
 , hbs
 , Templante
 ) {
@@ -29,7 +29,7 @@ define([
 
     render: function() {
       this.$el.html(this.templante({
-        'modulos': modulosConfig.grupoZero
+        'modulos': config.painel.grupoZero
       }));
     },
 

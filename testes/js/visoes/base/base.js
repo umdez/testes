@@ -11,7 +11,7 @@ define([
 , 'visoes/base/entrada'
 , 'visoes/base/painel'
 , 'visoes/base/topo'
-, 'visoes/base/grupos'
+, 'visoes/base/grupos/painel/grupos'
 ], function(
   aplic
 , Lingua

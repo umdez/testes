@@ -1,9 +1,9 @@
 define([
   'visoes/grupos/configuracao'
 , 'handlebars'
-, 'text!templantes/grupos/grupo03.html'
+, 'text!templantes/grupos/painel/grupo03.html'
 ], function(
-  modulosConfig
+  config
 , hbs
 , Templante
 ) {
@@ -21,7 +21,7 @@ define([
 
     render: function() {
       this.$el.html(this.templante({
-        'modulos': modulosConfig.grupoTres
+        'modulos': config.painel.grupoTres
       }));
     },
 

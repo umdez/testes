@@ -44,15 +44,15 @@ define([
 
     render: function() {
 
-      this.visaoDoGrupoZero = GDV.reusarVisao("Grupos", "VisaoDoGrupoZero", function() {
+      this.visaoDoGrupoZero = GDV.reusarVisao("GruposDoPainel", "VisaoDoGrupoZero", function() {
         return new VisaoDoGrupoZero();
       });
 
-      this.visaoDoGrupoUm = GDV.reusarVisao("Grupos", "VisaoDoGrupoUm", function() {
+      this.visaoDoGrupoUm = GDV.reusarVisao("GruposDoPainel", "VisaoDoGrupoUm", function() {
         return new VisaoDoGrupoUm();
       });
 
-      this.visaoDoGrupoDois = GDV.reusarVisao("Grupos", "VisaoDoGrupoDois", function() {
+      this.visaoDoGrupoDois = GDV.reusarVisao("GruposDoPainel", "VisaoDoGrupoDois", function() {
         return new VisaoDoGrupoDois();
       });
     },

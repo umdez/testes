@@ -12,7 +12,7 @@ define([
 
   var configuracao = {
     
-    painel: {
+    'painel': {
       grupoZero: [
       
       ],
@@ -28,14 +28,29 @@ define([
       grupoTres: [
 
       ]
+    },
+
+    'entrada': {
+      grupoZero: [
+      
+      ],
+      grupoUm: [
+        
+      ]
     }
     
   };
 
   return {
-    'grupoZero': configuracao.painel.grupoZero,
-    'grupoUm': configuracao.painel.grupoUm,
-    'grupoDois': configuracao.painel.grupoDois,
-    'grupoTres': configuracao.painel.grupoTres
+    'painel': {
+      'grupoZero': configuracao.painel.grupoZero,
+      'grupoUm': configuracao.painel.grupoUm,
+      'grupoDois': configuracao.painel.grupoDois,
+      'grupoTres': configuracao.painel.grupoTres
+    },
+    'entrada': {
+      'grupoZero': configuracao.entrada.grupoZero,
+      'grupoUm': configuracao.entrada.grupoUm
+    }
   }
 });
